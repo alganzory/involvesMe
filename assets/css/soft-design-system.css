@@ -47,7 +47,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #67748e;
-  background-color: #fff;
+  background-color: #2b1449;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
@@ -87,10 +87,11 @@ h3, .h3 {
       font-size: 1.875rem; } }
 
 h4, .h4 {
-  font-size: calc(1.275rem + 0.3vw); }
+  font-size: calc(1.275rem + 0.3vw);
+  font-family: "quicksand";}
   @media (min-width: 1200px) {
     h4, .h4 {
-      font-size: 1.5rem; } }
+      font-size: 1.5rem;} }
 
 h5, .h5 {
   font-size: 1.25rem; }
@@ -3640,7 +3641,7 @@ textarea.form-control-lg {
 .card-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  background-color: #fff;
+  background-color: var(--bs-table-striped-bg);
   border-bottom: 0 solid rgba(0, 0, 0, 0.125); }
   .card-header:first-child {
     border-radius: 1rem 1rem 0 0; }
