@@ -1,61 +1,3 @@
-
-
-/* Social Media */
-.btn-google {
-    color: white;
-    background-color: #ea4335
-}
-
-.btn-facebook {
-    color: white;
-    background-color: #3b5998
-}
-
-
-.or {
-    width: 100%; 
-    border-bottom: 1px solid rgb(247, 247, 247); 
-    line-height: 0.1em;
-    margin: 10px 0 20px; 
- } 
- 
-.or span { 
-    
-    background: #111010;/* add background to let 'Or' cover the line,*/
-     padding:0 10px; 
-     color: #e8e8eb;
- }
-
- /* Animation */
-
-*{
-    margin: 0px;
-    padding: 0px;
-}
-
-
-
-
-.context {
-    width: 100%;
-    position: absolute;
-   
-    /* top:50vh; */
-    
-}
-
-
-
-
-.area{
-    background: #111010;  /*also the whole page background*/
-    background: -webkit-linear-gradient(to left, #e6e7fa, #dbdbe2);  
-    width: 100%;
-    /* height:100vh; */
-    
-   
-}
-
 .circles{
     position: absolute;
     top: 0;
@@ -74,7 +16,6 @@
     background: rgba(211, 19, 109, 0.3);/* 0.3 is transprancy*/
     animation: animate 30s linear infinite;
     bottom: -150px;
-    
 }
 
 .circles li:nth-child(1){
@@ -152,8 +93,6 @@
     animation-delay: 0s;
     animation-duration: 11s;
 }
-
-
 
 @keyframes animate {
 
