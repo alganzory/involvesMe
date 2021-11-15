@@ -11,6 +11,13 @@ router.use (express.json())
 router.use (express.urlencoded({extended: false}));
 //end
 
+// new a user
+let user = {
+    id: 'lakdjfvbnkj2424t2',
+    email: 'zhang@gmail.com',
+    password: "asjdnvkjasndva;'wprihjgieprhjg324909",
+  };
+
 //for test 
 router.get('/reset-password', (req, res, next) => {
     res.render('reset-password');
