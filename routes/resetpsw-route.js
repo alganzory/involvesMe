@@ -17,7 +17,7 @@ let user = {
     email: 'zhang@gmail.com',
     password: "asjdnvkjasndva;'wprihjgieprhjg324909",
   };
-
+  const JWT_SECRET = 'some super secret...';
 //for test 
 router.get('/reset-password', (req, res, next) => {
     res.render('reset-password');
@@ -32,10 +32,28 @@ router.get('/forget-password', (req, res, next) => {
 router.post('/forget-password', (req, res, next) =>{
   
     const {email} = req.body;
-    res.send(email)
+    
     if(email!== user.email){ //user not existing
         res.send("User not registered")
         return;
     }
+    //1. create new secret
+  const secret = JWT_SECRET+user.password//encrypy
+  
+  //2. create payload
+  const payload ={
+      email:user.email,
+      id:user.id
+  }
+
+  //3. token
+  const token = jwt.sign(payload, secret,{expiresIn: '10m'})//the link within 10 mins
+
+  //4. create one time link from token
+  const link = `http://localhost:5050/reset-password/${user.id}/${token}`;
+  
+  //5. test
+  console.log(link)
+  res.send("password reset link has been sent to your email...")
 });
 module.exports = router;
