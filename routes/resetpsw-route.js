@@ -10,6 +10,13 @@ const { application } = require("express");
 router.use (express.json())
 router.use (express.urlencoded({extended: false}));
 //end
+
+//for test 
+router.get('/reset-password', (req, res, next) => {
+    res.render('reset-password');
+  });
+
+
 router.get('/forget-password', (req, res, next) => {
     res.render('forget-password', {title: "Forget Password"});
   });
