@@ -33,5 +33,9 @@ router.post('/forget-password', (req, res, next) =>{
   
     const {email} = req.body;
     res.send(email)
+    if(email!== user.email){ //user not existing
+        res.send("User not registered")
+        return;
+    }
 });
 module.exports = router;
