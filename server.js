@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+    require("dotenv").config();
 }
 
 const express = require("express");
@@ -10,25 +10,25 @@ const session = require('express-session');
 
 app.use(flash());
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
 }));
 
 
 app.set("views", "pages");
 app.set("view engine", "ejs");
-app.use (express.json())
-app.use (express.urlencoded({extended: false}));
-app.use (express.static("assets"));
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static("assets"));
 
-const indexRouter = require ("./routes/index.js");
-const authRouter = require ("./routes/auth-route.js");
+const indexRouter = require("./routes/index.js");
+const authRouter = require("./routes/auth-route.js");
 
 app.use('/auth/', authRouter);
-app.get ('/', indexRouter);
+app.get('/', indexRouter);
 
 
-app.listen(3000, ()=> {
-  console.log("Express on port 3000")
+app.listen(3000, () => {
+    console.log("Express on port 3000")
 });
