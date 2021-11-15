@@ -8,18 +8,30 @@
   },
   "scripts": {
     "open-app": "gulp open-app",
-    "start": "npm run open-app",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "gulp-watch"
   },
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-install": "^1.1.0",
     "gulp-open": "^3.0.1",
     "gulp-sass": "^5.0.0",
-    "gulp-sourcemaps": "^3.0.0"
+    "gulp-sourcemaps": "^3.0.0",
+    "nodemon": "^2.0.15"
   },
-  "homepage": "http://creative-tim.com/product/soft-ui-design-system"
+  "homepage": "http://creative-tim.com/product/soft-ui-design-system",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "method-override": "^3.0.0",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
+  }
 }

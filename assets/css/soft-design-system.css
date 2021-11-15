@@ -29,8 +29,17 @@
   --bs-white: #fff;
   --bs-font-sans-serif: Open Sans;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); }
-
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); 
+  
+   /* our custom variables, they start with im, which are initials of InvolvesMe */
+  --im-font: Quicksand; 
+  --im-lightest: #dbe7e8;
+  --im-lighter: #c2cccc;
+  --im-light: #aab2b2;
+  --im-lightish: #797f7f;
+  --im-muted: #67748e;
+  --im-dark: #221b44;
+}
 *,
 *::before,
 *::after {
@@ -42,12 +51,12 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-font-sans-serif);
+  font-family: var(--im-font);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #67748e;
-  background-color: #fff;
+  color: var(--im-light);
+  background-color: var(--im-dark);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
@@ -66,7 +75,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-bottom: 0.5rem;
   font-weight: 400;
   line-height: 1.2;
-  color: #344767; }
+  color: var(--im-lightest); }
 
 h1, .h1 {
   font-size: calc(1.425rem + 2.1vw); }
@@ -87,10 +96,11 @@ h3, .h3 {
       font-size: 1.875rem; } }
 
 h4, .h4 {
-  font-size: calc(1.275rem + 0.3vw); }
+  font-size: calc(1.275rem + 0.3vw);
+  font-family: var(--im-font);}
   @media (min-width: 1200px) {
     h4, .h4 {
-      font-size: 1.5rem; } }
+      font-size: 1.5rem;} }
 
 h5, .h5 {
   font-size: 1.25rem; }
@@ -1757,7 +1767,7 @@ progress {
   margin-bottom: 0.5rem;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #344767; }
+  color: var(--im-muted); }
 
 .col-form-label {
   padding-top: calc(0.5rem + 1px);
@@ -3640,7 +3650,7 @@ textarea.form-control-lg {
 .card-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  background-color: #fff;
+  background-color: var(--bs-table-striped-bg);
   border-bottom: 0 solid rgba(0, 0, 0, 0.125); }
   .card-header:first-child {
     border-radius: 1rem 1rem 0 0; }

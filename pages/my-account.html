@@ -1,0 +1,215 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        involvesMe. | My Account
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+</head>
+
+<body>
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card mb-5 bg-gradient-dark border-5">
+                            <div class="row text-center">
+                                <div class="col-sm-12">
+                                    <h3 mb-0>My Account</h3><br><br>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Username</h6>
+                                    </div>
+                                    <div class="col-sm-4 text-secondary" id="username">
+                                        username
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-5 text-secondary" id="email">
+                                        dude@him.com
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Password</h6>
+                                    </div>
+                                    <div class="col-sm-5 text-secondary" id="password">
+                                        *****************
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row" id="break">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0" id="label"></h6>
+                                    </div>
+                                    <div class="col-sm-5 text-secondary" id="checkbox">
+
+                                    </div>
+                                </div>
+                                <br><br><br><br>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-info" id="button1" onclick="myFunction()">Edit</button>
+                                        <button class="btn btn-danger" id="button2" onclick="Delete()">Delete account
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                                <img src="../assets/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0">
+                                <div class="position-relative">
+                                    <img class="max-width-500 w-100 position-relative z-index-2" src="../assets/img/shapes/settings.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+    <script src="../assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+
+    <script>
+        function Delete() {
+
+            var result = confirm("Want to delete?");
+            if (result) {
+                //Logic to delete the item
+                var answer = prompt('Enter you password ', '*****');
+            }
+        }
+
+        function myFunction() {
+            var name = document.getElementById("username").innerHTML;
+            var Email = document.getElementById("email").innerHTML;
+            var pass = document.getElementById("password").innerHTML;
+            var button = document.getElementById("button1").innerHTML;
+
+            if (button == "Edit")
+
+            {
+                var username = document.getElementById("username");
+                username.innerHTML = "";
+                var input = document.createElement("input");
+                input.type = "text";
+                input.id = "txt1";
+                input.placeholder = name.replace(/\s+/g, '');
+                var br = document.createElement("br");
+                username.appendChild(input);
+                username.appendChild(br);
+
+                var email = document.getElementById("email");
+                email.innerHTML = "";
+                var input = document.createElement("input");
+                input.type = "email";
+                input.id = "txt2";
+
+                input.placeholder = Email.replace(/\s+/g, '');
+                var br = document.createElement("br");
+                email.appendChild(input);
+                email.appendChild(br);
+
+                var password = document.getElementById("password");
+                password.innerHTML = "";
+                var input = document.createElement("input");
+                input.type = "password";
+                input.id = "txt3";
+
+                input.placeholder = pass.replace(/\s+/g, '');
+                var br = document.createElement("br");
+                password.appendChild(input);
+                password.appendChild(br);
+                var input = document.createElement("input");
+                document.getElementById("label").innerHTML = "Content creator"
+                input.type = "checkbox"
+                input.id = "txt4"
+                var div = document.getElementById("checkbox");
+                div.appendChild(input);
+
+                document.getElementById("button1").innerHTML = "Save"
+
+
+
+            } else if (button == "Save") {
+                // console.log(name);
+                var rep1 = document.getElementById("txt1").value;
+                // if (rep != "") {
+                name = rep1;
+                // }
+
+                document.getElementById("txt1").remove;
+                document.getElementById("username").innerHTML = name;
+                var rep2 = document.getElementById("txt2").value;
+                // if (rep != "") {
+                email = rep2;
+                // }
+
+                document.getElementById("txt2").remove;
+                document.getElementById("email").innerHTML = email;
+                var rep3 = document.getElementById("txt3").value;
+                // if (rep != "") {
+                password = rep3;
+                // }
+                document.getElementById("txt3").remove;
+
+
+                document.getElementById("txt4").style.display = "none";
+                document.getElementById("password").innerHTML = '*****';
+                document.getElementById("button1").innerHTML = "Edit"
+                document.getElementById("label").innerHTML = "";
+
+
+
+            }
+        }
+    </script>
+</body>
+
+</html>
