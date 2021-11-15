@@ -21,4 +21,10 @@ router.get('/forget-password', (req, res, next) => {
     res.render('forget-password', {title: "Forget Password"});
   });
 
+
+router.post('/forget-password', (req, res, next) =>{
+  
+    const {email} = req.body;
+    res.send(email)
+});
 module.exports = router;
