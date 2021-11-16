@@ -10,7 +10,7 @@ const passport = require("passport");
 const session = require("express-session");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
-const UserService = require("../user");
+const UserService = require("../models");
 const initializePassport = require("../passport-config");
 
 const passportInitialize = passport.initialize();
@@ -49,7 +49,15 @@ const get_register = (req, res) => {
 };
 const register_user = async(req, res) => {
     const { type, username, email, password, confirmPassword } = req.body
-
+    
+    if (await UserService.getUserByUsername({ username })) {
+        req.flash("error", "Account not created. Username is used");
+        return res.redirect("/auth/register");
+    }
+    if (await UserService.getUserByEmail({ email })) {
+        req.flash("error", "Account not created. Email already Exists");
+        return res.redirect("/auth/register");
+    }
     if (password.length < 8) {
         req.flash("error", "Account not created. Password must be 7+ characters long");
         return res.redirect("/auth/register");
@@ -59,14 +67,6 @@ const register_user = async(req, res) => {
         return res.redirect("/auth/register");
     }
 
-    if (await UserService.getUserByEmail({ email })) {
-        req.flash("error", "Account not created. Email already Exists");
-        return res.redirect("/auth/register");
-    }
-    if (await UserService.getUserByUsername({ username })) {
-        req.flash("error", "Account not created. Username is used");
-        return res.redirect("/auth/register");
-    }
     const hashedPassword = await bcrypt.hash(password, 10)
 
     try {
