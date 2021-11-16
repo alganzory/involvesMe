@@ -13,9 +13,9 @@ const bcrypt = require("bcrypt");
 const UserService = require("../user");
 const initializePassport = require("../passport-config");
 
-initializePassport(passport);
 const passportInitialize = passport.initialize();
 const passportSession = passport.session();
+initializePassport(passport);
 
 // middleware to check if the user is authenticated
 const checkAuthenticated = (req, res, next) => {

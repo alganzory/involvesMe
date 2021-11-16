@@ -17,6 +17,9 @@ const getUsers = (User) => () => {
 const getUserByEmail = (User) => async({ email }) => {
     return await User.findOne({ email })
 }
+const getUserById = (User) => async({ id }) => {
+    return await User.findOne({ id })
+}
 const getUserByUsername = (User) => async({ username }) => {
     return await User.findOne({ username })
 }
@@ -26,7 +29,8 @@ module.exports = (User) => {
         addLocalUser: addLocalUser(User),
         getUsers: getUsers(User),
         getUserByEmail: getUserByEmail(User),
-        getUserByUsername: getUserByUsername(User)
+        getUserByUsername: getUserByUsername(User),
+        getUserById: getUserById(User)
 
     }
 }

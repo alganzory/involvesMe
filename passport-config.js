@@ -6,10 +6,11 @@ const bcrypt = require('bcrypt');
 
 
 function initialize(passport) {
-    passport.use(new LocalStrategy(
+    console.log("initialize");
+    passport.use(new LocalStrategy({usernameField:"email"},
         async function(email, password, done) {
 
-            const currentUser = await UserService.getUserByEmail({ email });
+            const currentUser = await User.getUserByEmail({ email });
 
             if (!currentUser) {
                 return done(null, false, { message: `User with email ${email} does not exist` });
@@ -27,7 +28,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async(id, done) => {
-    const currentUser = await User.findOne({ id });
+    const currentUser = await User.getUserById({ id });
     done(null, currentUser);
 });
 module.exports = initialize;
