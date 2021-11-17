@@ -56,4 +56,8 @@ router.post('/forget-password', (req, res, next) =>{
   console.log(link)
   res.send("password reset link has been sent to your email...")
 });
+
+router.get('/reset-password/:id/:token', (req, res, next) => {
+    res.render('reset-password');
+});
 module.exports = router;
