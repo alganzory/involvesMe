@@ -6,10 +6,6 @@ const methodOverride = require('method-override');
 const authController = require('../controllers/authController');
 
 
-router.use(authController.passportInitialize);
-router.use(authController.passportSession);
-router.use(methodOverride('_method'));
-
 router.get("/login", authController.checkNotAuthenticated, authController.get_login);
 
 router.post("/login", authController.checkNotAuthenticated, authController.passportAuth);
@@ -18,6 +14,9 @@ router.get("/register", authController.checkNotAuthenticated, authController.get
 
 router.post("/register", authController.checkNotAuthenticated, authController.register_user);
 
-router.delete("/logout", authController.logout_user);
+router.get ("/google", authController.passportGoogleAuth);
+
+router.get ("/google/redirect", authController.passportGoogleAuth, authController.google_redirect);
+router.post("/logout", authController.checkAuthenticated,  authController.logout_user);
 
 module.exports = router;
