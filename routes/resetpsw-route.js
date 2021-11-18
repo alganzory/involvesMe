@@ -24,12 +24,12 @@ router.get('/reset-password', (req, res, next) => {
   });
 
 
-router.get('/forget-password', (req, res, next) => {
-    res.render('forget-password', {title: "Forget Password"});
+router.get('/forgot-password', (req, res, next) => {
+    res.render('forgot-password', {title: "Forgot Password"});
   });
 
 
-router.post('/forget-password', (req, res, next) =>{
+router.post('/forgot-password', (req, res, next) =>{
   
     const {email} = req.body;
     
