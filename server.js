@@ -5,15 +5,22 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const flash = require('express-flash');
-const session = require('express-session');
+// const session = require('express-session');
+const cookieSession = require('cookie-session');
+const passport = require("passport")
 
+// set up session cookies
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_KEY]
+}));
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(flash());
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}));
+
 
 
 app.set("views", "pages");
@@ -22,7 +29,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("assets"));
 
-const indexRouter = require("./routes/index.js");
+const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
 
 app.use('/auth/', authRouter);
