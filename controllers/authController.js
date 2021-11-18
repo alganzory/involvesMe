@@ -1,28 +1,21 @@
 require("dotenv").config();
 
 const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const flash = require("express-flash");
-const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const session = require("express-session");
+
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
-const UserService = require("../models");
-const initializePassport = require("../passport-config");
+const User = require("../models/user-Model");
+ require("../passport-config");
 
-const passportInitialize = passport.initialize();
-const passportSession = passport.session();
-initializePassport(passport);
 
 // middleware to check if the user is authenticated
 const checkAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    return res.redirect("/login");
+    return res.redirect("/auth/login");
 };
 const checkNotAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
