@@ -79,9 +79,7 @@ const register_user = async(req, res) => {
     }
 };
 
-const google_redirect = (req, res) => {
-    res.redirect("/");
-};
+
 
 const logout_user = (req, res) => {
     req.logOut();
@@ -94,6 +92,14 @@ const passportAuth = passport.authenticate("local", {
 });
 
 const passportGoogleAuth = passport.authenticate("google",{ scope: ['profile', 'email'] })
+const google_redirect = (req, res) => {
+    res.redirect("/");
+};
+
+const passportTwitchAuth =  passport.authenticate("twitch", { failureRedirect: "/auth/login" });
+const twitch_redirect =  (req, res) => {
+    res.redirect("/");
+};
 
 module.exports = {
     checkAuthenticated,
@@ -104,5 +110,7 @@ module.exports = {
     logout_user,
     passportAuth,
     passportGoogleAuth,
-    google_redirect
+    google_redirect,
+    passportTwitchAuth,
+    twitch_redirect,
 };

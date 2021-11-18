@@ -17,6 +17,10 @@ router.post("/register", authController.checkNotAuthenticated, authController.re
 router.get ("/google", authController.passportGoogleAuth);
 
 router.get ("/google/redirect", authController.passportGoogleAuth, authController.google_redirect);
+router.get ("/twitch", authController.passportTwitchAuth);
+
+router.get ("/twitch/redirect", authController.passportTwitchAuth, authController.twitch_redirect);
+
 router.post("/logout", authController.checkAuthenticated,  authController.logout_user);
 
 module.exports = router;

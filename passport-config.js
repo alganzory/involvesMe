@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const twitchStrategy = require("passport-twitch-new").Strategy;
 
 passport.use(
   new LocalStrategy({ usernameField: "email" }, async function (
@@ -19,12 +20,12 @@ passport.use(
 
     if (!currentUser) {
       return done(null, false, {
-        message: `User with email ${email} does not exist`,
+        message: `Invalid email or password`,
       });
     }
 
     if (!bcrypt.compareSync(password, currentUser.password)) {
-      return done(null, false, { message: `Incorrect password provided` });
+      return done(null, false, { message: `Invalid email or password`});
     }
     return done(null, currentUser);
   })
@@ -52,6 +53,26 @@ passport.use(
     }
   )
 );
+
+passport.use(new twitchStrategy({
+    clientID: process.env.TWITCH_CLIENT_ID,
+    clientSecret: process.env.TWITCH_CLIENT_SECRET,
+    callbackURL: "/auth/twitch/redirect",
+    scope: "user_read"
+  },
+  async function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
+    const newUserData = { 
+      id: profile.id,
+      username: profile.login,
+      profilePhoto: profile.profile_image_url,
+      source: "twitch",
+      email: profile.email
+    }
+    const user = await User.findOrCreate(profile.id, newUserData);
+    done(null, user);
+  }
+));
 
 passport.serializeUser((user, done) => {
   console.log(user.id);

@@ -78,7 +78,7 @@ exports.findOrCreate = async (id, user) => {
       const newUser = await exports.addUser(user);
       return newUser;
     } else {
-        console.log ("google account already registered, logging in instead..");
+        console.log ("account already registered, logging in ...");
       return currentUser;
     }
   } catch (error) {
