@@ -51,7 +51,7 @@ const register_user = async(req, res) => {
         return res.redirect("/auth/register");
     }
     if (password.length < 8) {
-        req.flash("error", "Account not created. Password must be 7+ characters long");
+        req.flash("error", "Account not created. Password must be 8 characters long at least");
         return res.redirect("/auth/register");
     }
     if (password != confirmPassword) {

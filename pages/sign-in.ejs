@@ -58,58 +58,62 @@ Coded by www.creative-tim.com
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
                 <h4 class="font-weight-bolder">Sign In</h4>
-                <p class="mb-0">Enter your email and password to sign in</p>
+                <p class="text-sm mt-3"> Sign in with your social accounts</p>
               </div>
 
-              <div class="card-body pb-0">
+              <div class="card-body pb-0 pt-0">
 
-                <% if (messages.error) {
-                  %>
-                <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
-                  <%= messages.error %>
+                <div class="form-group col-lg-12 mx-auto">
+                  <a href="/auth/twitch" class="btn btn-primary btn-block py-2 btn-twitch w-100">
+                    <i class="fa fa-twitch mr-2 me-2"></i>
+                    <span class="font-weight-bold">Continue with Twitch</span>
+                  </a>
+                  <a href="/auth/google/" class="btn btn-light btn-block py-2 btn-google w-100"><img
+                      src="https://img.icons8.com/color/16/000000/google-logo.png">
+                    <i class="me-2"></i>
+                    <span class="font-weight-bold">Continue with Google</span>
+                  </a>
                 </div>
-                <%
-                } %>
 
-                <form role="form" action="/auth/login" method="POST">
+           
+                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-0">
+                  <div class="border-bottom w-100 ml-5"></div>
+                  <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                  <div class="border-bottom w-100 mr-5"></div>
+                </div>
+                
+                <form role="form" class="mt-4" action="/auth/login" method="POST">
+                  <p class="mb-3 text-quicksand text-sm">Sign in with your credentials</p>
+
+                  <% if (messages.error) {
+                    %>
+                  <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                    <%= messages.error %>
+                  </div>
+                  <%
+                  } %>
+  
                   <div class="mb-3">
-                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"
+                    <input type="email" name="email" class="form-control form-control-md" placeholder="Email"
                       aria-label="Email" aria-describedby="email-addon" required>
                   </div>
                   <div class="mb-3">
-                    <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
+                    <input type="password" name="password" class="form-control form-control-md" placeholder="Password"
                       aria-label="Password" aria-describedby="password-addon" required>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <input class="form-check-input " type="checkbox" id="rememberMe">
                     <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign
+                    <button type="submit" class="btn btn-md bg-gradient-primary w-100 mt-3 mb-0">Sign
                       in</button>
                   </div>
-               
-                  <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
-                    <div class="border-bottom w-100 ml-5"></div>
-                    <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
-                    <div class="border-bottom w-100 mr-5"></div>
-                  </div>
 
-                  <!-- Social Login -->
-                  <div class="form-group col-lg-12 mx-auto">
-                    <a href="#" class="btn btn-primary btn-block py-2 btn-facebook w-100">
-                      <i class="fa fa-facebook-f mr-2 me-2"></i>
-                      <span class="font-weight-bold">Continue with Facebook</span>
-                    </a>
-                    <a href="/auth/google/" class="btn btn-light btn-block py-2 btn-google w-100"><img
-                        src="https://img.icons8.com/color/16/000000/google-logo.png">
-                      <i class="me-2"></i>
-                      <span class="font-weight-bold">Continue with Google</span>
-                    </a>
-                  </div>
                 </form>
+
               </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
+              <div class="card-footer text-center pt-2 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
                   Don't have an account?
                   <a href="/auth/register" class="text-primary text-gradient font-weight-bold">Sign up</a>
