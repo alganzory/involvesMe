@@ -23,10 +23,10 @@ const checkNotAuthenticated = (req, res, next) => {
     }
     return next();
 };
-const mongodbUri = "mongodb+srv://admin:vDB3pcBXhkGQIwmN@involvesme.d3lfa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; //process.env.MONGO_URI;
+
 
 mongoose.connect(
-    mongodbUri, {
+    process.env.MONGO_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     },
@@ -42,12 +42,11 @@ const get_register = (req, res) => {
 };
 const register_user = async(req, res) => {
     const { type, username, email, password, confirmPassword } = req.body
-    
-    if (await UserService.getUserByUsername({ username })) {
+    if (await User.getUserByUsername(username )) {
         req.flash("error", "Account not created. Username is used");
         return res.redirect("/auth/register");
     }
-    if (await UserService.getUserByEmail({ email })) {
+    if (await User.getUserByEmail( email )) {
         req.flash("error", "Account not created. Email already Exists");
         return res.redirect("/auth/register");
     }
@@ -63,19 +62,27 @@ const register_user = async(req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     try {
-        await UserService.addLocalUser({
+        const newUserData ={
             id: uuid.v4(),
             email,
             username,
             password: hashedPassword,
-            type: type
-        })
+            type: type,
+            source: "local"
+        } 
+        const newUser = await User.addUser(newUserData);
         res.redirect("/auth/login")
     } catch (e) {
+        console.error (e)
         req.flash("error", "Error creating a new account. Please Contact Support.");
         res.redirect("/auth/register")
     }
 };
+
+const google_redirect = (req, res) => {
+    res.redirect("/");
+};
+
 const logout_user = (req, res) => {
     req.logOut();
     res.redirect("/");
@@ -86,6 +93,7 @@ const passportAuth = passport.authenticate("local", {
     failureFlash: true,
 });
 
+const passportGoogleAuth = passport.authenticate("google",{ scope: ['profile', 'email'] })
 
 module.exports = {
     checkAuthenticated,
@@ -94,7 +102,7 @@ module.exports = {
     get_register,
     register_user,
     logout_user,
-    passportInitialize,
-    passportSession,
     passportAuth,
+    passportGoogleAuth,
+    google_redirect
 };
