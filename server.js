@@ -31,10 +31,11 @@ app.use(express.static("assets"));
 
 const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
+const accountRouter = require("./routes/account-route.js");
 
 app.use('/auth/', authRouter);
-app.get('/', indexRouter);
-
+app.use('/account/', accountRouter);
+app.use('/', indexRouter);
 
 app.listen(3000, () => {
     console.log("Express on port 3000")
