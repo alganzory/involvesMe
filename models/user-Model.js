@@ -85,3 +85,24 @@ exports.findOrCreate = async (id, user) => {
     console.error(error);
   }
 };
+exports.updateUser = async (id, user) => {
+ 
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const updatedUser = await User.updateOne({ id }, user);
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.deleteUser = async (id) => {
+ 
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const updatedUser = await User.deleteOne({ id });
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+};

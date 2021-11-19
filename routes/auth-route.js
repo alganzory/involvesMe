@@ -22,5 +22,6 @@ router.get ("/twitch", authController.passportTwitchAuth);
 router.get ("/twitch/redirect", authController.passportTwitchAuth, authController.twitch_redirect);
 
 router.post("/logout", authController.checkAuthenticated,  authController.logout_user);
+router.get("/logout", authController.checkAuthenticated,  authController.logout_user);
 
 module.exports = router;
