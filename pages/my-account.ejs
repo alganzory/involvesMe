@@ -62,11 +62,11 @@ Coded by www.creative-tim.com
                                 <p class="mb-0">Detailed information about your account</p>
                             </div>
                             <div class="card-body pb-0">
-                                <form role="form" method="post" action="/account/username">
+                                <form role="form" method="PUT" action="/account/username">
                                     <h6 class="mb-0">Username</h6>
                                     <div class="input-group mb-1">
                                         <!-- <span class="input-group-text bg-gray-500">@</span> -->
-                                        <input type="text" name="username" id="username" class="input-group-text bg-gray-500 col-10 text-start" value="<%=user.username%>" placeholder="@Username" aria-label="Username" aria-describedby="button-addon2" readonly>
+                                        <input type="text" name="username" id="username" class="input-group-text bg-gray-500 col-8 text-start" value="<%=user.username%>" placeholder="@Username" aria-label="Username" aria-describedby="button-addon2" readonly>
                                         <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonusername" onclick="enableUsername()"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25"height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" >
                                                 <path
@@ -75,16 +75,16 @@ Coded by www.creative-tim.com
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="button" id="usernamecancel" onclick="usernameCancel()" style="display: none;">Cancel</button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="submit" id="saveName" onclick="saveuserName()" style="display: none;">Save</button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="button" id="usernamecancel" onclick="usernameCancel()" style="display: none;">Cancel</button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="submit" id="saveName" onclick="saveuserName()" style="display: none;">Save</button>
 
                                     </div>
                                 </form>
-                                <form role="form" method="post" action="/account/email">
+                                <form role="form" method="PUT" action="/account/email">
                                     <h6 class="mb-0">Email</h6>
                                     <div class="input-group mb-1">
 
-                                        <input type="text" id="email" class="input-group-text bg-gray-500 col-10 text-start" value="<%=user.email%>" placeholder="kaka@gmail.com" aria-label="email" aria-describedby="button-addon2" readonly>
+                                        <input type="text" id="email" class="input-group-text bg-gray-500 col-8 text-start" value="<%=user.email%>" placeholder="kaka@gmail.com" aria-label="email" aria-describedby="button-addon2" readonly>
                                         <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonemail" onclick="enableEmail()"> <svg id="svgedit"xmlns="http://www.w3.org/2000/svg" width="25"
                                                 height="16" fill="currentColor" class="bi bi-pencil-square"
                                                 viewBox="0 0 16 16" >
@@ -93,15 +93,15 @@ Coded by www.creative-tim.com
                                                 <path fill-rule="evenodd"
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg></button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="button" id="emailcancel" onclick="emailCancel()" style="display: none;">Cancel</button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="submit" id="saveEmail" onclick="saveEmail()" style="display: none;"> Save </button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="button" id="emailcancel" onclick="emailCancel()" style="display: none;">Cancel</button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="submit" id="saveEmail" onclick="saveEmail()" style="display: none;"> Save </button>
                                     </div>
                                 </form>
-                                <form role="form" method="post" action="/account/password">
+                                <form role="form" method="PUT" action="/account/password">
                                     <h6 class="mb-0">Password</h6>
                                     <div class="input-group mb-1">
 
-                                        <input type="text" id="password" class="input-group-text bg-gray-500 col-10 text-start" placeholder="**********" aria-label="password" aria-describedby="button-addon2" readonly>
+                                        <input type="text" id="password" class="input-group-text bg-gray-500 col-8 text-start" placeholder="**********" aria-label="password" aria-describedby="button-addon2" readonly>
                                         <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonpassword" onclick="enablePassword()"> <svg xmlns="http://www.w3.org/2000/svg" width="25"
                                                 height="16" fill="currentColor" class="bi bi-pencil-square"
                                                 viewBox="0 0 16 16" >
@@ -110,8 +110,8 @@ Coded by www.creative-tim.com
                                                 <path fill-rule="evenodd"
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg></button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="button" id="passwordcancel" onclick="passwordCancel()" style="display: none;">Cancel</button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3 gap-11x" type="submit" id="savePassword" onclick="savePassword()" style="display: none;">
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="button" id="passwordcancel" onclick="passwordCancel()" style="display: none;">Cancel</button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="submit" id="savePassword" onclick="savePassword()" style="display: none;">
 
                                       
                                             Save
@@ -146,12 +146,13 @@ Coded by www.creative-tim.com
                                 <div class="row ">
                                     <div class="col-sm-12 ">
                                         <!-- Button trigger modal -->
-                                        <button type="button " class="btn btn-secondary " data-toggle="modal " data-target="#deleteModel " onclick="document.getElementById( 'deleteModal').style.display='block' ">
+                                        <button type="button " class="btn btn-secondary" data-toggle="modal " data-target="#deleteModel " onclick="document.getElementById( 'deleteModal').style.display='block' ">
                                             Delete account
                                         </button>
 
 
                                         <!-- Modal -->
+                                    
                                         <div class="modal " id="deleteModal" tabindex="-1 " role="dialog" aria-labelledby="deleteModalLabel " aria-hidden="true ">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content ">
@@ -163,22 +164,19 @@ Coded by www.creative-tim.com
                                                         </button>
                                                     </div>
                                                     <div class="modal-body ">
-                                                        Are you sure you want to delete your account?
+                                                        Are you sure you want to Delete your Account ?
                                                     </div>
                                                     <div class="modal-footer ">
-                                                        <form role="form " method="DELETE" action="/account/delete-account ">
-
-                                                            <button type="button " class="btn btn-secondary " data-dismiss="modal " onclick="document.getElementById( 'deleteModal').style.display='none' ">Close</button>
-                                                            <button type="submit " class="btn btn-danger ">Delete
-                                                                account</button>
+                                                        <form role="form " method="delete " action="/account/delete-account ">
+                                                            <button type="submit " class="btn bg-gradient-primary">Delete account</button>
                                                         </form>
+                                                        <button type="button " class="btn btn-secondary " data-dismiss="modal " onclick="document.getElementById( 'deleteModal').style.display='none' ">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -216,7 +214,7 @@ Coded by www.creative-tim.com
             document.getElementById("username").readOnly = false;
             let name = document.getElementById("username").value;
             document.getElementById("username").placeholder = name;
-            document.getElementById("username").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("username").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("saveName").style.display = "block";
             document.getElementById("usernamecancel").style.display = "block";
             document.getElementById("svgedit").remove;
@@ -228,7 +226,7 @@ Coded by www.creative-tim.com
 
         function enableEmail() {
             document.getElementById("email").readOnly = false;
-            document.getElementById("email").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("email").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("saveEmail").style.display = "block "
             document.getElementById("editbuttonusername").style.display = "none"
             document.getElementById("editbuttonemail").style.display = "none"
@@ -239,7 +237,7 @@ Coded by www.creative-tim.com
 
         function enablePassword() {
             document.getElementById("password").readOnly = false;
-            document.getElementById("password").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("savePassword").style.display = "block ";
             document.getElementById("editbuttonusername").style.display = "none"
             document.getElementById("editbuttonemail").style.display = "none"
@@ -252,7 +250,7 @@ Coded by www.creative-tim.com
             document.getElementById("username").readOnly = true;
             let name = document.getElementById("username").value = "<%=user.username%>";
             document.getElementById("username").placeholder = name;
-            document.getElementById("username").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("username").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("saveName").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
@@ -263,7 +261,7 @@ Coded by www.creative-tim.com
             document.getElementById("email").readOnly = true;
             let name = document.getElementById("email").value = "<%=user.email%>";
             document.getElementById("email").placeholder = name;
-            document.getElementById("email").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("email").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("saveEmail").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
@@ -274,7 +272,7 @@ Coded by www.creative-tim.com
             document.getElementById("password").readOnly = true;
             let name = document.getElementById("password").value = "***************";
             document.getElementById("password").placeholder = name;
-            document.getElementById("password").className = "input-group-text bg-gray-500 col-10 text-start";
+            document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
