@@ -91,12 +91,17 @@ const passportAuth = passport.authenticate("local", {
     failureFlash: true,
 });
 
-const passportGoogleAuth = passport.authenticate("google",{ scope: ['profile', 'email'] })
+const passportGoogleAuth = passport.authenticate("google", {
+    scope: ["profile", "email"],
+    failureRedirect: "/auth/login",
+    failureFlash: "Account already exists, sign in with credentials"
+  });
 const google_redirect = (req, res) => {
     res.redirect("/");
 };
 
-const passportTwitchAuth =  passport.authenticate("twitch", { failureRedirect: "/auth/login" });
+
+const passportTwitchAuth =  passport.authenticate("twitch", { failureRedirect: "/auth/login",failureFlash: "Account already exists, sign in with credentials" });
 const twitch_redirect =  (req, res) => {
     res.redirect("/");
 };

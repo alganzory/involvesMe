@@ -117,7 +117,7 @@ Coded by www.creative-tim.com
                                     </div>
                                 </form>
                                 <br>
-                                <% if ((user.type) == "fan"){ %>
+                                <% if ((user.type) != "creator"){ %>
                                 <form role="form" method="post" action="/account/type">
                                     <br>
                                     <div class="row mb-0 col-12 text-quicksand ">
