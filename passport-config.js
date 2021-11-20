@@ -23,7 +23,10 @@ passport.use(
         message: `Invalid email or password`,
       });
     }
-
+    if (currentUser.source !== "local"){
+      if (!currentUser.password)
+      return done (null, false, {message: "Account with this email address exists, try another login method"})
+    }
     if (!bcrypt.compareSync(password, currentUser.password)) {
       return done(null, false, { message: `Invalid email or password`});
     }
@@ -39,12 +42,12 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     async function (accessToken, refreshToken, profile, done) {
-      //   clg(profile);
+      console.log (profile);
       const newUserData = {
         id: profile.id,
         email: profile.emails[0].value,
         username: profile.name.familyName + profile.id,
-        profilePhoto: profile.picture,
+        profilePhoto: profile.photos[0].value,
         source: "google",
       };
       const user = await User.findOrCreate(profile.id, newUserData);
@@ -64,7 +67,7 @@ passport.use(new twitchStrategy({
     console.log(profile);
     const newUserData = { 
       id: profile.id,
-      username: profile.login,
+      username: profile.login + profile.id,
       profilePhoto: profile.profile_image_url,
       source: "twitch",
       email: profile.email
