@@ -180,8 +180,20 @@ const get_reset_password = async (req, res) => {
   }
 };
 
+const sendSuccessfulResetEmail = (email) => {
+  const data = {
+    to: email,
+    subject: "Password Reset",
+    html: `
+        <p>Your involvesMe account password was reset successfully. </p>
+        `,
+  };
+  sendEmail(data.to, data.subject, data.html);
+}
+
 const post_reset_password = async (req, res) => {
   const { password, confirmPassword, token, userId } = req.body;
+  const thisLink = `/auth/reset-password/${token}/${userId}`;
   if (password.length < 8) {
     req.flash("resetError", "Password must be 8 characters long at least");
     console.log("password length");
@@ -202,10 +214,10 @@ const post_reset_password = async (req, res) => {
       password: hashedPassword,
       resetPasswordToken: null,
     });
-    console.log(await User.getUserById (userId));
+    
     req.flash("success", "Password reset successfully");
+    sendSuccessfulResetEmail(user.email);
     res.status(200).redirect("/auth/login");
-      
   } catch (e) {
     console.log(e);
     req.flash("forgotError", "Invalid/Expired reset link, please try again");
