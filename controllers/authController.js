@@ -111,7 +111,7 @@ const post_forgot_password = async (req, res) => {
     return res.status(400).redirect("/auth/forgot-password");
   }
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "1m",
   });
   const data = {
     to: email,
@@ -126,7 +126,7 @@ const post_forgot_password = async (req, res) => {
     const hashedToken = await bcrypt.hash(token, 10);
     await User.updateUser(user.id, { resetPasswordToken: hashedToken });
     sendEmail(data.to, data.subject, data.html);
-    req.flash("success", "Password reset email sent");
+    req.flash("success", "Password reset link sent to your email");
     return res.status(200).redirect("/auth/login");
   } catch (e) {
     console.error(e);
@@ -199,6 +199,7 @@ const post_reset_password = async (req, res) => {
       resetPasswordToken: null,
     });
     console.log(await User.getUserById (userId));
+    req.flash("success", "Password reset successfully");
     res.status(200).redirect("/auth/login");
       
   } catch (e) {

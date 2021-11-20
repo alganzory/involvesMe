@@ -53,11 +53,17 @@ Coded by www.creative-tim.com
   <section>
     <div class="page-header min-vh-100">
       <div class="container">
+       
         <div class="row">
           <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
                 <h4 class="font-weight-bolder">Sign In</h4>
+                <% if (successMessages.length > 0) { %>
+                  <div class="alert alert-success text-white border-0 text-sm p-3" role="alert">
+                  <%= successMessages%>
+                </div>
+                <% } %>
                 <p class="text-sm mt-3"> Sign in with your social accounts</p>
               </div>
 
@@ -74,7 +80,6 @@ Coded by www.creative-tim.com
                     <span class="font-weight-bold">Continue with Google</span>
                   </a>
                 </div>
-
 
                 <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-0">
                   <div class="border-bottom w-100 ml-5"></div>
@@ -106,15 +111,12 @@ Coded by www.creative-tim.com
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
                     </div>
-                    <div >
+                    <div>
                       <a href="/auth/forgot-password" class="form-check-label text-muted">Forgot
                         password?</a>
                     </div>
                   </div>
-                  <p class="text-sm mx-auto">
-                 
-                    <a href="/auth/forgot-password" class="text-primary text-gradient font-weight-bold">Forgot Password</a>
-                  </p>
+              
                   <div class="text-center">
                     <button type="submit" class="btn btn-md bg-gradient-primary w-100 mt-3 mb-0">Sign
                       in</button>
