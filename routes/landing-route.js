@@ -21,7 +21,8 @@ router.get('/', checkAuthenticated, (req, res) => {
     password: ${req.user.password}
     <h3>
     </br>
-    <form method="POST" action="/auth/logout" >  <button type="submit">Logout</button> <form>
+    <form method="POST" action="/auth/logout" >  <button type="submit">Logout</button> </form>
+    <form method="GET" action="/account" >  <button type="submit">Account</button> </form>
     `)
 });
 

@@ -22,9 +22,21 @@ const change_email = async (req, res) => {
 
 const change_password = async (req, res) => {
     var query = req.user.id;
-    var password = req.body.password;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await UserService.updateUser(query, {password: hashedPassword});
+    var oldpassword = req.body.password;
+    
+    var newpassword = req.body.newpassword;
+    if (oldpassword && !bcrypt.compareSync(oldpassword, req.user.password)) {
+        req.flash("error","Incorrect Current Password");
+    }
+    else {
+        if (newpassword.length < 8) {
+            req.flash("error", "New Password must be at least 8 characters long");
+        }
+        else{
+            const hashedNewPassword = await bcrypt.hash(newpassword, 10);
+            await UserService.updateUser(query, {password: hashedNewPassword});
+        }
+    }
     res.redirect("/account");
 };
 const change_type = async (req, res) => {

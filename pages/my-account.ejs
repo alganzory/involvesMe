@@ -58,8 +58,15 @@ Coded by www.creative-tim.com
                                 <p class="mb-0">Detailed information about your account</p>
                             </div>
                             <div class="card-body pb-0">
+                                <% if (messages.error) {
+                                    %>
+                                  <div class="alert alert-danger text-white border-0 text-sm p-3 col-10" role="alert">
+                                    <%= messages.error %>
+                                  </div>
+                                  <%
+                                  } %>
                                 <form role="form" method="POST" action="/account/username?_method=PUT">
-                                    <h6 class="mb-0">Username</h6>
+                                    <label class="form-check-label text-muted">Username</label>
                                     <div class="input-group mb-1">
                                         <!-- <span class="input-group-text bg-gray-500">@</span> -->
                                         <input type="text" name="username" id="username" class="input-group-text bg-gray-500 col-8 text-start" value="<%=user.username%>" placeholder="@Username" aria-label="Username" aria-describedby="button-addon2" readonly>
@@ -77,7 +84,7 @@ Coded by www.creative-tim.com
                                     </div>
                                 </form>
                                 <form role="form" method="POST" action="/account/email?_method=PUT">
-                                    <h6 class="mb-0">Email</h6>
+                                    <label class="form-check-label text-muted">Email</label>
                                     <div class="input-group mb-1">
 
                                         <input type="text" name="email" id="email" class="input-group-text bg-gray-500 col-8 text-start" value="<%=user.email%>" placeholder="kaka@gmail.com" aria-label="email" aria-describedby="button-addon2" readonly>
@@ -94,10 +101,14 @@ Coded by www.creative-tim.com
                                     </div>
                                 </form>
                                 <form role="form" method="POST" action="/account/password?_method=PUT">
-                                    <h6 class="mb-0">Password</h6>
+                                    <label class="form-check-label text-muted"id="passwordtext">Password</label>
                                     <div class="input-group mb-1">
-
+                                        <% if (user.password){ %>
                                         <input type="text" name="password" id="password" class="input-group-text bg-gray-500 col-8 text-start" placeholder="**********" aria-label="password" aria-describedby="button-addon2" readonly>
+                                        <%} %>
+                                        <% if (!user.password){ %>
+                                        <input type="text" name="placeholderpassword" id="placeholderpassword" class="input-group-text bg-gray-500 col-8 text-start" placeholder="Add a password to sign in with email" aria-label="password" aria-describedby="button-addon2" readonly>
+                                        <%} %>
                                         <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonpassword" onclick="enablePassword()"> <svg xmlns="http://www.w3.org/2000/svg" width="25"
                                                 height="16" fill="currentColor" class="bi bi-pencil-square"
                                                 viewBox="0 0 16 16" >
@@ -105,18 +116,18 @@ Coded by www.creative-tim.com
                                                     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                 <path fill-rule="evenodd"
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                            </svg></button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="button" id="passwordcancel" onclick="passwordCancel()" style="display: none;">Cancel</button>
-                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="submit" id="savePassword" onclick="savePassword()" style="display: none;">
-
-                                      
-                                            Save
-
+                                            </svg>
                                         </button>
-
+                                    </div>
+                                   
+                                    <label class="form-check-label text-muted"id="newpasswordtext" style="display: none;">New Password</label>
+                                    <div class="input-group mb-1">
+                                        <input type="text" name="newpassword" id="newpassword" class="input-group-text bg-gray-500 col-8 text-start" placeholder="Please Input New Password" aria-label="newpassword" aria-describedby="button-addon2" style="display: none;">
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="button" id="passwordcancel" onclick="passwordCancel()" style="display: none;">Cancel</button>
+                                        <button class="btn btn-outline-primary mb-0 mx-1 px-2" type="submit" id="savePassword" onclick="savePassword()" style="display: none;">Save</button>
                                     </div>
                                 </form>
-                                <br>
+                                
                                 <% if ((user.type) != "creator"){ %>
                                 <form role="form" method="post" action="/account/type">
                                     <br>
@@ -223,8 +234,19 @@ Coded by www.creative-tim.com
             document.getElementById("emailcancel").style.display = "block";
         }
         function enablePassword() {
-            document.getElementById("password").readOnly = false;
-            document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
+            <%if (user.password){%>
+                document.getElementById("password").readOnly = false;
+                document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
+                document.getElementById("password").placeholder = "Please Input Current Password";
+                document.getElementById("password").setAttribute("required", "");
+            <%}%>
+            <%if (!user.password){%>
+                document.getElementById("passwordtext").style.display = "none";
+                document.getElementById("placeholderpassword").style.display = "none";
+            <%} %>
+            document.getElementById("newpasswordtext").style.display = "block";
+            document.getElementById("newpassword").setAttribute("required", "");
+            document.getElementById("newpassword").style.display = "block ";
             document.getElementById("savePassword").style.display = "block ";
             document.getElementById("editbuttonusername").style.display = "none"
             document.getElementById("editbuttonemail").style.display = "none"
@@ -256,10 +278,20 @@ Coded by www.creative-tim.com
             document.getElementById("emailcancel").style.display = "none";
         }
         function passwordCancel() {
-            document.getElementById("password").readOnly = true;
-            let name = document.getElementById("password").value = "***************";
-            document.getElementById("password").placeholder = name;
-            document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
+            <% if (user.password){ %>
+                document.getElementById("password").readOnly = true;
+                document.getElementById("password").placeholder = "***************";
+                document.getElementById("password").value =null;
+                document.getElementById("password").className = "input-group-text bg-gray-500 col-8 text-start";
+                document.getElementById("password").removeAttribute("required");
+            <% } %>
+            <% if (!user.password){%>
+                document.getElementById("passwordtext").style.display = "block";
+                document.getElementById("placeholderpassword").style.display = "block";
+            <% } %>
+            document.getElementById("newpassword").style.display = "none";
+            document.getElementById("newpassword").removeAttribute("required");
+            document.getElementById("newpasswordtext").style.display = "none";
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
