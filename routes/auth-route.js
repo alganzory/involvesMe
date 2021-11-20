@@ -14,9 +14,16 @@ router.get("/register", authController.checkNotAuthenticated, authController.get
 
 router.post("/register", authController.checkNotAuthenticated, authController.register_user);
 
+router.get ("/forgot-password", authController.checkNotAuthenticated, authController.get_forgot_password);
+router.get ("/reset-password/:token/:id", authController.checkNotAuthenticated, authController.get_reset_password);
+
+router.post("/reset-password", authController.checkNotAuthenticated, authController.post_reset_password);
+router.post("/forgot-password", authController.checkNotAuthenticated, authController.post_forgot_password);
+
 router.get ("/google", authController.passportGoogleAuth);
 
 router.get ("/google/redirect", authController.passportGoogleAuth, authController.google_redirect);
+
 router.get ("/twitch", authController.passportTwitchAuth);
 
 router.get ("/twitch/redirect", authController.passportTwitchAuth, authController.twitch_redirect);
