@@ -103,6 +103,17 @@ const get_forgot_password = (req, res) => {
   });
 };
 
+const sendResetPasswordEmail = (email,token,id) => {
+  const data = {
+    to: email,
+    subject: "Reset Password",
+    html: `
+        <p>You requested a password reset</p>
+        <p>Click this <a href="${process.env.CLIENT_URL}/auth/reset-password/${token}/${id}">link</a> to reset your password</p>
+        `,
+  };
+  sendEmail(data.to, data.subject, data.html);
+}
 const post_forgot_password = async (req, res) => {
   const { email } = req.body;
   const user = await User.getUserByEmail(email);
@@ -111,21 +122,14 @@ const post_forgot_password = async (req, res) => {
     return res.status(400).redirect("/auth/forgot-password");
   }
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1m",
+    expiresIn: "1h",
   });
-  const data = {
-    to: email,
-    subject: "Reset Password",
-    html: `
-        <p>You requested a password reset</p>
-        <p>Click this <a href="${process.env.CLIENT_URL}/auth/reset-password/${token}/${user.id}">link</a> to reset your password</p>
-        `,
-  };
+
   try {
     // we encrypt the token before storing it in the db
     const hashedToken = await bcrypt.hash(token, 10);
     await User.updateUser(user.id, { resetPasswordToken: hashedToken });
-    sendEmail(data.to, data.subject, data.html);
+    sendResetPasswordEmail(user.email, token, user.id);
     req.flash("success", "Password reset link sent to your email");
     return res.status(200).redirect("/auth/login");
   } catch (e) {
