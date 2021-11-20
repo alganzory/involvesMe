@@ -17,7 +17,11 @@ const userSchema = new Schema({
   type: String,
   source: { type: String, required: [true, "source not specified"] },
   lastVisited: { type: Date, default: new Date() },
-});
+  resetPasswordToken: {
+    type: String,
+    default: null,
+  }
+}, { timestamps: true });
 const User = mongoose.model("user", userSchema, "user");
 // var userModel = mongoose.model("user", userSchema, "user");
 
@@ -102,6 +106,14 @@ exports.deleteUser = async (id) => {
     await mongoose.connect(process.env.MONGO_URI);
     const updatedUser = await User.deleteOne({ id });
     return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+exports.getUserByResetPasswordToken = async (resetPasswordToken) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    return await User.findOne({ resetPasswordToken });
   } catch (error) {
     throw error;
   }
