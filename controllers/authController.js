@@ -202,10 +202,21 @@ const post_reset_password = async (req, res) => {
   if (password != confirmPassword) {
     req.flash("resetError", "Password and confirm password are not the same!");
     console.log("password match");
-    return res.redirect(`/auth/reset-password/${token}/${userId}`);
+    return res.redirect(thisLink);
   }
+  
+  
   try {
+
+    const user = await User.getUserById(userId);
+
+    if (!user) throw new Error("Invalid/Expired reset link!");
     
+    if (user.password && bcrypt.compareSync(password, user.password)) {
+      req.flash("resetError", "Your new password can't be the same as the old one");
+      return res.redirect(thisLink);
+    }
+
     await verifyResetLink(userId, token)
 
     const hashedPassword = await bcrypt.hash(password, 10);
