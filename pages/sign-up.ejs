@@ -93,6 +93,15 @@ Coded by www.creative-tim.com
                                     </div>
                                     <%
                                       } %>
+
+                                      <% if (errorMessages.length >0) {
+                                        %>
+                                    <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                                        <%= errorMessages %>
+                                    </div>
+                                    <%
+                                      } %>
+
                                     <!-- creator vs fan selection -->
                                     <div class="row mb-0 text-quicksand">
                                         <div class="btn-group" role="group"

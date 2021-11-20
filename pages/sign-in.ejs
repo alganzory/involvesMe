@@ -75,13 +75,13 @@ Coded by www.creative-tim.com
                   </a>
                 </div>
 
-           
+
                 <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-0">
                   <div class="border-bottom w-100 ml-5"></div>
                   <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
                   <div class="border-bottom w-100 mr-5"></div>
                 </div>
-                
+
                 <form role="form" class="mt-4" action="/auth/login" method="POST">
                   <p class="mb-3 text-quicksand text-sm">Sign in with your credentials</p>
 
@@ -92,7 +92,7 @@ Coded by www.creative-tim.com
                   </div>
                   <%
                   } %>
-  
+
                   <div class="mb-3">
                     <input type="email" name="email" class="form-control form-control-md" placeholder="Email"
                       aria-label="Email" aria-describedby="email-addon" required>
@@ -101,9 +101,15 @@ Coded by www.creative-tim.com
                     <input type="password" name="password" class="form-control form-control-md" placeholder="Password"
                       aria-label="Password" aria-describedby="password-addon" required>
                   </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input " type="checkbox" id="rememberMe">
-                    <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
+                  <div class="d-flex justify-content-between">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
+                    </div>
+                    <div >
+                      <a href="/auth/forgot-password" class="form-check-label text-muted">Forgot
+                        password?</a>
+                    </div>
                   </div>
                   <p class="text-sm mx-auto">
                  
