@@ -9,14 +9,26 @@ const get_myaccount = (req, res) => {
 const change_username = async (req, res) => {
     var query = req.user.id;
     var newData = req.body.username;
-    await UserService.updateUser(query, {username: newData});
+    const isExist = await UserService.getUserByUsername(newData);
+    if (isExist && isExist.id != query) {
+        req.flash("error","Username is already taken");
+    }
+    else {
+        await UserService.updateUser(query, {username: newData});
+    }
     res.redirect("/account");
 };
 
 const change_email = async (req, res) => {
     var query = req.user.id;
     var newData = req.body.email;
+    const isExist = await UserService.getUserByEmail(newData);
+    if (isExist && isExist.id != query) {
+        req.flash("error","Email is already registered");
+    }
+    else {
     await UserService.updateUser(query, {email: newData});
+    }
     res.redirect("/account");
 };
 
