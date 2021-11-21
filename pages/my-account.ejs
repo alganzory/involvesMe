@@ -82,14 +82,15 @@ Coded by www.creative-tim.com
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveName" onclick="saveuserName()" style="display: none;">
+                                                id="saveName" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
 
                                         </div>
                                     </div>
                                 </form>
-                                <form role="form" method="POST" action="/account/email?_method=PUT">
+                                <%var actionurl; if (usertype ==="local"){actionurl="/account/email?_method=PUT"}else{actionurl="#"}%>
+                                <form role="form" method="POST" action="<%=actionurl%>">
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="email" class="form-check-label text-muted">Email</label>
                                         <div class="d-flex input-group mb-1">
@@ -97,6 +98,7 @@ Coded by www.creative-tim.com
                                                 class="flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 value="<%=useremail%>" placeholder="email" aria-label="email"
                                                 aria-describedby="button-addon2" readonly>
+                                            <%if(usertype === "local"){%>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonemail" onclick="enableEmail()">
                                                 <i class="fas fa-pen text-md"></i>
@@ -109,6 +111,7 @@ Coded by www.creative-tim.com
                                                 id="saveEmail" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </form>
@@ -148,7 +151,7 @@ Coded by www.creative-tim.com
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="savePassword" onclick="savePassword()" style="display: none;">
+                                                id="savePassword"  style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
                                         </div>
@@ -260,7 +263,10 @@ Coded by www.creative-tim.com
             document.getElementById("usernamecancel").style.display = "block";
             // document.getElementById("svgedit").remove;
             document.getElementById("editbuttonusername").style.display = "none"
-            document.getElementById("editbuttonemail").style.display = "none"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
             document.getElementById("editbuttonpassword").style.display = "none"
         }
 
@@ -292,8 +298,11 @@ Coded by www.creative-tim.com
             document.getElementById("newpassword").setAttribute("required", "");
             document.getElementById("newpassword").style.display = "block ";
             document.getElementById("savePassword").style.display = "block ";
-            document.getElementById("editbuttonusername").style.display = "none"
-            document.getElementById("editbuttonemail").style.display = "none"
+            document.getElementById("editbuttonusername").style.display = "none";
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
             document.getElementById("editbuttonpassword").style.display = "none"
             document.getElementById("passwordcancel").style.display = "block";
             let passwrod = document.getElementById("password").value;
@@ -306,9 +315,12 @@ Coded by www.creative-tim.com
             document.getElementById("username").placeholder = name;
             // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
             document.getElementById("saveName").style.display = "none";
-            document.getElementById("editbuttonusername").style.display = "block"
-            document.getElementById("editbuttonemail").style.display = "block"
-            document.getElementById("editbuttonpassword").style.display = "block"
+            document.getElementById("editbuttonusername").style.display = "block";
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
+            document.getElementById("editbuttonpassword").style.display = "block";
             document.getElementById("usernamecancel").style.display = "none";
         }
 
@@ -343,7 +355,10 @@ Coded by www.creative-tim.com
             document.getElementById("newpasswordtext").style.display = "none";
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
-            document.getElementById("editbuttonemail").style.display = "block"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
             document.getElementById("editbuttonpassword").style.display = "block"
             document.getElementById("passwordcancel").style.display = "none";
         }
