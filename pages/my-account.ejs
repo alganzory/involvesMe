@@ -71,7 +71,7 @@ Coded by www.creative-tim.com
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="username" id="username"
                                                 class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value="<%=user.username%>" placeholder="@Username" aria-label="Username"
+                                                value="<%=username%>" placeholder="@Username" aria-label="Username"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonusername" onclick="enableUsername()">
@@ -95,7 +95,7 @@ Coded by www.creative-tim.com
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="email" id="email"
                                                 class="flex-grow-1 input-group-text bg-gray-300  text-start"
-                                                value="<%=user.email%>" placeholder="email" aria-label="email"
+                                                value="<%=useremail%>" placeholder="email" aria-label="email"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonemail" onclick="enableEmail()">
@@ -117,13 +117,13 @@ Coded by www.creative-tim.com
                                         <label for="password" class="form-check-label text-muted"
                                             id="passwordtext">Password</label>
                                         <div class="d-flex input-group mb-1">
-                                            <% if (user.password){ %>
+                                            <% if (passwordVer){ %>
                                             <input type="password" name="password" id="password"
                                                 class="flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 placeholder="**********" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
                                             <%} %>
-                                            <% if (!user.password){ %>
+                                            <% if (!passwordVer){ %>
                                             <input type="password" name="placeholderpassword" id="placeholderpassword"
                                                 class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Add a password to be able to sign in with credentials" aria-label="password"
@@ -156,7 +156,7 @@ Coded by www.creative-tim.com
                                 </form>
 
 
-                                <% if ((user.type) != "creator"){ %>
+                                <% if ((usertype) != "creator"){ %>
                                 <form role="form" method="post" action="/account/type">
                                     <div class="row mb-0 text-quicksand ">
                                         <p class="mb-1 text-left ">I am a: </p>
@@ -275,8 +275,8 @@ Coded by www.creative-tim.com
         }
 
         function enablePassword() {
-            var userPassword = '<%= user.password %>';
-            if (userPassword) {
+            var userPassword = '<%= passwordVer %>';
+            if (userPassword == 'true') {
                 document.getElementById("password").readOnly = false;
                 // document.getElementById("password").className = "input-group-text bg-gray-300 col-8 text-start";
                 document.getElementById("password").placeholder = "Please Input Current Password";
@@ -284,7 +284,7 @@ Coded by www.creative-tim.com
             }
 
             // alert ("WTF")
-            if (!userPassword) {
+            if (userPassword == 'false') {
                 document.getElementById("passwordtext").style.display = "none";
                 document.getElementById("placeholderpassword").style.display = "none";
             }
@@ -302,7 +302,7 @@ Coded by www.creative-tim.com
 
         function usernameCancel() {
             document.getElementById("username").readOnly = true;
-            let name = document.getElementById("username").value = "<%=user.username%>";
+            let name = document.getElementById("username").value = "<%=username%>";
             document.getElementById("username").placeholder = name;
             // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
             document.getElementById("saveName").style.display = "none";
@@ -314,7 +314,7 @@ Coded by www.creative-tim.com
 
         function emailCancel() {
             document.getElementById("email").readOnly = true;
-            let name = document.getElementById("email").value = "<%=user.email%>";
+            let name = document.getElementById("email").value = "<%=useremail%>";
             document.getElementById("email").placeholder = name;
             // document.getElementById("email").className = "input-group-text bg-gray-300 col-8 text-start";
             document.getElementById("saveEmail").style.display = "none";
@@ -325,15 +325,15 @@ Coded by www.creative-tim.com
         }
 
         function passwordCancel() {
-            var userPassword = '<%= user.password %>';
-            if (userPassword) {
+            var userPassword = '<%= passwordVer %>';
+            if (userPassword == 'true') {
                 document.getElementById("password").readOnly = true;
                 document.getElementById("password").placeholder = "***************";
                 document.getElementById("password").value = "";
                 // document.getElementById("password").className = "input-group-text bg-gray-300 col-8 text-start";
                 document.getElementById("password").removeAttribute("required");
             }
-            if (!userPassword) {
+            if (userPassword == 'false') {
                 document.getElementById("passwordtext").style.display = "block";
                 document.getElementById("placeholderpassword").style.display = "block";
             }

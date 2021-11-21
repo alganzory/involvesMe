@@ -1,9 +1,16 @@
 const UserService = require("../models/user-Model");
 const bcrypt = require("bcrypt");
 
-
 const get_myaccount = (req, res) => {
-    res.render("my-account",{user: req.user , title: "My Account"});
+    var passwordVer;
+    if(!req.user.password){ 
+        passwordVer=false;
+    }
+    else{
+        passwordVer=true;
+    }
+    var usertype = req.user.type;
+    res.render("my-account",{passwordVer: passwordVer,usertype: usertype,username: req.user.username,useremail: req.user.email, title: "My Account"});
 };
 
 const change_username = async (req, res) => {
