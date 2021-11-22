@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
 const passport = require("passport");
 const User = require("./models/user-Model");
 const bcrypt = require("bcrypt");
@@ -39,7 +38,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/redirect",
+      callbackURL: process.env.CLIENT_URL + "/auth/google/redirect",
     },
     async function (accessToken, refreshToken, profile, done) {
       console.log (profile);
@@ -60,7 +59,7 @@ passport.use(
 passport.use(new twitchStrategy({
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: "/auth/twitch/redirect",
+    callbackURL: process.env.CLIENT_URL + "/auth/twitch/redirect",
     scope: "user_read"
   },
   async function(accessToken, refreshToken, profile, done) {

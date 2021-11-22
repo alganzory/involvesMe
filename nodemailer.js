@@ -1,8 +1,8 @@
 "use strict";
 const nodemailer = require("nodemailer");
-
-
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const sendEmail = async (email, subject, html) => {
   try {
