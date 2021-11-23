@@ -15,155 +15,186 @@ Coded by www.creative-tim.com
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <title>
-    involvesMe. | <%= title %>
-  </title>
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-  <!-- Nucleo Icons -->
-  <link href="/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
-  <link href="/css/additional-styles.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <title>
+        involvesMe. |
+        <%= title %>
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
 </head>
 
 <body class="sign-in-illustration">
 
 
-  <ul class="circles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-  <section>
-    <div class="page-header min-vh-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
-            <div class="card card-plain">
-              <div class="card-header pb-0 text-left">
-                <h4 class="font-weight-bolder">Sign Up</h4>
-                <p class="mb-0">Enter your information to sign up</p>
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left">
+                                <h4 class="font-weight-bolder">Sign Up</h4>
+                                <p class="text-sm mt-3"> Sign up with your social accounts</p>
 
-              </div>
-              <div class="card-body pb-0">
-                <form role="form" action="/auth/register" method="POST">
+                            </div>
+                            <div class="card-body pb-0 pt-0">
+                               
+                                <!-- Social Login -->
+                                <div class="form-group col-lg-12 mx-auto">
+                                    <a href="/auth/twitch" class="btn btn-primary btn-block py-2 btn-twitch w-100">
+                                        <i class="fa fa-twitch mr-2 me-2"></i>
+                                        <span class="font-weight-bold">Continue with Twitch</span>
+                                    </a>
+                                    <a href="/auth/google" class="btn btn-light btn-block py-2 btn-google w-100"><img
+                                            src="https://img.icons8.com/color/16/000000/google-logo.png">
+                                        <i class="me-2"></i>
+                                        <span class="font-weight-bold">Continue with Google</span>
+                                    </a>
+                                </div>
+                                <!-- Divider Text -->
+                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-0">
+                                    <div class="border-bottom w-100 ml-5"></div>
+                                    <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                                    <div class="border-bottom w-100 mr-5"></div>
+                                </div>
 
-                  <!-- creator vs fan selection -->
-                  <div class="row mb-0 text-quicksand" >
-                    <p class="mb-1 text-center text-muted ">I am a: </p>
-                    <div class="btn-group" role="group"  aria-label="Basic radio toggle button group">
-                      <input type="radio" class="btn-check" name="account-type" id="fan" value="fan" autocomplete="off" checked>
-                      <label class="btn btn-lg btn-outline-primary" for="fan">Fan</label>
-                      <input type="radio" class="btn-check" name="account-type" id="content-creator" value="content-creator" autocomplete="off"
-                        >
-                      <label class="btn btn-lg  px-3 btn-outline-primary" for="content-creator">Content Creator</label>
+                                <form role="form"  class="mt-4" action="/auth/register" method="POST">
+                                    <p class="mb-3 text-quicksand text-sm">Sign up with your credentials, as a: </p>
+                                    <% if (messages.error) {
+                                        %>
+                                    <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                                        <%= messages.error %>
+                                    </div>
+                                    <%
+                                      } %>
+
+                                      <% if (errorMessages.length >0) {
+                                        %>
+                                    <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                                        <%= errorMessages %>
+                                    </div>
+                                    <%
+                                      } %>
+
+                                    <!-- creator vs fan selection -->
+                                    <div class="row mb-0 text-quicksand">
+                                        <div class="btn-group" role="group"
+                                            aria-label="Basic radio toggle button group">
+                                            <input type="radio" class="btn-check" name="type" id="fan" value="fan"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-md btn-outline-primary" for="fan">Fan</label>
+                                            <input type="radio" class="btn-check" name="type" id="creator"
+                                                value="creator" autocomplete="off">
+                                            <label class="btn btn-md  px-3 btn-outline-primary" for="creator">Content
+                                                Creator</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- username -->
+                                    <div class="mb-2 input-group">
+                                        <span class="input-group-text" id="username-addon">@</span>
+                                        <input name="username" type="text" class="form-control form-control-md"
+                                            placeholder="Username" aria-label="Name" aria-describedby="username-addon"
+                                            required>
+                                    </div>
+
+                                    <!-- email -->
+                                    <div class="mb-2">
+                                        <input name="email" type="email" class="form-control form-control-md"
+                                            placeholder="Email" aria-label="Email" aria-describedby="email-addon"
+                                            required>
+                                    </div>
+
+                                    <!-- password and confirmation -->
+                                    <div class="mb-2">
+                                        <input name="password" type="password" class="form-control form-control-md"
+                                            placeholder="Password" aria-label="Password"
+                                            aria-describedby="password-addon" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <input name="confirmPassword" type="password"
+                                            class="form-control form-control-md" placeholder="Confirm Password"
+                                            aria-label="Password" aria-describedby="password-addon" required>
+                                    </div>
+
+
+
+                                    <!-- submit button -->
+                                    <div class="text-center">
+                                        <button type="submit"
+                                            class="btn btn-md bg-gradient-primary btn-md w-100 mt-2 mb-0">Sign
+                                            Up</button>
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                            <div class="card-footer text-center  pt-2 px-lg-2 px-1">
+                                <p class="mb-4 text-sm mx-auto">
+                                    Already have an account?
+                                    <a href="/auth/login" class="text-primary text-gradient font-weight-bold">Sign
+                                        in</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
-                  <!-- username -->
-                  <div class="mb-2 input-group">
-                    <span class="input-group-text" id="username-addon">@</span>
-                    <input name="username" type="text" class="form-control form-control-lg" placeholder="Username"
-                      aria-label="Name" aria-describedby="username-addon" required>
-                  </div>
-
-                  <!-- email -->
-                  <div class="mb-2">
-                    <input name="email" type="email" class="form-control form-control-lg" placeholder="Email"
-                      aria-label="Email" aria-describedby="email-addon" required>
-                  </div>
-
-                  <!-- password and confirmation -->
-                  <div class="mb-2">
-                    <input name="password" type="password" class="form-control form-control-lg" placeholder="Password"
-                      aria-label="Password" aria-describedby="password-addon" required>
-                  </div>
-                  <div class="mb-2">
-                    <input name="confirmPassword" type="password" class="form-control form-control-lg"
-                      placeholder="Confirm Password" aria-label="Password" aria-describedby="password-addon" required>
-                  </div>
-
-
-
-                  <!-- submit button -->
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0">Sign Up</button>
-                  </div>
-
-                  <!-- Divider Text -->
-                  <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
-                    <div class="border-bottom w-100 ml-5"></div>
-                    <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
-                    <div class="border-bottom w-100 mr-5"></div>
-                  </div>
-
-                  <!-- Social Login -->
-                  <div class="form-group col-lg-12 mx-auto">
-                    <a href="#" class="btn btn-primary btn-block py-2 btn-facebook w-100">
-                      <i class="fa fa-facebook-f mr-2 me-2"></i>
-                      <span class="font-weight-bold">Continue with Facebook</span>
-                    </a>
-                    <a href="#" class="btn btn-light btn-block py-2 btn-google w-100"><img
-                        src="https://img.icons8.com/color/16/000000/google-logo.png">
-                      <i class="me-2"></i>
-                      <span class="font-weight-bold">Continue with Google</span>
-                    </a>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <p class="mb-4 text-sm mx-auto">
-                  Already have an account?
-                  <a href="/auth/login" class="text-primary text-gradient font-weight-bold">Sign in</a>
-                </p>
-              </div>
+                    <div
+                        class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                        <div
+                            class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                            <h4 class="mt-0 text-white font-weight-bolder" style="font-size: 2.4rem;">InvolvesMe</h4>
+                            <img src="/img/shapes/pattern-lines.svg" alt="pattern-lines"
+                                class="position-absolute opacity-4 start-0">
+                            <div class="position-relative">
+                                <img class="max-width-500 w-100 position-relative z-index-2"
+                                    src="/img/illustrations/chat.png">
+                            </div>
+                            <!--              ////-->
+                            <p class="text-white">As close as content creators can get with their fans.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div
-            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-            <div
-              class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
-              <h4 class="mt-0 text-white font-weight-bolder" style="font-size: 2.4rem;">InvolvesMe</h4>
-              <img src="/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0">
-              <div class="position-relative">
-                <img class="max-width-500 w-100 position-relative z-index-2" src="/img/illustrations/chat.png">
-              </div>
-              <!--              ////-->
-              <p class="text-white">As close as content creators can get with their fans.</p>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!--   Core JS Files   -->
-  <script src="/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <script src="/js/plugins/perfect-scrollbar.min.js"></script>
-  <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-  <script src="/js/plugins/parallax.min.js"></script>
-  <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-  <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script src="/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+    <script src="/js/plugins/parallax.min.js"></script>
+    <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+    <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
 </body>
 
 </html>
