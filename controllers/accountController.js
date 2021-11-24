@@ -1,6 +1,6 @@
 const UserService = require("../models/user-Model");
+const { passwordStrength } = require('check-password-strength');
 const bcrypt = require("bcrypt");
-
 const get_myaccount = (req, res) => {
     var passwordVer;
     if(!req.user.password){ 
@@ -48,8 +48,8 @@ const change_password = async (req, res) => {
         req.flash("error","Incorrect Current Password");
     }
     else {
-        if (newpassword.length < 8) {
-            req.flash("error", "New Password must be at least 8 characters long");
+        if ((passwordStrength(newpassword).value) === "Too weak" || (passwordStrength(newpassword).value) === "Weak") {
+            req.flash("error", "Password Must contain atleast 1 symbol, 1 Upper Case Letter, 1 Number and be 8 charactes long.");
         }
         else{
             const hashedNewPassword = await bcrypt.hash(newpassword, 10);

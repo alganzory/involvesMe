@@ -8,6 +8,7 @@ const passport = require("passport");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const User = require("../models/user-Model");
+const { passwordStrength } = require('check-password-strength');
 
 const jwt = require("jsonwebtoken");
 
@@ -62,10 +63,10 @@ const register_user = async (req, res) => {
     req.flash("registerError", "Account not created. Email already Exists");
     return res.redirect("/auth/register");
   }
-  if (password.length < 8) {
+  if ((passwordStrength(password).value) === "Too weak" || (passwordStrength(password).value) === "Weak") {
     req.flash(
       "registerError",
-      "Account not created. Password must be 8 characters long at least"
+      "Account not created. Password Must contain atleast 1 symbol, 1 Upper Case Letter, 1 Number and be 8 charactes long."
     );
     return res.redirect("/auth/register");
   }
