@@ -4,18 +4,18 @@ const express = require('express')
 var router = express.Router()
 
 router.get('/me',(req, res)=>{
-    res.send('this is My profile page')
-    // res.render('profile',{title:"My Profile"})
+
+    res.render('profile',{title:"My Profile"})
 })
 
 router.get('/:username',(req, res)=>{
-    res.send('this is Username"s profile page')
-   // res.render('profile',{title:req.params.username})//start render the data fetched from database to 
+    
+   res.render('profile',{title:req.params.username})//start render the data fetched from database to 
                                         //dynamic profile page
 })
 router.get('/',(req, res)=>{
-    res.send('this is  profile page')
-    // res.render('profile',{title:"Profile"})
+
+    res.render('profile',{title:"Profile"})
 })
 router.post('/edit', (req, res)=>{
     //fecth data from profile form 
