@@ -19,6 +19,7 @@ Coded by www.creative-tim.com
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+   
     <title>
         involvesMe. | Sign in
     </title>
@@ -33,10 +34,33 @@ Coded by www.creative-tim.com
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
-    <link href="../assets/css/additional-styles.css" rel="stylesheet" />
+    <link href="../assets/css/additional-styles.css" rel="stylesheet" />h
+     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"></link>  -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script> 
+
+    
+    <style>
+         .has-error label,
+        .has-error input,
+        .has-error textarea {
+            color: red;
+            border-color: red;
+        }
+    </style>
+
+
+<style>
+    .showCheckBox{
+        margin-right: 310px;
+    }
+</style>
+   
 </head>
 
 <body class="sign-in-illustration">
+    <script src="Authentication.js"></script>
 
     <ul class="circles">
         <li></li>
@@ -62,13 +86,41 @@ Coded by www.creative-tim.com
                             </div>
 
                             <div class="card-body pb-0">
-                                <form role="form">
+                                <!-- <form role="form"> -->
+                                    <form class= "needs-validation" novalidate> 
+                                
+
                                     <div class="mb-3">
-                                        <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                        <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon" id="email"  required>
+                                        <div class="valid-feedback">email field is valid!</div>
+                                        <div class="invalid-feedback">email field cannot be blank!</div>
+                                         <div class="help-block with-errors"></div> 
                                     </div>
+
+<!-- <div class="col-md-12">
+                              <input class="form-control" type="password" name="password" placeholder="Password" required>
+                               <div class="valid-feedback">Password field is valid!</div>
+                               <div class="invalid-feedback">Password field cannot be blank!</div>
+                           </div>
+
+ -->
+
+
+                                    
+ 
+
                                     <div class="mb-3">
-                                        <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                        <input type="password" class="form-control form-control-lg" placeholder="Password" id="passcode" aria-label="Password" aria-describedby="password-addon"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                         required required minlength="8" maxlength="16"  >
+                                        <div class="valid-feedback">The password field is valid!</div>
+                                        <div class="invalid-feedback">The Password field must be atleast 8 characters long and contain at least one number and one uppercase and lowercase letter!</div>
                                     </div>
+
+                              
+
+                                   <input type="checkbox" id="showCheckBox"  onclick="showPassword()"> <label for="showPassword"> show Password</label> 
+
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="rememberMe">
                                         <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
