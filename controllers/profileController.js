@@ -40,7 +40,6 @@ const edit_myprofile = async (req, res) => {
             displayName: req.body.displayname,
             Bio: req.body.bio
         }
-        console.log(profile)
         await ProfileService.updateProfile(req.user.id,profile);
     }
     else {

@@ -1,26 +1,11 @@
-
 const express = require('express')
+const router = express.Router()
 
-var router = express.Router()
+const {checkAuthenticated} = require('../controllers/authController');
+const profileController = require('../controllers/profileController');
 
-router.get('/me',(req, res)=>{
+router.get('/me',checkAuthenticated,profileController.get_myprofile);
+router.get('/:username',profileController.get_profile);
+router.post('/edit',checkAuthenticated,profileController.edit_myprofile);
 
-    res.render('profile',{title:"My Profile"})
-})
-
-router.get('/:username',(req, res)=>{
-    
-   res.render('profile',{title:req.params.username})//start render the data fetched from database to 
-                                        //dynamic profile page
-})
-router.get('/',(req, res)=>{
-
-    res.render('profile',{title:"Profile"})
-})
-router.post('/edit', (req, res)=>{
-    //fecth data from profile form 
-    res.send('this is profile editing page')
-    //then update the database
-})
-
-module.exports=router
+module.exports=router;
