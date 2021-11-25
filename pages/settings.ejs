@@ -59,230 +59,184 @@ Coded by www.creative-tim.com
                             <div class="card-body pb-0">
                                 <% if (messages.error) {
                                     %>
-                                <div class="alert alert-danger text-white border-0 text-sm p-3 " role="alert">
-                                    <%= messages.error %>
-                                </div>
-                                <%
+                                    <div class="alert alert-danger text-white border-0 text-sm p-3 " role="alert">
+                                        <%= messages.error %>
+                                    </div>
+                                    <%
                                   } %>
-                                  <p class="mb-0 pt-4">Profile</p>
-                                <div class="pb-3">
-                                    <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px" src="img/team-4.jpg">
-                                </div>
-                                
-                                <form role="form" method="POST" action="">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="displayname" class="form-check-label text-muted">Display Name</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="displayname" id="displayname"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value="John Smith" placeholder="John Smith" aria-label="Display name"
-                                                aria-describedby="button-addon2" readonly>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttondisplayname" onclick="">
+                                        <p class="mb-0 pt-4">Profile</p>
+                                        <div class="pb-3">
+                                            <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px" src="img/team-4.jpg">
+                                        </div>
+
+                                        <form role="form" method="POST" action="/settings/name?_method=PUT">
+                                            <div class="form-group col-lg-12 mx-auto ">
+                                                <label for="displayname " class="form-check-label text-muted ">Display Name</label>
+                                                <div class="d-flex input-group mb-1 ">
+                                                    <input type="text " name="displayname " id="displayname " class="flex-grow-1 input-group-text bg-gray-300 text-start " value="John Smith " placeholder="John Smith " aria-label="Display name
+                                            " aria-describedby="button-addon2 " readonly>
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3 " type="button " id="editbuttondisplayname " onclick=" ">
+                                                <i class="fas fa-pen text-md "></i>
+                                            </button>
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3 " type="button " id="displaynamecancel " onclick=" " style="display: none; ">
+                                                <i class="fas fa-times text-md "></i>
+                                            </button>
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3 " type="submit " id="saveDName " style="display: none; ">
+                                                <i class="fas fa-check text-md "></i>
+                                            </button>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form role="form " method="POST " action="/settings/Bio?_method=PUT">
+                                            <div class="form-group col-lg-12 mx-auto pb-0 ">
+                                                <label for="bio " class="form-check-label text-muted ">Bio</label>
+                                                <div class="d-flex input-group mb-1 ">
+                                                    <input type="text " name="bio " id="bioEdit " class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start " value="bla bla bla " placeholder="bla bla bla " aria-label="Bio " aria-describedby="button-addon2 " readonly>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-outline-primary col-12 mb-0 mx-auto " type="button " id="editBio " onclick=" ">
+                                                <i class="fas fa-pen text-md "></i>
+                                            </button>
+                                                    <div class="btn-group col-12 pb-5 " role="group ">
+                                                        <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 " type="button " id="bioCancel " onclick=" " style="display: none; ">
+                                                <i class="fas fa-times text-md "></i>
+                                            </button>
+                                                        <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 " type="submit " id="saveBio " style="display: none; ">
+                                                <i class="fas fa-check text-md "></i>
+                                            </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <p class="mb-0 pt-2 pb-3 ">Account</p>
+                                        <form role="form " method="POST " action="/settings/username?_method=PUT ">
+                                            <div class="form-group col-lg-12 mx-auto ">
+                                                <label for="username " class="form-check-label text-muted ">Username</label>
+                                                <div class="d-flex input-group mb-1 ">
+                                                    <input type="text " name="username " id="username " class="flex-grow-1 input-group-text bg-gray-300 text-start " value="<%=username%>" placeholder="@Username" aria-label="Username" aria-describedby="button-addon2" readonly>
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonusername" onclick="enableUsername()">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="displaynamecancel" onclick="" style="display: none;">
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="usernamecancel" onclick="usernameCancel()" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveDName" style="display: none;">
+                                                    <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit" id="saveName" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
 
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <form role="form" method="POST" action="">
-                                    <div class="form-group col-lg-12 mx-auto pb-0">
-                                        <label for="bio" class="form-check-label text-muted">Bio</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="bio" id="bioEdit"
-                                                class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value="bla bla bla" placeholder="bla bla bla" aria-label="Bio"
-                                                aria-describedby="button-addon2" readonly>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-outline-primary col-12 mb-0 mx-auto" type="button"
-                                            id="editBio" onclick="">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <%var actionurl; if (usertype ==="local"){actionurl="/settings/email?_method=PUT"}else{actionurl="#"}%>
+                                            <form role="form" method="POST" action="<%=actionurl%>">
+                                                <div class="form-group col-lg-12 mx-auto">
+                                                    <label for="email" class="form-check-label text-muted">Email</label>
+                                                    <div class="d-flex input-group mb-1">
+                                                        <input type="text" name="email" id="email" class="flex-grow-1 input-group-text bg-gray-300  text-start" value="<%=useremail%>" placeholder="email" aria-label="email" aria-describedby="button-addon2" readonly>
+                                                        <%if(usertype === "local"){%>
+                                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonemail" onclick="enableEmail()">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
-                                            <div class="btn-group col-12 pb-5" role="group">
-                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
-                                                id="bioCancel" onclick="" style="display: none;">
+                                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="emailcancel" onclick="emailCancel()" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
-                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="submit"
-                                                id="saveBio" style="display: none;">
+                                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit" id="saveEmail" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
-                                        </div>
-
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <p class="mb-0 pt-2 pb-3">Account</p>
-                                <form role="form" method="POST" action="/account/username?_method=PUT">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="username" class="form-check-label text-muted">Username</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="username" id="username"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value="<%=username%>" placeholder="@Username" aria-label="Username"
-                                                aria-describedby="button-addon2" readonly>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonusername" onclick="enableUsername()">
+                                                            <%}%>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form role="form" method="POST" action="/settings/password?_method=PUT">
+                                                <div class="form-group col-lg-12 mx-auto">
+                                                    <label for="password" class="form-check-label text-muted" id="passwordtext">Password</label>
+                                                    <div class="d-flex input-group mb-1">
+                                                        <% if (passwordVer){ %>
+                                                            <input type="password" name="password" id="password" class="flex-grow-1 input-group-text bg-gray-300  text-start" placeholder="**********" aria-label="password" aria-describedby="button-addon2" readonly>
+                                                            <%} %>
+                                                                <% if (!passwordVer){ %>
+                                                                    <input type="password" name="placeholderpassword" id="placeholderpassword" class="flex-grow-1 input-group-text bg-gray-300 text-start" placeholder="Add a password to be able to sign in with credentials" aria-label="password" aria-describedby="button-addon2"
+                                                                        readonly>
+                                                                    <%} %>
+                                                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="editbuttonpassword" onclick="enablePassword()">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="usernamecancel" onclick="usernameCancel()" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-12 mx-auto">
+                                                    <label for="newpassword" class="form-check-label text-muted" id="newpasswordtext" style="display: none;">New Password</label>
+                                                    <div class="input-group mb-1">
+                                                        <input type="password" name="newpassword" id="newpassword" class="flex-grow-1 input-group-text bg-gray-300 text-start" placeholder="Please Input New Password" aria-label="newpassword" aria-describedby="button-addon2" style="display: none;">
+                                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button" id="passwordcancel" onclick="passwordCancel()" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveName" style="display: none;">
+                                                        <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit" id="savePassword" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
-
-                                        </div>
-                                    </div>
-                                </form>
-                                <%var actionurl; if (usertype ==="local"){actionurl="/account/email?_method=PUT"}else{actionurl="#"}%>
-                                <form role="form" method="POST" action="<%=actionurl%>">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="email" class="form-check-label text-muted">Email</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="email" id="email"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
-                                                value="<%=useremail%>" placeholder="email" aria-label="email"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%if(usertype === "local"){%>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonemail" onclick="enableEmail()">
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="emailcancel" onclick="emailCancel()" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveEmail" style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
-                                            <%}%>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form role="form" method="POST" action="/account/password?_method=PUT">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="password" class="form-check-label text-muted"
-                                            id="passwordtext">Password</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <% if (passwordVer){ %>
-                                            <input type="password" name="password" id="password"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
-                                                placeholder="**********" aria-label="password"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <% if (!passwordVer){ %>
-                                            <input type="password" name="placeholderpassword" id="placeholderpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Add a password to be able to sign in with credentials" aria-label="password"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonpassword" onclick="enablePassword()">
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="newpassword" class="form-check-label text-muted"
-                                            id="newpasswordtext" style="display: none;">New Password</label>
-                                        <div class="input-group mb-1">
-                                            <input type="password" name="newpassword" id="newpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Please Input New Password" aria-label="newpassword"
-                                                aria-describedby="button-addon2" style="display: none;">
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="passwordcancel" onclick="passwordCancel()" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="savePassword"  style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                                    </div>
+                                                </div>
+                                            </form>
 
 
-                                <% if ((usertype) != "creator"){ %>
-                                <form role="form" method="post" action="/account/type">
-                                    <div class="row mb-0 text-quicksand ">
-                                        <p class="mb-1 text-left ">I am a: </p>
-                                        <div class="btn-group " role= "group ">
-                                                <input type=" text" class="btn btn-primary col-1" name="account-type"
-                                            id="fan" value="fan" readonly>
-                                            <button class="btn btn-md px-3 btn-outline-primary" id="tog" type="submit"
-                                                onclick="toggle()">Upgrade to Content Creator</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <% } %>
-                                <!-- Divider Text -->
-                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
-                                    <div class="border-bottom w-100 ml-5 "></div>
-                                    <span class="px-0 small text-muted font-weight-bold text-muted "></span>
-                                    <div class="border-bottom w-100 mr-5 "></div>
-                                </div>
+                                            <% if ((usertype) != "creator"){ %>
+                                                <form role="form" method="post" action="/settings/type">
+                                                    <div class="row mb-0 text-quicksand ">
+                                                        <p class="mb-1 text-left ">I am a: </p>
+                                                        <div class="btn-group " role="group ">
+                                                            <input type=" text" class="btn btn-primary col-1" name="account-type" id="fan" value="fan" readonly>
+                                                            <button class="btn btn-md px-3 btn-outline-primary" id="tog" type="submit" onclick="toggle()">Upgrade to Content Creator</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <% } %>
+                                                    <!-- Divider Text -->
+                                                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
+                                                        <div class="border-bottom w-100 ml-5 "></div>
+                                                        <span class="px-0 small text-muted font-weight-bold text-muted "></span>
+                                                        <div class="border-bottom w-100 mr-5 "></div>
+                                                    </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-sm-12 ">
-                                        <!-- Button trigger modal -->
-                                        <button type="button " class="btn btn-secondary" data-toggle="modal "
-                                            data-target="#deleteModal "
-                                            onclick="document.getElementById( 'deleteModal').style.display='block' ">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 ">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button " class="btn btn-secondary" data-toggle="modal " data-target="#deleteModal " onclick="document.getElementById( 'deleteModal').style.display='block' ">
                                             Delete account
                                         </button>
 
 
-                                        <!-- Modal -->
+                                                            <!-- Modal -->
 
-                                        <div class="modal " id="deleteModal" tabindex="-1 " role="dialog"
-                                            aria-labelledby="deleteModalLabel " aria-hidden="true ">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content ">
-                                                    <div class="modal-header ">
-                                                        <h5 class="modal-title text-secondary " id="exampleModalLabel ">
-                                                            Account deletion</h5>
-                                                        <button type="button " class="close border-0 bg-transparent "
-                                                            data-dismiss="modal " aria-label="Close "
-                                                            onclick="document.getElementById( 'deleteModal').style.display='none' ">
+                                                            <div class="modal " id="deleteModal" tabindex="-1 " role="dialog" aria-labelledby="deleteModalLabel " aria-hidden="true ">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content ">
+                                                                        <div class="modal-header ">
+                                                                            <h5 class="modal-title text-secondary " id="exampleModalLabel ">
+                                                                                Account deletion</h5>
+                                                                            <button type="button " class="close border-0 bg-transparent " data-dismiss="modal " aria-label="Close " onclick="document.getElementById( 'deleteModal').style.display='none' ">
                                                             <span aria-hidden="true ">&times;</span>
                                                         </button>
-                                                    </div>
-                                                    <div class="modal-body ">
-                                                        Are you sure you want to Delete your Account ?
-                                                    </div>
-                                                    <div class="modal-footer ">
-                                                        <form role="form " method="POST"
-                                                            action="/account/delete-account?_method=DELETE">
-                                                            <button type="submit" class="btn bg-gradient-primary">Delete
+                                                                        </div>
+                                                                        <div class="modal-body ">
+                                                                            Are you sure you want to Delete your Account ?
+                                                                        </div>
+                                                                        <div class="modal-footer ">
+                                                                            <form role="form " method="POST" action="/settings/delete-account?_method=DELETE">
+                                                                                <button type="submit" class="btn bg-gradient-primary">Delete
                                                                 account</button>
-                                                        </form>
-                                                        <button type="button " class="btn btn-secondary "
-                                                            data-dismiss="modal "
-                                                            onclick="document.getElementById( 'deleteModal').style.display='none' ">Close</button>
+                                                                            </form>
+                                                                            <button type="button " class="btn btn-secondary " data-dismiss="modal " onclick="document.getElementById( 'deleteModal').style.display='none' ">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -323,7 +277,7 @@ Coded by www.creative-tim.com
             // document.getElementById("svgedit").remove;
             document.getElementById("editbuttonusername").style.display = "none"
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "none";
             }
             document.getElementById("editbuttonpassword").style.display = "none"
@@ -359,7 +313,7 @@ Coded by www.creative-tim.com
             document.getElementById("savePassword").style.display = "block ";
             document.getElementById("editbuttonusername").style.display = "none";
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "none";
             }
             document.getElementById("editbuttonpassword").style.display = "none"
@@ -376,7 +330,7 @@ Coded by www.creative-tim.com
             document.getElementById("saveName").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block";
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "block";
             }
             document.getElementById("editbuttonpassword").style.display = "block";
@@ -415,7 +369,7 @@ Coded by www.creative-tim.com
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "block";
             }
             document.getElementById("editbuttonpassword").style.display = "block"
