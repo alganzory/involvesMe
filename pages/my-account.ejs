@@ -11,10 +11,12 @@ Coded by www.creative-tim.com
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/favicon.png">
+   
     <title>
         involvesMe. | My Account
     </title>
@@ -30,6 +32,10 @@ Coded by www.creative-tim.com
     <!-- CSS Files -->
     <link id="pagestyle" href="css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
     <link href="css/additional-styles.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="/js/Authentication.js"></script>
 </head>
 
 <body class="sign-in-illustration">
@@ -65,14 +71,16 @@ Coded by www.creative-tim.com
                                 </div>
                                 <%
                                   } %>
-                                <form role="form" method="POST" action="/account/username?_method=PUT">
+                                <form role="form" method="POST" action="/account/username?_method=PUT" class="needs-validation" novalidate>
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="username" class="form-check-label text-muted">Username</label>
                                         <div class="d-flex input-group mb-1">
-                                            <input type="text" name="username" id="username"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                            <input  type="text" name="username" id="username" 
+                                                class="form-control flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 value="<%=username%>" placeholder="@Username" aria-label="Username"
                                                 aria-describedby="button-addon2" readonly>
+
+
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonusername" onclick="enableUsername()">
                                                 <i class="fas fa-pen text-md"></i>
@@ -85,12 +93,16 @@ Coded by www.creative-tim.com
                                                 id="saveName" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
+                                            <div class="valid-feedback">Username field is valid!</div>
+                                        <div class="invalid-feedback">The Username field cannot be blank!</div>
+                                          <div class="help-block with-errors"></div> 
+
 
                                         </div>
                                     </div>
                                 </form>
                                 <%var actionurl; if (usertype ==="local"){actionurl="/account/email?_method=PUT"}else{actionurl="#"}%>
-                                <form role="form" method="POST" action="<%=actionurl%>">
+                                <form role="form" method="POST" action="<%=actionurl%>" class="needs-validation" novalidate>
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="email" class="form-check-label text-muted">Email</label>
                                         <div class="d-flex input-group mb-1">
@@ -115,37 +127,55 @@ Coded by www.creative-tim.com
                                         </div>
                                     </div>
                                 </form>
-                                <form role="form" method="POST" action="/account/password?_method=PUT">
+                                <form role="form" method="POST" action="/account/password?_method=PUT" class="needs-validation" novalidate>
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="password" class="form-check-label text-muted"
                                             id="passwordtext">Password</label>
                                         <div class="d-flex input-group mb-1">
                                             <% if (passwordVer){ %>
                                             <input type="password" name="password" id="password"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
+                                                class="form-control flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 placeholder="**********" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <% if (!passwordVer){ %>
-                                            <input type="password" name="placeholderpassword" id="placeholderpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Add a password to be able to sign in with credentials" aria-label="password"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonpassword" onclick="enablePassword()">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
+                                            <div class="valid-feedback">Password field is valid!</div>
+                                            <div class="invalid-feedback">Invalid Password!</div>
+                                             <div class="help-block with-errors"></div> 
+
+                                            <%} %>
+                                            <% if (!passwordVer){ %>
+                                            <input type="password" name="placeholderpassword" id="placeholderpassword"
+                                                class=" flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                placeholder="Add a password to be able to sign in with credentials" aria-label="password"
+                                                aria-describedby="button-addon2" readonly>
+                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                id="editbuttonpassword" onclick="enablePassword()">
+                                                <i class="fas fa-pen text-md"></i>
+                                            </button>
+                                              
+                                                <%} %>
+
+
+                                            
                                         </div>
+
                                     </div>
+
+
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="newpassword" class="form-check-label text-muted"
                                             id="newpasswordtext" style="display: none;">New Password</label>
                                         <div class="input-group mb-1">
                                             <input type="password" name="newpassword" id="newpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                class="form-control flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Please Input New Password" aria-label="newpassword"
-                                                aria-describedby="button-addon2" style="display: none;">
+                                                aria-describedby="button-addon2" style="display: none;"
+                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                                minlength="8"
+                                                maxlength="16">
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="passwordcancel" onclick="passwordCancel()" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
@@ -154,6 +184,9 @@ Coded by www.creative-tim.com
                                                 id="savePassword"  style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
+                                            <div class="valid-feedback">Password field is valid!</div>
+                                                <div class="invalid-feedback">Invalid Password!</div>
+                                                <div class="help-block with-errors"></div> 
                                         </div>
                                     </div>
                                 </form>
