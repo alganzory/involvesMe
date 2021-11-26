@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/favicon.png">
     <title>
-        involvesMe. | My Account
+        involvesMe. | Settings
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -53,9 +53,9 @@ Coded by www.creative-tim.com
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-8 d-flex flex-column mx-auto">
                         <div class="card card-plain">
+                            <h4 class="font-weight-bolder pt-3">Settings</h4>
                             <div class="card-header pb-0 text-left">
-                                <h4 class="font-weight-bolder">My Account</h4>
-                                <p class="mb-0">Detailed information about your account</p>
+                                
                             </div>
                             <div class="card-body pb-0">
                                 <% if (messages.error) {
@@ -65,12 +65,81 @@ Coded by www.creative-tim.com
                                 </div>
                                 <%
                                   } %>
+                                  <p class="mb-0 pt-4">Profile</p>
+                                <div class="profile-pic-div pb-3">
+                                    <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px" id="profile-photo" src="img/team-4.jpg">
+                                    <input type="file" id="uplaodPic" class="font-weight-bolder">
+                                    <label for="uplaodPic" id="uplaodPicBtn" >Update pictue</label>
+                                </div>
+                                
+                                <form role="form" method="POST" action="">
+                                    <div class="form-group col-lg-12 mx-auto">
+                                        <label for="displayname" class="form-check-label text-muted">Display Name</label>
+                                        <div class="d-flex input-group mb-1">
+                                            <input type="text" name="displayname" id="displayname"
+                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                value="John Smith" placeholder="John Smith" aria-label="Display name"
+                                                aria-describedby="button-addon2" readonly>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                id="editbuttondisplayname" onclick="enableDisplayName()">
+                                                <i class="fas fa-pen text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                id="displaycancel" onclick="displayCancel()" style="display: none;">
+                                                <i class="fas fa-times text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
+                                                id="saveDisplay" style="display: none;">
+                                                <i class="fas fa-check text-md"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form role="form" method="POST" action="">
+                                    <div class="form-group col-lg-12 mx-auto pb-0">
+                                        <label for="bio" class="form-check-label text-muted">Bio</label>
+                                        <div class="d-flex input-group mb-1">
+                                            <input type="text" name="bio" id="bioedit"
+                                                class="py-4 flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                value="bla bla bla" placeholder="bla bla bla" aria-label="Bio"
+                                                aria-describedby="button-addon2" readonly>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary col-12 mb-0 mx-auto" type="button"
+                                            id="editbuttonbio" onclick="enableBio()">
+                                                <i class="fas fa-pen text-md"></i>
+                                            </button>
+                                            <div class="btn-group col-12 pb-5" role="group">
+                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
+                                                id="biocancel" onclick="bioCancel()" style="display: none;">
+                                                <i class="fas fa-times text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="submit"
+                                                id="saveBio" style="display: none;">
+                                                <i class="fas fa-check text-md"></i>
+                                            </button>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Divider Text -->
+                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
+                                    <div class="border-bottom w-100 ml-5 "></div>
+                                    <span class="px-0 small text-muted font-weight-bold text-muted "></span>
+                                    <div class="border-bottom w-100 mr-5 "></div>
+                                </div>
+
+                                <p class="mb-0 pt-2 pb-3">Account</p>
                                 <form role="form" method="POST" action="/account/username?_method=PUT">
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="username" class="form-check-label text-muted">Username</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="username" id="username"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
                                                 value="<%=username%>" placeholder="@Username" aria-label="Username"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
@@ -95,7 +164,7 @@ Coded by www.creative-tim.com
                                         <label for="email" class="form-check-label text-muted">Email</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="email" id="email"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-500  text-start"
                                                 value="<%=useremail%>" placeholder="email" aria-label="email"
                                                 aria-describedby="button-addon2" readonly>
                                             <%if(usertype === "local"){%>
@@ -122,13 +191,13 @@ Coded by www.creative-tim.com
                                         <div class="d-flex input-group mb-1">
                                             <% if (passwordVer){ %>
                                             <input type="password" name="password" id="password"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-500  text-start"
                                                 placeholder="**********" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
                                             <%} %>
                                             <% if (!passwordVer){ %>
                                             <input type="password" name="placeholderpassword" id="placeholderpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
                                                 placeholder="Add a password to be able to sign in with credentials" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
                                             <%} %>
@@ -143,7 +212,7 @@ Coded by www.creative-tim.com
                                             id="newpasswordtext" style="display: none;">New Password</label>
                                         <div class="input-group mb-1">
                                             <input type="password" name="newpassword" id="newpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
                                                 placeholder="Please Input New Password" aria-label="newpassword"
                                                 aria-describedby="button-addon2" style="display: none;">
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
@@ -254,6 +323,7 @@ Coded by www.creative-tim.com
             }
         }
 
+        
         function enableUsername() {
             document.getElementById("username").readOnly = false;
             let name = document.getElementById("username").value;
@@ -268,6 +338,44 @@ Coded by www.creative-tim.com
                 document.getElementById("editbuttonemail").style.display = "none";
             }
             document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            document.getElementById("editbuttonbio").style.display = "none"
+        }
+
+        function enableDisplayName() {
+            document.getElementById("displayname").readOnly = false;
+            let name = document.getElementById("displayname").value;
+            document.getElementById("displayname").placeholder = name;
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveDisplay").style.display = "block";
+            document.getElementById("displaycancel").style.display = "block";
+            // document.getElementById("svgedit").remove;
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
+            document.getElementById("editbuttonpassword").style.display = "none";
+            document.getElementById("editbuttonbio").style.display = "none";
+            document.getElementById("editbuttonusername").style.display = "none";
+        }
+
+        function enableBio() {
+            document.getElementById("bioedit").readOnly = false;
+            let bio = document.getElementById("bioedit").value;
+            document.getElementById("bioedit").placeholder = bio;
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveBio").style.display = "block";
+            document.getElementById("biocancel").style.display = "block";
+            // document.getElementById("svgedit").remove;
+            document.getElementById("editbuttonbio").style.display = "none"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
+            document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            document.getElementById("editbuttonusername").style.display = "none";
         }
 
         function enableEmail() {
@@ -277,6 +385,8 @@ Coded by www.creative-tim.com
             document.getElementById("editbuttonusername").style.display = "none"
             document.getElementById("editbuttonemail").style.display = "none"
             document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none";
+            document.getElementById("editbuttonbio").style.display = "none";
             document.getElementById("emailcancel").style.display = "block";
         }
 
@@ -299,6 +409,8 @@ Coded by www.creative-tim.com
             document.getElementById("newpassword").style.display = "block ";
             document.getElementById("savePassword").style.display = "block ";
             document.getElementById("editbuttonusername").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "none";
+                document.getElementById("editbuttonbio").style.display = "none";
             var usertype = '<%=usertype%>';
             if (usertype == "local"){
                 document.getElementById("editbuttonemail").style.display = "none";
@@ -321,7 +433,47 @@ Coded by www.creative-tim.com
                 document.getElementById("editbuttonemail").style.display = "block";
             }
             document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
             document.getElementById("usernamecancel").style.display = "none";
+        }
+
+        function displayCancel() {
+            document.getElementById("displayname").readOnly = true;
+            let name = document.getElementById("displayname").value = "john nash";
+            document.getElementById("displayname").placeholder = name;
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveDisplay").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
+            document.getElementById("displaycancel").style.display = "none";
+            document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttonusername").style.display = "block";
+            
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
+           
+        }
+
+        function bioCancel() {
+            document.getElementById("bioedit").readOnly = true;
+            let bio = document.getElementById("bioedit").value = "bla bla bla";
+            document.getElementById("bioedit").placeholder = bio;
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveBio").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
+            document.getElementById("biocancel").style.display = "none";
+            document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttonusername").style.display = "block";
+            
+            var usertype = '<%=usertype%>';
+            if (usertype == "local"){
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
+           
         }
 
         function emailCancel() {
@@ -333,6 +485,8 @@ Coded by www.creative-tim.com
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
             document.getElementById("editbuttonpassword").style.display = "block"
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
             document.getElementById("emailcancel").style.display = "none";
         }
 
@@ -355,6 +509,8 @@ Coded by www.creative-tim.com
             document.getElementById("newpasswordtext").style.display = "none";
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
+            document.getElementById("editbuttondisplayname").style.display = "block"
+            document.getElementById("editbuttonbio").style.display = "block"
             var usertype = '<%=usertype%>';
             if (usertype == "local"){
                 document.getElementById("editbuttonemail").style.display = "block";
