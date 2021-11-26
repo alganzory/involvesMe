@@ -128,6 +128,7 @@ Coded by www.creative-tim.com
                     novalidate
                     action="/auth/register"
                     method="POST"
+                    onsubmit="return(validate())" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'
                   >
                     <p class="mb-3 text-quicksand text-sm">
                       Sign up with your credentials, as a:
@@ -228,7 +229,7 @@ Coded by www.creative-tim.com
                         placeholder="Password: at least 8 characters and requires patterns (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         aria-label="Password"
                         aria-describedby="password-addon"
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}"
                         required
                         minlength="8"
                         maxlength="16"

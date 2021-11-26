@@ -1,0 +1,52 @@
+<!--
+=========================================================
+* BLK Design System- v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/blk-design-system
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+</head>
+<% if(!profile){
+    profile= {
+      img: "https://www.kemhospitalpune.org/wp-content/uploads/2020/12/Profile_avatar_placeholder_large.png",
+      displayname: "Please Add Display Name",
+      bio: "Please Add Bio "
+    }
+}%>
+<body>
+  <div>
+    <form action="/profile/edit" method="post">
+      <div>
+        <img src="<%=profile.img%>" alt="">
+      </div>
+
+      <div>
+        <input type="text" name="displayname" value="<%=profile.displayName%>">
+      </div>
+
+      <div>
+        <textarea name="bio" id="" cols="30" rows="10"><%=profile.Bio%></textarea>
+      </div>
+
+      <div>
+        <button type="submit">Save</button>
+      </div>
+      
+    </form>
+  </div>
+</body>
+
+</html>
