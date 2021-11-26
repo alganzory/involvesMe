@@ -37,7 +37,8 @@
   <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
   <link href="/css/additional-styles.css" rel="stylesheet" />
    <!-- Post Swiper CSS-->
-   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
   <link href="/css/blog_posts.css" rel="stylesheet"/>
 
   
@@ -302,88 +303,46 @@
   <div class="container">
     <div class="row">
       <h1 class="profile-title text-left mb-6" contenteditable="true">Blog Posts</h1>
-      <div class="swiper-container">
-        
-        <div class="swiper-wrapper">
-        
-        <!-- Start One Swiper-Slide -->
-          <div class="swiper-slide">
-
+     
+      <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
           
-              <div class="card card-blog">
-                   <!-- Blog Post Information -->
-                <!-- Blog Post Photo which is first added by creators when they are writing posts -->
-                <div class="card-image">
-                  <a href="#"> <img class="img" src="/img/posts/post1.jpg"> </a>
-                  <div class="ripple-cont"></div>
-                </div>
-              <div class="table">
-              
-                <!-- Blog Post Title -->
-                <h5 class="card-caption mt-3 p-2"><a href="#">Vivamus odio ante, feugiat eget nisi sit amet, dignissim velit</a></h5>
-                
-                <!-- Blog Post short Description -->
-                <p>Vivamus odio ante, Vivamus odio ante,feugiat eget nisi sit,Vivamus odio ante, feugiat eget nisi,Vivamus odio ante, feugiat eget nisi sit</p>
-                <button type="submit">Read More</button>
-          
-
-                      <!-- <div class="ftr">
-                          <div class="author">
-                              <a href="#"> <img src="http://adamthemes.com/demo/code/cards/images/avatar3.png" alt="..." class="avatar img-raised"> <span>Debbon Amet</span> </a>
-                          </div>
-                          <div class="stats"> <i class="fa fa-clock-o"></i> 15 min </div>
-                      </div> -->
-                  </div>
-              
-
-
-        </div>
-
-          </div>
-        <!-- End One Swiper-Slide -->
-    
-        
-          <!-- Start One Swiper-Slide -->
-            <div class="swiper-slide">
-  
-            
-                <div class="card card-blog">
-                     <!-- Blog Post Information -->
-                  <!-- Blog Post Photo which is first added by creators when they are writing posts -->
-                  <div class="card-image">
-                    <a href="#"> <img class="img" src="/img/posts/post3.jpg"> </a>
-                    <div class="ripple-cont"></div>
-                  </div>
-                <div class="table">
-                
-                  <!-- Blog Post Title -->
-                  <h5 class="card-caption mt-3 p-2"><a href="#">Vivamus odio ante, feugiat eget nisi sit amet, dignissim velit</a></h5>
-                  
-                  <!-- Blog Post short Description -->
-                  <p>Vivamus odio ante, Vivamus odio ante,feugiat eget nisi sit,Vivamus odio ante, feugiat eget nisi,Vivamus odio ante, feugiat eget nisi sit</p>
-                  <button type="submit">Read More</button>
-            
-  
-                        <!-- <div class="ftr">
-                            <div class="author">
-                                <a href="#"> <img src="http://adamthemes.com/demo/code/cards/images/avatar3.png" alt="..." class="avatar img-raised"> <span>Debbon Amet</span> </a>
-                            </div>
-                            <div class="stats"> <i class="fa fa-clock-o"></i> 15 min </div>
-                        </div> -->
-                    </div>
-                
-  
-  
-          </div>
-  
+          <div class="card"  style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-normal">Special title treatment</h5>
+              <p class="card-text fw-light">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Read More</a>
             </div>
-          <!-- End One Swiper-Slide -->
-  
-
-          
+          </div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-slide">
+          <div class="card"  style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-normal">Special title treatment</h5>
+              <p class="card-text fw-light">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-slide">
+          <div class="card"  style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-normal">Special title treatment</h5>
+              <p class="card-text fw-light">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+        </div>
+       
+      
       </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+
     </div>
   </div>
   
@@ -407,7 +366,8 @@
   <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
 
 <!-- Post Swiper  -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <script src="/js/posts_swiper.js" type="text/javascript"></script>
 </body>
 
