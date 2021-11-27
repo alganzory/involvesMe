@@ -31,11 +31,21 @@ app.use(express.static("assets"));
 const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
 const accountRouter = require("./routes/account-route.js");
+<<<<<<< HEAD
 const settingsRouter = require("./routes/settings-route.js");
+=======
+const profileRouter = require('./routes/profile-route.js');
+>>>>>>> 6a50c8ac9adfa2c407fce19e3ae721379c26778b
 
+app.use('/', indexRouter);
 app.use('/auth/', authRouter);
+<<<<<<< HEAD
 app.use('/settings/', settingsRouter);
 app.use('/', indexRouter);
+=======
+app.use('/account/', accountRouter);
+app.use('/profile/', profileRouter);
+>>>>>>> 6a50c8ac9adfa2c407fce19e3ae721379c26778b
 
 const port = process.env.PORT || 3000;
 app.listen(port);
