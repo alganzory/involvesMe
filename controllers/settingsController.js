@@ -1,5 +1,6 @@
 const UserService = require("../models/user-Model");
 const bcrypt = require("bcrypt");
+const ProfileService = require("../models/profile-Model");
 
 const get_mysettings = (req, res) => {
     var passwordVer;
@@ -8,6 +9,7 @@ const get_mysettings = (req, res) => {
     } else {
         passwordVer = true;
     }
+    var profile = await ProfileService.getProfileById(req.user.id)
     var usertype = req.user.type;
 
     res.render("settings", {
@@ -16,8 +18,8 @@ const get_mysettings = (req, res) => {
         username: req.user.username,
         useremail: req.user.email,
         title: "My Settings",
-        name: req.user.name,
-        bio: req.user.bio
+        name: profile.name,
+        bio: profile.bio
     });
 };
 
@@ -36,7 +38,7 @@ const change_username = async(req, res) => {
 const change_name = async(req, res) => {
     var query = req.user.id;
     var newData = req.body.name;
-    await UserService.updateUser(query, { name: newData });
+    await ProfileService.updateProfile(query, { name: newData });
 
     res.redirect("/settings");
 };
@@ -44,9 +46,9 @@ const change_bio = async(req, res) => {
     var query = req.user.id;
     var id = req.body.id;
     var newData = req.body.bio;
-    const isExist = await UserService.getUserById(id);
+    // const isExist = await UserService.getUserById(id);
 
-    await UserService.updateUser(query, { bio: newData });
+    await ProfileService.updateProfile(query, { bio: newData });
 
     res.redirect("/settings");
 };

@@ -12,9 +12,9 @@ const userSchema = new Schema({
         unique: [true, "email already registered"],
     },
     username: String,
-    name: String,
-    bio: String,
-    profilePhoto: String,
+    // name: String,
+    // bio: String,
+    // profilePhoto: String,
     password: String,
     type: String,
     source: { type: String, required: [true, "source not specified"] },
@@ -75,14 +75,14 @@ exports.getUserByUsername = async(username) => {
         console.error(error);
     }
 };
-exports.getUserByName = async(name) => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-        return await User.findOne({ name });
-    } catch (error) {
-        console.error(error);
-    }
-};
+// exports.getUserByName = async(name) => {
+//     try {
+//         await mongoose.connect(process.env.MONGO_URI);
+//         return await User.findOne({ name });
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
 exports.findOrCreate = async(id, user) => {
     try {
