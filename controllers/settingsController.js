@@ -10,7 +10,7 @@ const get_mysettings = (req, res) => {
     }
     var usertype = req.user.type;
 
-    res.render("my-settings", {
+    res.render("settings", {
         passwordVer: passwordVer,
         usertype: usertype,
         username: req.user.username,
@@ -36,12 +36,8 @@ const change_username = async(req, res) => {
 const change_name = async(req, res) => {
     var query = req.user.id;
     var newData = req.body.name;
-    const isExist = await UserService.getUserByName(newData);
-    if (isExist && isExist.id != query) {
-        req.flash("error", "name is already taken");
-    } else {
-        await UserService.updateUser(query, { name: newData });
-    }
+    await UserService.updateUser(query, { name: newData });
+
     res.redirect("/settings");
 };
 const change_bio = async(req, res) => {
