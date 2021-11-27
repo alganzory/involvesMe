@@ -19,7 +19,6 @@ exports.postModel = Post;
 exports.addPost = async (post) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-
     const newPost = new Post(post);
     await newPost.save();
     return newPost;
@@ -31,7 +30,8 @@ exports.addPost = async (post) => {
 exports.getPostByuserId = async (userId) => {
     try {
       await mongoose.connect(process.env.MONGO_URI);
-      return await Post.findOne({ userId });
+      var Posts = await Post.find({ userId });
+      return Posts;
     } catch (error) {
       console.error(error);
     }
