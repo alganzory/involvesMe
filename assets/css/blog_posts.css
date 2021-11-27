@@ -34,6 +34,13 @@
 
 
 .card{
-  background-color: rgba(243, 242, 242, 0.089);
-  color:#fff;
+  background-color: rgba(243, 242, 242, 0.096);
+  /* background-color:white */
+
 }
+.card-text{
+  font-size: 14px;
+    text-align: start;
+}
+
+.card-title{text-align: start;}
