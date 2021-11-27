@@ -1,10 +1,13 @@
 const UserService = require("../models/user-Model");
 const ProfileService = require("../models/profile-Model");
+const PostController = require("../controllers/postController");
+
 
 const get_myprofile = async (req, res) => {
-    var profile = await ProfileService.getProfileById(req.user.id)
+    var profile = await ProfileService.getProfileById(req.user.id);
+    var posts = await PostController.get_userposts(req.user.id);
     if(profile){
-        res.render("profile-page",{profile: profile, title: "My Profile"});
+        res.render("profile-page",{profile: profile,posts: posts, title: "My Profile"});
     }
     else{
         res.render("profile-page",{profile: null, title: "My Profile"});
@@ -16,8 +19,9 @@ const get_profile = async (req, res) => {
     var searchedUser = await UserService.getUserByUsername(usernameURL);
     if(searchedUser){
         var profile = await ProfileService.getProfileById(searchedUser.id)
+        var posts = await PostController.get_userposts(searchedUser.id);
         if(profile){
-            res.render("profile-page",{profile: profile, title: (usernameURL +"'s Profile")});
+            res.render("profile-page",{profile: profile,posts: posts, title: (usernameURL +"'s Profile")});
         }
         else{
             //res.send (`<h1> User haven't created a profile </h1>`);
@@ -30,7 +34,7 @@ const get_profile = async (req, res) => {
         req.flash("error","This User Doesn't Exist"); //#for Later implementation
         res.redirect("/");
     }
-    
+
 };
 
 const edit_myprofile = async (req, res) => {
@@ -40,6 +44,7 @@ const edit_myprofile = async (req, res) => {
             displayName: req.body.displayname,
             Bio: req.body.bio
         }
+        console.log(profile)
         await ProfileService.updateProfile(req.user.id,profile);
     }
     else {
@@ -52,9 +57,19 @@ const edit_myprofile = async (req, res) => {
     }
     res.redirect("/profile/me");
 };
+const add_post = async (req, res) => {
+    var post = {
+        userId: req.user.id,
+        title: req.body.title,
+        content: req.body.content
+    }
+    PostController.addUserPost(post);
+    res.redirect("/profile/me");
+};
 
 module.exports = {
     get_myprofile,
     get_profile,
-    edit_myprofile
+    edit_myprofile,
+    add_post
 }
