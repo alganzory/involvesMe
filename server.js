@@ -34,6 +34,9 @@ const accountRouter = require("./routes/account-route.js");
 
 app.use('/auth/', authRouter);
 app.use('/account/', accountRouter);
+app.use ('/profile', (req,res) => {
+  res.render ('profile');
+})
 app.use('/', indexRouter);
 
 const port = process.env.PORT || 3000;
