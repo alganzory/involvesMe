@@ -36,6 +36,8 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
   <link href="/css/additional-styles.css" rel="stylesheet" />
+
+ 
 </head>
 
 
@@ -44,10 +46,11 @@
     <div class="page-header min-vh-100">
       <div class="container">
 
+         <!--
         <div
           class="alert alert-info text-white border-0 text-md p-3 d-flex justify-content-between align-items-center mt-6"
           role="alert">
-          <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing
+          <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing 
               mode</span></span>
 
           <form>
@@ -55,14 +58,9 @@
             <button type="submit" class="btn btn-sm btn-outline-light  btn-round m-0 ">Discard </button>
           </form>
         </div>
+        -->
 
-        <div class="d-flex justify-content-end  align-items-center mt-6 mb-4">
-
-          <button class="btn btn-md btn-primary btn-round m-0">
-            <i class="fas fa-user-edit"></i>
-            <span>&nbsp;Edit profile</span>
-          </button>
-        </div>
+       
 
 
 
@@ -70,33 +68,13 @@
         <row class="d-flex flex-md-row  flex-column  justify-content-between py-4 mb-6">
 
 
-          <div class="col-lg-5 col-md-5">
-            <h1 class="profile-title text-left" contenteditable="true">Mike Scheinder</h1>
-            <!-- <h5 class="text-on-back">About me</h5> -->
-            <p class="profile-description" contenteditable="true">Offices parties lasting outward nothing age few
-              resolve. Impression to
-              discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
-              about eat forty world has round miles.</p>
-            <div class="btn-wrapper profile pt-3">
-              <a target="_blank" href="https://twitter.com/creativetim" class="btn btn-icon btn-twitter btn-round"
-                data-toggle="tooltip" data-original-title="Follow us">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a target="_blank" href="https://www.facebook.com/creativetim" class="btn btn-icon btn-facebook btn-round"
-                data-toggle="tooltip" data-original-title="Like us">
-                <i class="fab fa-facebook-square"></i>
-              </a>
-              <a target="_blank" href="https://dribbble.com/creativetim" class="btn btn-icon btn-dribbble  btn-round"
-                data-toggle="tooltip" data-original-title="Follow us">
-                <i class="fab fa-dribbble"></i>
-              </a>
-            </div>
-          </div>
+         
 
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <div class="card card-plain">
               <div class="card-header">
                 <img src="/img/mike.jpg" class="img-center img-fluid px-5 rounded-circle">
+             
                 <!-- <h4 class="title">Transactions</h4> -->
               </div>
               <div class="card-body">
@@ -104,78 +82,26 @@
                 <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
                   <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#linka">
-                      Wallet
+                      Fund
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#linkb">
-                      Send
+                      Followers
+                      
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#linkc">
-                      News
+                      Following
                     </a>
                   </li>
                 </ul>
 
                 <!-- tab content -->
+                 <!-- LINK A  -->
                 <div class="tab-content tab-subcategories">
                   <div class="tab-pane active" id="linka">
-                    <div class="table-responsive">
-                      <table class="table tablesorter " id="plain-table">
-                        <thead class=" text-primary">
-                          <tr>
-                            <th class="header">
-                              COIN
-                            </th>
-                            <th class="header">
-                              AMOUNT
-                            </th>
-                            <th class="header">
-                              VALUE
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              BTC
-                            </td>
-                            <td>
-                              7.342
-                            </td>
-                            <td>
-                              48,870.75 USD
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              ETH
-                            </td>
-                            <td>
-                              30.737
-                            </td>
-                            <td>
-                              64,53.30 USD
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              XRP
-                            </td>
-                            <td>
-                              19.242
-                            </td>
-                            <td>
-                              18,354.96 USD
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="linkb">
                     <div class="row">
                       <label class="col-12 col-form-label">Pay to</label>
                       <div class="col-12">
@@ -195,38 +121,181 @@
                     <button type="submit" class="btn btn-simple btn-primary btn-icon btn-round float-right">
                       <i class="fa fa-paper-plane" aria-hidden="true"></i>
                   </div>
-                  <div class="tab-pane" id="linkc">
-                    <div class="table-responsive">
-                      <table class="table tablesorter " id="plain-table">
-                        <thead class=" text-primary">
-                          <tr>
-                            <th class="header">
-                              Latest Crypto News
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              The Daily: Nexo to Pay on Stable...
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              Venezuela Begins Public of Nation...
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              PR: BitCanna – Dutch Blockchain...
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+
+
+
+                  <!-- LINK B -->
+
+                  <div class="tab-pane active" id="linkb">
+                    <div class="table-responsive"   style= "height:500px; overflow-y: scroll;">
+                     
+                  <div class="list-group-item d-flex align-items-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <div class="flex-fill pl-3 pr-3">
+                        <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                        <div class="text-muted fs-13px">Crencheporford</div>
                     </div>
+                    <a href="#" class="btn btn-outline-primary">Follow</a>
+                </div>
+
+                <div class="list-group-item d-flex align-items-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                  <div class="flex-fill pl-3 pr-3">
+                      <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                      <div class="text-muted fs-13px">Crencheporford</div>
                   </div>
+                  <a href="#" class="btn btn-outline-primary">Follow</a>
+              </div>
+
+              <div class="list-group-item d-flex align-items-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                <div class="flex-fill pl-3 pr-3">
+                    <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                    <div class="text-muted fs-13px">Crencheporford</div>
+                </div>
+                <a href="#" class="btn btn-outline-primary">Follow</a>
+            </div>
+
+            <div class="list-group-item d-flex align-items-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+              <div class="flex-fill pl-3 pr-3">
+                  <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                  <div class="text-muted fs-13px">Crencheporford</div>
+              </div>
+              <a href="#" class="btn btn-outline-primary">Follow</a>
+          </div>
+
+                <div class="list-group-item d-flex align-items-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <div class="flex-fill pl-3 pr-3">
+                        <div><a href="#" class="text-dark font-weight-600">Lamar Kirkland</a></div>
+                        <div class="text-muted fs-13px">Prince Ewoodswan</div>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Follow</a>
+                </div>
+
+                <div class="list-group-item d-flex align-items-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <div class="flex-fill pl-3 pr-3">
+                        <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
+                        <div class="text-muted fs-13px">Red Suvern</div>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Follow</a>
+                </div>
+                
+                <div class="list-group-item d-flex align-items-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                  <div class="flex-fill pl-3 pr-3">
+                      <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
+                      <div class="text-muted fs-13px">Red Suvern</div>
+                  </div>
+                  <a href="#" class="btn btn-outline-primary">Follow</a>
+              </div>
+
+              <div class="list-group-item d-flex align-items-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                <div class="flex-fill pl-3 pr-3">
+                    <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
+                    <div class="text-muted fs-13px">Red Suvern</div>
+                </div>
+                <a href="#" class="btn btn-outline-primary">Follow</a>
+            </div>
+
+
+            <div class="list-group-item d-flex align-items-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+              <div class="flex-fill pl-3 pr-3">
+                  <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
+                  <div class="text-muted fs-13px">Red Suvern</div>
+              </div>
+              <a href="#" class="btn btn-outline-primary">Follow</a>
+          </div>
+               
+
+                
+                
                 </div>
               </div>
+
+                
+
+                  <div class="tab-pane" id="linkc">
+                    <div class="table-responsive" style= "height:500px; overflow-y: scroll;">
+
+                      <div class="list-group-item d-flex align-items-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                        <div class="flex-fill pl-3 pr-3">
+                            <div><a href="#" class="text-dark font-weight-600">Ahmed Yousuf</a></div>
+                            <div class="text-muted fs-13px">Crencheporford</div>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary">Following</a>
+                    </div>
+
+
+                    <div class="list-group-item d-flex align-items-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                      <div class="flex-fill pl-3 pr-3">
+                          <div><a href="#" class="text-dark font-weight-600">Fred Freeman</a></div>
+                          <div class="text-muted fs-13px">Fred</div>
+                      </div>
+                      <a href="#" class="btn btn-outline-primary">Following</a>
+                  </div>
+
+                 
+                
+                  <div class="list-group-item d-flex align-items-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <div class="flex-fill pl-3 pr-3">
+                        <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                        <div class="text-muted fs-13px">Crencheporford</div>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Following</a>
+                </div>
+                      
+                    </div>
+                  </div>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- HERE EDIT PROFILE -->
+          <div class="col-lg-5 col-md-5">
+            <!-- <div class="title_container justify-content-between align-items-center mt-6 mb-4">  -->
+            <h1 class="profile-title text-left" contenteditable="true">Mike Scheinder
+              <button class="btn btn-md btn-primary btn-round m-0">
+                <i class="fas fa-user-edit"></i>
+                <span>&nbsp;Edit profile</span>
+              </button>
+            </h1>
+
+            <!-- <div class="d-flex justify-content-end  align-items-center mt-6 mb-4"> -->
+
+            
+            <!-- </div> -->
+          <!-- </div> -->
+
+            <!-- <h5 class="text-on-back">About me</h5> -->
+            <p class="profile-description" contenteditable="true">Offices parties lasting outward nothing age few
+              resolve. Impression to
+              discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
+              about eat forty world has round miles.</p>
+            <div class="btn-wrapper profile pt-3">
+              <a target="_blank" href="https://twitter.com/creativetim" class="btn btn-icon btn-twitter btn-round"
+                data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a target="_blank" href="https://www.facebook.com/creativetim" class="btn btn-icon btn-facebook btn-round"
+                data-toggle="tooltip" data-original-title="Like us">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+              <a target="_blank" href="https://dribbble.com/creativetim" class="btn btn-icon btn-dribbble  btn-round"
+                data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-dribbble"></i>
+              </a>
             </div>
           </div>
         </row>
@@ -367,6 +436,8 @@
             </div>
           </div>
 
+
+          <!-- check -->
         </row>
         <row></row>
       </div>
