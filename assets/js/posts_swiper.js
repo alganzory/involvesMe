@@ -9,7 +9,7 @@ var swiper = new Swiper(".mySwiper", {
   },
   
   autoplay: {
-    delay: 1500,//slides shifting time
+    delay: 3000,//slides shifting time
     disableOnInteraction: false
   },
   loop: true,
