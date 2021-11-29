@@ -304,74 +304,61 @@
       <h1 class="profile-title text-left mb-6" contenteditable="true">Blog Posts</h1>
      
       <!-- Swiper -->
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <!-- Post Card -->
-          <div class="row mt-5">
-            <div class="col">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <% if(posts.length != 0){ for (let index = 0; index < posts.length; index++) { %>
+            
+          <% if(posts.length < 2){%>
+            <div class="">
+          <% }else{ %> 
+          <div class="swiper-slide">
+            <% } %> 
+            <!-- Post Card -->
+            <% 
+              var content;
+              var s1 = null, s2 = null; 
+              if(posts[index].content.length > 250){
+                var s = posts[index].content.slice(0,100);
+                var middle = Math.floor(s.length / 2);
+                var before = s.lastIndexOf(' ', middle);
+                var after = s.indexOf(' ', middle + 1);
 
-                <!-- CUSTOM BLOCKQUOTE -->
-                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
-                    <div class="blockquote-custom-icon bg-primary shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
-                    <footer class="pt-4  border-top">
-                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
-                      Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
-                    </p>
-                    </footer>
-                </blockquote><!-- END -->
-
+                if (middle - before < after - middle) {
+                    middle = before;
+                } else {
+                    middle = after;
+                }
+                s1 = s.substr(0, middle);
+                s2 = s.substr(middle + 1);
+              }  
+            %>
+              <div class="row mt-5">
+                <div class="col">
+                  <%if(s1 != null){content = s}else{content = posts[index].content}%>
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                        <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                        <p class="text-primary fw-normal"><%=posts[index].title%></p>
+                        <footer class="pt-4  border-top">
+                          <p class="card-title text-dark fw-normal"><%=content%>
+                            <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
+                          <%}%></p>
+                          
+                        </footer>
+                    </blockquote>
+                </div>
+              </div>
+          </div>
+            <% }}else{ %>
+            <form action="/profile/addpost" method="post">
+              <input type="text" name="title" id="title">
+              <textarea name="content" id="content" cols="30" rows="10"></textarea>
+              <button type="submit">Add post</button>
+            </form>
+            <% } %>
             </div>
+            <div class="swiper-pagination"></div>
         </div>
-        </div>
-        <div class="swiper-slide">
-          <!-- Post Card -->
-          <div class="row mt-5">
-            <div class="col">
-
-           
-                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
-                    <div class="blockquote-custom-icon bg-primary shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
-                    <footer class="pt-4  border-top">
-                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
-                      Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
-                    </p>
-                    </footer>
-                </blockquote><!-- END -->
-
-            </div>
-        </div>
-
-        </div>
-        <div class="swiper-slide">
-          <!-- Post Card -->
-          <div class="row mt-5">
-            <div class="col post-card">
-
-                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
-                    <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
-                    <footer class="pt-4  border-top">
-                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
-                      Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
-                    </p>
-                    </footer>
-                </blockquote><!-- END -->
-
-            </div>
-        </div>
-        </div>
-       
-      
       </div>
-      <div class="swiper-pagination"></div>
-    </div>
-
     </div>
   </div>
   
