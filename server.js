@@ -33,10 +33,10 @@ const authRouter = require("./routes/auth-route.js");
 const accountRouter = require("./routes/account-route.js");
 const profileRouter = require("./routes/profile-route.js");
 
+app.use('/', indexRouter);
 app.use('/auth/', authRouter);
 app.use('/account/', accountRouter);
 app.use ('/profile', profileRouter);
-app.use('/', indexRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port);
