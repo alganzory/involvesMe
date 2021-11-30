@@ -299,25 +299,34 @@
 
 
   <!-- Post Swiper -->
-  <div class="container">
+  <div class="container ">
     <div class="row">
-      <h1 class="profile-title text-left mb-6" contenteditable="true">Blog Posts</h1>
-     
-      <!-- Swiper -->
-    <div class="swiper mySwiper">
+      <div class="col">
+      <h1 class="profile-title text-left mb-6" contenteditable="true">Posts</h1>
+    </div>
+    
+    <!-- Add New Button -->
+    <div class="col ">
+      <button class=" btn btn-simple btn-primary " style="float: right;">
+        <i class="tim-icons icon-book-bookmark"></i> Add Now
+      </button>
+    </div>
+   
+<!-- Fecth Post data from data base  -->
+      <!--Two post cards for per view(slide) Swiper -->
+    <div class="swiper postTwoSwiper">
       <div class="swiper-wrapper">
+    
         <div class="swiper-slide">
           <!-- Post Card -->
           <div class="row mt-5">
             <div class="col">
-
                 <!-- CUSTOM BLOCKQUOTE -->
                 <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                     <div class="blockquote-custom-icon bg-primary shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
+                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale "</p>
                     <footer class="pt-4  border-top">
-                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
+                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black 
                       Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
                     </p>
                     </footer>
@@ -326,18 +335,17 @@
             </div>
         </div>
         </div>
+      
         <div class="swiper-slide">
           <!-- Post Card -->
           <div class="row mt-5">
             <div class="col">
 
-           
                 <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                     <div class="blockquote-custom-icon bg-primary shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
+                    <p class="text-primary fw-normal text-left">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
                     <footer class="pt-4  border-top">
-                      <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
+                      <p class="card-title text-dark fw-normal text-left"> For anyone who's been waiting with bated breath for Black F
                       Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
                     </p>
                     </footer>
@@ -357,7 +365,7 @@
                     <p class="text-primary fw-normal">"Nordstrom's Black Friday Sale Just Started. Here's What To Buy"</p>
                     <footer class="pt-4  border-top">
                       <p class="card-title text-dark fw-normal"> For anyone who's been waiting with bated breath for Black Friday sales, 
-                      we have good news and it involves the department store you've loved since middle school, 
+                     
                       Nordstrom...<a href="/content"><cite title="Source Title" class="p-1 text-info">read more>></cite></a>
                     </p>
                     </footer>
@@ -372,6 +380,7 @@
       <div class="swiper-pagination"></div>
     </div>
 
+    
     </div>
   </div>
   
