@@ -2,7 +2,7 @@ const UserService = require("../models/user-Model");
 const bcrypt = require("bcrypt");
 const ProfileService = require("../models/profile-Model");
 
-const get_mysettings = (req, res) => {
+const get_mysettings = async (req, res) => {
     var passwordVer;
     if (!req.user.password) {
         passwordVer = false;
@@ -18,8 +18,8 @@ const get_mysettings = (req, res) => {
         username: req.user.username,
         useremail: req.user.email,
         title: "My Settings",
-        name: profile.name,
-        bio: profile.bio
+        name: profile?.displayName, // the ? means if the profile is not null
+        bio: profile?.Bio 
     });
 };
 
