@@ -299,10 +299,19 @@
 
 
   <!-- Post Swiper -->
-  <div class="container">
+  <div class="container ">
     <div class="row">
+      <div class="col">
       <h1 class="profile-title text-left mb-6" contenteditable="true">Posts</h1>
-     
+    </div>
+
+    <!-- Add New Button -->
+    <div class="col ">
+      <button class=" btn btn-simple btn-primary " style="float: right;">
+        <i class="tim-icons icon-book-bookmark"></i> Add Now
+      </button>
+    </div>
+      
       <!-- Swiper -->
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
@@ -332,12 +341,12 @@
                 s2 = s.substr(middle + 1);
               }  
             %>
-              <div class="row mt-5" style="width: 80%;">
+              <div class="row mt-5" style="width: 80%; text-align: left;">
                 <div class="col">
                   <%if(s1 != null){content = s}else{content = posts[index].content}%>
                     <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                         <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                        <p class="text-primary fw-normal "><%=posts[index].title%></p>
+                        <p class="text-primary fw-normal"><%=posts[index].title%></p>
                         <footer class="pt-4  border-top">
                           <p class="card-title text-dark fw-normal" style="height: 100px;"><%=content%>
                             <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
