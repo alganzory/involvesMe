@@ -1,15 +1,26 @@
 const UserService = require("../models/user-Model");
 const bcrypt = require("bcrypt");
+const ProfileService = require("../models/profile-Model");
 
-const get_myaccount = (req, res) => {
+const get_mysettings = async (req, res) => {
     var passwordVer;
     if (!req.user.password) {
         passwordVer = false;
     } else {
         passwordVer = true;
     }
+    var profile = await ProfileService.getProfileById(req.user.id)
     var usertype = req.user.type;
-    res.render("my-account", { passwordVer: passwordVer, usertype: usertype, username: req.user.username, useremail: req.user.email, title: "My Account" });
+
+    res.render("settings", {
+        passwordVer: passwordVer,
+        usertype: usertype,
+        username: req.user.username,
+        useremail: req.user.email,
+        title: "My Settings",
+        name: profile?.displayName, // the ? means if the profile is not null
+        bio: profile?.Bio 
+    });
 };
 
 const change_username = async(req, res) => {
@@ -21,9 +32,26 @@ const change_username = async(req, res) => {
     } else {
         await UserService.updateUser(query, { username: newData });
     }
-    res.redirect("/account");
+    res.redirect("/settings");
 };
 
+const change_name = async(req, res) => {
+    var query = req.user.id;
+    var newData = req.body.name;
+    await ProfileService.updateProfile(query, { name: newData });
+
+    res.redirect("/settings");
+};
+const change_bio = async(req, res) => {
+    var query = req.user.id;
+    var id = req.body.id;
+    var newData = req.body.bio;
+    // const isExist = await UserService.getUserById(id);
+
+    await ProfileService.updateProfile(query, { bio: newData });
+
+    res.redirect("/settings");
+};
 const change_email = async(req, res) => {
     var query = req.user.id;
     var newData = req.body.email;
@@ -33,7 +61,7 @@ const change_email = async(req, res) => {
     } else {
         await UserService.updateUser(query, { email: newData });
     }
-    res.redirect("/account");
+    res.redirect("/settings");
 };
 
 const change_password = async(req, res) => {
@@ -51,13 +79,13 @@ const change_password = async(req, res) => {
             await UserService.updateUser(query, { password: hashedNewPassword });
         }
     }
-    res.redirect("/account");
+    res.redirect("/settings");
 };
 const change_type = async(req, res) => {
     var query = req.user.id;
     var newData = "creator";
     await UserService.updateUser(query, { type: newData });
-    res.redirect("/account");
+    res.redirect("/settings");
 };
 
 const delete_account = async(req, res) => {
@@ -66,8 +94,10 @@ const delete_account = async(req, res) => {
     res.redirect("/auth/logout");
 };
 module.exports = {
-    get_myaccount,
+    get_mysettings,
     change_username,
+    change_name,
+    change_bio,
     change_email,
     change_password,
     change_type,

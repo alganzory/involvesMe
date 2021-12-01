@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
-  }
+}
 const express = require("express");
 const app = express();
 const flash = require('express-flash');
@@ -32,9 +32,17 @@ const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
 const accountRouter = require("./routes/account-route.js");
 
-app.use('/auth/', authRouter);
-app.use('/account/', accountRouter);
-app.use('/', indexRouter);
+const settingsRouter = require("./routes/settings-route.js");
 
+const profileRouter = require('./routes/profile-route.js');
+
+
+app.use('/', indexRouter);
+app.use('/auth/', authRouter);
+
+app.use('/settings/', settingsRouter);
+app.use('/', indexRouter);
+app.use('/account/', accountRouter);
+app.use('/profile/', profileRouter);
 const port = process.env.PORT || 3000;
 app.listen(port);
