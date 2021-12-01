@@ -53,8 +53,8 @@ Coded by www.creative-tim.com
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-8 d-flex flex-column mx-auto">
                         <div class="card card-plain">
-                            <h4 class="font-weight-bolder pt-3">Settings</h4>
                             <div class="card-header pb-0 text-left">
+                                <h4 class="pt-3">Settings</h4>
                                 
                             </div>
                             <div class="card-body pb-0">
@@ -69,7 +69,6 @@ Coded by www.creative-tim.com
                                 <div class="profile-pic-div pb-3">
                                     <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px" id="profile-photo" src="img/team-4.jpg">
                                     <input type="file" id="uplaodPic" class="font-weight-bolder">
-                                    <label for="uplaodPic" id="uplaodPicBtn" >Update pictue</label>
                                 </div>
                                 
                                 <form role="form" method="POST" action="">
@@ -77,7 +76,7 @@ Coded by www.creative-tim.com
                                         <label for="displayname" class="form-check-label text-muted">Display Name</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="displayname" id="displayname"
-                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 value="John Smith" placeholder="John Smith" aria-label="Display name"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
@@ -99,10 +98,10 @@ Coded by www.creative-tim.com
 
                                 <form role="form" method="POST" action="">
                                     <div class="form-group col-lg-12 mx-auto pb-0">
-                                        <label for="bio" class="form-check-label text-muted">Bio</label>
+                                        <label for="bioedit" class="form-check-label text-muted">Bio</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="bio" id="bioedit"
-                                                class="py-4 flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 value="bla bla bla" placeholder="bla bla bla" aria-label="Bio"
                                                 aria-describedby="button-addon2" readonly>
                                         </div>
@@ -139,7 +138,7 @@ Coded by www.creative-tim.com
                                         <label for="username" class="form-check-label text-muted">Username</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="username" id="username"
-                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 value="<%=username%>" placeholder="@Username" aria-label="Username"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
@@ -164,7 +163,7 @@ Coded by www.creative-tim.com
                                         <label for="email" class="form-check-label text-muted">Email</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="email" id="email"
-                                                class="flex-grow-1 input-group-text bg-gray-500  text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 value="<%=useremail%>" placeholder="email" aria-label="email"
                                                 aria-describedby="button-addon2" readonly>
                                             <%if(usertype === "local"){%>
@@ -191,13 +190,13 @@ Coded by www.creative-tim.com
                                         <div class="d-flex input-group mb-1">
                                             <% if (passwordVer){ %>
                                             <input type="password" name="password" id="password"
-                                                class="flex-grow-1 input-group-text bg-gray-500  text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 placeholder="**********" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
                                             <%} %>
                                             <% if (!passwordVer){ %>
                                             <input type="password" name="placeholderpassword" id="placeholderpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Add a password to be able to sign in with credentials" aria-label="password"
                                                 aria-describedby="button-addon2" readonly>
                                             <%} %>
@@ -212,7 +211,7 @@ Coded by www.creative-tim.com
                                             id="newpasswordtext" style="display: none;">New Password</label>
                                         <div class="input-group mb-1">
                                             <input type="password" name="newpassword" id="newpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-500 text-start"
+                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Please Input New Password" aria-label="newpassword"
                                                 aria-describedby="button-addon2" style="display: none;">
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
