@@ -10,7 +10,7 @@ const get_myprofile = async (req, res) => {
         res.render("profile",{profile: profile,posts: posts, title: "My Profile"});
     }
     else{
-        res.render("profile",{profile: null, title: "My Profile"});
+        res.render("profile",{profile: null,posts: posts, title: "My Profile"});
     }
 };
 
