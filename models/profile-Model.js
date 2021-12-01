@@ -10,7 +10,11 @@ const profileSchema = new Schema({
   Bio: String,
   followers: { type : Array , "default" : [] },
   following: { type : Array , "default" : [] },
-  profilePhoto: String
+  profilePhoto: String,
+  patreonSocial: String,
+  youtubeSocial: String,
+  facebookSocial: String,
+  twitterSocial: String
 }, { timestamps: true });
 const Profile = mongoose.model("profile", profileSchema, "profile");
 
