@@ -7,10 +7,10 @@ const get_myprofile = async (req, res) => {
     var profile = await ProfileService.getProfileById(req.user.id);
     var posts = await PostController.get_userposts(req.user.id);
     if(profile){
-        res.render("profile",{profile: profile,posts: posts, title: "My Profile"});
+        res.render("profile",{profile: profile,currentUser: null,searchedUser: null,posts: posts, title: "My Profile"});
     }
     else{
-        res.render("profile",{profile: null,posts: posts, title: "My Profile"});
+        res.render("profile",{profile: null,currentUser: null,searchedUser: null,posts: posts, title: "My Profile"});
     }
 };
 
@@ -20,8 +20,21 @@ const get_profile = async (req, res) => {
     if(searchedUser){
         var profile = await ProfileService.getProfileById(searchedUser.id)
         var posts = await PostController.get_userposts(searchedUser.id);
-        if(profile){
-            res.render("profile",{profile: profile,posts: posts, title: (usernameURL +"'s Profile")});
+        if(profile && req.user.id){
+            var currentUser = await ProfileService.getProfileById(req.user.id);
+            if(!currentUser){
+                var profile2 = {
+                    id: req.user.id,
+                    displayName: "Add A Display Name",
+                    Bio: "Add A Bio"
+                }
+                await ProfileService.addProfile(profile2);
+            }
+            currentUser = await ProfileService.getProfileById(req.user.id);
+            res.render("profile",{profile: profile,currentUser: currentUser,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
+        }
+        else if(profile){
+            res.render("profile",{profile: profile,currentUser: null,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
         }
         else{
             //res.send (`<h1> User haven't created a profile </h1>`);
@@ -66,10 +79,22 @@ const add_post = async (req, res) => {
     PostController.addUserPost(post);
     res.redirect("/profile/me");
 };
+const followUser = async (req, res) => {
+    const { follower, following, action } = req.body;
+    try {
+        console.log(req.body)
+        ProfileService.updateFollows(follower,following,action)
+        var followedUser = await UserService.getUserById(following);
+        res.redirect("/profile/"+followedUser.username);
+    } 
+    catch(err) {
+    }
+};
 
 module.exports = {
     get_myprofile,
     get_profile,
     edit_myprofile,
+    followUser,
     add_post
 }

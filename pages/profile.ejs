@@ -94,6 +94,18 @@
                 data-toggle="tooltip" data-original-title="Follow us">
                 <i class="fab fa-dribbble"></i>
               </a>
+              <% if(currentUser){%> 
+                <% if(profile && currentUser.id != profile.id) { %>
+                <% const following = currentUser.following;
+                   const action = following.includes(profile.id) ? 'unfollow' : 'follow';
+                %>
+                <form action="follow" method="post">
+                  <input type="hidden" name="following" value="<%= profile.id %>">
+                  <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                  <input type="hidden" name="action" value="<%= action%>">
+                  <button class="btn btn-primary ml-4" id="follow-btn"><%=action%></button>
+                </form>
+                 <% }} %>
             </div>
           </div>
 
