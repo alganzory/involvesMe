@@ -34,8 +34,13 @@ const accountRouter = require("./routes/account-route.js");
 const storeRouter = require('./routes/store-route.js');
 app.use('/auth/', authRouter);
 app.use('/account/', accountRouter);
+
+app.use('/store/', (req,res) => {
+    res.render ("store");
+});
+
+// general in case all of the abo
 app.use('/', indexRouter);
-app.use('/store/', storeRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port);
