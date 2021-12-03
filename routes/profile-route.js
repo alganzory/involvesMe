@@ -7,6 +7,6 @@ const profileController = require('../controllers/profileController');
 router.get('/me',checkAuthenticated,profileController.get_myprofile);
 router.get('/:username',profileController.get_profile);
 router.post('/edit',checkAuthenticated,profileController.edit_myprofile);
-//router.post('/addpost',checkAuthenticated,profileController.add_post); for future implementation
+router.post('/addpost',checkAuthenticated,profileController.add_post);
 
 module.exports=router;
