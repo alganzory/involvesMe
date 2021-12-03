@@ -11,6 +11,8 @@ router.post('/addTwitter',checkAuthenticated,profileController.add_Twitter);
 router.post('/addFacebook',checkAuthenticated,profileController.add_Facebook);
 router.post('/addYoutube',checkAuthenticated,profileController.add_Youtube);
 router.post('/addPatreon',checkAuthenticated,profileController.add_Patreon);
-//router.post('/addpost',checkAuthenticated,profileController.add_post); for future implementation
+router.post('/follow',checkAuthenticated,profileController.followUser);
+router.post('/removeFollower',checkAuthenticated,profileController.removeFollower);
+router.post('/addpost',checkAuthenticated,profileController.add_post);
 
 module.exports=router;

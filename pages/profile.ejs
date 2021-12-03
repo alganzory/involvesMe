@@ -28,8 +28,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
   <!-- Nucleo Icons -->
-  <link href="/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/css/nucleo-icons.css" rel="stylesheet"/>
+  <link href="/css/nucleo-svg.css" rel="stylesheet"/>
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="/css/nucleo-svg.css" rel="stylesheet" />
@@ -147,11 +147,11 @@
 
     <div class="page-header min-vh-100">
       <div class="container">
-
+         <!--
         <div
           class="alert alert-info text-white border-0 text-md p-3 d-flex justify-content-between align-items-center mt-6"
           role="alert">
-          <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing
+          <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing 
               mode</span></span>
 
           <form>
@@ -159,19 +159,9 @@
             <button type="submit" class="btn btn-sm btn-outline-light  btn-round m-0 ">Discard </button>
           </form>
         </div>
-
-        <div class="d-flex justify-content-end  align-items-center mt-6 mb-4">
-
-          <button class="btn btn-md btn-primary btn-round m-0">
-            <i class="fas fa-user-edit"></i>
-            <span>&nbsp;Edit profile</span>
-          </button>
-        </div>
-
-
-
-
+        -->
         <row class="d-flex flex-md-row  flex-column  justify-content-between py-4 mb-6">
+
 
           <div class="col-lg-5 col-md-5">
             <h1 class="profile-title text-left" contenteditable="true">Mike Scheinder</h1>
@@ -237,11 +227,11 @@
               <% }} %> 
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <div class="col-lg-5 col-md-5 ml-auto mr-auto">
             <div class="card card-plain">
               <div class="card-header">
                 <img src="/img/mike.jpg" class="img-center img-fluid px-5 rounded-circle">
+             
                 <!-- <h4 class="title">Transactions</h4> -->
               </div>
               <div class="card-body">
@@ -249,78 +239,26 @@
                 <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
                   <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#linka">
-                      Wallet
+                      Support
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#linkb">
-                      Send
+                      Followers
+                      
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#linkc">
-                      News
+                      Following
                     </a>
                   </li>
                 </ul>
 
                 <!-- tab content -->
+                 <!-- LINK A  -->
                 <div class="tab-content tab-subcategories">
-                  <div class="tab-pane active" id="linka">
-                    <div class="table-responsive">
-                      <table class="table tablesorter " id="plain-table">
-                        <thead class=" text-primary">
-                          <tr>
-                            <th class="header">
-                              COIN
-                            </th>
-                            <th class="header">
-                              AMOUNT
-                            </th>
-                            <th class="header">
-                              VALUE
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              BTC
-                            </td>
-                            <td>
-                              7.342
-                            </td>
-                            <td>
-                              48,870.75 USD
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              ETH
-                            </td>
-                            <td>
-                              30.737
-                            </td>
-                            <td>
-                              64,53.30 USD
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              XRP
-                            </td>
-                            <td>
-                              19.242
-                            </td>
-                            <td>
-                              18,354.96 USD
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="linkb">
+                  <div class="tab-pane p-3 active" id="linka" style="background-color: white;">
                     <div class="row">
                       <label class="col-12 col-form-label">Pay to</label>
                       <div class="col-12">
@@ -340,37 +278,153 @@
                     <button type="submit" class="btn btn-simple btn-primary btn-icon btn-round float-right">
                       <i class="fa fa-paper-plane" aria-hidden="true"></i>
                   </div>
+
+                  
+                  <!-- LINK B -->
+
+                  <div class="tab-pane " id="linkb">
+                    <div class="table-responsive"   style= "height:400px; overflow-y: auto;">
+                      <!--Followers Card Start-->
+                      <% for(var i = 0; i<userFollowers.length;i++){var action = currentUser.following.includes(userFollowers[i].id) ? 'unfollow' : 'follow';%>
+                          <div class="list-group-item d-flex  align-items-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class=" rounded-circle" />
+                            <div class="flex-fill pl-3 pr-3">
+                                <div><a href="#" class="text-dark font-weight-600"><%=userFollowers[i].username%></a></div>
+                            </div>
+                            <% if(currentUser){ 
+                              var classname;
+                              if(userFollowers[i].id != currentUser.id){ 
+                                if(profile.id === currentUser.id){
+                                  classname = "col-6 col-md-5 list-group-item d-flex justify-content-between"
+                                }
+                                else {
+                                  classname = ""
+                                }%>
+                              <div class="<%=classname%>">
+                                <form action="follow" method="post">
+                                  <input type="hidden" name="following" value="<%= userFollowers[i].id %>">
+                                  <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                                  <input type="hidden" name="action" value="<%= action%>">
+                                  <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                                  <button class="btn btn-primary ml-4" id="follow-btn"><%=action%></button>
+                                </form>
+                                <%if(profile.id === currentUser.id){%>
+                                <a type="button" id="dropdownMenu2" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-primary">
+                                  <form action="removeFollower" method="post">
+                                    <input type="hidden" name="follower" value="<%=userFollowers[i].id%>">
+                                    <input type="hidden" name="following" value="<%=currentUser.id%>">
+                                    <input type="hidden" name="action" value="remove">
+                                    <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                                    <button class="dropdown-item" type="submit">Remove</button>
+                                  </form>
+                                </div>
+                                <%}%>
+                            </div>
+                            <%}}if(!currentUser){%>
+                            <form action="follow" method="post">
+                              <button class="btn btn-primary ml-4" id="follow-btn">Follow</button>
+                            </form>
+                            <% } %> 
+                          </div>
+                          <% } %>
+                      <!--Followers Card End-->
+                    </div>
+                  </div>
+
+            
+
+                
+                  <!-- LINK C -->
                   <div class="tab-pane" id="linkc">
-                    <div class="table-responsive">
-                      <table class="table tablesorter " id="plain-table">
-                        <thead class=" text-primary">
-                          <tr>
-                            <th class="header">
-                              Latest Crypto News
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              The Daily: Nexo to Pay on Stable...
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              Venezuela Begins Public of Nation...
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              PR: BitCanna – Dutch Blockchain...
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="table-responsive" style= "height:400px; overflow-y: auto;">
+                      <!--Following Card start-->
+                      <% for(var i = 0; i<userFollowing.length;i++){var action = currentUser.following.includes(userFollowing[i].id) ? 'unfollow' : 'follow';%>
+                          <div class="list-group-item d-flex  align-items-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class=" rounded-circle" />
+                            <div class="flex-fill pl-3 pr-3">
+                                <div><a href="#" class="text-dark font-weight-600"><%=userFollowing[i].username%></a></div>
+                            </div>
+                            <% if(currentUser){ 
+                              if(userFollowing[i].id != currentUser.id){%>
+                              <div class="">
+                                <form action="follow" method="post">
+                                  <input type="hidden" name="following" value="<%= userFollowing[i].id %>">
+                                  <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                                  <input type="hidden" name="action" value="<%= action%>">
+                                  <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                                  <button class="btn btn-primary ml-4" id="follow-btn"><%=action%></button>
+                                </form>
+                            </div>
+                            <%}}if(!currentUser){%>
+                            <form action="follow" method="post">
+                              <button class="btn btn-primary ml-4" id="follow-btn">unfollow</button>
+                            </form>
+                            <% } %> 
+                          </div>
+                          <% } %>
+                      <!--Following Card End-->
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- HERE EDIT PROFILE -->
+          <div class="col-lg-5 col-md-5">
+            <!-- <div class="title_container justify-content-between align-items-center mt-6 mb-4">  -->
+            <h1 class="profile-title text-left" contenteditable="true">Mike Scheinder
+              <button class="btn btn-md btn-primary btn-round m-0">
+                <i class="fas fa-user-edit"></i>
+                <span>&nbsp;Edit profile</span>
+              </button>
+            </h1>
+
+            <!-- <div class="d-flex justify-content-end  align-items-center mt-6 mb-4"> -->
+
+            
+            <!-- </div> -->
+          <!-- </div> -->
+
+            <!-- <h5 class="text-on-back">About me</h5> -->
+            <p class="profile-description" contenteditable="true">Offices parties lasting outward nothing age few
+              resolve. Impression to
+              discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
+              about eat forty world has round miles.</p>
+            <div class="btn-wrapper profile pt-3">
+              <a target="_blank" href="https://twitter.com/creativetim" class="btn btn-icon btn-twitter btn-round"
+                data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a target="_blank" href="https://www.facebook.com/creativetim" class="btn btn-icon btn-facebook btn-round"
+                data-toggle="tooltip" data-original-title="Like us">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+              <a target="_blank" href="https://dribbble.com/creativetim" class="btn btn-icon btn-dribbble  btn-round"
+                data-toggle="tooltip" data-original-title="Follow us">
+                <i class="fab fa-dribbble"></i>
+              </a>
+              <div class="btn-wrapper profile pt-3">
+                <% if(currentUser){%> 
+                  <% if(profile && currentUser.id != profile.id) { %>
+                  <% const following = currentUser.following;
+                     const action = following.includes(profile.id) ? 'unfollow' : 'follow';
+                  %>
+                  <form action="follow" method="post">
+                    <input type="hidden" name="following" value="<%= profile.id %>">
+                    <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                    <input type="hidden" name="action" value="<%= action%>">
+                    <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                    <button class="btn btn-primary ml-4" id="follow-btn"><%=action%></button>
+                  </form>
+                   <% }} %>
+                   <%if(!currentUser){%>
+                   <form action="follow" method="post">
+                    <button class="btn btn-primary ml-4" id="follow-btn">Follow</button>
+                  </form>
+                    <% } %> 
               </div>
             </div>
           </div>
@@ -453,10 +507,55 @@
       </button>
     </div>
       
+
+    <% if(posts.length ===1){%>
+    <div class="swiper mySingleSwiper ">
+      <div class="swiper-wrapper justify-content-center">
+    
+        <div class="swiper-slide w-70 ">
+          <!-- Post Card -->
+          <% 
+          var content;
+          var s1 = null, s2 = null; 
+          if(posts[0].content.length > 250){
+            var s = posts[0].content.slice(0,100);
+            var middle = Math.floor(s.length / 2);
+            var before = s.lastIndexOf(' ', middle);
+            var after = s.indexOf(' ', middle + 1);
+
+            if (middle - before < after - middle) {
+                middle = before;
+            } else {
+                middle = after;
+            }
+            s1 = s.substr(0, middle);
+            s2 = s.substr(middle + 1);
+          }  
+        %>
+          <div class="row mt-5" style="width: 80%; text-align: left;">
+            <div class="col">
+              <%if(s1 != null){content = s}else{content = posts[0].content}%>
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                    <p class="text-primary fw-normal"><%=posts[0].title%></p>
+                    <footer class="pt-4  border-top">
+                      <p class="card-title text-dark fw-normal" style="height: 135px;"><%=content%>
+                        <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
+                      <%}%></p>
+                      
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <%}%>
       <!-- Swiper -->
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <% if(posts.length != 0){ for (let index = 0; index < posts.length; index++) { %>
+          <% if(posts.length != 1){ for (let index = 0; index < posts.length; index++) { %>
             
           <% if(posts.length < 2){%>
             <div class="">
@@ -489,7 +588,7 @@
                         <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                         <p class="text-primary fw-normal"><%=posts[index].title%></p>
                         <footer class="pt-4  border-top">
-                          <p class="card-title text-dark fw-normal" style="height: 100px;"><%=content%>
+                          <p class="card-title text-dark fw-normal" style="height: 135px;"><%=content%>
                             <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
                           <%}%></p>
                           
@@ -498,7 +597,7 @@
                 </div>
               </div>
           </div>
-            <% }}else{ %>
+            <% }} if(posts.length == 0){ %>
             <form action="/profile/addpost" method="post">
               <input type="text" name="title" id="title">
               <textarea name="content" id="content" cols="30" rows="10"></textarea>
