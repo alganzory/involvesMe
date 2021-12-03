@@ -342,10 +342,55 @@
       </button>
     </div>
       
+
+    <% if(posts.length ===1){%>
+    <div class="swiper mySingleSwiper ">
+      <div class="swiper-wrapper justify-content-center">
+    
+        <div class="swiper-slide w-70 ">
+          <!-- Post Card -->
+          <% 
+          var content;
+          var s1 = null, s2 = null; 
+          if(posts[0].content.length > 250){
+            var s = posts[0].content.slice(0,100);
+            var middle = Math.floor(s.length / 2);
+            var before = s.lastIndexOf(' ', middle);
+            var after = s.indexOf(' ', middle + 1);
+
+            if (middle - before < after - middle) {
+                middle = before;
+            } else {
+                middle = after;
+            }
+            s1 = s.substr(0, middle);
+            s2 = s.substr(middle + 1);
+          }  
+        %>
+          <div class="row mt-5" style="width: 80%; text-align: left;">
+            <div class="col">
+              <%if(s1 != null){content = s}else{content = posts[0].content}%>
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                    <p class="text-primary fw-normal"><%=posts[0].title%></p>
+                    <footer class="pt-4  border-top">
+                      <p class="card-title text-dark fw-normal" style="height: 135px;"><%=content%>
+                        <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
+                      <%}%></p>
+                      
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <%}%>
       <!-- Swiper -->
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <% if(posts.length != 0){ for (let index = 0; index < posts.length; index++) { %>
+          <% if(posts.length != 1){ for (let index = 0; index < posts.length; index++) { %>
             
           <% if(posts.length < 2){%>
             <div class="">
@@ -378,7 +423,7 @@
                         <div class="blockquote-custom-icon bg-primary  shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                         <p class="text-primary fw-normal"><%=posts[index].title%></p>
                         <footer class="pt-4  border-top">
-                          <p class="card-title text-dark fw-normal" style="height: 100px;"><%=content%>
+                          <p class="card-title text-dark fw-normal" style="height: 135px;"><%=content%>
                             <%if(s1) {%>...<a href="/content/<%=posts[index]._id%>"><cite title="Source Title" class="p-1 text-info">read more</cite></a>
                           <%}%></p>
                           
@@ -387,7 +432,7 @@
                 </div>
               </div>
           </div>
-            <% }}else{ %>
+            <% }} if(posts.length == 0){ %>
             <form action="/profile/addpost" method="post">
               <input type="text" name="title" id="title">
               <textarea name="content" id="content" cols="30" rows="10"></textarea>
