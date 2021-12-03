@@ -28,8 +28,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
   <!-- Nucleo Icons -->
-  <link href="/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/css/nucleo-icons.css" rel="stylesheet"/>
+  <link href="/css/nucleo-svg.css" rel="stylesheet"/>
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="/css/nucleo-svg.css" rel="stylesheet" />
@@ -37,7 +37,27 @@
   <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
   <link href="/css/additional-styles.css" rel="stylesheet" />
 
- 
+ <script>
+   $('button').click(function() {
+  $(this).text(function(_, text) {
+    return text === "Follow" ? "Unfollow" : "Follow";
+  });
+  if($(this).text() == "Follow") {
+    $(this).removeClass('unfollow');
+  } else if($(this).text() == "Unfollow") {
+    $(this).addClass('unfollow');
+  }
+});
+ </script>
+
+ <style>
+   .removeButton{
+     width:80px;
+     height: 30px;  
+     background-color: black;  
+     font-size: 10px;
+   }
+ </style>
 </head>
 
 
@@ -70,7 +90,7 @@
 
          
 
-          <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <div class="col-lg-5 col-md-5 ml-auto mr-auto">
             <div class="card card-plain">
               <div class="card-header">
                 <img src="/img/mike.jpg" class="img-center img-fluid px-5 rounded-circle">
@@ -82,7 +102,7 @@
                 <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
                   <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#linka">
-                      Fund
+                      Support
                     </a>
                   </li>
                   <li class="nav-item">
@@ -129,26 +149,50 @@
                   <div class="tab-pane active" id="linkb">
                     <div class="table-responsive"   style= "height:500px; overflow-y: scroll;">
                      
-                  <div class="list-group-item d-flex align-items-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                      <!-- img-center img-fluid px-5 rounded-circle -->
+                  <div class="list-group-item d-flex  align-items-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class=" rounded-circle" />
                     <div class="flex-fill pl-3 pr-3">
                         <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
                         <div class="text-muted fs-13px">Crencheporford</div>
                     </div>
-                    <a href="#" class="btn btn-outline-primary">Follow</a>
+                
+                    <!-- <div class="row">
+                      <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+                      <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    </div> -->
+
+
+                    <div class="col-6 col-md-5 list-group-item d-flex visible:false justify-content-between ">
+                    <a href="#" class="btn btn-outline-primary ">Follow</a>
+
+
+                    <a  type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                      
+                  
+                  
+                    <div class="dropdown-menu dropdown-primary">
+                      <a class="dropdown-item" href="#"><i class="fab fa-apple-pay"></i>&nbsp;&nbsp;Remove</a>
+                      <a class="dropdown-item" href="#"><i class="fas fa-bell-slash"></i>&nbsp;&nbsp;Block</a>
+                      <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>&nbsp;&nbsp;Report</a>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="list-group-item d-flex align-items-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
                   <div class="flex-fill pl-3 pr-3">
                       <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
                       <div class="text-muted fs-13px">Crencheporford</div>
+                      
                   </div>
                   <a href="#" class="btn btn-outline-primary">Follow</a>
+                
               </div>
 
               <div class="list-group-item d-flex align-items-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
                 <div class="flex-fill pl-3 pr-3">
                     <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
                     <div class="text-muted fs-13px">Crencheporford</div>
@@ -157,7 +201,7 @@
             </div>
 
             <div class="list-group-item d-flex align-items-center">
-              <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+              <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
               <div class="flex-fill pl-3 pr-3">
                   <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
                   <div class="text-muted fs-13px">Crencheporford</div>
@@ -166,7 +210,7 @@
           </div>
 
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="50px" class="rounded-circle" />
                     <div class="flex-fill pl-3 pr-3">
                         <div><a href="#" class="text-dark font-weight-600">Lamar Kirkland</a></div>
                         <div class="text-muted fs-13px">Prince Ewoodswan</div>
@@ -175,7 +219,7 @@
                 </div>
 
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-circle" />
                     <div class="flex-fill pl-3 pr-3">
                         <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
                         <div class="text-muted fs-13px">Red Suvern</div>
@@ -184,7 +228,7 @@
                 </div>
                 
                 <div class="list-group-item d-flex align-items-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-circle" />
                   <div class="flex-fill pl-3 pr-3">
                       <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
                       <div class="text-muted fs-13px">Red Suvern</div>
@@ -193,7 +237,7 @@
               </div>
 
               <div class="list-group-item d-flex align-items-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-circle" />
                 <div class="flex-fill pl-3 pr-3">
                     <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
                     <div class="text-muted fs-13px">Red Suvern</div>
@@ -203,7 +247,7 @@
 
 
             <div class="list-group-item d-flex align-items-center">
-              <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+              <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-circle" />
               <div class="flex-fill pl-3 pr-3">
                   <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
                   <div class="text-muted fs-13px">Red Suvern</div>
@@ -223,7 +267,7 @@
                     <div class="table-responsive" style= "height:500px; overflow-y: scroll;">
 
                       <div class="list-group-item d-flex align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
                         <div class="flex-fill pl-3 pr-3">
                             <div><a href="#" class="text-dark font-weight-600">Ahmed Yousuf</a></div>
                             <div class="text-muted fs-13px">Crencheporford</div>
@@ -233,7 +277,7 @@
 
 
                     <div class="list-group-item d-flex align-items-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                      <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
                       <div class="flex-fill pl-3 pr-3">
                           <div><a href="#" class="text-dark font-weight-600">Fred Freeman</a></div>
                           <div class="text-muted fs-13px">Fred</div>
@@ -244,7 +288,7 @@
                  
                 
                   <div class="list-group-item d-flex align-items-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-circle" />
                     <div class="flex-fill pl-3 pr-3">
                         <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
                         <div class="text-muted fs-13px">Crencheporford</div>
