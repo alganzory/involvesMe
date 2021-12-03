@@ -161,72 +161,6 @@
         </div>
         -->
         <row class="d-flex flex-md-row  flex-column  justify-content-between py-4 mb-6">
-
-
-          <div class="col-lg-5 col-md-5">
-            <h1 class="profile-title text-left" contenteditable="true">Mike Scheinder</h1>
-            <!-- <h5 class="text-on-back">About me</h5> -->
-            <p class="profile-description" contenteditable="true">Offices parties lasting outward nothing age few
-              resolve. Impression to
-              discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
-              about eat forty world has round miles.</p>
-            <div class="btn-wrapper profile pt-3">
-                <div class="row">
-                  <% if(profile.twitterSocial){ %> 
-                  <!-- Twitter Tab -->
-                  <div class="col">
-                    <a class="twitter-timeline" data-width="250" data-height="250" data-theme="dark" href="h<%=profile.twitterSocial%>">Tweets by <%=profile.displayname%></a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                  </div>
-                  <% } %> 
-               
-                </div>
-                <div class="row">
-                  <% if(profile.youtubeSocial){ %> 
-                  <!-- Youtube Tab-->
-                  <div class="col">
-                    <script src="https://apis.google.com/js/platform.js"></script>
-                    <div class="g-ytsubscribe" data-channelid="<%=profile.youtubeSocial%>" data-layout="full" data-theme="dark" data-count="default"></div>
-                  </div>
-                  <% } %> 
-                  <% if(profile.patreonSocial){ %> 
-                  <!-- patron Tab -->
-                  <div class="col-10">
-                    <a href="https://www.patreon.com/bePatron?u=<%=profile.patreonSocial%>" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
-                    <script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script>
-                  </div>
-                  <% } %>
-                </div>
-            <!--  -->
-          
-          <% if(profileOwner === true) {%> 
-            <!-- Social Button -->
-            <% if(profile.twitterSocial && profile.facebookSocial && profile.youtubeSocial && profile.patreonSocial) {}else{%>
-            <p><b>Add Social Links:</b></p>
-            <% }if(!profile.twitterSocial){ %> 
-            <!-- Twitter Button -->
-            <button type="button" class="btn btn-twitter btn-icon" data-bs-toggle="modal" data-bs-target="#twitters">
-              <span class="btn-inner--icon"><i class="fab fa-twitter"></i></span>
-                <span class="btn-inner--text">Twitter</span>
-              </button>
-              <% } %> 
-              
-              <% if(!profile.youtubeSocial){ %> 
-              <!-- Youtube Button-->
-              <button type="button" class="btn btn-youtube btn-icon" data-bs-toggle="modal" data-bs-target="#youtube">
-                <span class="btn-inner--icon"><i class="fab fa-youtube"></i></span>
-                <span class="btn-inner--text">Youtube</span>
-              </button>
-              <% } %> 
-              <% if(!profile.patreonSocial){ %> 
-              <!-- patron Button -->
-              <button type="button" class="btn btn-dribbble btn-icon" data-bs-toggle="modal" data-bs-target="#patron">
-                <span class="btn-inner--icon"><i class="fab fa-dribbble"></i></span>
-                <span class="btn-inner--text">Patreon</span>
-              </button>
-              <% }} %> 
-            </div>
-          </div>
           <div class="col-lg-5 col-md-5 ml-auto mr-auto">
             <div class="card card-plain">
               <div class="card-header">
@@ -393,19 +327,63 @@
               resolve. Impression to
               discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
               about eat forty world has round miles.</p>
-            <div class="btn-wrapper profile pt-3">
-              <a target="_blank" href="https://twitter.com/creativetim" class="btn btn-icon btn-twitter btn-round"
-                data-toggle="tooltip" data-original-title="Follow us">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a target="_blank" href="https://www.facebook.com/creativetim" class="btn btn-icon btn-facebook btn-round"
-                data-toggle="tooltip" data-original-title="Like us">
-                <i class="fab fa-facebook-square"></i>
-              </a>
-              <a target="_blank" href="https://dribbble.com/creativetim" class="btn btn-icon btn-dribbble  btn-round"
-                data-toggle="tooltip" data-original-title="Follow us">
-                <i class="fab fa-dribbble"></i>
-              </a>
+              <div class="btn-wrapper profile pt-3">
+                <div class="row">
+                  <% if(profile.twitterSocial){ %> 
+                  <!-- Twitter Tab -->
+                  <div class="col">
+                    <a class="twitter-timeline" data-width="250" data-height="250" data-theme="dark" href="h<%=profile.twitterSocial%>">Tweets by <%=profile.displayname%></a> 
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                  </div>
+                  <% } %> 
+               
+                </div>
+                <div class="row">
+                  <% if(profile.youtubeSocial){ %> 
+                  <!-- Youtube Tab-->
+                  <div class="col">
+                    <script src="https://apis.google.com/js/platform.js"></script>
+                    <div class="g-ytsubscribe" data-channelid="<%=profile.youtubeSocial%>" data-layout="full" data-theme="dark" data-count="default"></div>
+                  </div>
+                  <% } %> 
+                  <% if(profile.patreonSocial){ %> 
+                  <!-- patron Tab -->
+                  <div class="col-10">
+                    <a href="https://www.patreon.com/bePatron?u=<%=profile.patreonSocial%>" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                    <script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script>
+                  </div>
+                  <% } %>
+                </div>
+            <!--  -->
+          
+            <% if(profileOwner === true) {%> 
+            <!-- Social Button -->
+            <% if(profile.twitterSocial && profile.facebookSocial && profile.youtubeSocial && profile.patreonSocial) {}else{%>
+            <p><b>Add Social Links:</b></p>
+            <% }if(!profile.twitterSocial){ %> 
+            <!-- Twitter Button -->
+            <button type="button" class="btn btn-twitter btn-icon" data-bs-toggle="modal" data-bs-target="#twitters">
+              <span class="btn-inner--icon"><i class="fab fa-twitter"></i></span>
+                <span class="btn-inner--text">Twitter</span>
+              </button>
+              <% } %> 
+              
+              <% if(!profile.youtubeSocial){ %> 
+              <!-- Youtube Button-->
+              <button type="button" class="btn btn-youtube btn-icon" data-bs-toggle="modal" data-bs-target="#youtube">
+                <span class="btn-inner--icon"><i class="fab fa-youtube"></i></span>
+                <span class="btn-inner--text">Youtube</span>
+              </button>
+              <% } %> 
+              <% if(!profile.patreonSocial){ %> 
+              <!-- patron Button -->
+              <button type="button" class="btn btn-dribbble btn-icon" data-bs-toggle="modal" data-bs-target="#patron">
+                <span class="btn-inner--icon"><i class="fab fa-dribbble"></i></span>
+                <span class="btn-inner--text">Patreon</span>
+              </button>
+              <% }} %> 
+              </div>
+            
               <div class="btn-wrapper profile pt-3">
                 <% if(currentUser){%> 
                   <% if(profile && currentUser.id != profile.id) { %>
@@ -426,7 +404,6 @@
                   </form>
                     <% } %> 
               </div>
-            </div>
           </div>
         </row>
 
@@ -597,13 +574,7 @@
                 </div>
               </div>
           </div>
-            <% }} if(posts.length == 0){ %>
-            <form action="/profile/addpost" method="post">
-              <input type="text" name="title" id="title">
-              <textarea name="content" id="content" cols="30" rows="10"></textarea>
-              <button type="submit">Add post</button>
-            </form>
-            <% } %>
+            <% }}%>
             </div>
             <div class="swiper-pagination"></div>
         </div>
