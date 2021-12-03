@@ -20,7 +20,7 @@ const get_profile = async (req, res) => {
     if(searchedUser){
         var profile = await ProfileService.getProfileById(searchedUser.id)
         var posts = await PostController.get_userposts(searchedUser.id);
-        if(profile && req.user.id){
+        if(profile && req.user){
             var currentUser = await ProfileService.getProfileById(req.user.id);
             if(!currentUser){
                 var profile2 = {
