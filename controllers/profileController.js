@@ -8,6 +8,7 @@ const get_myprofile = async (req, res) => {
     var posts = await PostController.get_userposts(req.user.id);
     var followers = new Array();
     var following = new Array();
+    var profileOwner = true;
     if(profile){
     for (let index = 0; index < profile.following.length; index++) {
         var followingId = profile.following[index];
@@ -19,16 +20,23 @@ const get_myprofile = async (req, res) => {
         followerId = await UserService.getUserById(followerId)
         followers[index] = followerId;
     }
-        res.render("profile",{profile: profile,currentUser: profile,searchedUser: null,userFollowers: followers,userFollowing: following,posts: posts, title: "My Profile"});
+        res.render("profile",{profile: profile,profileOwner: profileOwner,currentUser: profile,searchedUser: null,userFollowers: followers,userFollowing: following,posts: posts, title: "My Profile"});
     }
     else{
-        res.render("profile",{profile: null,currentUser: null,searchedUser: null,userFollowers: followers,userFollowing: following,posts: posts, title: "My Profile"});
+        profile = {
+            id: req.user.id,
+            displayName: "Add A Display Name",
+            Bio: "Add A Bio"
+        }
+        await ProfileService.addProfile(profile);
+        res.render("profile",{profile: null,profileOwner: profileOwner,currentUser: null,searchedUser: null,userFollowers: followers,userFollowing: following,posts: posts, title: "My Profile"});
     }
 };
 
 const get_profile = async (req, res) => {
     var usernameURL = req.params.username;
     var searchedUser = await UserService.getUserByUsername(usernameURL);
+    var profileOwner = false;
     if(searchedUser){
         var profile = await ProfileService.getProfileById(searchedUser.id)
         var posts = await PostController.get_userposts(searchedUser.id);
@@ -58,10 +66,10 @@ const get_profile = async (req, res) => {
                 await ProfileService.addProfile(profile2);
             }
             currentUser = await ProfileService.getProfileById(req.user.id);
-            res.render("profile",{profile: profile,currentUser: currentUser,userFollowers: followers,userFollowing: following,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
+            res.render("profile",{profile: profile,profileOwner: profileOwner,currentUser: currentUser,userFollowers: followers,userFollowing: following,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
         }
         else if(profile){
-            res.render("profile",{profile: profile,currentUser: null,userFollowers: followers,userFollowing: following,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
+            res.render("profile",{profile: profile,profileOwner: profileOwner,currentUser: null,userFollowers: followers,userFollowing: following,searchedUser: searchedUser,posts: posts, title: (usernameURL +"'s Profile")});
         }
         else{
             //res.send (`<h1> User haven't created a profile </h1>`);
@@ -94,6 +102,51 @@ const edit_myprofile = async (req, res) => {
             Bio: req.body.bio
         }
         await ProfileService.addProfile(profile);
+    }
+    res.redirect("/profile/me");
+};
+
+const add_Patreon = async (req, res) => {
+    var profile = await ProfileService.getProfileById(req.user.id)
+    if(profile){
+        profile = {
+            patreonSocial: req.body.patreon
+        }
+        console.log(profile)
+        await ProfileService.updateProfile(req.user.id,profile);
+    }
+    res.redirect("/profile/me");
+};
+const add_Twitter = async (req, res) => {
+    var profile = await ProfileService.getProfileById(req.user.id)
+    if(profile){
+        profile = {
+            twitterSocial: req.body.twitter
+        }
+        console.log(profile)
+        await ProfileService.updateProfile(req.user.id,profile);
+    }
+    res.redirect("/profile/me");
+};
+const add_Facebook = async (req, res) => {
+    var profile = await ProfileService.getProfileById(req.user.id)
+    if(profile){
+        profile = {
+            facebookSocial: req.body.facebook
+        }
+        console.log(profile)
+        await ProfileService.updateProfile(req.user.id,profile);
+    }
+    res.redirect("/profile/me");
+};
+const add_Youtube = async (req, res) => {
+    var profile = await ProfileService.getProfileById(req.user.id)
+    if(profile){
+        profile = {
+            youtubeSocial: req.body.youtube
+        }
+        console.log(profile)
+        await ProfileService.updateProfile(req.user.id,profile);
     }
     res.redirect("/profile/me");
 };
@@ -133,6 +186,10 @@ module.exports = {
     get_myprofile,
     get_profile,
     edit_myprofile,
+    add_Patreon,
+    add_Youtube,
+    add_Facebook,
+    add_Twitter,
     followUser,
     removeFollower,
     add_post
