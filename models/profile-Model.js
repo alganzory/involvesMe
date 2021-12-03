@@ -58,3 +58,40 @@ exports.deleteProfile = async (id) => {
     throw error;
   }
 };
+
+exports.updateFollows = async (follower ,following,action) => {
+ 
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    switch(action) {
+      case 'follow':
+          await Promise.all([ 
+            console.log("im here follow"),
+            Profile.findOneAndUpdate({ id: follower },  { $push: { following: following} }),
+            Profile.findOneAndUpdate({ id: following }, { $push: { followers: follower} }).clone()
+          ]);
+      break;
+
+      case 'unfollow':
+          await Promise.all([ 
+            console.log("im here unfollow"),
+            Profile.findOneAndUpdate({ id: follower }, { $pull: { following: following} }),
+            Profile.findOneAndUpdate({ id: following }, { $pull: { followers: follower} }).clone(),
+          ]);
+      break;
+
+      case 'remove':
+          await Promise.all([ 
+            console.log("im here remove"),
+            Profile.findOneAndUpdate({ id: following }, { $pull: { followers: follower} }),
+            Profile.findOneAndUpdate({ id: follower }, { $pull: { following: following} }).clone(),
+          ]);
+      break;
+
+      default:
+          break;
+  }
+  } catch (error) {
+    throw error;
+  }
+};
