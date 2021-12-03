@@ -26,3 +26,17 @@ breakpoints: {
 }
 }
 });
+
+// js for single post card
+
+var swiper = new Swiper(".mySingleSwiper", {
+
+
+slidesPerView: 1,
+freeMode: true,
+pagination: {
+el: '.swiper-pagination',
+type: 'bullets',
+clickable: true
+}
+});
