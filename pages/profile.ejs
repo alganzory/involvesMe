@@ -80,38 +80,6 @@
   </div>
  <!-- Twitter Modal -->
 
-   <!-- FaceBook Modal -->
-   <div class="col-md-4">
-    <div class="modal fade" id="facebook" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="card card-plain">
-              <div class="card-header pb-0 text-left">
-                <h3 class="font-weight-bolder fs-4 text-info text-gradient">Link your Facebook Page to your InvolvesMe</h3>
-                <p class="mb-0 text-dark">Enter Your Facebook Page Link </p> <!--(Doesnt work for Profile Due to Privacy reasons from facebook side)-->
-              </div>
-              <div class="card-body">
-                <form role="form text-left" method="post" action="/profile/addFacebook">
-                  <!-- <label>link</label> -->
-                  <div class="input-group mb-3">
-                    <input type="text" name="facebook" class="form-control" placeholder="profile link" aria-label="profile link" aria-describedby="email-addon">
-                  </div>
-               
-                  <div class="text-center">
-                    <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-                    <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-90 mt-4 mb-0">FaceBook</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-<!--FaceBook Modal -->
-
  <!-- Youtube Modal -->
  <div class="col-md-4">
   <div class="modal fade" id="youtube" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -221,18 +189,7 @@
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                   </div>
                   <% } %> 
-                  <% if(profile.facebookSocial){ %> 
-                  <!-- FaceBook Tab -->
-                  
-                  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0" nonce="iamV2nT5"></script>
-                  <div class="fb-page col" data-href="<%=profile.facebookSocial%>" data-tabs="timeline" data-width="250" data-height="250" data-small-header="true" 
-                    data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                    <blockquote cite="<%=profile.facebookSocial%>" class="fb-xfbml-parse-ignore">
-                      <a href="<%=profile.facebookSocial%>"></a>
-                    </blockquote>
-                  </div>
-                  <br>
-                  <% } %> 
+               
                 </div>
                 <div class="row">
                   <% if(profile.youtubeSocial){ %> 
@@ -263,14 +220,7 @@
                 <span class="btn-inner--text">Twitter</span>
               </button>
               <% } %> 
-              <% if(!profile.facebookSocial){ %> 
-              <!-- FaceBook Button -->
-              <button type="button" class="btn btn-facebook btn-icon" data-bs-toggle="modal" data-bs-target="#facebook">
-                <span class="btn-inner--icon"><i class="fab fa-facebook"></i></span>
-                <span class="btn-inner--text">Facebook</span>
-              </button>
-              <br>
-              <% } %> 
+              
               <% if(!profile.youtubeSocial){ %> 
               <!-- Youtube Button-->
               <button type="button" class="btn btn-youtube btn-icon" data-bs-toggle="modal" data-bs-target="#youtube">
