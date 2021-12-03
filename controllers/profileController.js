@@ -7,7 +7,7 @@ const get_myprofile = async (req, res) => {
     var profile = await ProfileService.getProfileById(req.user.id);
     var posts = await PostController.get_userposts(req.user.id);
     if(profile){
-        res.render("profile",{profile: profile,currentUser: null,searchedUser: null,posts: posts, title: "My Profile"});
+        res.render("profile",{profile: profile,currentUser: req.user,searchedUser: null,posts: posts, title: "My Profile"});
     }
     else{
         res.render("profile",{profile: null,currentUser: null,searchedUser: null,posts: posts, title: "My Profile"});
