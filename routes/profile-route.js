@@ -8,6 +8,7 @@ router.get('/me',checkAuthenticated,profileController.get_myprofile);
 router.get('/:username',profileController.get_profile);
 router.post('/edit',checkAuthenticated,profileController.edit_myprofile);
 router.post('/follow',checkAuthenticated,profileController.followUser);
-//router.post('/addpost',checkAuthenticated,profileController.add_post); for future implementation
+router.post('/removeFollower',checkAuthenticated,profileController.removeFollower);
+router.post('/addpost',checkAuthenticated,profileController.add_post);
 
 module.exports=router;

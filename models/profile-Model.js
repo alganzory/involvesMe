@@ -80,6 +80,14 @@ exports.updateFollows = async (follower ,following,action) => {
           ]);
       break;
 
+      case 'remove':
+          await Promise.all([ 
+            console.log("im here remove"),
+            Profile.findOneAndUpdate({ id: following }, { $pull: { followers: follower} }),
+            Profile.findOneAndUpdate({ id: follower }, { $pull: { following: following} }).clone(),
+          ]);
+      break;
+
       default:
           break;
   }
