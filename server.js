@@ -7,7 +7,8 @@ const flash = require('express-flash');
 // const session = require('express-session');
 const cookieSession = require('cookie-session');
 const passport = require("passport")
-
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 // set up session cookies
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
@@ -34,6 +35,11 @@ const accountRouter = require("./routes/account-route.js");
 
 app.use('/auth/', authRouter);
 app.use('/account/', accountRouter);
+
+app.post('/profile/edit', upload.single('profilePic'), function (req, res, next) {
+console.log(req.file)
+console.log(req.body)
+})
 app.use ('/profile', (req,res) => {
   res.render ('profile');
 })
