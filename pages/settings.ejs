@@ -30,17 +30,12 @@ Coded by www.creative-tim.com
     <!-- CSS Files -->
     <link id="pagestyle" href="css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
     <link href="css/additional-styles.css" rel="stylesheet" />
-</head>
-
-<body class="sign-in-illustration">
-
     <style>
         input[type="file"] {
             display: none;
         }
 
         .pp-upload {
-
             cursor: pointer;
         }
 
@@ -48,9 +43,52 @@ Coded by www.creative-tim.com
             position: absolute;
             right: 0;
         }
+
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 3rem;
+            height: 3rem;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
+</head>
+
+<body>
     <ul class="circles">
-        <li></li>
         <li></li>
         <li></li>
         <li></li>
@@ -69,7 +107,6 @@ Coded by www.creative-tim.com
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-left">
                                 <h4 class="pt-3">Settings</h4>
-
                             </div>
                             <div class="card-body pb-0">
                                 <% if (messages.error) {
@@ -80,7 +117,6 @@ Coded by www.creative-tim.com
                                 <%
                                   } %>
 
-
                                 <p class="mb-0 pt-4">Profile</p>
                                 <% if (messages.noProfile) {
                                     %>
@@ -90,29 +126,25 @@ Coded by www.creative-tim.com
                                 <%
                                   } %>
 
-
-
-
-
-                                <div class="profile-pic-div position-relative pb-3">
-                                    <form method="post" method="post" enctype="multipart/form-data"
+                                <div class="profile-pic-div position-relative py-1 mb-3">
+                                    <form id="pp-form" method="post" method="post" enctype="multipart/form-data"
                                         action="/settings/profile-photo">
 
-                                        <div class="pp-upload-wrapper m-0">
+                                        <div id="pp-edit" class="pp-upload-wrapper m-0">
                                             <label for="profile-upload" class="pp-upload m-0 text-center p-0">
                                                 <div type="button" class="btn btn-outline-primary mb-0 mx-1 px-3">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    <i class="fa fa-pen" aria-hidden="true"></i>
                                                 </div>
                                             </label>
                                             <input onchange="loadFile()" type="file" name="profile-photo"
-                                                id="profile-upload">
+                                                id="profile-upload" accept="image/png, image/jpeg">
                                         </div>
-                                        
-                                        <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px"
-                                            id="profile-photo" src="img/team-4.jpg">
 
-                                        <div id="pp-buttons" style="display: none;"
-                                            class="btn-group col-12 p-2" role="group">
+                                        <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px"
+                                            id="profile-photo" src=<%=profilePhoto%>>
+
+                                        <div id="pp-buttons" style="display: none;" class="btn-group col-12 p-2"
+                                            role="group">
                                             <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
                                                 id="ppCancel" onclick="ppCancel()">
                                                 <i class="fas fa-times text-md"></i>
@@ -134,7 +166,7 @@ Coded by www.creative-tim.com
                                             <input type="text" name="displayname" id="displayname"
                                                 class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Display Name"
-                                                <%= (displayName) ? 'value=' + displayName + '' : '' %>
+                                                <%= displayName? `value=`:'' %> "<%=displayName%>"
                                                 aria-label="Display name" aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttondisplayname" onclick="enableDisplayName()">
@@ -153,13 +185,13 @@ Coded by www.creative-tim.com
                                     </div>
                                 </form>
 
-                                <form role="form " method="POST " action="/settings/Bio?_method=PUT">
+                                <form role="form " method="POST" action="/settings/bio">
                                     <div class="form-group col-lg-12 mx-auto pb-0">
                                         <label for="bioedit" class="form-check-label text-muted">Bio</label>
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="bio" id="bioedit"
                                                 class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                <%= (bio) ? 'value=' + bio + '' : '' %> placeholder="Your Bio"
+                                                <%= bio? `value=`:'' %> "<%=bio%>" placeholder="Your Bio"
                                                 aria-label="Bio" aria-describedby="button-addon2" readonly>
                                         </div>
                                         <div>
@@ -174,7 +206,7 @@ Coded by www.creative-tim.com
                                                     <i class="fas fa-times text-md"></i>
                                                 </button>
                                                 <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
-                                                    type="submit " id="saveBio" style="display: none; ">
+                                                    type="submit" id="saveBio" style="display: none; ">
                                                     <i class="fas fa-check text-md "></i>
                                                 </button>
                                             </div>
@@ -581,27 +613,51 @@ Coded by www.creative-tim.com
             document.getElementById("passwordcancel").style.display = "none";
         }
 
-        function ppCancel(){ 
-            alert ("ppCancel");
+        function ppCancel() {
             var preview = document.getElementById('profile-photo');
-            if ( "<%=profilePhoto%>") 
+
             preview.src = "<%=profilePhoto%>";
-            else 
-            preview.src = "img/team-4.jpg"
+
             document.getElementById("pp-buttons").style.display = "none";
             var input = document.getElementById('profile-upload');
-            input.value=null;
+            input.value = null;
             return false;
         }
 
-        const ppCancelButton = document.getElementById ("ppCancel")
+        const ppCancelButton = document.getElementById("ppCancel")
         ppCancelButton.addEventListener("click", ppCancel);
-        
+
+        const ppSaveButton = document.getElementById("ppSave");
+        const ppForm = document.getElementById("pp-form")
+        ppForm.addEventListener("submit", () => {
+            var ppEdit = document.getElementById("pp-edit")
+            ppEdit.style.display = "none"
+            var ppButtons = document.getElementById("pp-buttons");
+            // ppButtons.style.display = "none"
+            while (ppButtons.firstChild) {
+                ppButtons.removeChild(ppButtons.firstChild);
+            }
+            ppButtons.innerHTML +=
+                `<div class="lds-ring mx-auto"><div></div><div></div><div></div><div></div></div>`
+
+        })
+
         function loadFile() {
             var input = document.getElementById('profile-upload');
             var preview = document.getElementById('profile-photo');
             var file = input.files[0];
-            console.log(file)
+
+            const fileTypes = [
+                "image/jpeg",
+                "image/png",
+            ];
+
+
+            if (!fileTypes.includes(file.type)) {
+                alert("Please upload a valid image file");
+                return false;
+            }
+
             var reader = new FileReader();
             var ppButtons = document.getElementById("pp-buttons");
             ppButtons.style.display = "flex";
@@ -613,8 +669,6 @@ Coded by www.creative-tim.com
             if (file) {
                 reader.readAsDataURL(file);
             }
-
-
         }
     </script>
 </body>
