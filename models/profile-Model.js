@@ -7,7 +7,7 @@ const profileSchema = new Schema({
     default: null,
   },
   displayName: String,
-  Bio: String,
+  bio: String,
   followers: { type : Array , "default" : [] },
   following: { type : Array , "default" : [] },
   profilePhoto: String
@@ -58,3 +58,24 @@ exports.deleteProfile = async (id) => {
     throw error;
   }
 };
+
+
+exports.createOrUpdateProfile = async (id, profile) => {
+
+  // try to find the user, if they exist we pass profile to update, if not we pass it to add 
+    try {
+    await mongoose.connect(process.env.MONGO_URI);
+
+    const newProfile = await Profile.findOne({ id: id });
+    if (newProfile) {
+      return await exports.updateProfile(id, profile);      
+
+    } else {
+      profile.id = id;
+      return await exports.addProfile(profile);
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
