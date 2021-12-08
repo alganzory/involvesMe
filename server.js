@@ -7,7 +7,8 @@ const flash = require('express-flash');
 // const session = require('express-session');
 const cookieSession = require('cookie-session');
 const passport = require("passport")
-
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 // set up session cookies
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
