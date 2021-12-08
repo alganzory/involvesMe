@@ -50,6 +50,7 @@ const get_myprofile = async (req, res) => {
       userFollowing: following,
       posts: posts,
       title: "My Profile",
+      profileType: req.user.type
     });
   } else {
     profile = {
@@ -67,6 +68,7 @@ const get_myprofile = async (req, res) => {
       userFollowing: following,
       posts: posts,
       title: "My Profile",
+        profileType: req.user.type
     });
   }
 };
@@ -113,6 +115,7 @@ const get_profile = async (req, res) => {
         searchedUser: searchedUser,
         posts: posts,
         title: usernameURL + "'s Profile",
+        profileType: searchedUser.type
       });
     } else if (profile) {
       res.render("profile", {
@@ -124,6 +127,7 @@ const get_profile = async (req, res) => {
         searchedUser: searchedUser,
         posts: posts,
         title: usernameURL + "'s Profile",
+        profileType: searchedUser.type
       });
     } else {
       //res.send (`<h1> User haven't created a profile </h1>`);
