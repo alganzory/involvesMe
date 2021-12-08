@@ -242,7 +242,9 @@
                   </label>
                   <input onchange="loadFile()" type="file" name="profile-upload" id="profile-upload">
                 </div>
-                <img id="profile-pic" src="/img/mike.jpg" class="img-center img-fluid rounded-circle">
+                <% const profilePic = profile.profilePhoto || "https://res.cloudinary.com/involvesme/image/upload/v1638402349/profile-photos/default_pp.png" %> 
+                <img id="profile-pic" src="<%= profilePic %>" 
+                class="img-center img-fluid rounded-circle w-70">
               </div>
 
               <!-- The three tabs -->
@@ -423,8 +425,7 @@
               <!-- H1 and FOllow  -->
               <div class=" d-flex flex-lg-column flex-row  align-items-lg-start align-items-end justify-content-between">
                 <div>
-                  <h1 data-ph="Display Name" data-post="displayName" class="content-editable text-left ">Mike
-                    Scheinder
+                  <h1 data-ph="Display Name" data-post="displayName" class="content-editable text-left "> <%=profile.displayName || "Display Name" %> 
                   </h1>
                 </div>
 
@@ -455,10 +456,8 @@
 
               <p class="content-editable profile-description"
                 data-ph="This is a space for you to tell people about yourself, your work, etc." data-post="bio">
-                Offices parties lasting outward nothing age few
-                resolve. Impression to
-                discretion understood to we interested he excellence. Him remarkably use projection collecting. Going
-                about eat forty world has round miles.</p>
+                <%= profile.bio || "This is a space for you to tell people about yourself, your work, etc." %> 
+                </p>
 
               <!-- ALl social stuff -->
               <div class="socials pt-3">
@@ -568,17 +567,15 @@
             </div>
 
             <div class="col-md-5">
-              <h1 class="content-editable profile-title text-left" data-ph="Store Name" data-post="storeName">Cool Merch
-                Store</h1>
+              <h1 class="content-editable profile-title text-left" data-ph="Store Name" data-post="storeName">
+                <%= profile.storeName || "Store Name" %>
+              </h1>
               <!-- <h5 class="text-on-back">02</h5> -->
               <p class="content-editable profile-description text-left"
                 data-ph="This is a space for you to tell people about your store, what it is about, what products and services your offer etc."
                 data-post="storeDesc">
-                An artist of considerable
-                range, Ryan — the
-                name taken by
-                Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving
-                it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
+                <%= profile.storeDesc || "This is a space for you to tell people about your store, what it is about, what products and services your offer etc." %>
+              </p>
               <div class="btn-wrapper pt-3">
                 <button href="javascript:void(0)" class="btn btn-simple btn-primary">
                   <i class="tim-icons icon-book-bookmark"></i> View
@@ -702,6 +699,7 @@
     var profilePicEdit = document.getElementsByClassName('pp-upload-wrapper');
     var editableFieldsValues = [];
     var formData = new FormData();
+    let isAnyChange = false;
 
     function enableEdit() {
       // alert("hi")
@@ -732,6 +730,8 @@
       editingModeBanner.classList.add('d-none');
       editProfileBtn.classList.remove('d-none');
       editProfileBtn.classList.add('d-flex');
+      profilePicEdit[0].classList.add('d-none');
+      profilePicEdit[0].classList.remove('d-flex');
     }
 
     function saveEdit() {
@@ -739,7 +739,7 @@
       // alert('save');
 
       disableEdit();
-      let isAnyChange = false;
+      
       for (let i = 0; i < editableFields.length; i++) {
         if (editableFieldsValues[i] != editableFields[i].innerHTML) {
           editableFieldsValues[i] = editableFields[i].innerHTML
@@ -765,14 +765,18 @@
         // })));
 
 
+        console.log (formData)
 
+          // add a spinner overlay
+          let spinner = document.createElement('div');
+          
         axios.post('/profile/edit', formData, {
             headers: {
               'Content-Type': `multipart/form-data;`,
             }
           })
           .then(function (response) {
-            console.log(response);
+            
           })
           .catch(function (error) {
             console.log(error);
@@ -787,8 +791,6 @@
       for (let i = 0; i < editableFields.length; i++) {
         editableFields[i].innerHTML = editableFieldsValues[i];
       }
-      profilePicEdit[0].classList.add('d-none');
-      profilePicEdit[0].classList.remove('d-flex');
       const profilePic = document.getElementById('profile-pic');
       profilePic.src = editableFieldsValues[editableFieldsValues.length - 1];
 
@@ -796,6 +798,7 @@
 
 
     function loadFile() {
+      alert("loadingfile")
       var input = document.getElementById('profile-upload');
       var preview = document.getElementById('profile-pic');
       var file = input.files[0];
@@ -809,7 +812,7 @@
       if (file) {
 
         formData.append('profilePic', file);
-
+        isAnyChange = true;
         for (var pair of formData.entries()) {
           console.log(pair[1]);
         }
