@@ -6,7 +6,7 @@ const profileController = require('../controllers/profileController');
 
 router.get('/me',checkAuthenticated,profileController.get_myprofile);
 router.get('/:username',profileController.get_profile);
-router.post('/edit',checkAuthenticated,profileController.edit_myprofile);
+router.post('/edit',checkAuthenticated, profileController.upload_photo, profileController.edit_myprofile);
 router.post('/addTwitter',checkAuthenticated,profileController.add_Twitter);
 router.post('/addFacebook',checkAuthenticated,profileController.add_Facebook);
 router.post('/addYoutube',checkAuthenticated,profileController.add_Youtube);
