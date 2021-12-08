@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/favicon.png">
     <title>
-        involvesMe. | My Account
+        involvesMe. | Settings
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -30,13 +30,65 @@ Coded by www.creative-tim.com
     <!-- CSS Files -->
     <link id="pagestyle" href="css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
     <link href="css/additional-styles.css" rel="stylesheet" />
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+
+        .pp-upload {
+            cursor: pointer;
+        }
+
+        .pp-upload-wrapper {
+            position: absolute;
+            right: 0;
+        }
+
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 3rem;
+            height: 3rem;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
-<body class="sign-in-illustration">
-
-
+<body>
     <ul class="circles">
-        <li></li>
         <li></li>
         <li></li>
         <li></li>
@@ -54,8 +106,7 @@ Coded by www.creative-tim.com
                     <div class="col-xl-6 col-lg-6 col-md-8 d-flex flex-column mx-auto">
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-left">
-                                <h4 class="font-weight-bolder">My Account</h4>
-                                <p class="mb-0">Detailed information about your account</p>
+                                <h4 class="pt-3">Settings</h4>
                             </div>
                             <div class="card-body pb-0">
                                 <% if (messages.error) {
@@ -65,7 +116,114 @@ Coded by www.creative-tim.com
                                 </div>
                                 <%
                                   } %>
-                                <form role="form" method="POST" action="/account/username?_method=PUT">
+
+                                <p class="mb-0 pt-4">Profile</p>
+                                <% if (messages.noProfile) {
+                                    %>
+                                <div class="alert alert-info text-white border-0 text-sm p-3 mt-2" role="alert">
+                                    <%= messages.noProfile %>
+                                </div>
+                                <%
+                                  } %>
+
+                                <div class="profile-pic-div position-relative py-1 mb-3">
+                                    <form id="pp-form" method="post" method="post" enctype="multipart/form-data"
+                                        action="/settings/profile-photo">
+
+                                        <div id="pp-edit" class="pp-upload-wrapper m-0">
+                                            <label for="profile-upload" class="pp-upload m-0 text-center p-0">
+                                                <div type="button" class="btn btn-outline-primary mb-0 mx-1 px-3">
+                                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                                </div>
+                                            </label>
+                                            <input onchange="loadFile()" type="file" name="profile-photo"
+                                                id="profile-upload" accept="image/png, image/jpeg">
+                                        </div>
+
+                                        <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px"
+                                            id="profile-photo" src=<%=profilePhoto%>>
+
+                                        <div id="pp-buttons" style="display: none;" class="btn-group col-12 p-2"
+                                            role="group">
+                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
+                                                id="ppCancel" onclick="ppCancel()">
+                                                <i class="fas fa-times text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 " type="submit"
+                                                id="ppSave">
+                                                <i class="fas fa-check text-md "></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                                <form role="form" method="POST" action="/settings/name?_method=PUT">
+                                    <div class="form-group col-lg-12 mx-auto">
+                                        <label for="displayname" class="form-check-label text-muted">Display
+                                            Name</label>
+                                        <div class="d-flex input-group mb-1">
+                                            <input type="text" name="displayname" id="displayname"
+                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                placeholder="Display Name"
+                                                <%= displayName? `value=`:'' %> "<%=displayName%>"
+                                                aria-label="Display name" aria-describedby="button-addon2" readonly>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                id="editbuttondisplayname" onclick="enableDisplayName()">
+                                                <i class="fas fa-pen text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
+                                                id="displaycancel" onclick="displayCancel()" style="display: none;">
+                                                <i class="fas fa-times text-md"></i>
+                                            </button>
+                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
+                                                id="saveDisplay" style="display: none;">
+                                                <i class="fas fa-check text-md"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form role="form " method="POST" action="/settings/bio">
+                                    <div class="form-group col-lg-12 mx-auto pb-0">
+                                        <label for="bioedit" class="form-check-label text-muted">Bio</label>
+                                        <div class="d-flex input-group mb-1">
+                                            <input type="text" name="bio" id="bioedit"
+                                                class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                <%= bio? `value=`:'' %> "<%=bio%>" placeholder="Your Bio"
+                                                aria-label="Bio" aria-describedby="button-addon2" readonly>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary col-12 mb-0 mx-auto" type="button"
+                                                id="editbuttonbio" onclick="enableBio()">
+                                                <i class="fas fa-pen text-md"></i>
+                                            </button>
+                                            <div class="btn-group col-12 pb-5" role="group">
+                                                <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6"
+                                                    type="button" id="biocancel" onclick="bioCancel()"
+                                                    style="display: none;">
+                                                    <i class="fas fa-times text-md"></i>
+                                                </button>
+                                                <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
+                                                    type="submit" id="saveBio" style="display: none; ">
+                                                    <i class="fas fa-check text-md "></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Divider Text -->
+                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
+                                    <div class="border-bottom w-100 ml-5 "></div>
+                                    <span class="px-0 small text-muted font-weight-bold text-muted "></span>
+                                    <div class="border-bottom w-100 mr-5 "></div>
+                                </div>
+
+                                <p class="mb-0 pt-2 pb-3">Account</p>
+                                <form role="form " method="POST " action="/settings/username?_method=PUT ">
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="username" class="form-check-label text-muted">Username</label>
                                         <div class="d-flex input-group mb-1">
@@ -89,7 +247,7 @@ Coded by www.creative-tim.com
                                         </div>
                                     </div>
                                 </form>
-                                <%var actionurl; if (usertype ==="local"){actionurl="/account/email?_method=PUT"}else{actionurl="#"}%>
+                                <%var actionurl; if (usertype ==="local"){actionurl="/settings/email?_method=PUT"}else{actionurl="#"}%>
                                 <form role="form" method="POST" action="<%=actionurl%>">
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="email" class="form-check-label text-muted">Email</label>
@@ -112,15 +270,14 @@ Coded by www.creative-tim.com
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
                                             <%}%>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form role="form" method="POST" action="/account/password?_method=PUT">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="password" class="form-check-label text-muted"
-                                            id="passwordtext">Password</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <% if (passwordVer){ %>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form role="form" method="POST" action="/settings/password?_method=PUT">
+                                                <div class="form-group col-lg-12 mx-auto">
+                                                    <label for="password" class="form-check-label text-muted" id="passwordtext">Password</label>
+                                                    <div class="d-flex input-group mb-1">
+                                                        <% if (passwordVer){ %>
                                             <input type="password" name="password" id="password"
                                                 class="flex-grow-1 input-group-text bg-gray-300  text-start"
                                                 placeholder="**********" aria-label="password"
@@ -129,8 +286,8 @@ Coded by www.creative-tim.com
                                             <% if (!passwordVer){ %>
                                             <input type="password" name="placeholderpassword" id="placeholderpassword"
                                                 class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Add a password to be able to sign in with credentials" aria-label="password"
-                                                aria-describedby="button-addon2" readonly>
+                                                placeholder="Add a password to be able to sign in with credentials"
+                                                aria-label="password" aria-describedby="button-addon2" readonly>
                                             <%} %>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
                                                 id="editbuttonpassword" onclick="enablePassword()">
@@ -151,7 +308,7 @@ Coded by www.creative-tim.com
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="savePassword"  style="display: none;">
+                                                id="savePassword" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
                                         </div>
@@ -160,12 +317,12 @@ Coded by www.creative-tim.com
 
 
                                 <% if ((usertype) != "creator"){ %>
-                                <form role="form" method="post" action="/account/type">
+                                <form role="form" method="post" action="/settings/type">
                                     <div class="row mb-0 text-quicksand ">
                                         <p class="mb-1 text-left ">I am a: </p>
-                                        <div class="btn-group " role= "group ">
-                                                <input type=" text" class="btn btn-primary col-1" name="account-type"
-                                            id="fan" value="fan" readonly>
+                                        <div class="btn-group " role="group ">
+                                            <input type=" text" class="btn btn-primary col-1" name="account-type"
+                                                id="fan" value="fan" readonly>
                                             <button class="btn btn-md px-3 btn-outline-primary" id="tog" type="submit"
                                                 onclick="toggle()">Upgrade to Content Creator</button>
                                         </div>
@@ -211,7 +368,7 @@ Coded by www.creative-tim.com
                                                     </div>
                                                     <div class="modal-footer ">
                                                         <form role="form " method="POST"
-                                                            action="/account/delete-account?_method=DELETE">
+                                                            action="/settings/delete-account?_method=DELETE">
                                                             <button type="submit" class="btn bg-gradient-primary">Delete
                                                                 account</button>
                                                         </form>
@@ -233,16 +390,13 @@ Coded by www.creative-tim.com
         </div>
     </section>
 
-    <!--   Core JS Files   -->
     <script src="js/core/popper.min.js " type="text/javascript "></script>
     <script src="js/core/bootstrap.min.js " type="text/javascript "></script>
     <script src="js/plugins/perfect-scrollbar.min.js "></script>
-    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
     <script src="js/plugins/parallax.min.js "></script>
-    <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
-    <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
     <script src="js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
+
     <script>
         function toggle() {
             if (document.getElementById("tog").className == "btn btn-lg px-3 btn-outline-primary") {
@@ -254,8 +408,10 @@ Coded by www.creative-tim.com
             }
         }
 
+
         function enableUsername() {
             document.getElementById("username").readOnly = false;
+            document.getElementById("username").focus();
             let name = document.getElementById("username").value;
             document.getElementById("username").placeholder = name;
             // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
@@ -264,19 +420,63 @@ Coded by www.creative-tim.com
             // document.getElementById("svgedit").remove;
             document.getElementById("editbuttonusername").style.display = "none"
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "none";
             }
             document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            document.getElementById("editbuttonbio").style.display = "none"
+        }
+
+        function enableDisplayName() {
+            document.getElementById("displayname").readOnly = false;
+            document.getElementById("displayname").focus();
+
+            let name = document.getElementById("displayname").value;
+            document.getElementById("displayname").placeholder = name || "Display Name";
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveDisplay").style.display = "block";
+            document.getElementById("displaycancel").style.display = "block";
+            // document.getElementById("svgedit").remove;
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local") {
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
+            document.getElementById("editbuttonpassword").style.display = "none";
+            document.getElementById("editbuttonbio").style.display = "none";
+            document.getElementById("editbuttonusername").style.display = "none";
+        }
+
+        function enableBio() {
+            document.getElementById("bioedit").readOnly = false;
+            document.getElementById("bioedit").focus();
+            let bio = document.getElementById("bioedit").value;
+            document.getElementById("bioedit").placeholder = bio || "Your Bio";
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveBio").style.display = "block";
+            document.getElementById("biocancel").style.display = "block";
+            // document.getElementById("svgedit").remove;
+            document.getElementById("editbuttonbio").style.display = "none"
+            var usertype = '<%=usertype%>';
+            if (usertype == "local") {
+                document.getElementById("editbuttonemail").style.display = "none";
+            }
+            document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none"
+            document.getElementById("editbuttonusername").style.display = "none";
         }
 
         function enableEmail() {
             document.getElementById("email").readOnly = false;
+            document.getElementById("email").focus();
             // document.getElementById("email").className = "input-group-text bg-gray-300 col-8 text-start";
             document.getElementById("saveEmail").style.display = "block "
             document.getElementById("editbuttonusername").style.display = "none"
             document.getElementById("editbuttonemail").style.display = "none"
             document.getElementById("editbuttonpassword").style.display = "none"
+            document.getElementById("editbuttondisplayname").style.display = "none";
+            document.getElementById("editbuttonbio").style.display = "none";
             document.getElementById("emailcancel").style.display = "block";
         }
 
@@ -284,6 +484,7 @@ Coded by www.creative-tim.com
             var userPassword = '<%= passwordVer %>';
             if (userPassword == 'true') {
                 document.getElementById("password").readOnly = false;
+                document.getElementById("password").focus();
                 // document.getElementById("password").className = "input-group-text bg-gray-300 col-8 text-start";
                 document.getElementById("password").placeholder = "Please Input Current Password";
                 document.getElementById("password").setAttribute("required", "");
@@ -299,8 +500,10 @@ Coded by www.creative-tim.com
             document.getElementById("newpassword").style.display = "block ";
             document.getElementById("savePassword").style.display = "block ";
             document.getElementById("editbuttonusername").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "none";
+            document.getElementById("editbuttonbio").style.display = "none";
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "none";
             }
             document.getElementById("editbuttonpassword").style.display = "none"
@@ -317,11 +520,54 @@ Coded by www.creative-tim.com
             document.getElementById("saveName").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block";
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "block";
             }
             document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
             document.getElementById("usernamecancel").style.display = "none";
+        }
+
+        function displayCancel() {
+            document.getElementById("displayname").readOnly = true;
+            let name = document.getElementById("displayname").value;
+
+            if ("<%=displayName%>")
+                document.getElementById("displayname").value = "<%=displayName%>";
+            document.getElementById("displayname").placeholder = name || "Display Name";
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveDisplay").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
+            document.getElementById("displaycancel").style.display = "none";
+            document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttonusername").style.display = "block";
+
+            var usertype = '<%=usertype%>';
+            if (usertype == "local") {
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
+
+        }
+
+        function bioCancel() {
+            document.getElementById("bioedit").readOnly = true;
+            let bio = document.getElementById("bioedit").value;
+            document.getElementById("bioedit").placeholder = bio || "Your Bio";
+            // document.getElementById("username").className = "input-group-text bg-gray-300 col-8 text-start";
+            document.getElementById("saveBio").style.display = "none";
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
+            document.getElementById("biocancel").style.display = "none";
+            document.getElementById("editbuttonpassword").style.display = "block";
+            document.getElementById("editbuttonusername").style.display = "block";
+
+            var usertype = '<%=usertype%>';
+            if (usertype == "local") {
+                document.getElementById("editbuttonemail").style.display = "block";
+            }
+
         }
 
         function emailCancel() {
@@ -333,6 +579,8 @@ Coded by www.creative-tim.com
             document.getElementById("editbuttonusername").style.display = "block"
             document.getElementById("editbuttonemail").style.display = "block"
             document.getElementById("editbuttonpassword").style.display = "block"
+            document.getElementById("editbuttondisplayname").style.display = "block";
+            document.getElementById("editbuttonbio").style.display = "block";
             document.getElementById("emailcancel").style.display = "none";
         }
 
@@ -355,12 +603,72 @@ Coded by www.creative-tim.com
             document.getElementById("newpasswordtext").style.display = "none";
             document.getElementById("savePassword").style.display = "none";
             document.getElementById("editbuttonusername").style.display = "block"
+            document.getElementById("editbuttondisplayname").style.display = "block"
+            document.getElementById("editbuttonbio").style.display = "block"
             var usertype = '<%=usertype%>';
-            if (usertype == "local"){
+            if (usertype == "local") {
                 document.getElementById("editbuttonemail").style.display = "block";
             }
             document.getElementById("editbuttonpassword").style.display = "block"
             document.getElementById("passwordcancel").style.display = "none";
+        }
+
+        function ppCancel() {
+            var preview = document.getElementById('profile-photo');
+
+            preview.src = "<%=profilePhoto%>";
+
+            document.getElementById("pp-buttons").style.display = "none";
+            var input = document.getElementById('profile-upload');
+            input.value = null;
+            return false;
+        }
+
+        const ppCancelButton = document.getElementById("ppCancel")
+        ppCancelButton.addEventListener("click", ppCancel);
+
+        const ppSaveButton = document.getElementById("ppSave");
+        const ppForm = document.getElementById("pp-form")
+        ppForm.addEventListener("submit", () => {
+            var ppEdit = document.getElementById("pp-edit")
+            ppEdit.style.display = "none"
+            var ppButtons = document.getElementById("pp-buttons");
+            // ppButtons.style.display = "none"
+            while (ppButtons.firstChild) {
+                ppButtons.removeChild(ppButtons.firstChild);
+            }
+            ppButtons.innerHTML +=
+                `<div class="lds-ring mx-auto"><div></div><div></div><div></div><div></div></div>`
+
+        })
+
+        function loadFile() {
+            var input = document.getElementById('profile-upload');
+            var preview = document.getElementById('profile-photo');
+            var file = input.files[0];
+
+            const fileTypes = [
+                "image/jpeg",
+                "image/png",
+            ];
+
+
+            if (!fileTypes.includes(file.type)) {
+                alert("Please upload a valid image file");
+                return false;
+            }
+
+            var reader = new FileReader();
+            var ppButtons = document.getElementById("pp-buttons");
+            ppButtons.style.display = "flex";
+
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>
