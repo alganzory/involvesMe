@@ -207,9 +207,10 @@
             class=" shadow alert alert-info text-white border-0 text-md p-3 d-none justify-content-between align-items-center mt-3"
             role="alert">
             <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing
-                mode</span></span>
+                mode,  <br> Click on something to edit it,
+                when you are done, click save or discard the changes</span></span>
 
-            <form>
+            <form class="d-flex flex-md-row flex-column" style="gap: .25rem;"> 
               <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="saveEdit()">Save
               </button>
               <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="cancelEdit()">Discard
