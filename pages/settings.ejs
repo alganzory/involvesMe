@@ -109,22 +109,18 @@ Coded by www.creative-tim.com
                                 <h4 class="pt-3">Settings</h4>
                             </div>
                             <div class="card-body pb-0">
-                                <% if (messages.error) {
-                                    %>
+                                <% if (messages.error) { %>
                                 <div class="alert alert-danger text-white border-0 text-sm p-3 " role="alert">
                                     <%= messages.error %>
                                 </div>
-                                <%
-                                  } %>
+                                <%} %>
 
-                                <p class="mb-0 pt-4">Profile</p>
-                                <% if (messages.noProfile) {
-                                    %>
+                                <p class="mb-0 pt-4">Profile</p>    
+                                <% if (messages.noProfile) {%>
                                 <div class="alert alert-info text-white border-0 text-sm p-3 mt-2" role="alert">
                                     <%= messages.noProfile %>
                                 </div>
-                                <%
-                                  } %>
+                                <%} %>
 
                                 <div class="profile-pic-div position-relative py-1 mb-3">
                                     <form id="pp-form" method="post" method="post" enctype="multipart/form-data"
@@ -145,10 +141,18 @@ Coded by www.creative-tim.com
 
                                         <div id="pp-buttons" style="display: none;" class="btn-group col-12 p-2"
                                             role="group">
+
                                             <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
-                                                id="ppCancel" onclick="ppCancel()">
+                                                id="ppCancel">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("ppCancel").addEventListener("click",
+                                                    function () {
+                                                        ppCancel();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 " type="submit"
                                                 id="ppSave">
                                                 <i class="fas fa-check text-md "></i>
@@ -166,20 +170,34 @@ Coded by www.creative-tim.com
                                             <input type="text" name="displayname" id="displayname"
                                                 class="flex-grow-1 input-group-text bg-gray-300 text-start"
                                                 placeholder="Display Name"
-                                                <%= displayName? `value=`:'' %> "<%=displayName%>"
-                                                aria-label="Display name" aria-describedby="button-addon2" readonly>
+                                                value = "<%=displayName%>"
+                                                aria-label="Display name" aria-describedby="button-addon2" 
+                                                readonly >
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttondisplayname" onclick="enableDisplayName()">
+                                                id="editbuttondisplayname" >
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="displaycancel" onclick="displayCancel()" style="display: none;">
+                                                id="displaycancel" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("displaycancel").addEventListener("click",
+                                                    function () {
+                                                        displayCancel();
+                                                    });
+                                                document.getElementById("editbuttondisplayname").addEventListener(
+                                                    "click",
+                                                    function () {
+                                                        enableDisplayName();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
                                                 id="saveDisplay" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
                                             </button>
+
 
                                         </div>
                                     </div>
@@ -191,20 +209,35 @@ Coded by www.creative-tim.com
                                         <div class="d-flex input-group mb-1">
                                             <input type="text" name="bio" id="bioedit"
                                                 class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                <%= bio? `value=`:'' %> "<%=bio%>" placeholder="Your Bio"
+                                                value= "<%=bio%>"
+                                                 placeholder="Your Bio"
                                                 aria-label="Bio" aria-describedby="button-addon2" readonly>
                                         </div>
                                         <div>
                                             <button class="btn btn-outline-primary col-12 mb-0 mx-auto" type="button"
-                                                id="editbuttonbio" onclick="enableBio()">
+                                                id="editbuttonbio">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("editbuttonbio").addEventListener("click",
+                                                    function () {
+                                                        enableBio();
+                                                    });
+                                            </script>
                                             <div class="btn-group col-12 pb-5" role="group">
                                                 <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6"
-                                                    type="button" id="biocancel" onclick="bioCancel()"
+                                                    type="button" id="biocancel"
                                                     style="display: none;">
                                                     <i class="fas fa-times text-md"></i>
                                                 </button>
+                                                <script>
+                                                    // add on click event listener to the previous button
+                                                    document.getElementById("biocancel").addEventListener("click",
+                                                        function () {
+                                                            bioCancel();
+                                                        });
+                                                </script>
                                                 <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
                                                     type="submit" id="saveBio" style="display: none; ">
                                                     <i class="fas fa-check text-md "></i>
@@ -232,13 +265,27 @@ Coded by www.creative-tim.com
                                                 value="<%=username%>" placeholder="@Username" aria-label="Username"
                                                 aria-describedby="button-addon2" readonly>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonusername" onclick="enableUsername()">
+                                                id="editbuttonusername">
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("editbuttonusername").addEventListener("click",
+                                                    function () {
+                                                        enableUsername();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="usernamecancel" onclick="usernameCancel()" style="display: none;">
+                                                id="usernamecancel" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("usernamecancel").addEventListener("click",
+                                                    function () {
+                                                        usernameCancel();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
                                                 id="saveName" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
@@ -247,7 +294,8 @@ Coded by www.creative-tim.com
                                         </div>
                                     </div>
                                 </form>
-                                <%var actionurl; if (usertype ==="local"){actionurl="/settings/email?_method=PUT"}else{actionurl="#"}%>
+                                <%var actionurl;%>
+                                <% if (usertype ==="local") actionurl="/settings/email?_method=PUT"; else actionurl="#"%>
                                 <form role="form" method="POST" action="<%=actionurl%>">
                                     <div class="form-group col-lg-12 mx-auto">
                                         <label for="email" class="form-check-label text-muted">Email</label>
@@ -258,13 +306,27 @@ Coded by www.creative-tim.com
                                                 aria-describedby="button-addon2" readonly>
                                             <%if(usertype === "local"){%>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonemail" onclick="enableEmail()">
+                                                id="editbuttonemail" >
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("editbuttonemail").addEventListener("click",
+                                                    function () {
+                                                        enableEmail();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="emailcancel" onclick="emailCancel()" style="display: none;">
+                                                id="emailcancel" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("emailcancel").addEventListener("click",
+                                                    function () {
+                                                        emailCancel();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
                                                 id="saveEmail" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
@@ -290,9 +352,16 @@ Coded by www.creative-tim.com
                                                 aria-label="password" aria-describedby="button-addon2" readonly>
                                             <%} %>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonpassword" onclick="enablePassword()">
+                                                id="editbuttonpassword" >
                                                 <i class="fas fa-pen text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("editbuttonpassword").addEventListener("click",
+                                                    function () {
+                                                        enablePassword();
+                                                    });
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-12 mx-auto">
@@ -304,9 +373,16 @@ Coded by www.creative-tim.com
                                                 placeholder="Please Input New Password" aria-label="newpassword"
                                                 aria-describedby="button-addon2" style="display: none;">
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="passwordcancel" onclick="passwordCancel()" style="display: none;">
+                                                id="passwordcancel" style="display: none;">
                                                 <i class="fas fa-times text-md"></i>
                                             </button>
+                                            <script>
+                                                // add on click event listener to the previous button
+                                                document.getElementById("passwordcancel").addEventListener("click",
+                                                    function () {
+                                                        passwordCancel();
+                                                    });
+                                            </script>
                                             <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
                                                 id="savePassword" style="display: none;">
                                                 <i class="fas fa-check text-md"></i>
@@ -324,8 +400,15 @@ Coded by www.creative-tim.com
                                             <input type=" text" class="btn btn-primary col-1" name="account-type"
                                                 id="fan" value="fan" readonly>
                                             <button class="btn btn-md px-3 btn-outline-primary" id="tog" type="submit"
-                                                onclick="toggle()">Upgrade to Content Creator</button>
+                                                >Upgrade to Content Creator</button>
                                         </div>
+                                        <script>
+                                            // add on click event listener to the previous button
+                                            // document.getElementById("tog").addEventListener("click",
+                                            //     function () {
+                                            //         toggle();
+                                            //     });
+                                        </script>
                                     </div>
                                 </form>
                                 <% } %>
@@ -343,9 +426,17 @@ Coded by www.creative-tim.com
                                         <!-- Button trigger modal -->
                                         <button type="button " class="btn btn-secondary" data-toggle="modal "
                                             data-target="#deleteModal "
-                                            onclick="document.getElementById( 'deleteModal').style.display='block' ">
+                                           >
                                             Delete account
                                         </button>
+                                        <script>
+                                            // add on click event listener to the previous button
+                                            document.getElementById("deleteModal").addEventListener("click",
+                                                function () {
+                                                    document.getElementById( 'deleteModal').style.display='none'
+                                                });
+
+                                        </script>
 
 
                                         <!-- Modal -->
@@ -359,9 +450,17 @@ Coded by www.creative-tim.com
                                                             Account deletion</h5>
                                                         <button type="button " class="close border-0 bg-transparent "
                                                             data-dismiss="modal " aria-label="Close "
-                                                            onclick="document.getElementById( 'deleteModal').style.display='none' ">
+                                                          >
                                                             <span aria-hidden="true ">&times;</span>
                                                         </button>
+                                                        <script>
+                                                            // add on click event listener to the previous button
+                                                            document.getElementById("deleteModal").addEventListener("click",
+                                                                function () {
+                                                                    document.getElementById( 'deleteModal').style.display='none'
+                                                                });
+
+                                                        </script>
                                                     </div>
                                                     <div class="modal-body ">
                                                         Are you sure you want to Delete your Account ?
@@ -374,8 +473,15 @@ Coded by www.creative-tim.com
                                                         </form>
                                                         <button type="button " class="btn btn-secondary "
                                                             data-dismiss="modal "
-                                                            onclick="document.getElementById( 'deleteModal').style.display='none' ">Close</button>
+                                                            >Close</button>
                                                     </div>
+                                                    <script>
+                                                        // add on click event listener to the previous button
+                                                        document.getElementById("deleteModal").addEventListener("click",
+                                                            function () {
+                                                                document.getElementById( 'deleteModal').style.display='none'
+                                                            });
+                                                    </script>
                                                 </div>
                                             </div>
                                         </div>
@@ -390,12 +496,13 @@ Coded by www.creative-tim.com
         </div>
     </section>
 
-    <script src="js/core/popper.min.js " type="text/javascript "></script>
-    <script src="js/core/bootstrap.min.js " type="text/javascript "></script>
-    <script src="js/plugins/perfect-scrollbar.min.js "></script>
-    <script src="js/plugins/parallax.min.js "></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
-    <script src="js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/plugins/perfect-scrollbar.min.js "></script>
+    <script src="/js/plugins/parallax.min.js "></script>
+    <script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
+    <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
 
     <script>
         function toggle() {
@@ -429,6 +536,7 @@ Coded by www.creative-tim.com
         }
 
         function enableDisplayName() {
+            alert("display name");
             document.getElementById("displayname").readOnly = false;
             document.getElementById("displayname").focus();
 
