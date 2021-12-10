@@ -577,7 +577,9 @@
       console.log(editableFields)
       for (let i = 0; i < editableFields.length; i++) {
         editableFields[i].contentEditable = true;
-        editableFieldsValues[i] = editableFields[i].innerHTML;
+        let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+        console.log ("here", textContent)
+        editableFieldsValues[i] = textContent;
       }
       let profilePic = document.getElementById('profile-pic');
       editableFieldsValues.push(profilePic.src)
@@ -611,8 +613,9 @@
       disableEdit();
       
       for (let i = 0; i < editableFields.length; i++) {
-        if (editableFieldsValues[i] != editableFields[i].innerHTML) {
-          editableFieldsValues[i] = editableFields[i].innerHTML
+        let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+        if (editableFieldsValues[i] != textContent) {
+          editableFieldsValues[i] = textContent
           isAnyChange = true;
         }
       }
@@ -659,7 +662,7 @@
       // alert('cancel');
       disableEdit();
       for (let i = 0; i < editableFields.length; i++) {
-        editableFields[i].innerHTML = editableFieldsValues[i];
+        editableFields[i].childNodes[0].textContent = editableFieldsValues[i];
       }
       const profilePic = document.getElementById('profile-pic');
       profilePic.src = editableFieldsValues[editableFieldsValues.length - 1];
