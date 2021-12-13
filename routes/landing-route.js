@@ -23,6 +23,7 @@ router.get('/', checkAuthenticated, (req, res) => {
     </br>
     <form method="POST" action="/auth/logout" >  <button type="submit">Logout</button> </form>
     <form method="GET" action="/settings" >  <button type="submit">Account</button> </form>
+    <form method="GET" action="/profile/me" >  <button type="submit">Profile</button> </form>
     `)
 });
 

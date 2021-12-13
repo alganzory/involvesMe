@@ -14,5 +14,8 @@ router.post('/addPatreon',checkAuthenticated,profileController.add_Patreon);
 router.post('/follow',checkAuthenticated,profileController.followUser);
 router.post('/removeFollower',checkAuthenticated,profileController.removeFollower);
 router.post('/addpost',checkAuthenticated,profileController.add_post);
+router.get('/', (req,res) => {
+    res.redirect ('/profile/me')
+});
 
 module.exports=router;
