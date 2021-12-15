@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const {checkAuthenticated, checkNotAutheticated} = require('../controllers/authController');
+const { checkAuthenticated, checkNotAutheticated } = require('../controllers/authController');
 router.get('/', checkAuthenticated, (req, res) => {
-   // this is temportary until landing page is created
-    res.send (`<h1> landing page </h1>
+    // this is temportary until landing page is created
+
+    res.render('viewProduct', {
+        type: 'creator'
+    });
+    res.send(`<h1> landing page </h1>
     </br>   
     </br>
     <h3> email: ${req.user.email} </h3>
