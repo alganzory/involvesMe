@@ -114,3 +114,20 @@
     }
 
 }
+
+#uplaodPic
+{
+    display: none;
+}
+
+#uplaodPicBtn
+{
+    height: 10px;
+    position: relative;
+    bottom:0;
+    left: 43%;
+    text-align: center;
+    color: #67748e;
+    
+}
+
