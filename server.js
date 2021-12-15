@@ -35,6 +35,7 @@ const settingsRouter = require("./routes/settings-route.js");
 const profileRouter = require('./routes/profile-route.js');
 
 
+const storeRouter = require('./routes/store-route.js');
 app.use('/auth/', authRouter);
 app.use('/settings/', settingsRouter);
 app.use('/profile/', profileRouter);
