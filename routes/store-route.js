@@ -8,3 +8,8 @@ router.get('/', checkAuthenticated, (req, res) => {
 });
 
 module.exports = router;
+
+router.get('/addProduct', checkAuthenticated, (req, res) => {
+    // this is temportary until merge only
+     res.render('addProduct');
+});
