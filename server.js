@@ -33,12 +33,13 @@ const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
 const settingsRouter = require("./routes/settings-route.js");
 const profileRouter = require('./routes/profile-route.js');
-
+const viewProductRouter = require('./routes/viewProduct-route.js');
 
 const storeRouter = require('./routes/store-route.js');
 app.use('/auth/', authRouter);
 app.use('/settings/', settingsRouter);
 app.use('/profile/', profileRouter);
+app.use('/viewProduct', viewProductRouter);
 app.use('/', indexRouter);
 const port = process.env.PORT || 3000;
 app.listen(port);

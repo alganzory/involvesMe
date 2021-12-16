@@ -5,9 +5,6 @@ const { checkAuthenticated, checkNotAutheticated } = require('../controllers/aut
 router.get('/', checkAuthenticated, (req, res) => {
     // this is temportary until landing page is created
 
-    res.render('viewProduct', {
-        type: 'creator'
-    });
     res.send(`<h1> landing page </h1>
     </br>   
     </br>

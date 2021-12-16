@@ -54,9 +54,9 @@ Coded by www.creative-tim.com
     </ul>
     <section>
         <div class="container">
-            <div class="row  mt-7 ml-3">
-                <div class="col ">
-                    <div class="card " style="width: 34rem;">
+            <div class="row mt-7 ml-3">
+                <div class="col-lg-6 col-12 ">
+                    <div class="card ">
                         <div class="card-img-top">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
@@ -86,7 +86,7 @@ Coded by www.creative-tim.com
                             </div>
                         </div>
                         <div class="card-body">
-                            <% if(type == "fan"){%>
+                            <% if(type === "fan"){%>
                                 <a href="#" class="btn btn-primary">Add to cart</a>
                                 <%}%>
 
@@ -94,7 +94,7 @@ Coded by www.creative-tim.com
                         </div>
                     </div>
                 </div>
-                <div class="col ">
+                <div class="col-lg-6 col-12 ">
                     <div class="container">
                         <div class="row">
                             <div class="col-8">
@@ -102,7 +102,7 @@ Coded by www.creative-tim.com
 
                             </div>
                             <div class="col-4">
-                                <%  if(type == "creator"){%>
+                                <%  if(type === "creator"){%>
                                     <a href="#" class="btn btn-primary">Edit Productt</a>
                                     <%}%>
                             </div>
