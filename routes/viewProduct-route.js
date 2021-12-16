@@ -6,6 +6,7 @@ router.get('/', checkAuthenticated, (req, res) => {
     // this is temportary until landing page is created
     res.render('viewProduct', {
         type: req.user.type
+
     });
 
 });
