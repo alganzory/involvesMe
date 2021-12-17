@@ -96,8 +96,9 @@ Coded by www.creative-tim.com
                   <form
                     role="form"
                     class="mt-4"
-                    action="/auth/login"
+                    action="/product/addProduct"
                     method="POST"
+                    enctype="multipart/form-data"
                   >
                     <div class="mb-3">
                       <label for="name" class="form-check-label text-muted"
@@ -120,9 +121,11 @@ Coded by www.creative-tim.com
                         >Price:
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         name="price"
                         class="form-control form-control-md"
+                        step=".01"
+                        min="0"
                         placeholder="Price(RM)"
                         aria-label="price"
                         aria-describedby="text-addon"
@@ -214,17 +217,18 @@ Coded by www.creative-tim.com
 
                     <!-- Product Photo -->
                     <div class="mb-3">
-                      <div class="preview">
-                        <img id="productPhoto" />
+                      <div class="preview" id="imagePreview">
+                        
                       </div>
                       <label for="productPhoto">Upload Image</label>
                       <input
                         type="file"
-                        name="productPhoto"
+                        name="productPhotos"
                         id="productPhoto"
                         class="form-control form-control-md"
                         accept="image/*"
                         onchange="showPreview(event);"
+                        multiple
                       />
                     </div>
 
@@ -292,9 +296,18 @@ Coded by www.creative-tim.com
     <script type="text/javascript">
       function showPreview(event) {
         if (event.target.files.length > 0) {
-          var src = URL.createObjectURL(event.target.files[0]);
-          var preview = document.getElementById("productPhoto");
-          preview.src = src;
+          var preview = document.getElementById("imagePreview");
+          preview.innerHTML = '';
+          for (let index = 0; index < event.target.files.length; index++) {
+            var src = URL.createObjectURL(event.target.files[index]);
+            const imgElement = document.createElement("img");
+            imgElement.id = "productPhoto";
+            imgElement.src = src;
+            imgElement.style.marginBottom = "8px";
+            const space = document.createElement("br");
+            preview.appendChild(imgElement);  
+            preview.appendChild(space);   
+          }
           preview.style.display = "block";
         }
       }
