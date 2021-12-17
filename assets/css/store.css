@@ -1,18 +1,21 @@
 
 
+  #swiper-container{
+	height: 190vh !important;
 
+}
     .swiper {
         width: 100%;
         height: 20%;
         /* margin-left: auto;
         margin-right: auto; */
-        background-color: white;
+        /* background-color: white; */
       }
 
       .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        /* background: #fff; */
         height: calc((100% - 30px) / 2);
 
         /* Center slide text vertically */
