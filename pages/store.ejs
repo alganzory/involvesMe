@@ -119,13 +119,11 @@ Coded by www.creative-tim.com
 
 
     <div >
-    <div class="container" >
+    <div class="container overflow-hidden min-height: 100vh" id="swiper-container">
 <!-- 
     <div class="container" style="height:100px;"> -->
         <div class="row">
          <div class="col"  >
-            
-                jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
                  <!-- Swiper -->
             <!-- Swiper -->
     <div class="swiper mySwiper">
@@ -330,7 +328,9 @@ Coded by www.creative-tim.com
 
     <!-- Initialize Swiper -->
     <script>
+      
       var swiper = new Swiper(".mySwiper", {
+       
         slidesPerView: 4,
         grid: {
           rows: 2,
@@ -340,6 +340,31 @@ Coded by www.creative-tim.com
           el: ".swiper-pagination",
           clickable: true,
         },
+        // adjust the slides per view based on the size of screen
+        breakpoints:{
+          1080:{
+            slidesPerView: 4,
+    grid: {
+            rows: 2,
+            },
+    spaceBetween: 10,
+          },
+        960: {
+    slidesPerView: 3,
+    grid: {
+            rows: 2,
+            },
+    spaceBetween: 10,
+    },
+    320: {
+    slidesPerView: 2,
+    grid: {
+            rows: 2,
+            },
+    spaceBetween: 10,
+    }
+
+}
       });
     </script>
 </body>
