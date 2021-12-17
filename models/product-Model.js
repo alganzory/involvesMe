@@ -14,6 +14,7 @@ const productSchema = new Schema({
   size: String,
   color: String,
   additionalDetails: String,
+  stock: Number
 }, { timestamps: true });
 const Product = mongoose.model("product", productSchema, "product");
 
