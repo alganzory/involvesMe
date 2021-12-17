@@ -39,6 +39,7 @@ const storeRouter = require('./routes/store-route.js');
 app.use('/auth/', authRouter);
 app.use('/settings/', settingsRouter);
 app.use('/profile/', profileRouter);
+app.use('/store', storeRouter);
 app.use('/viewProduct', viewProductRouter);
 app.use('/', indexRouter);
 const port = process.env.PORT || 3000;
