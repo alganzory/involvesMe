@@ -21,14 +21,14 @@ const productSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   deletedAt: { type: Date, default: null },
-  isDeleted: { type: Boolean, default: false },
-  isSold: { type: Boolean, default: false },
-  isActive: { type: Boolean, default: true },
-  isFeatured: { type: Boolean, default: false },
-  isNew: { type: Boolean, default: false },
-  isPopular: { type: Boolean, default: false },
-  isOnSale: { type: Boolean, default: false },
-  isFreeShipping: { type: Boolean, default: false },
+  // isDeleted: { type: Boolean, default: false },
+  // isSold: { type: Boolean, default: false },
+  // isActive: { type: Boolean, default: true },
+  // isFeatured: { type: Boolean, default: false },
+  // isNew: { type: Boolean, default: false },
+  // isPopular: { type: Boolean, default: false },
+  // isOnSale: { type: Boolean, default: false },
+  // isFreeShipping: { type: Boolean, default: false },
 }, { timestamps: true });
 
 const Product = mongoose.model("product", productSchema, "product");
