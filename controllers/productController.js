@@ -12,7 +12,7 @@ const get_product = async (req, res) => {
     username: req.user.username,
   };
   
-  res.render("product", { product: product, user: user });
+  res.render("viewProduct", { product: product, user: user });
 };
 
 module.exports = {

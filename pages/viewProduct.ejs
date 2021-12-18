@@ -80,7 +80,7 @@ Coded by www.creative-tim.com
                             </div>
                         </div>
 
-                        <% if(type === "fan"){%>
+                        <% if(user.type === "fan"){%>
                         <div class="card-footer pb-0">
                             <form>
                                 <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
@@ -102,7 +102,7 @@ Coded by www.creative-tim.com
                                 <div class="flex-shrink-0">
                                     <h2>Product Name</h2>
                                 </div>
-                                <%  if(type === "creator"){%>
+                                <%  if(user.id === product.userId){%>
                                 <div>
                                     <button type="submit" class="btn btn-primary ">
                                         Edit Product
