@@ -56,13 +56,15 @@ Coded by www.creative-tim.com
     </ul>
     <section>
         <div class="container">
-            <div class="row mt-7 ml-3">
-                <div class="col-lg-6 col-12 ">
+            <div class="row mt-7">
+                <div class="col-lg-6 col-12 mb-5 ">
                     <div class="card ">
-                        <div class="card-img-top height-500">
+                        <div class="card-body p-0">
                             <div class="swiper mySwiper">
                                 <div class="swiper-wrapper height-500">
-                                    <div class="swiper-slide d-flex p-3" style="background-image: url(https://source.unsplash.com/random?sig=53);">Slide 1</div>
+                                    <div class="swiper-slide d-flex p-3"
+                                        style="background-image: url(https://source.unsplash.com/random?sig=53);">Slide
+                                        1</div>
                                     <div class="swiper-slide">Slide 2</div>
                                     <div class="swiper-slide">Slide 3</div>
                                     <div class="swiper-slide">Slide 4</div>
@@ -78,47 +80,50 @@ Coded by www.creative-tim.com
                             </div>
                         </div>
 
-                        <div class="card-body">
-                            <% if(type === "fan"){%>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="Quantity"><h6> Quantity</h6></label>
-                                        <input type="number" value="0" class="form-control " id="QuantityInputEmail1 " aria-describedby="QuantityHelp " placeholder="Enter Quantity ">
+                        <% if(type === "fan"){%>
+                        <div class="card-footer pb-0">
+                            <form>
+                                <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
+                                    <!-- <label for="Quantity"> Quantity</label> -->
+                                    <input type="number" placeholder="Quantity" class="form-control flex-shrink-1"
+                                        id="QuantityInputEmail1 " aria-describedby="QuantityHelp ">
 
-                                    </div>
                                     <button type="submit " class="btn btn-primary ">Add to cart</button>
-                                </form>
-                                <%}%>
-
-
+                                </div>
+                            </form>
                         </div>
+                        <%}%>
                     </div>
                 </div>
-                <div class="col-lg-6 col-12 ">
-                    <div class="container ">
-                        <div class="row mt-2">
-                            <div class="col-lg-8 col-7 ">
-                                <h2>Product Name</h2>
-
-                            </div>
-                            <div class="col-lg-4 col-5 ">
+                <div class="col-lg-6 col-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h2>Product Name</h2>
+                                </div>
                                 <%  if(type === "creator"){%>
+                                <div>
                                     <button type="submit" class="btn btn-primary ">
-                                        <span class="text-capitalize ">Edit Product</span></button>
-                                    <%}%>
+                                        Edit Product
+                                </div>
+                                <%}%>
                             </div>
+                            <h4 class="text-info">RM 3605</h4>
+                            
                         </div>
+                        <div class="card-body">
+                            
+                            <h6>Colors</h6>
+                            <hr>                 
+                            <h6>Size</h6>
+                            <hr>
 
-                        <h4 class=" mt-4 opacity-8 text-primary ">price</h4>
-                        <hr>
-                        <h6 class="opacity-7 ">Colors</h6>
-                        <hr>
-
-                        <h6 class="opacity-7 ">Size</h6>
-
-                        <p class="mt-4 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                            <p class="mt-4 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                                passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        </div>
+                     
                     </div>
                 </div>
             </div>
