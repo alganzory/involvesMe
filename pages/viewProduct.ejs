@@ -59,20 +59,17 @@ Coded by www.creative-tim.com
             <div class="row mt-7">
                 <div class="col-lg-6 col-12 mb-5 ">
                     <div class="card ">
-                        <div class="card-body p-0">
+                        <div class="card-body p-2">
                             <div class="swiper mySwiper">
                                 <div class="swiper-wrapper height-500">
-                                    <div class="swiper-slide d-flex p-3"
-                                        style="background-image: url(https://source.unsplash.com/random?sig=53);">Slide
-                                        1</div>
-                                    <div class="swiper-slide">Slide 2</div>
-                                    <div class="swiper-slide">Slide 3</div>
-                                    <div class="swiper-slide">Slide 4</div>
-                                    <div class="swiper-slide">Slide 5</div>
-                                    <div class="swiper-slide">Slide 6</div>
-                                    <div class="swiper-slide">Slide 7</div>
-                                    <div class="swiper-slide">Slide 8</div>
-                                    <div class="swiper-slide">Slide 9</div>
+
+                                    <% for (let i = 0; i < product.productPhotos.length; i++) { %>
+                                    <div class="swiper-slide">
+                                        <img src="<%= product.productPhotos[i] %>" alt="..." class="img-fluid">
+                                    </div>
+                                    <% } %>
+
+                                  
                                 </div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
@@ -80,7 +77,7 @@ Coded by www.creative-tim.com
                             </div>
                         </div>
 
-                        <% if(user.type === "fan"){%>
+                        <%  if(user.id !== product.userId){%>
                         <div class="card-footer pb-0">
                             <form>
                                 <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
@@ -97,10 +94,10 @@ Coded by www.creative-tim.com
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="card ">
-                        <div class="card-header">
+                        <div class="card-header pb-0">
                             <div class="d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="flex-shrink-0">
-                                    <h2>Product Name</h2>
+                                    <h2><%= product.name ||    "Product Name" %></h2>
                                 </div>
                                 <%  if(user.id === product.userId){%>
                                 <div>
@@ -109,19 +106,49 @@ Coded by www.creative-tim.com
                                 </div>
                                 <%}%>
                             </div>
-                            <h4 class="text-info">RM 3605</h4>
+                            <h4 class="text-info"> <%= "RM" + product.price || "9999" %></h4>
                             
                         </div>
                         <div class="card-body">
                             
-                            <h6>Colors</h6>
-                            <hr>                 
-                            <h6>Size</h6>
+                            <% if (product.color) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Color</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.color || "Color" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                            <% if (product.size) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Size</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.size || "Size" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                            <% if (product.category) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Category</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.category || "Category" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                                    
                             <hr>
+                            <p class="card-text"><%= product.description || "Product Description" %></p>
 
-                            <p class="mt-4 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                          
                         </div>
                      
                     </div>
@@ -131,15 +158,22 @@ Coded by www.creative-tim.com
     </section>
 
 
-    <script src="../assets/js/core/popper.min.js " type="text/javascript "></script>
-    <script src="../assets/js/core/bootstrap.min.js " type="text/javascript "></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js "></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+    <script src="/js/plugins/perfect-scrollbar.min.js"></script>
     <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-    <script src="../assets/js/plugins/parallax.min.js "></script>
+    <script src="/js/plugins/parallax.min.js "></script>
     <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
     <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
-    <script src="../assets/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
+    <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js'></script>
