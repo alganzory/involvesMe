@@ -10,7 +10,6 @@
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #f56565;
-  --bs-blue: #1266f1;
   --bs-orange: #fd7e14;
   --bs-yellow: #fbd38d;
   --bs-green: #81e6d9;
@@ -3278,14 +3277,6 @@ fieldset:disabled .btn {
   background-color: #8392ab;
   border-color: #8392ab;
 }
-
-.btn-blue {
-  color: #fff;
-  background-color: #1266F1;
-  border-color: #8392ab;
-}
-
-
 .btn-secondary:hover {
   color: #000;
   background-color: #96a2b8;
