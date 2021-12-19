@@ -5,7 +5,6 @@ const uuid = require("uuid");
 
 const get_Cart = async (req, res) => {
     var cart = await cartService.getCartByuserId(req.user.id);
-    console.log(cart.totalPrice)
     res.render('viewCart',{cart: cart, title: "View Cart"});
 };
 

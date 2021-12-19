@@ -103,6 +103,7 @@ Coded by www.creative-tim.com
                                     </thead>
 
                                     <tbody>
+                                        <% if(cart != null) {%> 
                                         <% for(var i = 0; i < cart.products.length; i++){ %> 
                                         <tr align="center">
                                             <td class="align-middle">
@@ -124,21 +125,26 @@ Coded by www.creative-tim.com
                                                 </button>
                                             </td>
                                         </tr>
-                                        <% } %> 
+                                        <tfoot>
+                                            <tr align="center">
+                                                <td class="align-middle" colspan="5">
+                                                    Total Price(RM): <%=cart.totalPrice%> 
+                                                </td>
+                                                <td class="align-middle">
+                                                    <button type="button" class="btn bg-gradient-primary mt-3" >
+                                                        Checkout
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                        <% } }else {%>
+                                            <tr align="center">
+                                                <td class="align-middle" colspan="6">
+                                                    Shopping Cart Is Empty 
+                                                </td>
+                                            </tr>
+                                        <% } %>  
                                     </tbody>
-
-                                    <tfoot>
-                                        <tr align="center">
-                                            <td class="align-middle" colspan="5">
-                                                Total Price(RM): <%=cart.totalPrice%>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button type="button" class="btn bg-gradient-primary mt-3">
-                                                    Checkout
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
