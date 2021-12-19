@@ -1,0 +1,150 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <title>involvesMe. | Product</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- <div>
+        Add to cart "For Testing Only"
+        <form action="/cart/additem" method="post">
+            <input type="text" name="productId" value="61bd8341a5f977e3ef2abe6e">
+            <input type="text" name="storeId" value="102937565687195142207">
+            <input type="number" name="quantity" value="30" min="1" max="30">
+            <button type="submit">Submit</button>
+        </form>
+    </div> -->
+    <section>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            #involves {
+                width: 50px;
+                height: 50px;
+                border-radius: 50px;
+            }
+        </style>
+
+        <div class="container mx-auto overflow max-height-vh-100 w-100">
+            <div class="row">
+                <div class="mt-5 d-flex justify-content-between">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <h2>Shopping Cart</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <table id="productTable" class="table table-condensed table-striped" table
+                                    align="center">
+                                    <thead>
+                                        <tr align="center">
+                                            <th>Product Photo</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price(RM)</th>
+                                            <th>Total Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% for(var i = 0; i < cart.products.length; i++){ %> 
+                                        <tr align="center">
+                                            <td class="align-middle">
+                                                <img id="involves" src="<%=cart.products[i].productThumnail%>" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=cart.products[i].name%>
+                                            </td>
+                                            <td class="align-middle"><%=cart.products[i].quantity%></td>
+                                            <td class="align-middle"><%=cart.products[i].price%></td>
+                                            <td class="align-middle"><%=cart.products[i].totalPrice%></td>
+                                            <td class="align-middle">
+                                                <button type="button" style="color: black; background-color: #1266f1"
+                                                    class="btn mt-3">
+                                                    Edit
+                                                </button>
+                                                <button type="button" class="btn bg-gradient-dark mt-3">
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <% } %> 
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr align="center">
+                                            <td class="align-middle" colspan="5">
+                                                Total Price(RM): <%=cart.totalPrice%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <button type="button" class="btn bg-gradient-primary mt-3">
+                                                    Checkout
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
