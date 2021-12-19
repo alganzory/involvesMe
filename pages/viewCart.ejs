@@ -103,49 +103,63 @@ Coded by www.creative-tim.com
                                     </thead>
 
                                     <tbody>
-                                        <% if(cart != null) {%> 
-                                        <% for(var i = 0; i < cart.products.length; i++){ %> 
+                                        <% if(cart !=null) {%>
+                                            <% for(var i=0; i < cart.products.length; i++){ var action ="notset";%>
+                                                <tr align="center">
+                                                    <form action="" method="post">
+                                                        <td class="align-middle">
+                                                            <img id="involves"
+                                                                src="<%=cart.products[i].productThumnail%>" />
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <%=cart.products[i].name%>
+                                                            <input type="text" name="productId" value="<%=cart.products[i].product%>" hidden>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <%=cart.products[i].quantity%>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <%=cart.products[i].price%>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <%=cart.products[i].totalPrice%>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <button type="sumbit"
+                                                                formaction="editItem"
+                                                                style="color: black; background-color: #1266f1"
+                                                                class="btn mt-3">
+                                                                Edit
+                                                            </button>
+                                                            <button type="sumbit"
+                                                                formaction="deleteItem"
+                                                                class="btn bg-gradient-dark mt-3">
+                                                                Delete
+                                                            </button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                                <% } %>
+                                    <tfoot>
                                         <tr align="center">
-                                            <td class="align-middle">
-                                                <img id="involves" src="<%=cart.products[i].productThumnail%>" />
+                                            <td class="align-middle" colspan="5">
+                                                Total Price(RM): <%=cart.totalPrice%>
                                             </td>
                                             <td class="align-middle">
-                                                <%=cart.products[i].name%>
-                                            </td>
-                                            <td class="align-middle"><%=cart.products[i].quantity%></td>
-                                            <td class="align-middle"><%=cart.products[i].price%></td>
-                                            <td class="align-middle"><%=cart.products[i].totalPrice%></td>
-                                            <td class="align-middle">
-                                                <button type="button" style="color: black; background-color: #1266f1"
-                                                    class="btn mt-3">
-                                                    Edit
-                                                </button>
-                                                <button type="button" class="btn bg-gradient-dark mt-3">
-                                                    Delete
+                                                <button type="button" class="btn bg-gradient-primary mt-3">
+                                                    Checkout
                                                 </button>
                                             </td>
                                         </tr>
+                                    </tfoot>
+                                    <% }else {%>
+                                        <tr align="center">
+                                            <td class="align-middle" colspan="6">
+                                                Shopping Cart Is Empty
+                                            </td>
+                                        </tr>
                                         <% } %>
-                                        <tfoot>
-                                            <tr align="center">
-                                                <td class="align-middle" colspan="5">
-                                                    Total Price(RM): <%=cart.totalPrice%> 
-                                                </td>
-                                                <td class="align-middle">
-                                                    <button type="button" class="btn bg-gradient-primary mt-3" >
-                                                        Checkout
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                        <% }else {%>
-                                            <tr align="center">
-                                                <td class="align-middle" colspan="6">
-                                                    Shopping Cart Is Empty 
-                                                </td>
-                                            </tr>
-                                        <% } %>  
-                                    </tbody>
+                                            </tbody>
                                 </table>
                             </div>
                         </div>
@@ -157,4 +171,3 @@ Coded by www.creative-tim.com
 </body>
 
 </html>
-
