@@ -65,3 +65,23 @@ exports.deleteCart = async (id) => {
     throw error;
   }
 };
+
+// delete product from delete cart
+exports.deleteProductById = async(projectId)=>{
+
+  try{
+ 
+
+      await mongoose.connect(process.env.MONGO_URI);
+      const deleteProduct = await Cart.updateMany(
+        
+        
+          { $pull: { products: { product: projectId } } }
+        
+      )
+      return deleteProduct;
+
+  }catch{
+
+  }
+}
