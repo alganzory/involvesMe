@@ -23,7 +23,23 @@ const get_product_json = async (req, res) => {
   res.json(product);
 };
 
+const isAvailableStock = async (stock,quantity) => {
+  if(stock < quantity){
+    return false;
+  }
+  else {
+    return true;
+  }
+};
+
+const GetProductObject = async (productId) => {
+  var product = await ProductService.getProductById(productId);
+    return product;
+};
+
 module.exports = {
   get_product,
   get_product_json,
+  isAvailableStock,
+  GetProductObject
 };

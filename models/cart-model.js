@@ -48,7 +48,7 @@ exports.updateCart = async (id, cart) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedCart = await Cart.updateOne({ id }, cart);
+    const updatedCart = await Cart.findOneAndUpdate( id , cart);
     return updatedCart;
   } catch (error) {
     throw error;
