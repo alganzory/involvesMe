@@ -33,7 +33,25 @@ const addToCart = async (req, res) => {
 };*/
 
 
+// delete product
+const deleteProductFromCart = async(req, res)=>{
+    
+        
+      
+    var delete_id = req.params.id;
+    
+    console.log('delete product id='+delete_id)
+
+   await cartService.deleteProductById(delete_id)
+ 
+   console.log('deleted')
+    res.redirect("/cart/");
+    
+}
+
+
 module.exports = {
     get_Cart,
+    deleteProductFromCart,
     //addToCart
 };
