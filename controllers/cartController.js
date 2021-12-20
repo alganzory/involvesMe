@@ -7,6 +7,21 @@ const get_Cart = async (req, res) => {
     var cart = await cartService.getCartByuserId(req.user.id);
     res.render('viewCart',{cart: cart, title: "View Cart"});
 };
+// delete product
+const deleteProductFromCart = async(req, res)=>{
+    
+        
+    console.log("this is delete")
+      var delete_id = req.params.id;
+      
+      console.log('delete product id='+delete_id)
+
+     await cartService.deleteProductById(delete_id)
+   
+     console.log('deleted')
+      // res.redirect("/cart/");
+      
+}
 
 
 /*For Testing only 
@@ -33,7 +48,10 @@ const addToCart = async (req, res) => {
 };*/
 
 
+
+
 module.exports = {
     get_Cart,
+    deleteProductFromCart,
     //addToCart
 };
