@@ -64,12 +64,12 @@ Coded by www.creative-tim.com
                                 <div class="swiper-wrapper height-500">
 
                                     <% for (let i = 0; i < product.productPhotos.length; i++) { %>
-                                    <div class="swiper-slide">
-                                        <img src="<%= product.productPhotos[i] %>" alt="..." class="img-fluid">
-                                    </div>
-                                    <% } %>
+                                        <div class="swiper-slide">
+                                            <img src="<%= product.productPhotos[i] %>" alt="..." class="img-fluid">
+                                        </div>
+                                        <% } %>
 
-                                  
+
                                 </div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
@@ -78,18 +78,17 @@ Coded by www.creative-tim.com
                         </div>
 
                         <%  if(user.id !== product.userId){%>
-                        <div class="card-footer pb-0">
-                            <form>
-                                <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
-                                    <!-- <label for="Quantity"> Quantity</label> -->
-                                    <input type="number" placeholder="Quantity" class="form-control flex-shrink-1"
-                                        id="QuantityInputEmail1 " aria-describedby="QuantityHelp ">
+                            <div class="card-footer pb-0">
+                                <form>
+                                    <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
+                                        <!-- <label for="Quantity"> Quantity</label> -->
+                                        <input type="number" placeholder="Quantity" class="form-control flex-shrink-1" id="QuantityInputEmail1 " aria-describedby="QuantityHelp ">
 
-                                    <button type="submit " class="btn btn-primary ">Add to cart</button>
-                                </div>
-                            </form>
-                        </div>
-                        <%}%>
+                                        <button type="submit " class="btn btn-primary ">Add to cart</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <%}%>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
@@ -97,11 +96,13 @@ Coded by www.creative-tim.com
                         <div class="card-header pb-0">
                             <div class="d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="flex-shrink-0">
-                                    <h2><%= product.name ||    "Product Name" %></h2>
+                                    <h2>
+                                        <%= product.name ||    "Product Name" %>
+                                    </h2>
                                 </div>
                                 <%  if(user.id === product.userId){%>
-                                <div>
-                                    <button type="submit" class="btn btn-primary ">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary" id="">
                                         Edit Product
                                 </div>
                                 <%}%>
