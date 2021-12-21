@@ -123,7 +123,7 @@ Coded by www.creative-tim.com
                                                         <input id = "<%="quantityInput" + i%>" 
                                                             name="newQuantity"
                                                             type="number" 
-                                                            max = "<%=cart.products[i].stock%>"
+                                                           
                                                             min = 1
                                                             class="d-none"
                                                            
@@ -265,7 +265,7 @@ Coded by www.creative-tim.com
         oldQuantity.setAttribute("class" , "d-none");
         newQuantity.removeAttribute("class" ,"d-none");
         newQuantity.value = +oldQuantity.textContent
-        // console.log ("<%=cart.products[0].stock%>")
+       
         //console.log(tempQuantity);
         //changeQuantity.style.backgroundColor = "white";
         // var num = 1;
@@ -303,7 +303,7 @@ Coded by www.creative-tim.com
         console.log(oldQuantity.textContent);
         console.log(newQuantity.textContent);
          
-        console.log ("<%=cart.products[0].quantity%>")
+    
         // var test = parseInt(newQuantity.textContent);
         // console.log(test);
 
