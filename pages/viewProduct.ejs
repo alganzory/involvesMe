@@ -83,10 +83,12 @@ Coded by www.creative-tim.com
                                     <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
                                         <!-- <label for="Quantity"> Quantity</label> -->
                                         <input type="number" placeholder="Quantity" class="form-control flex-shrink-1"
-                                            id="QuantityInputEmail1" name="quantity" min="1" max="<%=product.stock%>" aria-describedby="QuantityHelp ">
+                                            id="QuantityInputEmail1" name="quantity" min="1" max="<%=product.stock%>" required aria-describedby="QuantityHelp ">
                                         <input type="text" name="productId" value="<%=product.id%>"hidden>
                                         <button type="submit " class="btn btn-primary ">Add to cart</button>
+                                        
                                     </div>
+                                    <p class="text-center text-danger"> Max Quantity Available is <%=product.stock%> </p>
                                 </form>
                             </div>
                             <%}%>
