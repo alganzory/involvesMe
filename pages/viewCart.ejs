@@ -119,20 +119,23 @@ Coded by www.creative-tim.com
                                                         </td>
                                                         <td class="align-middle">
 
-                                                        <span id = "<%="quantity" + i%>"><%=cart.products[i].quantity%></span>
+                                                        <span id = "<%="quantity" + i%>"></span>
                                                         <input id = "<%="quantityInput" + i%>" 
                                                             name="newQuantity"
                                                             type="number" 
                                                             max = "<%=cart.products[i].stock%>"
                                                             min = 1
                                                             class="d-none"
-                                                            
-                                                            oninvalid="this.setCustomValidity('There are only ' + <%=cart.products[i].stock%> + ' of this item in stock' )"
+                                                           
                                                     
-                                                            >
+                                                           >
 
-                                                            <%=cart.products[i].quantity%>
-                                                          
+                                                           <%=cart.products[i].quantity%>
+                                                           <% if (messages.outstock) {%>
+                                                            <p class="text-primary">
+                                                                <%= messages.outstock %>
+                                                            </p>
+                                                             <%}%>
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].price%>
@@ -142,12 +145,16 @@ Coded by www.creative-tim.com
 
                                                             <%=cart.products[i].totalPrice%>
                                                         </td>
-                                                    </form>
+                                                    
                                                         <td class="align-middle">
+                                                            <div class="container">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                         
 
-                                                            <div class="btn-group" role="group">
+                                                                
                                                                 <button type="button"
-                                                                    formaction="editItem"
+                                                                   
                                                                     style="color: black; background-color: #1266f1"
                                                                     class="btn mt-3 d-flex display: inline-block;"
                                                                     id= "<%="editItem" + i%>"
@@ -162,7 +169,7 @@ Coded by www.creative-tim.com
                                                                     <i class="fa fa-check-square-o"></i>
                                                                     Save
                                                                 </button>
-                                                                <button type="button"
+                                                                <button
                                                             
                                                                     class="btn bg-gradient-dark mt-3 d-none"
                                                                     id= "<%="cancelChanges" + i%>"
@@ -170,41 +177,31 @@ Coded by www.creative-tim.com
                                                                     <i class="fa fa-window-close-o"></i>
                                                                     Cancel
                                                                 </button>
-                                                                <button type="button"
-                                                                    formaction="deleteItem"
-                                                                    class="btn bg-gradient-dark mt-3 d-flex">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                       <div class="container">
-                                                                <div class="row">
-                                                                <div class="col">
-                                                            <form action="/cart/edit" method="post"　>
-                                                            <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
-                                                            <button 
-                                                               
-                                                                style="color: black; background-color: #1266f1"
-                                                              
-                                                                class="btn mt-3">
-                                                                Edit
-                                                            </button>
+                                                                
+                                                           
+                                                        </div>
+                                                        <div class="col">
                                                         </form>
-                                                    </div>
-                                                    <div class="col">
                                                             <form action="/cart/delete" method="post" onsubmit="return confirm('Are you sure to delete the product?');"　>
                                                                 <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
                                                                 <button  id="#btn-submit"
-                                                                  class="btn bg-gradient-dark mt-3 delete">
+                                                                  class="btn bg-gradient-secondary mt-3 delete">
                                                                 Delete
                                                             </button>
                                                         </form>
                                                     </div>
                                                     </div>
                                                     </div>
-
-                                                        </td>
+                                                    </td>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                   </div>    
                                                    
                                                 </tr>
+                                            </div></div>
                                                 <% } %>
                                     <tfoot>
                                         <tr align="center">
@@ -268,7 +265,7 @@ Coded by www.creative-tim.com
         oldQuantity.setAttribute("class" , "d-none");
         newQuantity.removeAttribute("class" ,"d-none");
         newQuantity.value = +oldQuantity.textContent
-        console.log ("<%=cart.products[0].stock%>")
+        // console.log ("<%=cart.products[0].stock%>")
         //console.log(tempQuantity);
         //changeQuantity.style.backgroundColor = "white";
         // var num = 1;
