@@ -1,6 +1,7 @@
 const cartService = require("../models/cart-model");
 // const productController = require("../controllers/productController");
 
+
 const ProductService = require('../models/product-model')
 const uuid = require("uuid");
 
@@ -63,9 +64,12 @@ const editProductFromCart = async(req, res)=>{
     var origanProduct =await ProductService.getProductById(edit_id);
     var origanProduct_stock =origanProduct.stock;
 
-    var quantity = 1;//test 
+    var quantity = req.body.newQuantity;//test 
+    console.log("stock: "+origanProduct_stock)
+    console.log("quantity: "+quantity)
     console.log(origanProduct_stock);
-     if(quantity<=origanProduct_stock){
+    
+      if(quantity<=origanProduct_stock && quantity>0){
         for (let index = 0; index < cartSearch.products.length; index++) {
             if (cartSearch.products[index].product == edit_id) {
                 cartSearch.totalPrice = Number(cartSearch.totalPrice) - Number(cartSearch.products[index].totalPrice);
@@ -88,7 +92,12 @@ const editProductFromCart = async(req, res)=>{
          
         console.log(cartSearch)
      }else{
-         console.log('out of stock')
+        
+        req.flash(
+            'outstock',
+            "out of stock,current stock is: "+origanProduct_stock
+          );
+      
      }
 
     
@@ -96,6 +105,7 @@ const editProductFromCart = async(req, res)=>{
    
      console.log('edited')
       res.redirect("/cart/");
+    
       
 }
 
