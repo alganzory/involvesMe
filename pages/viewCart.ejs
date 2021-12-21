@@ -104,7 +104,9 @@ Coded by www.creative-tim.com
 
                                     <tbody>
                                         <% if(cart !=null) {%>
+                                            <%var totalAmount=0;%>
                                             <% for(var i=0; i < cart.products.length; i++){ var action ="notset";%>
+                                            
                                                 <tr align="center">
                                                     <form action="/cart/edit" method="post">
                                                         <td class="align-middle">
@@ -113,9 +115,10 @@ Coded by www.creative-tim.com
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].name%>
-                                                            <input type="text" name="productId" value="<%=cart.products[i].product%>" hidden>
+                                                            <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
                                                         </td>
                                                         <td class="align-middle">
+
                                                         <span id = "<%="quantity" + i%>"><%=cart.products[i].quantity%></span>
                                                         <input id = "<%="quantityInput" + i%>" 
                                                             name="newQuantity"
@@ -127,14 +130,21 @@ Coded by www.creative-tim.com
                                                             oninvalid="this.setCustomValidity('There are only ' + <%=cart.products[i].stock%> + ' of this item in stock' )"
                                                     
                                                             >
+
+                                                            <%=cart.products[i].quantity%>
+                                                          
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].price%>
+                                                            <% totalAmount+=(cart.products[i].quantity *cart.products[i].price);%>
                                                         </td>
                                                         <td class="align-middle">
+
                                                             <%=cart.products[i].totalPrice%>
                                                         </td>
+                                                    </form>
                                                         <td class="align-middle">
+
                                                             <div class="btn-group" role="group">
                                                                 <button type="button"
                                                                     formaction="editItem"
@@ -166,14 +176,41 @@ Coded by www.creative-tim.com
                                                                     Delete
                                                                 </button>
                                                             </div>
+                                                       <div class="container">
+                                                                <div class="row">
+                                                                <div class="col">
+                                                            <form action="/cart/edit" method="post"　>
+                                                            <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
+                                                            <button 
+                                                               
+                                                                style="color: black; background-color: #1266f1"
+                                                              
+                                                                class="btn mt-3">
+                                                                Edit
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col">
+                                                            <form action="/cart/delete" method="post" onsubmit="return confirm('Are you sure to delete the product?');"　>
+                                                                <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
+                                                                <button  id="#btn-submit"
+                                                                  class="btn bg-gradient-dark mt-3 delete">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+
                                                         </td>
-                                                    </form>
+                                                   
                                                 </tr>
                                                 <% } %>
                                     <tfoot>
                                         <tr align="center">
                                             <td class="align-middle" colspan="5">
-                                                Total Price(RM): <%=cart.totalPrice%>
+                                                
+                                                Total Price(RM): <%=totalAmount%>
                                             </td>
                                             <td class="align-middle">
                                                 <button type="button" class="btn bg-gradient-primary mt-3">
@@ -198,6 +235,7 @@ Coded by www.creative-tim.com
             </div>
         </div>
     </section>
+
 
     <script>
 
@@ -282,6 +320,41 @@ Coded by www.creative-tim.com
      }
     
     </script>
+
+
+
+
+  
+
+
+    
+       
+
+    
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+<script src="../assets/js/plugins/parallax.min.js"></script>
+<!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="../assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+
+<!-- modal -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
 </body>
 
 </html>

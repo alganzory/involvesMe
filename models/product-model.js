@@ -23,7 +23,7 @@ const productSchema = new Schema({
 }, { timestamps: true });
 
 const Product = mongoose.model("product", productSchema, "product");
-
+mongoose.models = {};//in order other controller can call it
 exports.productModel = Product;
 
 exports.addProduct = async (product) => {
