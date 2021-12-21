@@ -106,7 +106,7 @@ Coded by www.creative-tim.com
                                         <% if(cart !=null) {%>
                                             <% for(var i=0; i < cart.products.length; i++){ var action ="notset";%>
                                                 <tr align="center">
-                                                    <form action="" method="post">
+                                                    <form action="/cart/edit" method="post">
                                                         <td class="align-middle">
                                                             <img id="involves"
                                                                 src="<%=cart.products[i].productThumnail%>" />
@@ -116,7 +116,17 @@ Coded by www.creative-tim.com
                                                             <input type="text" name="productId" value="<%=cart.products[i].product%>" hidden>
                                                         </td>
                                                         <td class="align-middle">
-                                                            <%=cart.products[i].quantity%>
+                                                        <span id = "<%="quantity" + i%>"><%=cart.products[i].quantity%></span>
+                                                        <input id = "<%="quantityInput" + i%>" 
+                                                            name="newQuantity"
+                                                            type="number" 
+                                                            max = "<%=cart.products[i].stock%>"
+                                                            min = 1
+                                                            class="d-none"
+                                                            
+                                                            oninvalid="this.setCustomValidity('There are only ' + <%=cart.products[i].stock%> + ' of this item in stock' )"
+                                                    
+                                                            >
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].price%>
@@ -125,17 +135,37 @@ Coded by www.creative-tim.com
                                                             <%=cart.products[i].totalPrice%>
                                                         </td>
                                                         <td class="align-middle">
-                                                            <button type="sumbit"
-                                                                formaction="editItem"
-                                                                style="color: black; background-color: #1266f1"
-                                                                class="btn mt-3">
-                                                                Edit
-                                                            </button>
-                                                            <button type="sumbit"
-                                                                formaction="deleteItem"
-                                                                class="btn bg-gradient-dark mt-3">
-                                                                Delete
-                                                            </button>
+                                                            <div class="btn-group" role="group">
+                                                                <button type="button"
+                                                                    formaction="editItem"
+                                                                    style="color: black; background-color: #1266f1"
+                                                                    class="btn mt-3 d-flex display: inline-block;"
+                                                                    id= "<%="editItem" + i%>"
+                                                                    onclick="enableEdit('<%=i%>')">
+                                                                    Edit
+                                                                </button>
+                                                                <button type="submit"
+                                                        
+                                                                    class="btn bg-gradient-dark mt-3 d-none"
+                                                                    id= "<%="saveChanges" + i%>"
+                                                                    onclick="saveChanges('<%=i%>')">
+                                                                    <i class="fa fa-check-square-o"></i>
+                                                                    Save
+                                                                </button>
+                                                                <button type="button"
+                                                            
+                                                                    class="btn bg-gradient-dark mt-3 d-none"
+                                                                    id= "<%="cancelChanges" + i%>"
+                                                                    onclick="cancelChanges('<%=i%>')">
+                                                                    <i class="fa fa-window-close-o"></i>
+                                                                    Cancel
+                                                                </button>
+                                                                <button type="button"
+                                                                    formaction="deleteItem"
+                                                                    class="btn bg-gradient-dark mt-3 d-flex">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
                                                         </td>
                                                     </form>
                                                 </tr>
@@ -168,6 +198,92 @@ Coded by www.creative-tim.com
             </div>
         </div>
     </section>
+
+    <script>
+
+        var edit = "editItem";
+        var save = "saveChanges";
+        var cancel = "cancelChanges";
+
+        
+    
+    function enableEdit(index)
+     {  
+    
+        var itemId = edit + index;
+        var saveId = save + index;
+        var cancelId = cancel + index;
+        var quantityId = "quantity" + index;
+        var quantityEditId = "quantityInput" + index;
+        //console.log(quantityId);
+    
+        var thisItem = document.getElementById(itemId);
+        var saveThis = document.getElementById(saveId);
+        var cancelThis = document.getElementById(cancelId);
+        var oldQuantity = document.getElementById(quantityId);
+        var newQuantity = document.getElementById(quantityEditId);
+        //console.log(changeQuantity);
+    
+        thisItem.classList.add("d-none");
+        saveThis.classList.remove("d-none");
+        cancelThis.classList.remove("d-none");
+        oldQuantity.setAttribute("class" , "d-none");
+        newQuantity.removeAttribute("class" ,"d-none");
+        newQuantity.value = +oldQuantity.textContent
+        console.log ("<%=cart.products[0].stock%>")
+        //console.log(tempQuantity);
+        //changeQuantity.style.backgroundColor = "white";
+        // var num = 1;
+        // console.log(changeQuantity);
+        //console.log(changeQuantity.innerText);
+        //tempQuantity = changeQuantity.innerText;
+    
+        // if(isNaN(tempQuantity))
+        // {
+        //     log.error("wtf");
+        // }
+    
+     }
+    
+     function cancelChanges(index)
+     {
+        var itemId = edit + index;
+        var saveId = save + index;
+        var cancelId = cancel + index;
+        var quantityId = "quantity" + index;
+        var quantityEditId = "quantityInput" + index;
+
+        var thisItem = document.getElementById(itemId);
+        var saveThis = document.getElementById(saveId);
+        var cancelThis = document.getElementById(cancelId);
+        var oldQuantity = document.getElementById(quantityId);
+        var newQuantity = document.getElementById(quantityEditId);
+        //console.log(changeQuantity);
+    
+        thisItem.classList.remove("d-none");
+        saveThis.classList.add("d-none");
+        cancelThis.classList.add("d-none");
+        oldQuantity.setAttribute("class" , "d-block");
+        newQuantity.setAttribute("class" ,"d-none");
+        console.log(oldQuantity.textContent);
+        console.log(newQuantity.textContent);
+         
+        console.log ("<%=cart.products[0].quantity%>")
+        // var test = parseInt(newQuantity.textContent);
+        // console.log(test);
+
+        // if(oldQuantity.textContent != newQuantity.textContent)
+        // {
+        //     newQuantity.innerHTML = oldQuantity.textContent;
+        // }
+
+
+    
+     }
+    
+    </script>
 </body>
 
 </html>
+
+
