@@ -77,3 +77,19 @@ exports.deleteProduct = async (id) => {
     throw error;
   }
 };
+
+exports.updateStock = async(productid, stock)=>{
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const updatedStock = await Product.update(
+      {"Employeeid" : 1},
+      {$set: { "EmployeeName" : "NewMartin"}});
+      const updateStock =await Product.updateOne(
+      {"id": productid},
+      {$set: {"stock": stock}}
+    )
+    return updatedStock;
+  }catch (error) {
+    throw error;
+  }
+}
