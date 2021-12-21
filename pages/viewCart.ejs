@@ -119,6 +119,7 @@ Coded by www.creative-tim.com
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].quantity%>
+                                                           
                                                         </td>
                                                         <td class="align-middle">
                                                             <%=cart.products[i].price%>
@@ -130,16 +131,30 @@ Coded by www.creative-tim.com
                                                         </td>
                                                     </form>
                                                         <td class="align-middle">
-                                                            <button type="sumbit"
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                <div class="col">
+                                                            <form action="/cart/edit" method="post"　></form>
+                                                            <button 
                                                                
                                                                 style="color: black; background-color: #1266f1"
+                                                              
                                                                 class="btn mt-3">
                                                                 Edit
                                                             </button>
-                                                            <button type="sumbit" id="delete_button"
-                                                                onclick="deletes()"  class="btn bg-gradient-dark mt-3 delete">
+                                                        </form>
+                                                    </div>
+                                                    <div class="col">
+                                                            <form action="/cart/delete" method="post" onsubmit="return confirm('Are you sure to delete the product?');"　>
+                                                                <input type="text" id="productId" name="productId" value="<%=cart.products[i].product%>" hidden>
+                                                                <button  id="#btn-submit"
+                                                                  class="btn bg-gradient-dark mt-3 delete">
                                                                 Delete
                                                             </button>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                    </div>
                                                         </td>
                                                    
                                                 </tr>
@@ -174,67 +189,36 @@ Coded by www.creative-tim.com
         </div>
     </section>
 
-    <!-- button delete event JS  -->
-
-    <script>
-    function deletes() {
-      
-
-          swal({
-             title: "Are you sure?",
-                       
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-         .then((willDelete) => {
-                          
-            var productId = document.getElementById('productId').value;
-
-             if (willDelete) {
-
-             fetch(`http://localhost:3000/cart/delete/${productId}`,{
-              method: "POST",
-             headers : {
-              "Content-Type" : "application/json; charset=utf-8"
-
-              },  
-
-                      
-                           
-            })
-            }
-           location.reload()
-        });
-                   
 
 
-    }
 
-    </script>
+  
+
 
     
-    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-    <script src="../assets/js/plugins/parallax.min.js"></script>
-    <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-    <script src="../assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+       
 
-    <!-- modal -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+<script src="../assets/js/plugins/parallax.min.js"></script>
+<!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="../assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
 
+<!-- modal -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
