@@ -44,11 +44,12 @@ exports.getCartById = async (id) => {
   }
 };
 
+
 exports.updateCart = async (id, cart) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedCart = await Cart.updateOne({ id }, cart);
+    const updatedCart = await Cart.findOneAndUpdate( id , cart);
     return updatedCart;
   } catch (error) {
     throw error;
@@ -67,21 +68,25 @@ exports.deleteCart = async (id) => {
 };
 
 // delete product from delete cart
-exports.deleteProductById = async(projectId)=>{
+exports.deleteProductById = async(cartid, productId)=>{
 
   try{
  
 
       await mongoose.connect(process.env.MONGO_URI);
-      const deleteProduct = await Cart.updateMany(
+      const deleteProduct = await Cart.findOneAndUpdate(
         
-        
-          { $pull: { products: { product: projectId } } }
+          {_id: cartid},
+          { $pull: { products: { product: productId } } },
+          {new: true}
         
       )
+      console.log("deleted product")
       return deleteProduct;
 
   }catch{
 
   }
 }
+
+
