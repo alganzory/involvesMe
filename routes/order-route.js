@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+const orderController = require("../controllers/orderController")
 const { checkAuthenticated, checkNotAutheticated } = require('../controllers/authController');
-router.get('/', checkAuthenticated, (req, res) => {
-    // this is temportary until landing page is created
-    res.render('order');
-});
+
+router.get('/', checkAuthenticated,orderController.get_Order);
+router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
 
 module.exports = router;
