@@ -77,3 +77,19 @@ exports.deleteOrder = async (id) => {
   }
 };
 
+
+//update the Status
+exports.updateOrderStatus = async(orderid, newOrderStatus)=>{
+    try{
+
+        await  mongoose.connect(process.env.MONGO_URI);
+        const updatedOrder = await Order.updateOne(
+
+            {orderId: orderid},
+            {$set: {orderStatus: newOrderStatus}}
+        )
+        return updatedOrder;
+    }catch (error) {
+    throw error;
+  }
+}
