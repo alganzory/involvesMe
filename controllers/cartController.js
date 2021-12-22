@@ -32,8 +32,17 @@ const addToCart = async (req, res) => {
     return res.redirect("/");
 };*/
 
-
+const getCartById = async (userId) => {
+    var cart = await cartService.getCartByuserId(userId);
+    return cart;
+};
+const deleteCart = async (userId) => {
+    var cart = await cartService.deleteCart(userId);
+    return cart;
+};
 module.exports = {
     get_Cart,
     //addToCart
+    getCartById,
+    deleteCart
 };

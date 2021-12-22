@@ -23,7 +23,19 @@ const get_product_json = async (req, res) => {
   res.json(product);
 };
 
+const getProduct = async (productId) => {
+  const product = await ProductService.getProductById(productId);
+  return product;
+};
+
+const updateProductStock = async (productObject,productId) => {
+  var updatedProduct = await ProductService.updateProduct(productId,productObject);
+  return updatedProduct;
+}
+
 module.exports = {
   get_product,
   get_product_json,
+  getProduct,
+  updateProductStock
 };
