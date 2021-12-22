@@ -17,13 +17,14 @@ Coded by www.creative-tim.com
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-    <title>involvesMe. | Order</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <title>involvesMe. | Product</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <!--     Fonts and icons     -->
@@ -39,10 +40,11 @@ Coded by www.creative-tim.com
     <link href="/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
-    <link href="./css/additional-styles.css" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
 </head>
 
 <body>
+
     <ul class="circles">
         <li></li>
         <li></li>
@@ -61,25 +63,26 @@ Coded by www.creative-tim.com
             table {
                 border-collapse: collapse;
             }
-            
+
             #involves {
                 width: 50px;
                 height: 50px;
                 border-radius: 50px;
             }
-            
+
             @media screen and (max-width: 600px) {
                 .card {
                     width: 40rem !important;
                     text-align: center;
                 }
+
                 .card-text {
                     /* text-align: left;
                     padding-left: ; */
                     padding-right: 80px;
                 }
             }
-            
+
             @media screen and (max-width: 1030px) {
                 #card1 {
                     margin-top: 1.5rem;
@@ -90,18 +93,18 @@ Coded by www.creative-tim.com
 
         <div class="container mx-auto overflow max-height-vh-100 w-100">
             <div class="row">
-
                 <div class="mt-5 d-flex justify-content-between">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-4 mb-3">
-                                <h2>Shopping Cart</h2>
+                                <h2>You Order</h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-lg-10">
                                 <div class="conatiner">
-                                    <table id="productTable" class="table table-condensed table-striped " table align="center">
+                                    <table id="productTable" class="table table-condensed table-striped " table
+                                        align="center">
                                         <thead>
                                             <tr align="center">
                                                 <th>Product Photo</th>
@@ -114,31 +117,28 @@ Coded by www.creative-tim.com
                                         </thead>
 
                                         <tbody>
+                                            <!-- Cart Items -->
+                                            <% for(var i=0; i < order.products.length; i++){ var action="notset" ;%>
+                                                <tr align="center">
 
-                                            <tr align="center">
-                                                <form action="" method="post">
-                                                    <td class="align-middle col-xs-12 col-sm-12 col-lg-10">
-                                                        <img id="involves" src="/img/product1.jpg" />
+                                                    <td class="align-middle">
+                                                        <img id="involves"
+                                                            src="<%=order.products[i].productThumnail%>" />
                                                     </td>
-                                                    <td class="align-middle col-xs-12 col-sm-12 col-lg-10">
-                                                        product 1
-                                                        <input type="text" name="productId" value="product 1" hidden>
+                                                    <td class="align-middle">
+                                                        <%=order.products[i].name%>
                                                     </td>
-                                                    <td class="align-middle col-xs-12 col-sm-12 col-lg-10">
-                                                        1
+                                                    <td class="align-middle">
+                                                        <%=order.products[i].quantity%>
                                                     </td>
-                                                    <td class="align-middle col-xs-12 col-sm-12 col-lg-10">
-                                                        111
+                                                    <td class="align-middle">
+                                                        <%=order.products[i].price%>
                                                     </td>
-                                                    <td class="align-middle ccol-xs-12 col-sm-12 col-lg-10">
-                                                        111
+                                                    <td class="align-middle">
+                                                        <%=order.products[i].totalPrice%>
                                                     </td>
-
-                                                </form>
-                                            </tr>
-
-
-
+                                                </tr>
+                                                <% } %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -146,108 +146,119 @@ Coded by www.creative-tim.com
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-lg-2">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-6 col-lg-12 ">
-                                        <div class="card " id="card1" style="width: 18rem;">
+                                <form action="makeOrder" method="POST">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-lg-12 ">
+                                            <!-- Shipping Details -->
+                                            <div class="card " id="card1" style="width: 18rem;">
 
-                                            <div class="card-body">
-                                                <h5 class="card-title pt-2">Shipping Address</h5>
-                                                <div class="coanatiner mt-4">
-                                                    <form>
+                                                <div class="card-body">
+                                                    <h5 class="card-title pt-2">Shipping Address</h5>
+                                                    <div class="coanatiner mt-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="Name" aria-describedby="name" placeholder="Full Name">
+                                                            <input type="text" class="form-control" id="Name"
+                                                                name="fullName" aria-describedby="name"
+                                                                placeholder="Full Name" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control" id="phoneN"
+                                                                name="phoneNumber" aria-describedby="phone"
+                                                                placeholder="Phone Number" required>
 
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="number" class="form-control" id="phoneN" aria-describedby="phone" placeholder="Phone Number">
-
+                                                            <input type="text" class="form-control" id="Address"
+                                                                name="Address" aria-describedby="Address"
+                                                                placeholder="Full Address" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="Address" aria-describedby="Address" placeholder="Full Address">
+                                                            <input type="textarea" class="form-control" id="Info"
+                                                                name="additinoalInfo" aria-describedby="Info"
+                                                                placeholder="Additional Info">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <input type="textarea" class="form-control" id="Info" aria-describedby="Info" placeholder="Additional Info">
-                                                        </div>
-
-                                                    </form>
+                                                    </div>
+                                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                                 </div>
-                                                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-lg-12">
-                                        <div class="card mt-4" style="width: 18rem;">
+                                        <div class="col-xs-12 col-sm-6 col-lg-12">
+                                            <div class="card mt-4" style="width: 18rem;">
+                                                <!-- Order price -->
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Order Summray</h5>
+                                                    <div class="conatiner mt-4">
+                                                        <div class="row">
 
-                                            <div class="card-body">
-                                                <h5 class="card-title">Order Summray</h5>
-                                                <div class="conatiner mt-4">
-                                                    <div class="row">
+                                                            <div class="col-7">
+                                                                <p class="card-text">Total Price</p>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <p id="text" class="card-text">RM <%=order.totalPrice%>
+                                                                </p>
 
-                                                        <div class="col-8">
-                                                            <p class="card-text">Totla Price</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-4">
-                                                            <p id="text" class="card-text">100 Rm</p>
+                                                        <div class="row">
 
+                                                            <div class="col-7 ">
+                                                                <p id="text" class="card-text">Reward</p>
+                                                            </div>
+                                                            <div class="col-5 ">
+                                                                <p class="card-text">
+                                                                    <%=(order.totalPrice*0.10)%> Points
+                                                                </p>
+                                                                <input type="text" hidden name="reward"
+                                                                    value="<%=(order.totalPrice*0.10)%>">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
 
-                                                        <div class="col-8 ">
-                                                            <p id="text" class="card-text">Reward</p>
-                                                        </div>
-                                                        <div class="col-4 ">
-                                                            <p class="card-text">+200</p>
-
-                                                        </div>
-                                                    </div>
-                                                    <form>
                                                         <div class="form-group mt-3">
 
-                                                            <input type="text" class="form-control" id="voucher" aria-describedby="voucherHelp" placeholder="Voucher/Promo Code ?">
+                                                            <input type="text" class="form-control" id="voucher"
+                                                                name="promoCode" aria-describedby="voucherHelp"
+                                                                placeholder="Voucher/Promo Code ?">
                                                         </div>
 
                                                         <div class="form-group mb-0">
                                                             <div class="row mb-0 text-quicksand">
-                                                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                                                    <input type="radio" class="btn-check" name="type" id="Credit" value="Credit" autocomplete="off" checked>
-                                                                    <label class="btn btn-md btn-outline-primary" for="Credit">Credit</label>
-                                                                    <input type="radio" class="btn-check " name="type" id="Points" value="Points" autocomplete="off">
-                                                                    <label class="btn btn-md  px-3 btn-outline-primary" for="Points">Points</label>
+                                                                <div class="btn-group" role="group"
+                                                                    aria-label="Basic radio toggle button group">
+                                                                    <input type="radio" class="btn-check"
+                                                                        name="paymentMethod" id="Credit" value="Credit"
+                                                                        autocomplete="off" checked>
+                                                                    <label class="btn btn-md btn-outline-primary"
+                                                                        for="Credit">Credit</label>
+                                                                    <input type="radio" class="btn-check "
+                                                                        name="paymentMethod" id="Points" value="Points"
+                                                                        autocomplete="off">
+                                                                    <label class="btn btn-md  px-3 btn-outline-primary"
+                                                                        for="Points">Points</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group px-2 m-0">
                                                             <div class="row mb-0">
-                                                                <button type="submit" class=" btn btn-success d-flex flex-row  justify-content-center mb-0 text-white text-center"> Checkout</button>
-
+                                                                <button type="submit"
+                                                                    class=" btn btn-success d-flex flex-row  justify-content-center mb-0 text-white text-center">
+                                                                    Checkout
+                                                                </button>
                                                             </div>
                                                         </div>
-
-                                                    </form>
-
+                                                    </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+
 </body>
-
-</html>
-
-</html>
 
 </html>
