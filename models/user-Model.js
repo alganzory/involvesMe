@@ -17,6 +17,8 @@ const userSchema = new Schema({
     // profilePhoto: String,
     password: String,
     type: String,
+    balance: Number,
+    points: Number,
     source: { type: String, required: [true, "source not specified"] },
     lastVisited: { type: Date, default: new Date() },
     resetPasswordToken: {

@@ -60,7 +60,7 @@ exports.deleteCart = async (id) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedCart = await Cart.deleteOne({ id });
+    const updatedCart = await Cart.deleteOne( id );
     return updatedCart;
   } catch (error) {
     throw error;
