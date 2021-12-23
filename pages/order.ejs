@@ -92,166 +92,159 @@ Coded by www.creative-tim.com
         </style>
 
         <div class="container mx-auto overflow max-height-vh-100 w-100">
-            <div class="row">
-                <div class="mt-5 d-flex justify-content-between">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4 mb-3">
-                                <h2>You Order</h2>
-                            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-4 mb-3">
+                            <h2>Your Order</h2>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-10">
-                                <div class="conatiner">
-                                    <table id="productTable" class="table table-condensed table-striped " table
-                                        align="center">
-                                        <thead>
-                                            <tr align="center">
-                                                <th>Product Photo</th>
-                                                <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price(RM)</th>
-                                                <th>Total Price</th>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-9">
+                            <table id="productTable" class="table table-condensed table-striped " table align="center">
+                                <thead>
+                                    <tr align="center">
+                                        <th>Product Photo</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price(RM)</th>
+                                        <th>Total Price</th>
 
-                                            </tr>
-                                        </thead>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Cart Items -->
+                                    <% for(var i=0; i < order.products.length; i++){ var action="notset" ;%>
+                                        <tr align="center">
 
-                                        <tbody>
-                                            <!-- Cart Items -->
-                                            <% for(var i=0; i < order.products.length; i++){ var action="notset" ;%>
-                                                <tr align="center">
+                                            <td class="align-middle">
+                                                <img id="involves" src="<%=order.products[i].productThumnail%>" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].name%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].quantity%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].price%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].totalPrice%>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
 
-                                                    <td class="align-middle">
-                                                        <img id="involves"
-                                                            src="<%=order.products[i].productThumnail%>" />
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <%=order.products[i].name%>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <%=order.products[i].quantity%>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <%=order.products[i].price%>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <%=order.products[i].totalPrice%>
-                                                    </td>
-                                                </tr>
-                                                <% } %>
-                                        </tbody>
-                                    </table>
-                                </div>
 
-                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-3">
+                            <form action="makeOrder" method="POST">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-lg-12 ">
+                                        <!-- Shipping Details -->
+                                        <div class="card " id="card1" style="width: 18rem;">
 
-                            <div class="col-xs-12 col-sm-12 col-lg-2">
-                                <form action="makeOrder" method="POST">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-6 col-lg-12 ">
-                                            <!-- Shipping Details -->
-                                            <div class="card " id="card1" style="width: 18rem;">
-
-                                                <div class="card-body">
-                                                    <h5 class="card-title pt-2">Shipping Address</h5>
-                                                    <div class="coanatiner mt-4">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="Name"
-                                                                name="fullName" aria-describedby="name"
-                                                                placeholder="Full Name" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" class="form-control" id="phoneN"
-                                                                name="phoneNumber" aria-describedby="phone"
-                                                                placeholder="Phone Number" required>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="Address"
-                                                                name="Address" aria-describedby="Address"
-                                                                placeholder="Full Address" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="textarea" class="form-control" id="Info"
-                                                                name="additinoalInfo" aria-describedby="Info"
-                                                                placeholder="Additional Info">
-                                                        </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title pt-2">Shipping Address</h5>
+                                                <div class="coanatiner mt-4">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Name"
+                                                            name="fullName" aria-describedby="name"
+                                                            placeholder="Full Name" required>
                                                     </div>
-                                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                                </div>
+                                                    <div class="form-group">
+                                                        <input type="tel" class="form-control" id="phoneN"
+                                                            name="phoneNumber" pattern="[0-9]{11}"
+                                                            aria-describedby="phone"
+                                                            placeholder="PhoneNumbe (01234567891)" required>
 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Address"
+                                                            name="Address" aria-describedby="Address"
+                                                            placeholder="Full Address" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="textarea" class="form-control" id="Info"
+                                                            name="additinoalInfo" aria-describedby="Info"
+                                                            placeholder="Additional Info">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 col-lg-12">
-                                            <div class="card mt-4" style="width: 18rem;">
-                                                <!-- Order price -->
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Order Summray</h5>
-                                                    <div class="conatiner mt-4">
-                                                        <div class="row">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-lg-12">
+                                        <div class="card mt-4" style="width: 18rem;">
+                                            <!-- Order price -->
+                                            <div class="card-body">
+                                                <h5 class="card-title">Order Summray</h5>
+                                                <div class="conatiner mt-4">
+                                                    <div class="row">
 
-                                                            <div class="col-7">
-                                                                <p class="card-text">Total Price</p>
-                                                            </div>
-                                                            <div class="col-5">
-                                                                <p id="text" class="card-text">RM <%=order.totalPrice%>
-                                                                </p>
+                                                        <div class="col-7">
+                                                            <p class="card-text">Total Price</p>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <p id="text" class="card-text">RM <%=order.totalPrice%>
+                                                            </p>
 
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-7 ">
+                                                            <p id="text" class="card-text">Reward</p>
+                                                        </div>
+                                                        <div class="col-5 ">
+                                                            <p class="card-text">
+                                                                <%=(order.totalPrice*0.10)%> Points
+                                                            </p>
+                                                            <input type="text" hidden name="reward"
+                                                                value="<%=(order.totalPrice*0.10)%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mt-3">
+
+                                                        <input type="text" class="form-control" id="voucher"
+                                                            name="promoCode" aria-describedby="voucherHelp"
+                                                            placeholder="Voucher/Promo Code ?">
+                                                    </div>
+
+                                                    <div class="form-group mb-0">
+                                                        <div class="row mb-0 text-quicksand">
+                                                            <div class="btn-group" role="group"
+                                                                aria-label="Basic radio toggle button group">
+                                                                <input type="radio" class="btn-check"
+                                                                    name="paymentMethod" id="Credit" value="Credit"
+                                                                    autocomplete="off" checked>
+                                                                <label class="btn btn-md btn-outline-primary"
+                                                                    for="Credit">Credit</label>
+                                                                <input type="radio" class="btn-check "
+                                                                    name="paymentMethod" id="Points" value="Points"
+                                                                    autocomplete="off">
+                                                                <label class="btn btn-md  px-3 btn-outline-primary"
+                                                                    for="Points">Points</label>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-
-                                                            <div class="col-7 ">
-                                                                <p id="text" class="card-text">Reward</p>
-                                                            </div>
-                                                            <div class="col-5 ">
-                                                                <p class="card-text">
-                                                                    <%=(order.totalPrice*0.10)%> Points
-                                                                </p>
-                                                                <input type="text" hidden name="reward"
-                                                                    value="<%=(order.totalPrice*0.10)%>">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group mt-3">
-
-                                                            <input type="text" class="form-control" id="voucher"
-                                                                name="promoCode" aria-describedby="voucherHelp"
-                                                                placeholder="Voucher/Promo Code ?">
-                                                        </div>
-
-                                                        <div class="form-group mb-0">
-                                                            <div class="row mb-0 text-quicksand">
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic radio toggle button group">
-                                                                    <input type="radio" class="btn-check"
-                                                                        name="paymentMethod" id="Credit" value="Credit"
-                                                                        autocomplete="off" checked>
-                                                                    <label class="btn btn-md btn-outline-primary"
-                                                                        for="Credit">Credit</label>
-                                                                    <input type="radio" class="btn-check "
-                                                                        name="paymentMethod" id="Points" value="Points"
-                                                                        autocomplete="off">
-                                                                    <label class="btn btn-md  px-3 btn-outline-primary"
-                                                                        for="Points">Points</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group px-2 m-0">
-                                                            <div class="row mb-0">
-                                                                <button type="submit"
-                                                                    class=" btn btn-success d-flex flex-row  justify-content-center mb-0 text-white text-center">
-                                                                    Checkout
-                                                                </button>
-                                                            </div>
+                                                    </div>
+                                                    <div class="form-group px-2 m-0">
+                                                        <div class="row mb-0">
+                                                            <button type="submit"
+                                                                class=" btn btn-success d-flex flex-row  justify-content-center mb-0 text-white text-center">
+                                                                Checkout
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
