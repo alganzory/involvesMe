@@ -2,18 +2,17 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-  userId: {
-    type: String,
-    default: null,
-  },
+  buyerId: String,
   cartId: String,
   products: { type : Array , "default" : [] },
+  subTotal : Number,
   totalPrice: Number,
   orderId: String,
   fullName: String,
   phoneNumber: String,
   address: String,
   additionalInfo: String,
+  pointsUsed : Number,
   reward: Number,
   promoCode: String,
   isPaid: Boolean,

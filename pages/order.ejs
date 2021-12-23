@@ -183,7 +183,6 @@ Coded by www.creative-tim.com
                                                 <h5 class="card-title">Order Summray</h5>
                                                 <div class="conatiner mt-4">
                                                     <div class="row">
-
                                                         <div class="col-7">
                                                             <p class="card-text">Total Price</p>
                                                         </div>
@@ -194,7 +193,6 @@ Coded by www.creative-tim.com
                                                         </div>
                                                     </div>
                                                     <div class="row">
-
                                                         <div class="col-7 ">
                                                             <p id="text" class="card-text">Reward</p>
                                                         </div>
@@ -216,18 +214,30 @@ Coded by www.creative-tim.com
 
                                                     <div class="form-group mb-0">
                                                         <div class="row mb-0 text-quicksand">
+                                                            <p class="card-text">
+                                                                You have <%=userPoints%> Points
+                                                            </p>
+                                                            <% if(userPoints> 0) {%>
+                                                                <p class="card-text">Total with points <b>RM
+                                                                   <%=order.totalPrice-(userPoints*0.01)%></b></p>
+                                                            <% } %>
+                                                            <p class="card-text">
+                                                                Use Points:
+                                                            </p>
                                                             <div class="btn-group" role="group"
                                                                 aria-label="Basic radio toggle button group">
                                                                 <input type="radio" class="btn-check"
-                                                                    name="paymentMethod" id="Credit" value="Credit"
-                                                                    autocomplete="off" checked>
+                                                                    name="usedPoints" id="Credit"
+                                                                    value="true" autocomplete="off"
+                                                                    required>
                                                                 <label class="btn btn-md btn-outline-primary"
-                                                                    for="Credit">Credit</label>
+                                                                    for="Credit">Yes</label>
                                                                 <input type="radio" class="btn-check "
-                                                                    name="paymentMethod" id="Points" value="Points"
-                                                                    autocomplete="off">
-                                                                <label class="btn btn-md  px-3 btn-outline-primary"
-                                                                    for="Points">Points</label>
+                                                                    name="usedPoints" id="Points"
+                                                                    value="false" autocomplete="off" checked required>
+                                                                <label
+                                                                    class="btn btn-md  px-3 btn-outline-primary"
+                                                                    for="Points">No</label>
                                                             </div>
                                                         </div>
                                                     </div>
