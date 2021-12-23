@@ -48,3 +48,87 @@ app.use('/order', orderRouter);
 app.use('/', indexRouter);
 const port = process.env.PORT || 3000;
 app.listen(port);
+
+// setting up paypal payment
+var paypal = require('paypal-rest-sdk');
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': 'AdwSTeWJSFnq0J5a2xC_Ny9-yNFiDgQZRKOoMdZBvqkKKgWwC2PbxmVgDjtt7wgrCb5NnGBdcHCZwVox',
+    'client_secret': 'ECNDDF5DKBFvH_z18ac9UqLI4xqeIabAXJA8du1I9gUAdnsWB_K4sg-91ZQ1kW3QP5gLDovF1x7ONA1M'
+  });
+
+app.post('/pay', (req, res) => {
+    var create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/success",
+            "cancel_url": "http://localhost:3000/cancel"
+        },
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "item",
+                    "sku": "item",
+                    "price": "1.00",
+                    "currency": "MYR",
+                    "quantity": 1
+                }]
+            },
+            "amount": {
+                "currency": "MYR",
+                "total": "1.00"
+            },
+            "description": "Hi."
+        }]
+    };
+
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            for (var i = 0; i < payment.links.length; i++)
+            {
+                if (payment.links[i].rel === 'approval_url')
+                {
+                    res.redirect(payment.links[i].href);
+                }
+
+            }
+        }
+    });
+
+});
+
+
+app.get('/success', (req,res) => {
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+
+    const execute_payment_json = {
+        "payer_id": payerId,
+        "transactions":[{
+            "amount": {
+                "currency": "MYR",
+                "total": "1.00"
+            }
+        }]
+    };
+
+    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+           
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.send("success");
+        }
+    });    
+});
+
+app.get('/cancel', (req,res) => res.send("Cancelled"));
