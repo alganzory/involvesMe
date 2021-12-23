@@ -117,7 +117,7 @@ const getCartById = async (userId) => {
 const deleteCart = async (userId) => {
     var cart = await cartService.deleteCart(userId);
     return cart;
-
+};
 module.exports = {
     get_Cart,
     deleteProductFromCart,

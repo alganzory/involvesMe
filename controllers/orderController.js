@@ -3,6 +3,14 @@ const cartController = require("../controllers/cartController")
 const productController = require("../controllers/productController")
 const userController = require("../controllers/authController")
 const uuid = require("uuid");
+const paypal = require('paypal-rest-sdk');
+const { findOrCreate } = require("../models/user-Model");
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': 'AdwSTeWJSFnq0J5a2xC_Ny9-yNFiDgQZRKOoMdZBvqkKKgWwC2PbxmVgDjtt7wgrCb5NnGBdcHCZwVox',
+    'client_secret': 'ECNDDF5DKBFvH_z18ac9UqLI4xqeIabAXJA8du1I9gUAdnsWB_K4sg-91ZQ1kW3QP5gLDovF1x7ONA1M'
+  });
 
 const get_Order = async (req, res) => {
     var order = await cartController.getCartById(req.user.id);
@@ -62,9 +70,83 @@ const makeOrder = async (req, res) => {
     await orderService.addOrder(order);
     await cartController.deleteCart(cart);
     await userController.updateUserPoints(req.user.id,userPoints);
+    
+    var create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/order/success/"+order.orderId,
+            "cancel_url": "http://localhost:3000/order/cancel"
+        },
+        "transactions": [{
+            
+            "amount": {
+                "currency": "MYR",
+                "total": order.totalPrice
+            },
+            "description": "Your Involves Me Order"
+        }]
+    };
 
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            for (var i = 0; i < payment.links.length; i++)
+            {
+                if (payment.links[i].rel === 'approval_url')
+                {
+                    res.redirect(payment.links[i].href);
+                }
+
+            }
+        }
+    });
+};
+
+const paymentSuccess = async (req, res) => {
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+    const order = await orderService.getOrderById(req.params.id);
+    const execute_payment_json = {
+        "payer_id": payerId,
+        "transactions":[{
+            "amount": {
+                "currency": "MYR",
+                "total": order.totalPrice
+            }
+        }]
+    };
+
+    paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment){
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            var updatedStatus = {
+                orderStatus: "Paid",
+                isPaid: true
+            }
+            /*for (let index = 0; index < order.products.length; index++) {
+                var seller = await storeController.getStoreById(order.products[index].storeId).sellerId
+                await userController.updateUserBalance(seller,Number(order.products[index].totalPrice)*0.80);
+            }*/
+            //Implement after Store controllers has been created (For Updating seller balance)
+            await orderService.updateOrder(order.orderId,updatedStatus)
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            req.flash("Success", "Payment Successful, Order will be Shipped Within 3 Working days.");
+            res.redirect("/");
+        }
+    });  
+};
+const paymentCancelled = async (req, res) => {
+    req.flash("error", "Payment Failed or Cancelled");
     res.redirect("/");
 };
+
 
 const getOrderById = async (id) => {
     var order = await orderService.getOrderById(id)
@@ -74,5 +156,7 @@ const getOrderById = async (id) => {
 module.exports = {
     get_Order,
     makeOrder,
-    getOrderById
+    getOrderById,
+    paymentSuccess,
+    paymentCancelled
 }

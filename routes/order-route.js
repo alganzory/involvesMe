@@ -6,5 +6,8 @@ const { checkAuthenticated, checkNotAutheticated } = require('../controllers/aut
 
 router.get('/', checkAuthenticated,orderController.get_Order);
 router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
+router.get('/success/:id', checkAuthenticated,orderController.paymentSuccess);
+router.get('/cancel', checkAuthenticated,orderController.paymentCancelled);
+
 
 module.exports = router;

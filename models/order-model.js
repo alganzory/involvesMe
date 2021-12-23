@@ -45,20 +45,20 @@ exports.getOrderByuserId = async (userId) => {
     }
 };
 
-exports.getOrderById = async (id) => {
+exports.getOrderById = async (orderId) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    return await Order.findOne({ id });
+    return await Order.findOne({ orderId });
   } catch (error) {
     console.error(error);
   }
 };
 
-exports.updateOrder = async (id, order) => {
+exports.updateOrder = async (orderId, order) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedOrder = await Order.updateOne({ id }, order);
+    const updatedOrder = await Order.updateOne({ orderId }, order);
     return updatedOrder;
   } catch (error) {
     throw error;
