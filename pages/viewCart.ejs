@@ -210,9 +210,11 @@ Coded by www.creative-tim.com
                                                 Total Price(RM): <%=totalAmount%>
                                             </td>
                                             <td class="align-middle">
-                                                <button type="button" class="btn bg-gradient-primary mt-3">
-                                                    Checkout
-                                                </button>
+                                                <form action="/pay" method="post">
+                                                    <button type="submit" class="btn bg-gradient-primary mt-3">
+                                                        Checkout
+                                                    </button>
+                                                </form> 
                                             </td>
                                         </tr>
                                     </tfoot>
