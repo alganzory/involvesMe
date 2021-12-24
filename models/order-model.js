@@ -21,7 +21,6 @@ const orderSchema = new Schema({
   deliveryDate: Date
 }, { timestamps: true });
 const Order = mongoose.model("order", orderSchema, "order");
-
 exports.orderModel = Order;
 
 exports.addOrder= async (order) => {
