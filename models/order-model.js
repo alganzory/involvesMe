@@ -2,18 +2,17 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-  userId: {
-    type: String,
-    default: null,
-  },
+  buyerId: String,
   cartId: String,
   products: { type : Array , "default" : [] },
+  subTotal : Number,
   totalPrice: Number,
   orderId: String,
   fullName: String,
   phoneNumber: String,
   address: String,
   additionalInfo: String,
+  pointsUsed : Number,
   reward: Number,
   promoCode: String,
   isPaid: Boolean,
@@ -46,10 +45,10 @@ exports.getOrderByuserId = async (userId) => {
     }
 };
 
-exports.getOrderById = async (id) => {
+exports.getOrderById = async (orderId) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    return await Order.findOne({ id });
+    return await Order.findOne({ orderId });
   } catch (error) {
     console.error(error);
   }
