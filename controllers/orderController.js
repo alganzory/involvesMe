@@ -64,7 +64,7 @@ const cancelOrder = async (req, res) => {
   
         //4. change the status of the order
         var canceledOrder = await orderService.updateOrderStatus(orderId, "canceled")
-        console.log(canceledOrder)
+      
     }else{
         req.flash(
             "cannotcancel",
