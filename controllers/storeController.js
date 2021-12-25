@@ -1,6 +1,6 @@
 const UserService = require("../models/user-Model");
 const StoreService = require("../models/store-Model");
-const productContoller = require("../controllers/productController");
+const productController = require("../controllers/productController");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
@@ -24,6 +24,7 @@ const storage = new CloudinaryStorage({
 
 const parser = multer({ storage: storage });
 
+
 const get_mystore = async (req, res) => {
   var store = await StoreService.getStoreByUserId(req.user.id);
   console.log(req.user);
@@ -43,7 +44,14 @@ const get_mystore = async (req, res) => {
         username: req.user.username,
       }
     : null;
+  
+    let products = [];;
+  if (store) {
+    console.log (store);
+     products = await productController.get_store_products(store.id);
 
+    return res.render("store", { store: store, user: user, products:products, isStoreOwner: true });
+  }
   res.render("store", { store: store, user: user, isStoreOwner: true });
 };
 
@@ -60,6 +68,13 @@ const get_store = async (req, res) => {
 
   if (!store) return res.status(404).json("Store not found");
 
+  let products = []
+  if (store) {
+    console.log (store);
+     products = await productController.get_store_products(store.id);
+
+    return res.render("store", { store: store, user: user, products:products, isStoreOwner: false });
+  }
 
   res.render("store", { store: store, user: user, isStoreOwner: false });
 };
@@ -80,10 +95,27 @@ const edit_mystore = async (req, res) => {
   res.redirect("/profile/me");
 };
 
+//  called when a user adds a product to their store
+const add_product_to_store = async (req, res) => {
+  const productId = req.params.id;
+  const storeId = req.user.id;
+  await StoreService.addProductToStore(storeId, productId);
+  res.redirect("/store");
+};
+
+const remove_product_from_store = async (req, res) => {
+  const productId = req.params.id;
+  const storeId = req.user.id;
+  await StoreService.removeProductFromStore(storeId, productId);
+  res.redirect("/store");
+};
+
+
 //  export the module
 module.exports = {
   get_mystore,
   get_store,
   upload_photo,
   edit_mystore,
+  add_product_to_store
 };

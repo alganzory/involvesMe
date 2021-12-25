@@ -17,13 +17,18 @@ const get_product = async (req, res) => {
   res.render("viewProduct", { product: product, user: user });
 };
 
-const get_product_json = async (req, res) => {
-  const productId = req.params.id;
+const get_product_json = async (productId) => {
   const product = await ProductService.getProductById(productId);
-  res.json(product);
+  return(product);
+};
+
+const get_store_products = async (storeId) => {
+  const products = await ProductService.getProductsByStoreId(storeId);
+  return products;
 };
 
 module.exports = {
   get_product,
   get_product_json,
+  get_store_products
 };
