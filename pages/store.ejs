@@ -108,7 +108,17 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button id="button" href=" # " class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 ">
+                        <div class="card ">
+                            <img class="card-img-top mt-15 " src="/img/product.png " alt="product ">
+                            <div class="card-body ">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button id="button" href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -118,7 +128,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -128,17 +138,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="card ">
-                            <img class="card-img-top mt-15" src="/img/product.png" alt="product">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@ Coded by www.creative-tim.com
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <button href="#" class="btn btn-primary" onclick="addtoCart()">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,30 @@ Coded by www.creative-tim.com
     </div>
     </div>
     </div>
+    <div id="myModal" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content  border" id="modalb">
+                <div class="modal-header" id="modalh">
+                    <h5 class="modal-title " id="staticBackdropLabel ">Add to Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <form id="addToCartForm" action="/cart/addItem" method="post">
 
+                        <div class="form-group ">
+                            <label for="Quantity "><h6>Quantity</h6></label>
+                            <input type="number" name="quantity" class="form-control" id="quantity" placeholder="quantity" min="1" max="<%//=productStock%>" required>
+                            <input type="text" name="productId" value="<%//=productId%>"hidden>
+                        </div>
+                    </form>
+                </div>
+                <div class=" modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="addToCartForm" class="btn btn-primary ">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--   Core JS Files   -->
     <script src="/js/core/popper.min.js " type="text/javascript "></script>
     <script src="/js/core/bootstrap.min.js " type="text/javascript "></script>
@@ -212,6 +235,7 @@ Coded by www.creative-tim.com
     <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
     <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
     <!-- ======= -->
     </div>
     </div>
@@ -228,6 +252,12 @@ Coded by www.creative-tim.com
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
     <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
     <!-- >>>>>>> 3940b009b77cd8a66da8cb885e3e57bb043ff1dc -->
+    <script>
+        function addtoCart() {
+            $("#myModal ").modal('show');
+
+        }
+    </script>
 </body>
 
 </html>
