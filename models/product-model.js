@@ -23,7 +23,7 @@ const productSchema = new Schema({
 }, { timestamps: true });
 
 const Product = mongoose.model("product", productSchema, "product");
-
+mongoose.models={};
 exports.productModel = Product;
 
 exports.addProduct = async (product) => {
@@ -74,6 +74,20 @@ exports.deleteProduct = async (id) => {
     const updatedProduct = await Product.deleteOne({ id });
     return updatedProduct;
   } catch (error) {
+    throw error;
+  }
+};
+
+exports.updateStock = async(productId, newStock)=>{
+
+  try{
+    await mongoose.connect(process.env.MONGO_URI);
+    const updateStock = await Product.updateOne(
+      {id: productId},
+      {$set: {stock: newStock}}
+    )
+  return updateStock;
+  }catch(error){
     throw error;
   }
 };
