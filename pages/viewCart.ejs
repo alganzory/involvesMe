@@ -89,6 +89,13 @@ Coded by www.creative-tim.com
                         </div>
                         <div class="row">
                             <div class="col">
+                                <% if (messages.error) {
+                                    %>
+                                  <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                                    <%= messages.error %>
+                                  </div>
+                                  <%
+                                  } %>
                                 <table id="productTable" class="table table-condensed table-striped" table
                                     align="center">
                                     <thead>

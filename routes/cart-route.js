@@ -7,7 +7,7 @@ const cartController = require('../controllers/cartController');
 router.get('/',checkAuthenticated,cartController.get_Cart);
 router.post('/delete', (checkAuthenticated, cartController.deleteProductFromCart));
 router.post('/edit', (checkAuthenticated, cartController.editProductFromCart));
-//For Testing only
-//router.post('/additem',checkAuthenticated,cartController.addToCart)
+router.post('/additem',checkAuthenticated,cartController.addToCart)
+
 
 module.exports=router;

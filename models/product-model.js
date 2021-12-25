@@ -23,7 +23,9 @@ const productSchema = new Schema({
 }, { timestamps: true });
 
 const Product = mongoose.model("product", productSchema, "product");
-mongoose.models = {};//in order other controller can call it
+
+mongoose.models={};
+
 exports.productModel = Product;
 
 exports.addProduct = async (product) => {
@@ -77,3 +79,18 @@ exports.deleteProduct = async (id) => {
     throw error;
   }
 };
+
+exports.updateStock = async(productId, newStock)=>{
+
+  try{
+    await mongoose.connect(process.env.MONGO_URI);
+    const updateStock = await Product.updateOne(
+      {id: productId},
+      {$set: {stock: newStock}}
+    )
+  return updateStock;
+  }catch(error){
+    throw error;
+  }
+};
+
