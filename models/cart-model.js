@@ -44,6 +44,7 @@ exports.getCartById = async (id) => {
   }
 };
 
+
 exports.updateCart = async (id, cart) => {
  
   try {
@@ -65,3 +66,27 @@ exports.deleteCart = async (id) => {
     throw error;
   }
 };
+
+// delete product from delete cart
+exports.deleteProductById = async(cartid, productId)=>{
+
+  try{
+ 
+
+      await mongoose.connect(process.env.MONGO_URI);
+      const deleteProduct = await Cart.findOneAndUpdate(
+        
+          {_id: cartid},
+          { $pull: { products: { product: productId } } },
+          {new: true}
+        
+      )
+      console.log("deleted product")
+      return deleteProduct;
+
+  }catch{
+
+  }
+}
+
+
