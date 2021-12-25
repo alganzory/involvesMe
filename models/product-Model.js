@@ -5,26 +5,18 @@ const productSchema = new Schema({
   userId: {
     type: String,
     default: null,
-    required: true,
   },
-  id: String,
-  storeId: String,
-  storeName: String,
+  productPhotos: { type : Array , "default" : [] },
   name: String,
+  price: Number,
   description: String,
+  category: String,
   size: String,
   color: String,
-  price: Number,
-  category: String,
-  stock: Number,
-  sold: Number,
-  productPhotos: { type : Array , "default" : [] },
-  tags: { type : Array , "default" : [] },
+  additionalDetails: String,
+  stock: Number
 }, { timestamps: true });
-
 const Product = mongoose.model("product", productSchema, "product");
-
-mongoose.models={};
 
 exports.productModel = Product;
 
@@ -79,18 +71,3 @@ exports.deleteProduct = async (id) => {
     throw error;
   }
 };
-
-exports.updateStock = async(productId, newStock)=>{
-
-  try{
-    await mongoose.connect(process.env.MONGO_URI);
-    const updateStock = await Product.updateOne(
-      {id: productId},
-      {$set: {stock: newStock}}
-    )
-  return updateStock;
-  }catch(error){
-    throw error;
-  }
-};
-

@@ -21,7 +21,6 @@ const orderSchema = new Schema({
   deliveryDate: Date
 }, { timestamps: true });
 const Order = mongoose.model("order", orderSchema, "order");
-
 exports.orderModel = Order;
 
 exports.addOrder= async (order) => {
@@ -75,3 +74,20 @@ exports.deleteOrder = async (id) => {
     throw error;
   }
 };
+
+
+//update the Status
+exports.updateOrderStatus = async(orderid, newOrderStatus)=>{
+    try{
+
+        await  mongoose.connect(process.env.MONGO_URI);
+        const updatedOrder = await Order.updateOne(
+
+            {orderId: orderid},
+            {$set: {orderStatus: newOrderStatus}}
+        )
+        return updatedOrder;
+    }catch (error) {
+    throw error;
+  }
+}

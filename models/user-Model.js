@@ -28,7 +28,7 @@ const userSchema = new Schema({
 }, { timestamps: true });
 const User = mongoose.model("user", userSchema, "user");
 // var userModel = mongoose.model("user", userSchema, "user");
-
+mongoose.models={}
 exports.userModel = User;
 
 exports.addUser = async(user) => {
@@ -130,3 +130,31 @@ exports.getUserByResetPasswordToken = async(resetPasswordToken) => {
         throw error;
     }
 };
+
+//related to order
+
+exports.updatePoints = async(userid, returnPoints)=>{
+    try{
+        await mongoose.connect(process.env.MONGO_URI);
+        const updateStock = await User.updateOne(
+          {id: userid},
+          {$set: {points: returnPoints}}
+        )
+      return updateStock;
+      }catch(error){
+        throw error;
+      }
+}
+
+exports.updateBalance = async(userid, returnBalance)=>{
+    try{
+        await mongoose.connect(process.env.MONGO_URI);
+        const updateStock = await User.updateOne(
+          {id: userid},
+          {$set: {balance: returnBalance}}
+        )
+      return updateStock;
+      }catch(error){
+        throw error;
+      }
+}

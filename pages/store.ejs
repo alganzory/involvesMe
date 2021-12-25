@@ -259,18 +259,17 @@ Coded by www.creative-tim.com
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-                    <form>
-
-
+                    <form id="addToCartForm" action="/cart/addItem" method="post">
                         <div class="form-group ">
                             <label for="Quantity "><h6>Quantity</h6></label>
-                            <input type="number" class="form-control" id="quantity" placeholder="quantity" min="0" max="6">
+                            <input type="number" name="quantity" class="form-control" id="quantity" placeholder="quantity" min="1" max="<%//=productStock%>" required>
+                            <input type="text" name="productId" value="<%//=productId%>"hidden>
                         </div>
                     </form>
                 </div>
                 <div class=" modal-footer ">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary ">Confirm</button>
+                    <button type="submit" form="addToCartForm" class="btn btn-primary ">Confirm</button>
                 </div>
             </div>
         </div>
