@@ -23,7 +23,9 @@ const productSchema = new Schema({
 }, { timestamps: true });
 
 const Product = mongoose.model("product", productSchema, "product");
+
 mongoose.models={};
+
 exports.productModel = Product;
 
 exports.addProduct = async (product) => {
@@ -91,3 +93,4 @@ exports.updateStock = async(productId, newStock)=>{
     throw error;
   }
 };
+

@@ -14,6 +14,48 @@ Coded by www.creative-tim.com
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
+ <!-- axios -->
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+ <style>
+ 
+   .content-editable {
+     caret-color: #ff7a18;
+   }
+   [contentEditable=true]::selection{
+     background: #f5f5f5;
+     color: #cb0c9f;
+   }
+   [contentEditable=true] {
+     border-radius: .5rem;
+     padding: 0.75rem;
+     box-shadow: 0 0 10px #cb0c9f;
+   }
+
+
+   [contentEditable=true]:empty:before {
+     content: attr(data-ph);
+     color: grey;
+     font-style: italic;
+   }
+
+   input[type="file"] {
+     display: none;
+   }
+
+   .pp-upload {
+
+     cursor: pointer;
+   }
+
+   .pp-upload-wrapper {
+     position: absolute;
+     bottom: 5%;
+    left: 5%;
+    
+   }
+ </style>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,48 +80,56 @@ Coded by www.creative-tim.com
 
 <body>
 
-    <ul class="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+    
+    <div class="fixed-top container">
+        <div id="editing-mode-banner"
+          class="shadow alert alert-info text-white border-0 text-md p-3 d-none justify-content-between align-items-center mt-3"
+          role="alert"
+          style="opacity: 90%; z-index: 2000;">
+          <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing
+              mode,  <br> Click on something to edit it,
+              when you are done, click save or discard the changes</span></span>
 
-    <div class="header-row" id="header-row" style="padding: 0px; overflow:hidden; height:250px;">
-        <!-- container-fluid is the same as container but spans a wider viewport, 
-    it still has padding though so you need to remove this either by adding 
-    another class with no padding or inline as I did below -->
-        <div class="container-fluid" style="padding: 0px;">
-            <div class="row">
-                <!-- You originally has it set up for two columns, remove the second 
-    column as it is unneeded and set the first to always span all 12 columns 
-    even when at its smallest (xs). Set the overflow to hidden so no matter 
-    the height of your image it will never show outside this div-->
-                <div class="col-xs-12">
+          <form class="d-flex flex-md-row flex-column" style="gap: .25rem;"> 
+            <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="saveEdit()">Save
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="cancelEdit()">Discard
+            </button>
+          </form>
+        </div>
 
-                    <!-- place your image here -->
-                    <div class="row">
-                        <img src="/img/storebk.png" alt="Store Image" class="w-100 h-100">
-                        <div class="col-9">
-                            <button type="button" class="btn bg-gradient-primary position-absolute  ml-1" style="  right:125px ;top:200px;height: 40px;">Edit Store</button>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+        <div class="ml-auto d-flex justify-content-end  align-items-center mt-4 mb-2" 
+        id="edit-store-btn" style="opacity: 90%; z-index: 2000;">
+          <button type="button" class="shadow btn btn-md px-4 btn-primary btn-round m-0" onclick="enableEdit()">
+            <i class="fas fa-user-edit"></i>
+            <span>&nbsp;Edit Store</span>
+          </button>
         </div>
     </div>
+
+    <div class="row">
+                        
+                <!-- Store Banner with upload -->
+              <div class="container position-relative pt-0 d-flex justify-content-center col-12 " style="padding: 0px; overflow:hidden; height: 250px;">
+                <div class="pp-upload-wrapper d-none">
+                  <label for="store-banner-upload" class="pp-upload m-0 text-center p-0">
+                    <div type="button" class="btn btn-xs btn-primary btn-round m-0">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </div>
+                  </label>
+                  <input onchange="loadFile()" type="file" name="store-banner-upload" id="store-banner-upload">
+                </div>
+                
+                <img id="banner-pic"src="/img/storebk.png" 
+                class="img-center img-fluid col-12" >
+              </div>
+            </div>          
+
     <!-- </div> -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container mt-6">
-            <h2>Store Name</h2>
-            <p class="lead">This is a modified area that occupies the entire horizontal space of its parent.</p>
+            <h2 class="content-editable">Store Name</h2>
+            <p class="content-editable">This is a modified area that occupies the entire horizontal space of its parent.</p>
         </div>
     </div>
 
@@ -210,7 +260,6 @@ Coded by www.creative-tim.com
                 </div>
                 <div class="modal-body ">
                     <form id="addToCartForm" action="/cart/addItem" method="post">
-
                         <div class="form-group ">
                             <label for="Quantity "><h6>Quantity</h6></label>
                             <input type="number" name="quantity" class="form-control" id="quantity" placeholder="quantity" min="1" max="<%//=productStock%>" required>
@@ -225,6 +274,143 @@ Coded by www.creative-tim.com
             </div>
         </div>
     </div>
+
+    <!-- Javascript for editing -->
+  <script>
+    var editableFields = document.getElementsByClassName('content-editable');
+    var editStoreBtn = document.getElementById('edit-store-btn');
+    var editingModeBanner = document.getElementById('editing-mode-banner');
+    var bannerPicEdit = document.getElementsByClassName('pp-upload-wrapper');
+    var editableFieldsValues = [];
+    var formData = new FormData();
+    let isAnyChange = false;
+
+    function enableEdit() {
+      // alert("hi")
+      // e.preventDefault();
+       console.log(editableFields)
+       for (let i = 0; i < editableFields.length; i++) {
+         editableFields[i].contentEditable = true;
+         let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+         console.log ("here", textContent)
+         editableFieldsValues[i] = textContent;
+       }
+      let bannerPic = document.getElementById('banner-pic');
+      editableFieldsValues.push(bannerPic.src)
+      editStoreBtn.classList.remove('d-flex');
+      editStoreBtn.classList.add('d-none');
+      editingModeBanner.classList.remove('d-none');
+      editingModeBanner.classList.add('d-flex');
+      editableFields[0].focus();
+      bannerPicEdit[0].classList.remove('d-none');
+      bannerPicEdit[0].classList.add('d-flex');
+      
+    }
+
+    function disableEdit() {
+
+      for (let i = 0; i < editableFields.length; i++) {
+        editableFields[i].contentEditable = false;
+
+      }
+      editingModeBanner.classList.remove('d-flex');
+      editingModeBanner.classList.add('d-none');
+      editStoreBtn.classList.remove('d-none');
+      editStoreBtn.classList.add('d-flex');
+      bannerPicEdit[0].classList.add('d-none');
+      bannerPicEdit[0].classList.remove('d-flex');
+    }
+
+    function saveEdit() {
+      // e.preventDefault();
+      // alert('save');
+
+      disableEdit();
+      
+      for (let i = 0; i < editableFields.length; i++) {
+        let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+        if (editableFieldsValues[i] != textContent) {
+          editableFieldsValues[i] = textContent
+          isAnyChange = true;
+        }
+      }
+
+      if (isAnyChange) {
+        // send post request to update profile
+        const keys = [...editableFields].map(field => field.dataset.post);
+
+        // let formData = {};
+
+        keys.forEach((key, index) => {
+          // console.log(key, editableFieldsValues[index])
+
+          formData.append(key, editableFieldsValues[index]);
+
+        });
+
+        // formData = Object.assign(...keys.map((k, i) => ({
+        //   [k]: editableFieldsValues[i]
+        // })));
+
+
+        console.log (formData)
+
+          // add a spinner overlay
+          let spinner = document.createElement('div');
+          
+        axios.post('/store/edit', formData, {
+            headers: {
+              'Content-Type': `multipart/form-data;`,
+            }
+          })
+          .then(function (response) {
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+      console.log(editableFieldsValues);
+    }
+
+    function cancelEdit() {
+      // e.preventDefault();
+      // alert('cancel');
+      disableEdit();
+      for (let i = 0; i < editableFields.length; i++) {
+        editableFields[i].childNodes[0].textContent = editableFieldsValues[i];
+      }
+      const bannerPic = document.getElementById('banner-pic');
+      bannerPic.src = editableFieldsValues[editableFieldsValues.length - 1];
+
+    }
+
+
+    function loadFile() {
+      alert("loadingfile")
+      var input = document.getElementById('store-banner-upload');
+      var preview = document.getElementById('banner-pic');
+      var file = input.files[0];
+      console.log(file)
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+
+        formData.append('bannerPic', file);
+        isAnyChange = true;
+        for (var pair of formData.entries()) {
+          console.log(pair[1]);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+
     <!--   Core JS Files   -->
     <script src="/js/core/popper.min.js " type="text/javascript "></script>
     <script src="/js/core/bootstrap.min.js " type="text/javascript "></script>
