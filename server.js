@@ -33,14 +33,18 @@ const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
 const settingsRouter = require("./routes/settings-route.js");
 const profileRouter = require('./routes/profile-route.js');
-const productRouter = require('./routes/product-route');
-
 const storeRouter = require('./routes/store-route.js');
+const productRouter = require('./routes/product-route.js');
+const cartRouter = require('./routes/cart-route');
+const orderRouter = require('./routes/order-route');
+
 app.use('/auth/', authRouter);
 app.use('/settings/', settingsRouter);
 app.use('/profile/', profileRouter);
 app.use('/store', storeRouter);
 app.use('/product', productRouter);
+app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
 app.use('/', indexRouter);
 
 const port = process.env.PORT || 3000;
