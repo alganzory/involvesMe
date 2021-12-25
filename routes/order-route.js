@@ -1,8 +1,13 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
+const orderController = require("../controllers/orderController")
 const { checkAuthenticated, checkNotAutheticated } = require('../controllers/authController');
-const orderController= require('../controllers/orderController');
+
+router.get('/checkout', checkAuthenticated,orderController.get_Order);
+router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
+router.get('/success/:id', checkAuthenticated,orderController.paymentSuccess);
+router.get('/cancelPayment', checkAuthenticated,orderController.paymentCancelled);
 router.get('/' ,  checkAuthenticated, (req, res) => {
     res.render("cancelOrder")
 })

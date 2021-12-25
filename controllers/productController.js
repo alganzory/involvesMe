@@ -73,6 +73,11 @@ const get_product_json = async (req, res) => {
   res.json(product);
 };
 
+const updateProductStock = async (productObject,productId) => {
+  var updatedProduct = await ProductService.updateProduct(productId,productObject);
+  return updatedProduct;
+}
+
 const isAvailableStock = async (stock,quantity) => {
   if(stock < quantity){
     return false;
@@ -87,9 +92,11 @@ const GetProductObject = async (productId) => {
     return product;
 };
 
+
 module.exports = {
   get_product,
   get_product_json,
+  updateProductStock,
   isAvailableStock,
   GetProductObject,
   add_product,

@@ -1,0 +1,268 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <title>involvesMe. | Product</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <section>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            #involves {
+                width: 50px;
+                height: 50px;
+                border-radius: 50px;
+            }
+
+            @media screen and (max-width: 600px) {
+                .card {
+                    width: 40rem !important;
+                    text-align: center;
+                }
+
+                .card-text {
+                    /* text-align: left;
+                    padding-left: ; */
+                    padding-right: 80px;
+                }
+            }
+
+            @media screen and (max-width: 1030px) {
+                #card1 {
+                    margin-top: 1.5rem;
+                    ;
+                }
+            }
+        </style>
+
+        <div class="container mx-auto overflow max-height-vh-100 w-100">
+
+            <div class="mt-5 d-flex justify-content-between">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-4 mb-3">
+                            <h2>Your Order</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-9">
+                            <table id="productTable" class="table table-condensed table-striped " table align="center">
+                                <thead>
+                                    <tr align="center">
+                                        <th>Product Photo</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price(RM)</th>
+                                        <th>Total Price</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Cart Items -->
+                                    <% for(var i=0; i < order.products.length; i++){ var action="notset" ;%>
+                                        <tr align="center">
+
+                                            <td class="align-middle">
+                                                <img id="involves" src="<%=order.products[i].productThumnail%>" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].name%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].quantity%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].price%>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%=order.products[i].totalPrice%>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-3">
+                            <form action="makeOrder" method="POST">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-lg-12 ">
+                                        <!-- Shipping Details -->
+                                        <div class="card " id="card1" style="width: 18rem;">
+
+                                            <div class="card-body">
+                                                <h5 class="card-title pt-2">Shipping Address</h5>
+                                                <div class="coanatiner mt-4">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Name"
+                                                            name="fullName" aria-describedby="name"
+                                                            placeholder="Full Name" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="tel" class="form-control" id="phoneN"
+                                                            name="phoneNumber" pattern="[0-9]{11}"
+                                                            aria-describedby="phone"
+                                                            placeholder="PhoneNumbe (01234567891)" required>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Address"
+                                                            name="Address" aria-describedby="Address"
+                                                            placeholder="Full Address" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="textarea" class="form-control" id="Info"
+                                                            name="additinoalInfo" aria-describedby="Info"
+                                                            placeholder="Additional Info">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-lg-12">
+                                        <div class="card mt-4" style="width: 18rem;">
+                                            <!-- Order price -->
+                                            <div class="card-body">
+                                                <h5 class="card-title">Order Summray</h5>
+                                                <div class="conatiner mt-4">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <p class="card-text">Total Price</p>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <p id="text" class="card-text">RM <%=order.totalPrice%>
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-7 ">
+                                                            <p id="text" class="card-text">Reward</p>
+                                                        </div>
+                                                        <div class="col-5 ">
+                                                            <p class="card-text">
+                                                                <%=(order.totalPrice*0.10)%> Points
+                                                            </p>
+                                                            <input type="text" hidden name="reward"
+                                                                value="<%=(order.totalPrice*0.10)%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mt-3">
+
+                                                        <input type="text" class="form-control" id="voucher"
+                                                            name="promoCode" aria-describedby="voucherHelp"
+                                                            placeholder="Voucher/Promo Code ?">
+                                                    </div>
+
+                                                    <div class="form-group mb-0">
+                                                        <div class="row mb-0 text-quicksand">
+                                                            <p class="card-text">
+                                                                You have <%=userPoints%> Points
+                                                            </p>
+                                                            <% if(userPoints> 0) {%>
+                                                                <p class="card-text">Total with points <b>RM
+                                                                   <%=order.totalPrice-(userPoints*0.01)%></b></p>
+                                                            <% } %>
+                                                            <p class="card-text">
+                                                                Use Points:
+                                                            </p>
+                                                            <div class="btn-group" role="group"
+                                                                aria-label="Basic radio toggle button group">
+                                                                <input type="radio" class="btn-check"
+                                                                    name="usedPoints" id="Credit"
+                                                                    value="true" autocomplete="off"
+                                                                    required>
+                                                                <label class="btn btn-md btn-outline-primary"
+                                                                    for="Credit">Yes</label>
+                                                                <input type="radio" class="btn-check "
+                                                                    name="usedPoints" id="Points"
+                                                                    value="false" autocomplete="off" checked required>
+                                                                <label
+                                                                    class="btn btn-md  px-3 btn-outline-primary"
+                                                                    for="Points">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group px-2 m-0">
+                                                        <div class="row mb-0">
+                                                            <button type="submit"
+                                                                class=" btn btn-success d-flex flex-row  justify-content-center mb-0 text-white text-center">
+                                                                Checkout
+                                                            </button>
+                                                            <a href="../cart" class="btn btn-primary mt-2" role="button">Back To Cart</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

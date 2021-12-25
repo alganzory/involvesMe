@@ -30,7 +30,7 @@
     "cloudinary": "^1.27.1",
     "cookie-session": "^1.4.0",
     "ejs": "^3.1.6",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
@@ -44,6 +44,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-twitch-new": "^0.0.2",
+    "paypal-rest-sdk": "^1.8.1",
     "util": "^0.12.4",
     "swiper": "^7.3.3",
     "uuid": "^8.3.2"

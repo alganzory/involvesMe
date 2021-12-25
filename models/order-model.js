@@ -53,11 +53,11 @@ exports.getOrderById = async (orderId) => {
   }
 };
 
-exports.updateOrder = async (id, order) => {
+exports.updateOrder = async (orderId, order) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedOrder = await Order.updateOne({ id }, order);
+    const updatedOrder = await Order.updateOne({ orderId }, order);
     return updatedOrder;
   } catch (error) {
     throw error;

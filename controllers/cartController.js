@@ -108,6 +108,16 @@ const editProductFromCart = async(req, res)=>{
       
 }
 
+const getCartById = async (userId) => {
+    var cart = await cartService.getCartByuserId(userId);
+    return cart;
+};
+
+const deleteCart = async (userId) => {
+    var cart = await cartService.deleteCart(userId);
+    return cart;
+};
+
 const addToCart = async (req, res) => {
     var cartSearch = await cartService.getCartByuserId(req.user.id);
     var product = await productController.GetProductObject(req.body.productId);
@@ -197,12 +207,11 @@ const addToCart = async (req, res) => {
 };
 
 
-
-
 module.exports = {
     get_Cart,
     deleteProductFromCart,
     editProductFromCart,
+    getCartById,
+    deleteCart,
     addToCart
-
 };
