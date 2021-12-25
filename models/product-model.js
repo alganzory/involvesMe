@@ -56,6 +56,16 @@ exports.getProductById = async (id) => {
   }
 };
 
+exports.getProductsByStoreId = async (storeId) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    return await Product.find({ storeId });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 exports.updateProduct = async (id, product) => {
  
   try {
