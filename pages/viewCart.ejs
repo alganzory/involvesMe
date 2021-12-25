@@ -218,8 +218,9 @@ Coded by www.creative-tim.com
                                             </td>
                                             <td class="align-middle">
 
-                                                <form action="../order/" method="get">
-                                                    <button type="submit" class="btn bg-gradient-primary mt-3">
+                                                <form action="../order/checkout" method="get">
+                                                    <%var disable =""; if(cart.products.length <= 0){disable="disabled"}%>
+                                                    <button type="submit" class="btn bg-gradient-primary mt-3" <%=disable%>> 
                                                         Checkout
                                                     </button>
                                                 </form>

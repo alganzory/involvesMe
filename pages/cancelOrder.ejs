@@ -62,7 +62,8 @@ Coded by www.creative-tim.com
     <div class="col">
     <h3>Cancel Order</h3>
     <form action="/order/cancel" method="post" onsubmit="return submitForm(this);"　>
-        <input type="text" id="orderId" name="orderId" value="2021122201" hidden>
+        Order ID:
+        <input type="text" id="orderId" name="orderId" placeholder="OrderID Value" required> <!-- Place holder Only-->
         <button  id="btn-submit"
           class="btn bg-gradient-secondary mt-3">
         Cancel

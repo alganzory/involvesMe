@@ -1,7 +1,5 @@
 const cartService = require("../models/cart-model");
-// const productController = require("../controllers/productController");
-
-
+const productController = require("../controllers/productController");
 const ProductService = require('../models/product-model')
 const uuid = require("uuid");
 
@@ -57,7 +55,6 @@ const deleteProductFromCart = async(req, res)=>{
 const editProductFromCart = async(req, res)=>{
     
     var cartSearch = await cartService.getCartByuserId(req.user.id);
-
     var edit_id = req.body.productId;//
     console.log("product id: "+edit_id)
     var origanProduct =await ProductService.getProductById(edit_id);
@@ -72,10 +69,8 @@ const editProductFromCart = async(req, res)=>{
         for (let index = 0; index < cartSearch.products.length; index++) {
             if (cartSearch.products[index].product == edit_id) {
                 cartSearch.totalPrice = Number(cartSearch.totalPrice) - Number(cartSearch.products[index].totalPrice);
-                
-                  cartSearch.totalPrice = Number(cartSearch.totalPrice) - Number(cartSearch.products[index].totalPrice);
                 cartSearch.products[index].totalPrice = quantity *  Number(cartSearch.products[index].price);
-                 cartSearch.products[index].quantity= quantity
+                cartSearch.products[index].quantity= quantity
               
                 cartSearch.totalPrice = Number(cartSearch.totalPrice) + Number(cartSearch.products[index].totalPrice);
              
@@ -98,12 +93,8 @@ const editProductFromCart = async(req, res)=>{
           );
       
      }
-
-    
-   
-   
-     console.log('edited')
-      res.redirect("/cart/");
+    console.log('edited')
+    res.redirect("/cart/");
     
       
 }

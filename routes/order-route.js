@@ -8,9 +8,7 @@ router.get('/checkout', checkAuthenticated,orderController.get_Order);
 router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
 router.get('/success/:id', checkAuthenticated,orderController.paymentSuccess);
 router.get('/cancelPayment', checkAuthenticated,orderController.paymentCancelled);
-router.get('/' ,  checkAuthenticated, (req, res) => {
-    res.render("cancelOrder")
-})
+router.get('/' ,  checkAuthenticated, orderController.getCancelOrder);
 router.post('/cancel', (checkAuthenticated, orderController.cancelOrder))
   
 

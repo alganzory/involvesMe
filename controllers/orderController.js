@@ -27,6 +27,11 @@ const get_Order = async (req, res) => {
     }
 };
 
+const getCancelOrder = async (req, res) => {
+    res.render("cancelOrder")
+};
+
+
 const makeOrder = async (req, res) => {
     var cart = await cartController.getCartById(req.user.id);
     const {fullName, address, usedPoints, phoneNumber, additionalInfo, reward , promoCode} = req.body;
@@ -63,50 +68,55 @@ const makeOrder = async (req, res) => {
     }
 
     for (let index = 0; index < order.products.length; index++) {
-        var product = await productController.getProduct(order.products[index].product);
+        var product = await productController.GetProductObject(order.products[index].product);
         product.stock = Number(product.stock) - Number(order.products[index].quantity);
         await productController.updateProductStock(product,order.products[index].product);
     }
 
     userPoints = Number(userPoints) + Number(reward);
+    if(order.products.length > 0){
+        await orderService.addOrder(order);
+        await cartController.deleteCart(cart);
+        await userController.updateUserPoints(req.user.id,userPoints);
 
-    await orderService.addOrder(order);
-    await cartController.deleteCart(cart);
-    await userController.updateUserPoints(req.user.id,userPoints);
-    
-    var create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://localhost:3000/order/success/"+order.orderId,
-            "cancel_url": "http://localhost:3000/order/cancelPayment"
-        },
-        "transactions": [{
-            
-            "amount": {
-                "currency": "MYR",
-                "total": order.totalPrice
+        var create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
             },
-            "description": "Your Involves Me Order"
-        }]
-    };
+            "redirect_urls": {
+                "return_url": "http://localhost:3000/order/success/"+order.orderId,
+                "cancel_url": "http://localhost:3000/order/cancelPayment"
+            },
+            "transactions": [{
+                
+                "amount": {
+                    "currency": "MYR",
+                    "total": order.totalPrice
+                },
+                "description": "Your Involves Me Order"
+            }]
+        };
 
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-            for (var i = 0; i < payment.links.length; i++)
-            {
-                if (payment.links[i].rel === 'approval_url')
+        paypal.payment.create(create_payment_json, function (error, payment) {
+            if (error) {
+                throw error;
+            } else {
+                for (var i = 0; i < payment.links.length; i++)
                 {
-                    res.redirect(payment.links[i].href);
-                }
+                    if (payment.links[i].rel === 'approval_url')
+                    {
+                        res.redirect(payment.links[i].href);
+                    }
 
+                }
             }
-        }
-    });
+        });
+    }
+    else {
+        req.flash("error", "Order Doesnt Have any Items !!");
+        res.redirect("/cart/");
+    }
 };
 
 const paymentSuccess = async (req, res) => {
@@ -232,5 +242,6 @@ module.exports = {
     getOrderById,
     paymentSuccess,
     paymentCancelled,
-    cancelOrder
+    cancelOrder,
+    getCancelOrder
 }

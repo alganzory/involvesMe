@@ -2,6 +2,7 @@ const ProductService = require("../models/product-Model");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const uuid = require("uuid");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -30,7 +31,8 @@ const upload_photos =  parser.array('productPhotos', 10);
 const add_product = async (req, res) => {
     var product = { ...req.body };
     console.log(req.files)
-    product.userId = req.user.id;
+    product.storeId = req.user.id;
+    product.id = uuid.v4();
     if (req.files){
         const productPhotos=[];
         for (let index = 0; index < req.files.length; index++) { //for loop to assign each url to array and add the array as a whole to database
