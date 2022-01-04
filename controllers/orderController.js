@@ -38,8 +38,12 @@ const makeOrder = async (req, res) => {
     var total = cart.totalPrice;
     var today = new Date();
     var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7); 
-    var userPoints = req.user.points;
+    var userPoints = 0;
     var pointsUsed = 0;
+    
+    if(req.user.points){
+        userPoints = req.user.points;
+    }
     console.log(usedPoints)
     if(usedPoints == "true"){
         pointsUsed = req.user.points;
@@ -76,8 +80,11 @@ const makeOrder = async (req, res) => {
     userPoints = Number(userPoints) + Number(reward);
     if(order.products.length > 0){
         await orderService.addOrder(order);
+        console.log("Made Order")
         await cartController.deleteCart(cart);
+        console.log("Deleted Cart")
         await userController.updateUserPoints(req.user.id,userPoints);
+        console.log("Added points")
 
         var create_payment_json = {
             "intent": "sale",
