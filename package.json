@@ -45,8 +45,8 @@
     "passport-local": "^1.0.0",
     "passport-twitch-new": "^0.0.2",
     "paypal-rest-sdk": "^1.8.1",
-    "util": "^0.12.4",
     "swiper": "^7.3.3",
+    "util": "^0.12.4",
     "uuid": "^8.3.2"
   }
 }

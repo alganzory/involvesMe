@@ -4,7 +4,7 @@ const ProductService = require('../models/product-model')
 const uuid = require("uuid");
 
 
-const get_Cart = async (req, res) => {
+const get_Cart = async(req, res) => {
     var cart = await cartService.getCartByuserId(req.user.id);
     res.render('viewCart', { cart: cart, title: "View Cart" });
 };
@@ -12,26 +12,26 @@ const get_Cart = async (req, res) => {
 
 
 // delete product
-const deleteProductFromCart = async(req, res)=>{
-    
+const deleteProductFromCart = async(req, res) => {
+
     var cartSearch = await cartService.getCartByuserId(req.user.id);
-  
+
     var delete_id = req.body.productId;
-  
+
 
     //finc specific product in cart
     for (let index = 0; index < cartSearch.products.length; index++) {
         // if find
         if (cartSearch.products[index].product == delete_id) {
-           
-           
+
+
             //update the total price 
             cartSearch.totalPrice = Number(cartSearch.totalPrice) - Number(cartSearch.products[index].totalPrice);
-           
+
             //remove the object
             cartSearch.products.splice(index, 1);
 
-            
+
             var cart = {
                 userId: cartSearch.userId,
                 id: cartSearch.id,
@@ -41,39 +41,39 @@ const deleteProductFromCart = async(req, res)=>{
             await cartService.updateCart(req.user.id, cart)
         }
     }
-     
+
     console.log(cartSearch)
-    //  await cartService.deleteProductById(cartId, delete_id);
-   
-     console.log('deleted')
-      res.redirect("/cart/");
-      
+        //  await cartService.deleteProductById(cartId, delete_id);
+
+    console.log('deleted')
+    res.redirect("/cart/");
+
 }
 
 
 // edit product
-const editProductFromCart = async(req, res)=>{
-    
-    var cartSearch = await cartService.getCartByuserId(req.user.id);
-    var edit_id = req.body.productId;//
-    console.log("product id: "+edit_id)
-    var origanProduct =await ProductService.getProductById(edit_id);
-    var origanProduct_stock =origanProduct.stock;
+const editProductFromCart = async(req, res) => {
 
-    var quantity = req.body.newQuantity;//test 
-    console.log("stock: "+origanProduct_stock)
-    console.log("quantity: "+quantity)
+    var cartSearch = await cartService.getCartByuserId(req.user.id);
+    var edit_id = req.body.productId; //
+    console.log("product id: " + edit_id)
+    var origanProduct = await ProductService.getProductById(edit_id);
+    var origanProduct_stock = origanProduct.stock;
+
+    var quantity = req.body.newQuantity; //test 
+    console.log("stock: " + origanProduct_stock)
+    console.log("quantity: " + quantity)
     console.log(origanProduct_stock);
-    
-      if(quantity<=origanProduct_stock && quantity>0){
+
+    if (quantity <= origanProduct_stock && quantity > 0) {
         for (let index = 0; index < cartSearch.products.length; index++) {
             if (cartSearch.products[index].product == edit_id) {
                 cartSearch.totalPrice = Number(cartSearch.totalPrice) - Number(cartSearch.products[index].totalPrice);
-                cartSearch.products[index].totalPrice = quantity *  Number(cartSearch.products[index].price);
-                cartSearch.products[index].quantity= quantity
-              
+                cartSearch.products[index].totalPrice = quantity * Number(cartSearch.products[index].price);
+                cartSearch.products[index].quantity = quantity
+
                 cartSearch.totalPrice = Number(cartSearch.totalPrice) + Number(cartSearch.products[index].totalPrice);
-             
+
                 var cart = {
                     userId: cartSearch.userId,
                     id: cartSearch.id,
@@ -83,33 +83,33 @@ const editProductFromCart = async(req, res)=>{
                 await cartService.updateCart(req.user.id, cart)
             }
         }
-         
+
         console.log(cartSearch)
-     }else{
-        
+    } else {
+
         req.flash(
             'outstock',
-            "out of stock,current stock is: "+origanProduct_stock
-          );
-      
-     }
+            "out of stock,current stock is: " + origanProduct_stock
+        );
+
+    }
     console.log('edited')
     res.redirect("/cart/");
-    
-      
+
+
 }
 
-const getCartById = async (userId) => {
+const getCartById = async(userId) => {
     var cart = await cartService.getCartByuserId(userId);
     return cart;
 };
 
-const deleteCart = async (userId) => {
+const deleteCart = async(userId) => {
     var cart = await cartService.deleteCart(userId);
     return cart;
 };
 
-const addToCart = async (req, res) => {
+const addToCart = async(req, res) => {
     var cartSearch = await cartService.getCartByuserId(req.user.id);
     var product = await productController.GetProductObject(req.body.productId);
     var stockAvailable = await productController.isAvailableStock(product.stock, req.body.quantity)
@@ -118,8 +118,7 @@ const addToCart = async (req, res) => {
     if (req.body.quantity < 1) {
         req.flash("error", "Product Quanitiy Cannot Be 0 !!");
         res.redirect("/cart/");
-    }
-    else {
+    } else {
         if (stockAvailable != false) {
             var productObject = {
                 product: product.id,
@@ -133,8 +132,7 @@ const addToCart = async (req, res) => {
 
             if (cartSearch != null) {
                 var totalprice = cartSearch.totalPrice + (product.price * req.body.quantity);
-            }
-            else {
+            } else {
                 var totalprice = (product.price * req.body.quantity);
             }
             if (cartSearch != null) {
@@ -146,8 +144,7 @@ const addToCart = async (req, res) => {
                             cartSearch.products[index].quantity = Number(cartSearch.products[index].quantity) + Number(productObject.quantity);
                             cartSearch.products[index].totalPrice = cartSearch.products[index].price * cartSearch.products[index].quantity;
                             quantitychanged = true;
-                        }
-                        else {
+                        } else {
                             skip = true;
                         }
                     }
@@ -161,8 +158,7 @@ const addToCart = async (req, res) => {
                             products: cartSearch.products,
                             totalPrice: totalprice
                         };
-                    }
-                    else {
+                    } else {
                         var cart = {
                             userId: cartSearch.userId,
                             id: cartSearch.id,
@@ -172,8 +168,7 @@ const addToCart = async (req, res) => {
                     }
                 }
                 await cartService.updateCart(req.user.id, cart);
-            }
-            else {
+            } else {
                 var cart = {
                     userId: req.user.id,
                     id: uuid.v4(),
@@ -185,12 +180,10 @@ const addToCart = async (req, res) => {
             if (skip == true) {
                 req.flash("error", "Your Cart Has the Maxiumun Number of this item thats available in stock");
                 res.redirect("/cart/");
-            }
-            else {
+            } else {
                 res.redirect("/cart/");
             }
-        }
-        else {
+        } else {
             req.flash("error", "Product is Out of Stock!");
             res.redirect("/cart/");
         }
