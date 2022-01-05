@@ -1,4 +1,4 @@
-const ProductService = require("../models/product-Model");
+const ProductService = require("../models/product-model");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
