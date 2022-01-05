@@ -40,7 +40,7 @@ exports.getPostByuserId = async (userId) => {
 exports.getPostById = async (id) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    return await Post.findOne({ id });
+    return await Post.findOne({ _id: id });
   } catch (error) {
     console.error(error);
   }
