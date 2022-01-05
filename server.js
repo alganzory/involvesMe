@@ -37,6 +37,7 @@ const storeRouter = require('./routes/store-route.js');
 const productRouter = require('./routes/product-route.js');
 const cartRouter = require('./routes/cart-route');
 const orderRouter = require('./routes/order-route');
+const postRouter = require('./routes/post-route');
 
 app.use('/auth/', authRouter);
 app.use('/settings/', settingsRouter);
@@ -45,6 +46,7 @@ app.use('/store', storeRouter);
 app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
+app.use('/post', postRouter);
 app.use('/', indexRouter);
 
 const port = process.env.PORT || 3000;
