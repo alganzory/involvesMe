@@ -8,6 +8,7 @@ const passport = require("passport");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const User = require("../models/user-Model");
+const ProfileService = require("../models/profile-Model")
 
 const jwt = require("jsonwebtoken");
 
@@ -89,6 +90,16 @@ const register_user = async (req, res) => {
       source: "local",
     };
     const newUser = await User.addUser(newUserData);
+
+    //  add profile
+    var profile = {
+      id: newUserData.id,
+      displayName: username,
+      bio: null,
+
+    };
+    ProfileService.createOrUpdateProfile(newUserData.id, profile)
+
     res.redirect("/auth/login");
   } catch (e) {
     console.error(e);
