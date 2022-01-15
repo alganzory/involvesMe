@@ -1,0 +1,721 @@
+<!--
+=========================================================
+* BLK Design System- v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/blk-design-system
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <title>
+    involvesMe. | Profile
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+  <!-- Nucleo Icons -->
+  <link href="/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+  <link href="/css/additional-styles.css" rel="stylesheet" />
+  <!-- Post Swiper CSS-->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <link href="/css/blog_posts.css" rel="stylesheet" />
+
+
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <style>
+  
+    .content-editable {
+      caret-color: #ff7a18;
+    }
+    [contentEditable=true]::selection{
+      background: #f5f5f5;
+      color: #cb0c9f;
+    }
+    [contentEditable=true] {
+      border-radius: .5rem;
+      padding: 0.75rem;
+      box-shadow: 0 0 10px #cb0c9f;
+    }
+
+
+    [contentEditable=true]:empty:before {
+      content: attr(data-ph);
+      color: grey;
+      font-style: italic;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .pp-upload {
+
+      cursor: pointer;
+    }
+
+    .pp-upload-wrapper {
+      position: absolute;
+      right: 0;
+    }
+  </style>
+
+</head>
+
+
+<body>
+  <section>
+  
+    <!-- Twitter Modal -->
+    <div class="col-md-4">
+      <div class="modal fade" id="twitters" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-left">
+                  <h3 class="font-weight-bolder fs-4 text-info text-gradient">Link your Twitter to your InvolvesMe</h3>
+                  <p class="mb-0 text-dark">Enter Your Profile's Link</p>
+                </div>
+                <div class="card-body">
+                  <form role="form text-left" method="post" action="/profile/addTwitter">
+                    <!-- <label>link</label> -->
+                    <div class="input-group mb-3">
+                      <%
+                        var tValue;
+                        if(profile.twitterSocial){tValue=profile.twitterSocial}
+                      %>
+                      <input type="text" name="twitter" class="form-control" placeholder="profile link"
+                        value="<%=tValue%>" aria-label="profile link" aria-describedby="email-addon">
+                    </div>
+
+                    <div class="text-center">
+                      <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                      <button type="submit"
+                        class="btn btn-round bg-gradient-info btn-lg w-90 mt-4 mb-0">Twitter</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Twitter Modal -->
+
+    <!-- Youtube Modal -->
+    <div class="col-md-4">
+      <div class="modal fade" id="youtube" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-left">
+                  <h3 class="font-weight-bolder fs-4 text-danger text-gradient">Link your Youtube to your InvolvesMe
+                  </h3>
+                  <p class="mb-0 text-dark">Enter Your Channel ID (Your Channel ID is not the same as Channel Name) <a
+                      style="color: red;" href="https://commentpicker.com/youtube-channel-id.php" target="_blank">you
+                      can get your channel ID here</a></p>
+                </div>
+                <div class="card-body">
+                  <form role="form text-left" method="post" action="/profile/addYoutube">
+                    <!-- <label>link</label> -->
+                    <div class="input-group mb-3">
+                      <%
+                    var yValue;
+                    if(profile.youtubeSocial){yValue=profile.youtubeSocial}
+                  %>
+                      <input type="text" name="youtube" class="form-control" placeholder="channel ID"
+                        value="<%=yValue%>" aria-label="profile link" aria-describedby="email-addon">
+                    </div>
+                    <div class="text-center">
+                      <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                      <button type="submit"
+                        class="btn text-white btn-round bg-danger btn-lg w-100 mt-4 mb-0">Youtube</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Youtube Modal -->
+
+    <!-- Patron Modal -->
+    <div class="col-md-4">
+      <div class="modal fade" id="patron" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-left">
+                  <h3 class="font-weight-bolder fs-4 text-primary text-gradient">Link your Patreon to your InvolvesMe
+                  </h3>
+                  <p class="mb-0 text-dark">Enter Your ID </p>
+                </div>
+                <div class="card-body">
+                  <form role="form text-left" method="post" action="/profile/addPatreon">
+                    <!-- <label>link</label> -->
+                    <div class="input-group mb-3">
+                      <%
+                    var pValue;
+                    if(profile.patreonSocial){pValue=profile.patreonSocial}
+                  %>
+                      <input type="text" name="patreon" class="form-control" placeholder="user ID" value="<%=pValue%>"
+                        aria-label="profile link" aria-describedby="email-addon">
+                    </div>
+                    <div class="text-center">
+                      <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                      <button type="submit"
+                        class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0">patreon</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Patron Modal -->
+
+
+    <div class="page-header mt-8 mb-4 min-vh-100">
+      <div class="container">
+
+        <!-- Edit banner -->
+        <% if(currentUser){%>
+        <% if(profile && currentUser.id === profile.id) { %>
+        <div class="fixed-top container">
+          <div id="editing-mode-banner"
+            class="shadow alert alert-info text-white border-0 text-md p-3 d-none justify-content-between align-items-center mt-3"
+            role="alert"
+            style="opacity: 90%; z-index: 2000;">
+            <span class="alert-icon"><i class="fa fa-edit"></i> <span class="alert-text">You are currently in editing
+                mode,  <br> Click on something to edit it,
+                when you are done, click save or discard the changes</span></span>
+
+            <form class="d-flex flex-md-row flex-column" style="gap: .25rem;"> 
+              <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="saveEdit()">Save
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light  btn-round m-0 " onclick="cancelEdit()">Discard
+              </button>
+            </form>
+          </div>
+          <div class="ml-auto d-flex justify-content-end  align-items-center mt-4 mb-2" 
+          id="edit-profile-btn" style="opacity: 90%; z-index: 2000;">
+            <button type="button" class="shadow btn btn-md px-4 btn-primary btn-round m-0" onclick="enableEdit()">
+              <i class="fas fa-user-edit"></i>
+              <span>&nbsp;Edit profile</span>
+            </button>
+          </div>
+        </div>
+        <% }} %>
+
+
+        <!-- Profile Info and Picture Row -->
+        <div class="d-flex flex-lg-row flex-column justify-content-md-between">
+          <!-- Picture and tabs Card -->
+          <div class="col-lg-6 flex-shrink-0 ">
+            <div class="card card-plain">
+
+              <!-- Profile Picture with upload -->
+              <div class="card-header position-relative pt-0 d-flex justify-content-center">
+                <div class="pp-upload-wrapper d-none m-0">
+                  <label for="profile-upload" class="pp-upload m-0 text-center p-0">
+                    <div type="button" class="btn btn-xs btn-primary btn-round m-0">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </div>
+                  </label>
+                  <input onchange="loadFile()" type="file" name="profile-upload" id="profile-upload">
+                </div>
+                <% const profilePic = profile.profilePhoto || "https://res.cloudinary.com/involvesme/image/upload/v1638402349/profile-photos/default_pp.png" %> 
+                <img id="profile-pic" src="<%= profilePic %>" 
+                class="img-center img-fluid rounded-circle w-70">
+              </div>
+
+              <!-- The three tabs -->
+              <div class="card-body">
+                <!-- nav header -->
+                <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#linka">
+                      Support
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#linkb">
+                      Followers
+
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#linkc">
+                      Following
+                    </a>
+                  </li>
+                </ul>
+
+                <!-- tab content -->
+
+                <div class="tab-content tab-subcategories">
+
+                  <!-- Support Tab  -->
+                  <div class="tab-pane p-3 active" id="linka" style="background-color: white;">
+
+                    <form>
+                      <div class="row">
+                        <label class="col-12 col-form-label">Amount</label>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="1.587">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-0 text-quicksand">
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                          <input type="radio" class="btn-check" name="type" id="credit" value="credit"
+                            autocomplete="off" checked>
+                          <label class="btn btn-md btn-outline-primary" for="credit">Credit</label>
+                          <input type="radio" class="btn-check" name="type" id="points" value="points"
+                            autocomplete="off">
+                          <label class="btn btn-md px-3 btn-outline-primary" for="points">Points</label>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-simple btn-primary btn-icon btn-round float-right">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                      </button>
+
+                    </form>
+                  </div>
+
+                  <!-- Followers tab-->
+
+                  <div class="tab-pane " id="linkb">
+                    <div class="table-responsive" style="height:242px; overflow-y: auto;">
+                      <!--Followers Card Start-->
+                      <%if(userFollowers.length === 0){%>
+                      <div class="list-group-item d-flex  align-items-center">
+                        <div class="flex-fill pl-3 pr-3">
+                          <div style="color: black;">User doesn't have Any Followers</div>
+                        </div>
+                      </div>
+                      <%}%>
+
+                      <% for(var i = 0; i<userFollowers.length;i++){ %>
+                      <% var action = currentUser.following.includes(userFollowers[i].id) ? 'unfollow' : 'follow'; %>
+
+
+                      <!-- THIS IS THE PROBLEM! -->
+                      <div class="list-group-item d-flex  align-items-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px"
+                          class=" rounded-circle" />
+                        <div class="w-40 mw-50 flex-fill pl-3 pr-3">
+                          <div>
+                            <a href="./<%=userFollowers[i].username%>"
+                              class="text-dark font-weight-600"><%=userFollowers[i].username%></a></div>
+                        </div>
+
+                        <% if(currentUser){ %>
+                        <%if(userFollowers[i].id != currentUser.id){ %>
+                        <% const class2 = (profile.id === currentUser.id)? "col d-flex justify-content-between": "" %>
+                        <div class="<%= class2%>">
+                          <form action="follow" method="post">
+                            <input type="hidden" name="following" value="<%= userFollowers[i].id %>">
+                            <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                            <input type="hidden" name="action" value="<%= action%>">
+                            <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                            <button class="btn btn-primary mb-0" id="follow-btn"
+                              style="width: 120px;"><%=action%></button>
+                          </form>
+
+                          <%if(profile.id === currentUser.id){%>
+                          <a type="button" class="m-1" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                          <div class="dropdown-menu dropdown-primary">
+                            <form action="removeFollower" method="post">
+                              <input type="hidden" name="follower" value="<%=userFollowers[i].id%>">
+                              <input type="hidden" name="following" value="<%=currentUser.id%>">
+                              <input type="hidden" name="action" value="remove">
+                              <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                              <button class="dropdown-item" type="submit">Remove</button>
+                            </form>
+                          </div>
+                          <%}%>
+                        </div>
+                        <%}}%>
+                          <% if(!currentUser){%>
+                          <form action="follow" method="post">
+                            <button class="btn btn-primary mb-0" id="follow-btn" style="width: 120px;">Follow</button>
+                          </form>
+                          <% } %>
+                        </div>
+                        <% } %>
+                        <!--Followers Card End-->
+                      </div>
+                    </div>
+                    <!-- try now -->
+                    <!-- Following Tab -->
+                    <div class="tab-pane" id="linkc">
+                      <div class="table-responsive" style="height:242px; overflow-y: auto;">
+                        <%if(userFollowing.length === 0){%>
+                        <div class="list-group-item d-flex  align-items-center">
+                          <div class="flex-fill pl-3 pr-3">
+                            <div style="color: black;">No One is following This User</div>
+                          </div>
+                        </div>
+                        <%}%>
+                      <!--Following Card start-->
+                      <% for(var i = 0; i<userFollowing.length;i++){ %>
+                        <% var action = currentUser.following.includes(userFollowing[i].id) ? 'unfollow' : 'follow';%>
+
+                        <div class="list-group-item d-flex  align-items-center">
+                          <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px"
+                            class=" rounded-circle" />
+                          <div class="w-40 mw-40 flex-fill pl-3 pr-3">
+                            <div><a href="./<%=userFollowing[i].username%>"
+                                class="text-dark font-weight-600"><%=userFollowing[i].username%></a></div>
+                          </div>
+                          <% if(currentUser){ %>
+                          <% if(userFollowing[i].id != currentUser.id){%>
+                          <div class="">
+                            <form action="follow" method="post">
+                              <input type="hidden" name="following" value="<%= userFollowing[i].id %>">
+                              <input type="hidden" name="follower" value="<%= currentUser.id%>">
+                              <input type="hidden" name="action" value="<%= action%>">
+                              <input type="hidden" name="profileUser" value="<%=profile.id%>">
+                              <button class="btn btn-primary mb-0" id="follow-btn"><%=action%></button>
+                            </form>
+                          </div>
+                          <%}}if(!currentUser){%>
+                          <form action="follow" method="post">
+                            <button class="btn btn-primary mb-0" id="follow-btn">unfollow</button>
+                          </form>
+                          <% } %>
+                        </div>
+                        <% } %>
+                        <!--Following Card End-->
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- EDIT PROFILE -->
+            <div class="col-lg-5 flex-shrink-0">
+              
+              <!-- H1 and FOllow  -->
+              <div class=" d-flex flex-lg-column flex-row  align-items-lg-start align-items-end justify-content-between">
+                <div>
+                  <h1 data-ph="Display Name" data-post="displayName" class="content-editable text-left "> <%=profile.displayName || "Display Name" %> 
+                  </h1>
+                </div>
+
+                <div>
+                  <% if(currentUser){%>
+                  <% if(profile && currentUser.id != profile.id) { %>
+                  <%
+                 const action =  currentUser.following.includes(profile.id) ? 'unfollow' : 'follow';
+               %>
+
+                  <form action="follow" method="post" class="p-0 m-0">
+                    <input type="hidden" name="following" value="<%= profile.id %>">
+                    <input type="hidden" name="follower" value="<%= currentUser.id %>">
+                    <input type="hidden" name="action" value="<%= action %>">
+                    <input type="hidden" name="profileUser" value="<%=profile.id %>">
+                    <button class="btn btn-primary" id="follow-btn"> <%=action%> </button>
+                  </form>
+
+                  <% }} else if(!currentUser){%>
+                  <form action="follow" method="post">
+                    <button class="btn btn-primary" id="follow-btn">Follow</button>
+                  </form>
+                  <% } %>
+                </div>
+
+              </div>
+
+
+              <p class="content-editable profile-description"
+                data-ph="This is a space for you to tell people about yourself, your work, etc." data-post="bio">
+                <%= profile.bio || "This is a space for you to tell people about yourself, your work, etc." %> 
+                </p>
+
+              <!-- ALl social stuff -->
+              <div class="socials pt-3">
+
+                <div class="row my-2">
+                  <div class="col">
+                    <% var socialLinks; if(profileOwner === true) {%>
+                    <!-- Social Button -->
+                    <% if(profile.twitterSocial || profile.youtubeSocial || profile.patreonSocial) {socialLinks="Edit Social Links:"}else{socialLinks="Add Social Links:"}%>
+                    <p><b><%=socialLinks%></b></p>
+                    <!-- Twitter Button -->
+                    <button type="button" class="btn btn-twitter btn-icon" data-toggle="modal"
+                      data-target="#twitters">
+                      <span class="btn-inner--icon"><i class="fab fa-twitter"></i></span>
+                      <span class="btn-inner--text">Twitter</span>
+                    </button>
+                    <!-- Youtube Button-->
+                    <button type="button" class="btn btn-youtube btn-icon" data-toggle="modal"
+                      data-target="#youtube">
+                      <span class="btn-inner--icon"><i class="fab fa-youtube"></i></span>
+                      <span class="btn-inner--text">Youtube</span>
+                    </button>
+                    <!-- patron Button -->
+                    <button type="button" class="btn btn-dribbble btn-icon" data-toggle="modal"
+                      data-target="#patron">
+                      <span class="btn-inner--icon"><i class="fab fa-dribbble"></i></span>
+                      <span class="btn-inner--text">Patreon</span>
+                    </button>
+                    <% } %>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <% if(profile.twitterSocial){ %>
+                  <!-- Twitter Tab -->
+                  <div class="col">
+                    <a class="twitter-timeline" data-width="100%" data-height="250" data-theme="dark"
+                      href="<%=profile.twitterSocial%>">Tweets by <%=profile.displayname%></a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                  </div>
+                  <% } %>
+                </div>
+                <!--  -->
+                <div class="row my-3">
+                  <div class="col">
+                    <% if(profile.youtubeSocial){ %>
+                    <!-- Youtube Tab-->
+                    <div>
+                      <script src="https://apis.google.com/js/platform.js"></script>
+                      <div class="g-ytsubscribe" data-channelid="<%=profile.youtubeSocial%>" data-layout="full"
+                        data-theme="dark" data-count="default"></div>
+                    </div>
+                    <% } %>
+                    <% if(profile.patreonSocial){ %>
+                    <!-- patron Tab -->
+
+                    <div>
+                      <a href="https://www.patreon.com/bePatron?u=<%=profile.patreonSocial%>"
+                        data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                      <script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script>
+                    </div>
+                    <% } %>
+                  </div>
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+
+          </div>
+          
+        <% if (profileType !== "fan") { %>
+        <%- include('parts/store-section.ejs') %>
+        <%- include('parts/posts-section.ejs') %>
+          <% } %>
+
+
+              </div> <!-- Container -->
+            </div> <!-- Row -->
+
+
+  </section>
+
+
+
+
+  <!-- Javascript for editing -->
+  <script>
+    var editableFields = document.getElementsByClassName('content-editable');
+    var editProfileBtn = document.getElementById('edit-profile-btn');
+    var editingModeBanner = document.getElementById('editing-mode-banner');
+    var profilePicEdit = document.getElementsByClassName('pp-upload-wrapper');
+    var editableFieldsValues = [];
+    var formData = new FormData();
+    let isAnyChange = false;
+
+    function enableEdit() {
+      // alert("hi")
+      // e.preventDefault();
+      console.log(editableFields)
+      for (let i = 0; i < editableFields.length; i++) {
+        editableFields[i].contentEditable = true;
+        let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+        console.log ("here", textContent)
+        editableFieldsValues[i] = textContent;
+      }
+      let profilePic = document.getElementById('profile-pic');
+      editableFieldsValues.push(profilePic.src)
+      editProfileBtn.classList.remove('d-flex');
+      editProfileBtn.classList.add('d-none');
+      editingModeBanner.classList.remove('d-none');
+      editingModeBanner.classList.add('d-flex');
+      editableFields[0].focus();
+      profilePicEdit[0].classList.remove('d-none');
+      profilePicEdit[0].classList.add('d-flex');
+    }
+
+    function disableEdit() {
+
+      for (let i = 0; i < editableFields.length; i++) {
+        editableFields[i].contentEditable = false;
+
+      }
+      editingModeBanner.classList.remove('d-flex');
+      editingModeBanner.classList.add('d-none');
+      editProfileBtn.classList.remove('d-none');
+      editProfileBtn.classList.add('d-flex');
+      profilePicEdit[0].classList.add('d-none');
+      profilePicEdit[0].classList.remove('d-flex');
+    }
+
+    function saveEdit() {
+      // e.preventDefault();
+      // alert('save');
+
+      disableEdit();
+      
+      for (let i = 0; i < editableFields.length; i++) {
+        let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
+        if (editableFieldsValues[i] != textContent) {
+          editableFieldsValues[i] = textContent
+          isAnyChange = true;
+        }
+      }
+
+      if (isAnyChange) {
+        // send post request to update profile
+        const keys = [...editableFields].map(field => field.dataset.post);
+
+        // let formData = {};
+
+        keys.forEach((key, index) => {
+          // console.log(key, editableFieldsValues[index])
+
+          formData.append(key, editableFieldsValues[index]);
+
+        });
+
+        // formData = Object.assign(...keys.map((k, i) => ({
+        //   [k]: editableFieldsValues[i]
+        // })));
+
+
+        console.log (formData)
+
+          // add a spinner overlay
+          let spinner = document.createElement('div');
+          
+        axios.post('/profile/edit', formData, {
+            headers: {
+              'Content-Type': `multipart/form-data;`,
+            }
+          })
+          .then(function (response) {
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+
+    function cancelEdit() {
+      // e.preventDefault();
+      // alert('cancel');
+      disableEdit();
+      for (let i = 0; i < editableFields.length; i++) {
+        editableFields[i].childNodes[0].textContent = editableFieldsValues[i];
+      }
+      const profilePic = document.getElementById('profile-pic');
+      profilePic.src = editableFieldsValues[editableFieldsValues.length - 1];
+
+    }
+
+
+    function loadFile() {
+      alert("loadingfile")
+      var input = document.getElementById('profile-upload');
+      var preview = document.getElementById('profile-pic');
+      var file = input.files[0];
+      console.log(file)
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+
+        formData.append('profilePic', file);
+        isAnyChange = true;
+        for (var pair of formData.entries()) {
+          console.log(pair[1]);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+  <!--   Core JS Files   -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+  <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+  <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+  <script src="/js/plugins/parallax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI">
+  </script>
+  <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+
+
+
+  <!-- Post Swiper  -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script src="/js/posts_swiper.js" type="text/javascript"></script>
+
+</body>
+
+</html>

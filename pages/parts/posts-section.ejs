@@ -1,0 +1,96 @@
+          <!-- Posts -->
+          <div class="row">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h1 class="profile-title text-left">Posts</h1>
+              </div>
+
+              <!-- Add New Button -->
+              <div>
+                <a href="/post/addPost">
+                  <button class=" btn btn-simple btn-primary ">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span>New Post</span>
+                  </button>
+                </a>
+              </div>
+
+            </div>
+            <!-- Swiper -->
+
+            <% if (!posts.length) { %>
+            <div class="col-md-12">
+              <p class="text-center">No posts to display at the moment.</p>
+            </div>
+            <% } %>
+
+            <div class="<%= (posts.length ===1)? "swiper mySingleSwiper": "swiper mySwiper" %>">
+              <div class="swiper-wrapper <%= posts.length ===1? "justify-content-center": "" %>">
+
+
+                <% for (let index = 0; index < posts.length; index++) { %>
+                <!-- Post Card -->
+                <% 
+                var content;
+                var s1 = null, s2 = null; 
+                if(posts[index].content.length > 250){
+                  var s = posts[index].content.slice(0,100);
+                  var middle = Math.floor(s.length / 2);
+                  var before = s.lastIndexOf(' ', middle);
+                  var after = s.indexOf(' ', middle + 1);
+  
+                  if (middle - before < after - middle) {
+                      middle = before;
+                  } else {
+                      middle = after;
+                  }
+                  s1 = s.substr(0, middle);
+                  s2 = s.substr(middle + 1);
+                }  
+            %>
+                <div class="swiper-slide">
+                  <div class="row mt-5" style="width: 80%; text-align: left;">
+                    <div class="col">
+                      <%if(s1 != null) content = s; else content = posts[index].content %>
+                      <!-- <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-primary  shadow-sm">
+                      <i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <footer>
+                      <p>
+  
+                      </p>
+                    </footer>
+                  </blockquote> -->
+
+                      <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                        <div class="blockquote-custom-icon bg-primary  shadow-sm">
+                          <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                        <p class="text-primary fw-normal"><%=posts[index].title%>
+                        </p>
+
+                        <footer class="pt-4  border-top">
+                          <p class="card-title text-dark fw-normal" style="height: 135px;">
+                            <span><%=content%>
+                            </span>
+                            <% if(s1) {%>
+                            <% var contentString= "/content/" + posts[index]._id %>
+                            <span>...</span>
+                            <a href="<%= contentString%>">
+
+                              <cite title="Source Title" class="p-1 text-info">read more</cite>
+                            </a>
+                            <%}%>
+                      </p>
+                                
+                    </footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+            <% }%>
+                    </div> <!-- Swiper Wrapper -->
+                    <div class="swiper-pagination"></div>
+                  </div> <!-- Swiper -->
+                </div> <!-- Posts -->

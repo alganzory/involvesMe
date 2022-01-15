@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const {checkAuthenticated, checkNotAutheticated} = require('../controllers/authController');
+const { checkAuthenticated, checkNotAutheticated } = require('../controllers/authController');
 router.get('/', checkAuthenticated, (req, res) => {
-   // this is temportary until landing page is created
-    res.send (`<h1> landing page </h1>
+    // this is temportary until landing page is created
+
+    res.send(`<h1> landing page </h1>
     </br>   
     </br>
     <h3> email: ${req.user.email} </h3>
@@ -22,7 +23,8 @@ router.get('/', checkAuthenticated, (req, res) => {
     <h3>
     </br>
     <form method="POST" action="/auth/logout" >  <button type="submit">Logout</button> </form>
-    <form method="GET" action="/account" >  <button type="submit">Account</button> </form>
+    <form method="GET" action="/settings" >  <button type="submit">Account</button> </form>
+    <form method="GET" action="/profile/me" >  <button type="submit">Profile</button> </form>
     `)
 });
 

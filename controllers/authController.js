@@ -257,10 +257,23 @@ const google_redirect = (req, res) => {
   res.redirect("/");
 };
 
-
 const passportTwitchAuth =  passport.authenticate("twitch", { failureRedirect: "/auth/login",failureFlash: "Account already exists, sign in with credentials" });
 const twitch_redirect =  (req, res) => {
     res.redirect("/");
+};
+
+const updateUserBalance = async (userId, balance) => {
+  updatedUser = {
+    balance: balance
+  }
+  await User.updateUser(userId,updatedUser)
+};
+
+const updateUserPoints = async (userId, points) => {
+  updatedUser = {
+    points: points
+  }
+  await User.updateUser(userId,updatedUser)
 };
 
 module.exports = {
@@ -279,4 +292,6 @@ module.exports = {
   post_forgot_password,
   get_reset_password,
   post_reset_password,
+  updateUserBalance,
+  updateUserPoints
 };
