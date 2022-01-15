@@ -19,7 +19,7 @@ const profileSchema = new Schema({
   storeDesc: String // TODO: change to store model
 }, { timestamps: true });
 const Profile = mongoose.model("profile", profileSchema, "profile");
-
+mongoose.models={};
 exports.profileModel = Profile;
 
 exports.addProfile = async (profile) => {
