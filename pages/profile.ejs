@@ -289,12 +289,12 @@
                   <!-- Support Tab  -->
                   <div class="tab-pane p-3 active" id="linka" style="background-color: white;">
 
-                    <form>
+                    <form method="POST" action="/wallet/dontePaypal">
                       <div class="row">
                         <label class="col-12 col-form-label">Amount</label>
                         <div class="col-12">
                           <div class="form-group">
-                            <input type="text" class="form-control" placeholder="1.587">
+                            <input type="text" required id="donateAmount" name="donateAmount" class="form-control" placeholder="100 MYR">
                           </div>
                         </div>
                       </div>
@@ -302,13 +302,14 @@
                       <div class="row mb-0 text-quicksand">
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                           <input type="radio" class="btn-check" name="type" id="credit" value="credit"
-                            autocomplete="off" checked>
+                            autocomplete="off" checked onclick="document.getElementById('donateAmount').placeholder = '100 MYR';">
                           <label class="btn btn-md btn-outline-primary" for="credit">Credit</label>
                           <input type="radio" class="btn-check" name="type" id="points" value="points"
-                            autocomplete="off">
+                            autocomplete="off" onclick="document.getElementById('donateAmount').placeholder = '10000 Points';">
                           <label class="btn btn-md px-3 btn-outline-primary" for="points">Points</label>
                         </div>
                       </div>
+                      <input type="hidden" name="receiverId" value="<%=profile.id%>">
                       <button type="submit" class="btn btn-simple btn-primary btn-icon btn-round float-right">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i>
                       </button>
