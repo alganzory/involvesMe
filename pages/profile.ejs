@@ -294,7 +294,7 @@
                         <label class="col-12 col-form-label">Amount</label>
                         <div class="col-12">
                           <div class="form-group">
-                            <input type="text" id="donateAmount" name="donateAmount" class="form-control" placeholder="100 MYR">
+                            <input type="text" required id="donateAmount" name="donateAmount" class="form-control" placeholder="100 MYR">
                           </div>
                         </div>
                       </div>
@@ -309,6 +309,7 @@
                           <label class="btn btn-md px-3 btn-outline-primary" for="points">Points</label>
                         </div>
                       </div>
+                      <input type="hidden" name="receiverId" value="<%=profile.id%>">
                       <button type="submit" class="btn btn-simple btn-primary btn-icon btn-round float-right">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i>
                       </button>
