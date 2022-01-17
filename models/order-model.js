@@ -18,6 +18,8 @@ const orderSchema = new Schema({
   isPaid: Boolean,
   orderStatus: String,
   paymentMethod: String,
+  paymentId: String,
+  saleId: String,
   deliveryDate: Date
 }, { timestamps: true });
 const Order = mongoose.model("order", orderSchema, "order");

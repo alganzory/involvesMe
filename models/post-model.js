@@ -40,7 +40,7 @@ exports.getPostByuserId = async (userId) => {
 exports.getPostById = async (id) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    return await Post.findOne({ id });
+    return await Post.findOne({ _id: id });
   } catch (error) {
     console.error(error);
   }
@@ -50,7 +50,7 @@ exports.updatePost = async (id, post) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedPost = await Post.updateOne({ id }, post);
+    const updatedPost = await Post.updateOne({ _id: id }, post);
     return updatedPost;
   } catch (error) {
     throw error;
@@ -61,7 +61,7 @@ exports.deletePost = async (id) => {
  
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const updatedPost = await Post.deleteOne({ id });
+    const updatedPost = await Post.deleteOne({ _id: id });
     return updatedPost;
   } catch (error) {
     throw error;
