@@ -2,6 +2,7 @@ const orderService = require("../models/order-model");
 const cartController = require("../controllers/cartController")
 const productController = require("../controllers/productController")
 const userController = require("../controllers/authController")
+const walletController = require("../controllers/walletController")
 const uuid = require("uuid");
 const paypal = require('paypal-rest-sdk');
 const { findOrCreate } = require("../models/user-Model");
@@ -17,7 +18,8 @@ paypal.configure({
 
 const get_Order = async (req, res) => {
     var order = await cartController.getCartById(req.user.id);
-    var userPoints = req.user.points;
+    var userPoints = await walletController.getWalletObject(req.user.id);
+    userPoints = userPoints.points;
     if (order) {
         res.render('order', { order: order, userPoints: userPoints, title: "Your Order" });
     }
@@ -34,6 +36,7 @@ const getCancelOrder = async (req, res) => {
 
 const makeOrder = async (req, res) => {
     var cart = await cartController.getCartById(req.user.id);
+    var userwallet = await walletController.getWalletObject(req.user.id);
     const { fullName, address, usedPoints, phoneNumber, additionalInfo, reward, promoCode } = req.body;
     var total = cart.totalPrice;
     var today = new Date();
@@ -41,14 +44,16 @@ const makeOrder = async (req, res) => {
     var userPoints = 0;
     var pointsUsed = 0;
 
-    if (req.user.points) {
-        userPoints = req.user.points;
+    if (userwallet.points > 0) {
+        userPoints = userwallet.points;
+        console.log("Points found : "+userPoints )
     }
     console.log(usedPoints)
     if (usedPoints == "true") {
         pointsUsed = userPoints;
         userPoints = Number(userPoints) - Number(pointsUsed);
-        total = cart.totalPrice - (userPoints * 0.01);
+        total = parseFloat(cart.totalPrice - (pointsUsed * 0.01)).toFixed(2)
+        console.log("Total price reduced : "+total)
     }
 
     var order = {
@@ -83,7 +88,8 @@ const makeOrder = async (req, res) => {
         console.log("Made Order")
         await cartController.deleteCart(cart);
         console.log("Deleted Cart")
-        await userController.updateUserPoints(req.user.id, userPoints);
+        userwallet.points = userPoints
+        await walletController.updateWallet(userwallet);
         console.log("Added points")
 
         var create_payment_json = {
@@ -220,12 +226,12 @@ const cancelOrder = async (req, res) => {
 
         //3.1 get buyer info
         console.log("Started Buyer info")
-        var buyer = await UserService.getUserById(req.user.id);
+        var buyer = await walletController.getWalletObject(req.user.id);
 
         //3.2 update the points
         var upatedPoints = Number(buyer.points) - Number(reward) + Number(pointsUsed);
-
-        await UserService.updatePoints(req.user.id, upatedPoints);
+        buyer.points = upatedPoints;
+        await walletController.updateWallet(buyer);
 
         //3.3 update the balance
         if (orderSearch.orderStatus == "Paid") {

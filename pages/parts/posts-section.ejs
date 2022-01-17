@@ -67,7 +67,8 @@
                         <div class="blockquote-custom-icon bg-primary  shadow-sm">
                           <i class="fa fa-quote-left text-white"></i>
                         </div>
-                        <p class="text-primary fw-normal"><%=posts[index].title%>
+                        <% var contentString= "/post/" + posts[index]._id %>
+                        <p class="text-primary fw-normal"><a href="<%= contentString%>"><%=posts[index].title%></a>
                         </p>
 
                         <footer class="pt-4  border-top">
@@ -75,7 +76,7 @@
                             <span><%=content%>
                             </span>
                             <% if(s1) {%>
-                            <% var contentString= "/content/" + posts[index]._id %>
+                            
                             <span>...</span>
                             <a href="<%= contentString%>">
 

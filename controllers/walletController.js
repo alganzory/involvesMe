@@ -75,59 +75,64 @@ const dontePaypal = async (req, res) => {
     var donateAmount = req.body.donateAmount;
     var dontationType = req.body.type;
     var pointsAmount = 0;
-    var userWallet = await walletService.getWalletByuserId(receiverId);
     var receiver = await UserService.getUserById(receiverId);
-    if (userWallet == null) {
-        userWallet = {
-            id: uuid.v4(),
-            userId: receiverId,
-            balance: 0,
-            points: 0
-        }
-        await walletService.addWallet(userWallet);
-    }
-
-    if (dontationType == "points") {
-        pointsAmount = donateAmount;
-        donateAmount = pointsAmount * 0.01;
-    }
-
-    if (donateAmount <= 0) {
-        req.flash("error", "Donatation must be more then 0 MYR");
+    var userWallet = await walletService.getWalletByuserId(receiverId);
+    if (receiverId == req.user.id) {
+        req.flash("error", "You cannot donate to yourself");
         res.redirect("/profile/" + receiver.username);
     }
     else {
-        var create_payment_json = {
-            "intent": "sale",
-            "payer": {
-                "payment_method": "paypal"
-            },
-            "redirect_urls": {
-                "return_url": "http://localhost:3000/wallet/success/" + receiverId + "/" + dontationType + "/" + donateAmount + "/" + pointsAmount + "/",
-                "cancel_url": "http://localhost:3000/wallet/cancelPayment"
-            },
-            "transactions": [{
-
-                "amount": {
-                    "currency": "MYR",
-                    "total": donateAmount
-                },
-                "description": "Your Involves Donation"
-            }]
-        };
-
-        paypal.payment.create(create_payment_json, function (error, payment) {
-            if (error) {
-                throw error;
-            } else {
-                for (var i = 0; i < payment.links.length; i++) {
-                    if (payment.links[i].rel === 'approval_url') {
-                        res.redirect(payment.links[i].href);
-                    }
-
+        if (donateAmount <= 0) {
+            req.flash("error", "Donatation must be more then 0 MYR");
+            res.redirect("/profile/" + receiver.username);
+        }
+        else {
+            if (userWallet == null) {
+                userWallet = {
+                    id: uuid.v4(),
+                    userId: receiverId,
+                    balance: 0,
+                    points: 0
                 }
+                await walletService.addWallet(userWallet);
             }
-        });
+
+            if (dontationType == "points") {
+                pointsAmount = donateAmount;
+                donateAmount = pointsAmount * 0.01;
+            }
+            var create_payment_json = {
+                "intent": "sale",
+                "payer": {
+                    "payment_method": "paypal"
+                },
+                "redirect_urls": {
+                    "return_url": "http://localhost:3000/wallet/success/" + receiverId + "/" + dontationType + "/" + donateAmount + "/" + pointsAmount + "/",
+                    "cancel_url": "http://localhost:3000/wallet/cancelPayment"
+                },
+                "transactions": [{
+
+                    "amount": {
+                        "currency": "MYR",
+                        "total": donateAmount
+                    },
+                    "description": "Your Involves Donation"
+                }]
+            };
+
+            paypal.payment.create(create_payment_json, function (error, payment) {
+                if (error) {
+                    throw error;
+                } else {
+                    for (var i = 0; i < payment.links.length; i++) {
+                        if (payment.links[i].rel === 'approval_url') {
+                            res.redirect(payment.links[i].href);
+                        }
+
+                    }
+                }
+            });
+        }
     }
 };
 
@@ -176,10 +181,21 @@ const paymentCancelled = async (req, res) => {
     res.redirect("/");
 };
 
+const getWalletObject = async (userID) => {
+    var wallet = await walletService.getWalletByuserId(userID);
+    return wallet;
+};
+
+const updateWallet = async (wallet) => {
+    var wallet = await walletService.updateWallet(wallet.id,wallet);
+    return wallet;
+};
 module.exports = {
     getWallet,
     withdrawMoney,
     dontePaypal,
     paymentSuccess,
-    paymentCancelled
+    paymentCancelled,
+    getWalletObject,
+    updateWallet
 }

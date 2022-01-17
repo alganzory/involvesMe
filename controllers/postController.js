@@ -48,7 +48,7 @@ const deletePost = async(req, res)=>{
     console.log(deletePost);
 
 
-    res.redirect("/cart/")
+    res.redirect("/profile/")
 
 }
 

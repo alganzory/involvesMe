@@ -2,21 +2,24 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  userId: {
-    type: String,
-    default: null,
-  },
-  productPhotos: { type : Array , "default" : [] },
+  id: String,
+  storeId: String,
+  storeName: String,
   name: String,
-  price: Number,
   description: String,
-  category: String,
   size: String,
   color: String,
-  additionalDetails: String,
-  stock: Number
+  price: Number,
+  category: String,
+  stock: Number,
+  sold: Number,
+  productPhotos: { type : Array , "default" : [] },
+  tags: { type : Array , "default" : [] },
 }, { timestamps: true });
+
 const Product = mongoose.model("product", productSchema, "product");
+
+mongoose.models={};
 
 exports.productModel = Product;
 
@@ -30,7 +33,6 @@ exports.addProduct = async (product) => {
     console.error(error);
   }
 };
-
 exports.getProductByuserId = async (userId) => {
     try {
       await mongoose.connect(process.env.MONGO_URI);
@@ -40,7 +42,6 @@ exports.getProductByuserId = async (userId) => {
       console.error(error);
     }
 };
-
 exports.getProductById = async (id) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
@@ -49,7 +50,6 @@ exports.getProductById = async (id) => {
     console.error(error);
   }
 };
-
 exports.updateProduct = async (id, product) => {
  
   try {
@@ -60,7 +60,6 @@ exports.updateProduct = async (id, product) => {
     throw error;
   }
 };
-
 exports.deleteProduct = async (id) => {
  
   try {
@@ -68,6 +67,20 @@ exports.deleteProduct = async (id) => {
     const updatedProduct = await Product.deleteOne({ id });
     return updatedProduct;
   } catch (error) {
+    throw error;
+  }
+};
+
+exports.updateStock = async(productId, newStock)=>{
+
+  try{
+    await mongoose.connect(process.env.MONGO_URI);
+    const updateStock = await Product.updateOne(
+      {id: productId},
+      {$set: {stock: newStock}}
+    )
+  return updateStock;
+  }catch(error){
     throw error;
   }
 };

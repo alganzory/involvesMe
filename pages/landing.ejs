@@ -117,6 +117,13 @@ Coded by www.creative-tim.com
                 </div>
             </div>
         </div> -->
+        <% if (messages.error) {
+            %>
+          <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+            <%= messages.error %>
+          </div>
+          <%
+          } %>
         <div class="container swapper">
             <h3 class="pt-3 opacity-3"> Recommened content</h3>
             <div class="swiper mySwiper1">

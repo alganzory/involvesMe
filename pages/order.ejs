@@ -207,7 +207,7 @@ Coded by www.creative-tim.com
                                                                 </p>
                                                                 <% if(userPoints> 0) {%>
                                                                     <p class="card-text">Total with points <b>RM
-                                                                   <%=order.totalPrice-(userPoints*0.01)%></b></p>
+                                                                   <%=parseFloat(order.totalPrice-(userPoints*0.01)).toFixed(2)%></b></p>
                                                                     <% } %>
                                                                         <p class="card-text">
                                                                             Use Points:
