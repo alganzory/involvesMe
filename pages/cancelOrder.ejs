@@ -19,12 +19,10 @@ Coded by www.creative-tim.com
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <title>involvesMe. | Product</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <!--     Fonts and icons     -->
@@ -42,6 +40,7 @@ Coded by www.creative-tim.com
     <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
     <link href="/css/additional-styles.css" rel="stylesheet" />
 </head>
+<!-- <%- include('parts/nav-section.ejs') %> -->
 
 <body>
     <ul class="circles">
@@ -55,66 +54,64 @@ Coded by www.creative-tim.com
         <li></li>
         <li></li>
     </ul>
-  
+
     <!-- for test only -->
-    <div class="container justify-content-center" >
-    <div class="row">
-    <div class="col">
-    <h3>Cancel Order</h3>
-    <form action="/order/cancel" method="post" onsubmit="return submitForm(this);"　>
-        Order ID:
-        <input type="text" id="orderId" name="orderId" placeholder="OrderID Value" required> <!-- Place holder Only-->
-        <button  id="btn-submit"
-          class="btn bg-gradient-secondary mt-3">
+    <div class="container justify-content-center">
+        <div class="row">
+            <div class="col">
+                <h3>Cancel Order</h3>
+                <form action="/order/cancel" method="post" onsubmit="return submitForm(this);" 　>
+                    Order ID:
+                    <input type="text" id="orderId" name="orderId" placeholder="OrderID Value" required>
+                    <!-- Place holder Only-->
+                    <button id="btn-submit" class="btn bg-gradient-secondary mt-3">
         Cancel
     </button>
 
-</form>
+                </form>
 
-</div>
-<%if(messages.cannotcancel){%>
-    <p class="text-primary"><%= messages.cannotcancel%></p>
-<%}%>
+            </div>
+            <%if(messages.cannotcancel){%>
+                <p class="text-primary">
+                    <%= messages.cannotcancel%>
+                </p>
+                <%}%>
 
-</div>
-</div>
-<script>
-    function submitForm(form){
-        swal({
-            title: "Are you sure to cancel?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-               
-                form.submit();
-            } 
-        });
-        return false;
-    }
+        </div>
+    </div>
+    <script>
+        function submitForm(form) {
+            swal({
+                    title: "Are you sure to cancel?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
 
-</script>
+                        form.submit();
+                    }
+                });
+            return false;
+        }
+    </script>
 
-<!--   Core JS Files   -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-</script>
-<script src="/js/plugins/perfect-scrollbar.min.js"></script>
-<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-<script src="/js/plugins/parallax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI">
-</script>
-<script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+    <script src="/js/plugins/parallax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI">
+    </script>
+    <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
