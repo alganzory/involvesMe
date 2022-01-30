@@ -21,7 +21,7 @@ const get_Order = async (req, res) => {
     var userPoints = await walletController.getWalletObject(req.user.id);
     userPoints = userPoints.points;
     if (order) {
-        res.render('order', { order: order, userPoints: userPoints, title: "Your Order" });
+        res.render('order', { order: order, usertype: req.user.type,userPoints: userPoints, title: "Your Order" });
     }
     else {
         req.flash("error", "Cart Doesnt Have any Items !!");
@@ -30,9 +30,27 @@ const get_Order = async (req, res) => {
 };
 
 const getCancelOrder = async (req, res) => {
-    res.render("cancelOrder")
+    res.render("cancelOrder",{usertype: req.user.type})
 };
 
+
+const get_Order_Creator = async (req, res) => {
+    var order = await orderService.getOrderBysellerId();
+    var orders = new Array;
+    for (var i = 0; i < order.length; i++) {
+        for (let index = 0; index < order[i].products.length; index++) {
+            if (order[i].products[index].store === req.user.id) {
+                console.log("found");
+                orders.push(order[i]);
+            }
+        }
+    }
+    var orderss = new Set(orders);
+    orders = Array.from(orderss);
+    console.log(req.user.type);
+    res.render('viewOrder', { order: orders, usertype: req.user.type,title: "Your Order" });
+
+};
 
 const makeOrder = async (req, res) => {
     var cart = await cartController.getCartById(req.user.id);
@@ -46,14 +64,14 @@ const makeOrder = async (req, res) => {
 
     if (userwallet.points > 0) {
         userPoints = userwallet.points;
-        console.log("Points found : "+userPoints )
+        console.log("Points found : " + userPoints)
     }
     console.log(usedPoints)
     if (usedPoints == "true") {
         pointsUsed = userPoints;
         userPoints = Number(userPoints) - Number(pointsUsed);
         total = parseFloat(cart.totalPrice - (pointsUsed * 0.01)).toFixed(2)
-        console.log("Total price reduced : "+total)
+        console.log("Total price reduced : " + total)
     }
 
     var order = {
@@ -222,7 +240,7 @@ const cancelOrder = async (req, res) => {
         var totalPrice = orderSearch.totalPrice;
         var reward = orderSearch.reward;
         var pointsUsed = orderSearch.pointsUsed;
-        
+
 
         //3.1 get buyer info
         console.log("Started Buyer info")
@@ -277,5 +295,6 @@ module.exports = {
     paymentSuccess,
     paymentCancelled,
     cancelOrder,
-    getCancelOrder
+    getCancelOrder,
+    get_Order_Creator
 }
