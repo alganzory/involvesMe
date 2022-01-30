@@ -9,6 +9,7 @@ router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
 router.get('/success/:id', checkAuthenticated,orderController.paymentSuccess);
 router.get('/cancelPayment', checkAuthenticated,orderController.paymentCancelled);
 router.get('/' ,  checkAuthenticated, orderController.getCancelOrder);
+router.get('/viewOrdersCreator' ,  checkAuthenticated, orderController.get_Order_Creator);
 router.post('/cancel', (checkAuthenticated, orderController.cancelOrder))
   
 

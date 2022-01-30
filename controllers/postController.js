@@ -13,7 +13,7 @@ const get_product = async (req, res) => {
     var user = {
         id: req.user.id
     }
-    res.render("viewPost", { post: post, user: user, title: "Post" });
+    res.render("viewPost", { post: post,usertype: req.user.type, user: user, title: "Post" });
 };
 
 // Function Called from Profile Controller
@@ -32,7 +32,7 @@ const makePost = async (req, res) => {
 };
 
 const get_makePost = async (req, res) => {
-    res.render("addPost", { title: "Add Post" });
+    res.render("addPost", { usertype: req.user.type,title: "Add Post" });
 };
 
 // delete post

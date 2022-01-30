@@ -1,3 +1,4 @@
+const { Store } = require("express-session");
 let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
@@ -44,6 +45,16 @@ exports.getOrderByuserId = async (userId) => {
     } catch (error) {
       console.error(error);
     }
+};
+
+exports.getOrderBysellerId = async (sellerId) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    var order = await Order.find();
+    return order;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 exports.getOrderById = async (orderId) => {

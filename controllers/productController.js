@@ -22,7 +22,7 @@ const storage = new CloudinaryStorage({
 const parser = multer({ storage: storage });
 
 const get_addproduct = async(req, res) => {
-    res.render('addProduct');
+    res.render('addProduct',{usertype: req.user.type});
 };
 
 const upload_photos = parser.array('productPhotos', 10);
@@ -64,7 +64,7 @@ const get_product = async(req, res) => {
     };
 
 
-    res.render("viewProduct", { product: product, user: user });
+    res.render("viewProduct", { product: product, usertype: req.user.type,user: user });
 };
 
 const get_product_json = async(req, res) => {

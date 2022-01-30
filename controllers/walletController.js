@@ -68,7 +68,7 @@ const getWallet = async (req, res) => {
         }
         await walletService.addWallet(userWallet);
     }
-    res.render("wallet", { userWallet: userWallet, title: "Wallet" });
+    res.render("wallet", { userWallet: userWallet, usertype: req.user.type,title: "Wallet" });
 };
 const dontePaypal = async (req, res) => {
     var receiverId = req.body.receiverId;
