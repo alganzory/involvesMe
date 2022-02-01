@@ -27,7 +27,6 @@ const parser = multer({ storage: storage });
 
 const get_mystore = async (req, res) => {
   var store = await StoreService.getStoreByUserId(req.user.id);
-  console.log(req.user);
   store = store
     ? store
     : {
