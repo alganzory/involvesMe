@@ -484,8 +484,8 @@ Coded by www.creative-tim.com
                                                                             <!-- Button trigger modal -->
                                                                             <button type="button "
                                                                                 class="btn btn-secondary"
-                                                                                data-toggle="modal "
-                                                                                data-target="#deleteModal ">
+                                                                                data-toggle="modal"
+                                                                                data-target="#deleteModal">
                                                                                 Delete account
                                                                             </button>
                                                                             <script>
@@ -498,61 +498,7 @@ Coded by www.creative-tim.com
                                                                             </script>
 
 
-                                                                            <!-- Modal -->
 
-                                                                            <div class="modal " id="deleteModal"
-                                                                                tabindex="-1 " role="dialog"
-                                                                                aria-labelledby="deleteModalLabel "
-                                                                                aria-hidden="true ">
-                                                                                <div class="modal-dialog modal-dialog-centered"
-                                                                                    role="document">
-                                                                                    <div class="modal-content ">
-                                                                                        <div class="modal-header ">
-                                                                                            <h5 class="modal-title text-secondary "
-                                                                                                id="exampleModalLabel ">
-                                                                                                Account deletion</h5>
-                                                                                            <button type="button "
-                                                                                                class="close border-0 bg-transparent "
-                                                                                                data-dismiss="modal "
-                                                                                                aria-label="Close ">
-                                                                                                <span
-                                                                                                    aria-hidden="true ">&times;</span>
-                                                                                            </button>
-                                                                                            <script>
-                                                                                                // add on click event listener to the previous button
-                                                                                                document.getElementById("deleteModal").addEventListener("click",
-                                                                                                    function () {
-                                                                                                        document.getElementById('deleteModal').style.display = 'none'
-                                                                                                    });
-
-                                                                                            </script>
-                                                                                        </div>
-                                                                                        <div class="modal-body ">
-                                                                                            Are you sure you want to
-                                                                                            Delete your Account ?
-                                                                                        </div>
-                                                                                        <div class="modal-footer ">
-                                                                                            <form role="form "
-                                                                                                method="POST"
-                                                                                                action="/settings/delete-account?_method=DELETE">
-                                                                                                <button type="submit"
-                                                                                                    class="btn bg-gradient-primary">Delete
-                                                                                                    account</button>
-                                                                                            </form>
-                                                                                            <button type="button "
-                                                                                                class="btn btn-secondary "
-                                                                                                data-dismiss="modal ">Close</button>
-                                                                                        </div>
-                                                                                        <script>
-                                                                                            // add on click event listener to the previous button
-                                                                                            document.getElementById("deleteModal").addEventListener("click",
-                                                                                                function () {
-                                                                                                    document.getElementById('deleteModal').style.display = 'none'
-                                                                                                });
-                                                                                        </script>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                 </div>
@@ -561,6 +507,49 @@ Coded by www.creative-tim.com
                     </div>
                 </div>
             </div>
+            </div>
+            <!-- Modal -->
+
+            <div class="modal " id="deleteModal" tabindex="-1 " role="dialog" aria-labelledby="deleteModalLabel "
+                aria-hidden="true ">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title text-secondary " id="exampleModalLabel ">
+                                Account deletion</h5>
+                            <button type="button " class="close border-0 bg-transparent " data-dismiss="modal "
+                                aria-label="Close ">
+                                <span aria-hidden="true ">&times;</span>
+                            </button>
+                            <script>
+                                // add on click event listener to the previous button
+                                document.getElementById("deleteModal").addEventListener("click",
+                                    function () {
+                                        document.getElementById('deleteModal').style.display = 'none'
+                                    });
+
+                            </script>
+                        </div>
+                        <div class="modal-body ">
+                            Are you sure you want to
+                            Delete your Account ?
+                        </div>
+                        <div class="modal-footer ">
+                            <form role="form " method="POST" action="/settings/delete-account?_method=DELETE">
+                                <button type="submit" class="btn bg-gradient-primary">Delete
+                                    account</button>
+                            </form>
+                            <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button>
+                        </div>
+                        <script>
+                            // add on click event listener to the previous button
+                            document.getElementById("deleteModal").addEventListener("click",
+                                function () {
+                                    document.getElementById('deleteModal').style.display = 'none'
+                                });
+                        </script>
+                    </div>
+                </div>
             </div>
     </section>
 
