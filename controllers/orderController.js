@@ -21,7 +21,7 @@ const get_Order = async (req, res) => {
     var userPoints = await walletController.getWalletObject(req.user.id);
     userPoints = userPoints.points;
     if (order) {
-        res.render('order', { order: order, usertype: req.user.type,userPoints: userPoints, title: "Your Order" });
+        res.render('order', { order: order, usertype: req.user.type, userPoints: userPoints, title: "Your Order" });
     }
     else {
         req.flash("error", "Cart Doesnt Have any Items !!");
@@ -30,7 +30,7 @@ const get_Order = async (req, res) => {
 };
 
 const getCancelOrder = async (req, res) => {
-    res.render("cancelOrder",{usertype: req.user.type})
+    res.render("cancelOrder", { usertype: req.user.type })
 };
 
 
@@ -48,15 +48,20 @@ const get_Order_Creator = async (req, res) => {
     var orderss = new Set(orders);
     orders = Array.from(orderss);
     console.log(req.user.type);
-    res.render('viewOrder', { order: orders, usertype: req.user.type,title: "Your Order" });
+    res.render('viewOrder', { order: orders, usertype: req.user.type, title: "Your Order" });
 
 };
 
 const get_Orders = async (req, res) => {
     var orders = await orderService.getOrdersByuserId(req.user.id);
-    console.log(orders);
-    res.render('manageOrder', { orders: orders, user: req.user ,usertype: req.user.type, title: "Your Orders" });
-
+    if (!orders[0]) {
+        req.flash("error", "You Doesnt Have any Orders !!");
+        res.redirect("/");
+    }
+    else {
+        console.log(orders);
+        res.render('manageOrder', { orders: orders, user: req.user, usertype: req.user.type, title: "Your Orders" });
+    }
 };
 
 const makeOrder = async (req, res) => {
