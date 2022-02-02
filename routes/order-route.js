@@ -5,6 +5,7 @@ const orderController = require("../controllers/orderController")
 const { checkAuthenticated, checkNotAutheticated } = require('../controllers/authController');
 
 router.get('/checkout', checkAuthenticated,orderController.get_Order);
+router.get('/orders', checkAuthenticated,orderController.get_Orders);
 router.post('/makeOrder', checkAuthenticated,orderController.makeOrder);
 router.get('/success/:id', checkAuthenticated,orderController.paymentSuccess);
 router.get('/cancelPayment', checkAuthenticated,orderController.paymentCancelled);

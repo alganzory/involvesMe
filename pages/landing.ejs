@@ -43,31 +43,33 @@ Coded by www.creative-tim.com
             border-radius: 50%;
             margin-right: 100px;
         }
-        
+
         .avatar:last-child {
             margin-right: -2px
         }
-        
+
         .swiper-button-prev {
             margin-left: 100px !important;
         }
-        
+
         .swiper-button-next {
             margin-right: 100px !important;
         }
-        
+
         @media only screen and (max-width: 800px) {
             .avatar {
                 margin-right: 10px;
             }
+
             .swiper-button-prev {
                 margin-left: 40px !important;
             }
+
             .swiper-button-next {
                 margin-right: 40px !important;
             }
         }
-        
+
         @media only screen and (max-width: 450px) {
             .avatar {
                 width: 70px;
@@ -75,7 +77,9 @@ Coded by www.creative-tim.com
                 border-radius: 50%;
                 margin-right: 1px;
             }
+
             .swiper-button-prev {}
+
             .swiper-button-next {
                 margin-right: 10px !important;
             }
@@ -117,57 +121,60 @@ Coded by www.creative-tim.com
                 </div>
             </div>
         </div> -->
-        <% if (messages.error) {
-            %>
-          <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
-            <%= messages.error %>
-          </div>
-          <%
-          } %>
-        <div class="container swapper">
-            <h3 class="pt-3 opacity-3"> Recommened Creators</h3>
-            <div class="swiper mySwiper1">
-                <div class="swiper-wrapper">
-                    
-                    <% profiles.forEach(function(profile) { %>
-        
-                            <div class="swiper-slide">
-                        <div class="avatar">
-                            <div class=" ">
-                                <% const profilePhoto = profile.profilePhoto ? profile.profilePhoto : 'https://res.cloudinary.com/involvesme/image/upload/v1638402349/profile-photos/default_pp.png' %>
-                                <% const profileLink = "/profile/" + profile.id %>
-                                <a href="<%=profileLink%>"> <img src="<%=profilePhoto%>" alt="Avatar " class="avatar ">
-                                </a>
-                 
-
-                            </div>
-                        </div>
-                        </div>
-                        <% }) %>
-                
-    
-
-                </div>
-                <!-- <div class="swiper-button-next "></div>
-            <div class="swiper-button-prev "></div> -->
+        <% if (messages.error) { %>
+            <div class="alert alert-danger text-white border-0 text-sm p-3" role="alert">
+                <%= messages.error %>
             </div>
-        </div>
-        <div class="container mt-4">
+            <% } %>
+                <div class="container swapper">
+                    <h3 class="pt-3 opacity-3"> Recommened Creators</h3>
+                    <div class="swiper mySwiper1">
+                        <div class="swiper-wrapper">
+
+                            <% profiles.forEach(function(profile) { %>
+
+                                <div class="swiper-slide">
+                                    <div class="avatar">
+                                        <div class=" ">
+                                            <% const profilePhoto=profile.profilePhoto ? profile.profilePhoto
+                                                : 'https://res.cloudinary.com/involvesme/image/upload/v1638402349/profile-photos/default_pp.png'
+                                                %>
+                                                <% const profileLink="/profile/" + profile.id %>
+                                                    <a href="<%=profileLink%>"> <img src="<%=profilePhoto%>"
+                                                            alt="Avatar " class="avatar ">
+
+                                                    </a>
+                                                    
+
+                                        </div>
+                                    </div>
+                                    <%=profile.displayName%>
+                                </div>
+                                <% }) %>
 
 
-            <div class="swiper mySwiper2">
-                <h3 class="pt-3 opacity-3"> Recommended Posts</h3>
-                <div class="swiper-wrapper">
+
+                        </div>
+                        <!-- <div class="swiper-button-next "></div>
+            <div class="swiper-button-prev "></div> -->
+                    </div>
+                </div>
+                <div class="container mt-4">
 
 
-                    <% posts.forEach(post => { %>
-                        
-                 
-                    <div class="swiper-slide">
-                        <div class="row mt-5" style="width: 80%; text-align: left;">
-                            <div class="col">
+                    <div class="swiper mySwiper2">
+                        <h3 class="pt-3 opacity-3"> Recommended Posts</h3>
+                        <div class="swiper-wrapper">
 
-                                <!-- <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+
+                            <% posts.forEach(post=> { %>
+
+
+                                <div class="swiper-slide">
+                                    <div class="row mt-5" style="width: 80%; text-align: left;">
+                                        <div class="col">
+
+                                            <!-- <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                     <div class="blockquote-custom-icon bg-primary  shadow-sm">
                       <i class="fa fa-quote-left text-white"></i>
                     </div>
@@ -178,65 +185,70 @@ Coded by www.creative-tim.com
                     </footer>
                   </blockquote> -->
 
-                                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
-                                    <div class="blockquote-custom-icon bg-primary  shadow-sm">
-                                        <i class="fa fa-quote-left text-white"></i>
+                                            <blockquote
+                                                class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                                                <div class="blockquote-custom-icon bg-primary  shadow-sm">
+                                                    <i class="fa fa-quote-left text-white"></i>
+                                                </div>
+                                                <p class="text-primary fw-normal">
+                                                    <%= post.title%>
+                                                </p>
+
+                                                <footer class="pt-4  border-top">
+                                                    <p class="card-title text-dark fw-normal" style="height: 135px;">
+                                                        <%= post.content%>
+
+                                                            </a>
+
+                                                    </p>
+
+                                                </footer>
+                                            </blockquote>
+                                        </div>
                                     </div>
-                                    <p class="text-primary fw-normal">
-                                        <%= post.title%>
-                                    </p>
+                                </div>
 
-                                    <footer class="pt-4  border-top">
-                                        <p class="card-title text-dark fw-normal" style="height: 135px;">
-                                            <%= post.content%>
-                                        
-                                            </a>
+                                <% }) %>
 
-                                        </p>
-
-                                    </footer>
-                                </blockquote>
-                            </div>
                         </div>
                     </div>
- 
-                    <% }) %>
-
+                    <!-- Swiper Wrapper -->
+                    <div class="swiper-pagination"></div>
                 </div>
-            </div>
-            <!-- Swiper Wrapper -->
-            <div class="swiper-pagination"></div>
-        </div>
 
-        <div class="container mb-10 mt-5">
+                <div class="container mb-10 mt-5">
 
-            <h3 class="pt-3 opacity-3"> Recommended Products</h3>
+                    <h3 class="pt-3 opacity-3"> Recommended Products</h3>
 
-            <div class="container d-flex flex-wrap overflow-auto max-height-vh-100 mt-4 "
-            style="gap: 7rem">
-              
-                <% products.forEach(function(product) {  %>
-           
-           <div class="card" style="width: 20rem;">
-             <img class="card-img-top mt-15" src="<%= product.productPhotos[0] %> " alt="product">
-             <div class="card-body">
-               <h5 class="card-title"><%=product.name%></h5>
-               <p class="card-text"><%=product.description%></p>
-               <p class="card-text"> MYR <%=product.price%></p>
-               <% const productLink = "/product/view/" + product.id %>
-               <a href=<%=productLink%> class="btn btn-primary">View Product</a>
-             </div>
-           </div>
-         <% }) %>
+                    <div class="container d-flex flex-wrap overflow-auto max-height-vh-100 mt-4 " style="gap: 7rem">
 
-            </div>
-        </div>
-        </div>
-        </div>
+                        <% products.forEach(function(product) { %>
+
+                            <div class="card" style="width: 20rem;">
+                                <img class="card-img-top mt-15" src="<%= product.productPhotos[0] %> " alt="product">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%=product.name%>
+                                    </h5>
+                                    <p class="card-text">
+                                        <%=product.description%>
+                                    </p>
+                                    <p class="card-text"> MYR <%=product.price%>
+                                    </p>
+                                    <% const productLink="/product/view/" + product.id %>
+                                        <a href=<%=productLink%> class="btn btn-primary">View Product</a>
+                                </div>
+                            </div>
+                            <% }) %>
+
+                    </div>
+                </div>
+                </div>
+                </div>
 
     </body>
 
- 
+
     </div>
     </div>
     </section>
@@ -259,9 +271,9 @@ Coded by www.creative-tim.com
         var swiper = new Swiper(".mySwiper1 ", {
             slidesPerView: 3,
             autoplay: {
-          delay: 1000,
-          disableOnInteraction: false,
-        },
+                delay: 1000,
+                disableOnInteraction: false,
+            },
             navigation: {
                 nextEl: ".swiper-button-next ",
                 prevEl: ".swiper-button-prev ",

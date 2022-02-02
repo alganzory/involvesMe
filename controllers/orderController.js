@@ -52,6 +52,13 @@ const get_Order_Creator = async (req, res) => {
 
 };
 
+const get_Orders = async (req, res) => {
+    var orders = await orderService.getOrdersByuserId(req.user.id);
+    console.log(orders);
+    res.render('manageOrder', { orders: orders, user: req.user ,usertype: req.user.type, title: "Your Orders" });
+
+};
+
 const makeOrder = async (req, res) => {
     var cart = await cartController.getCartById(req.user.id);
     var userwallet = await walletController.getWalletObject(req.user.id);
@@ -285,7 +292,7 @@ const cancelOrder = async (req, res) => {
         )
     }
 
-    res.redirect("/order/")
+    res.redirect("/order/orders")
 };
 
 module.exports = {
@@ -296,5 +303,6 @@ module.exports = {
     paymentCancelled,
     cancelOrder,
     getCancelOrder,
-    get_Order_Creator
+    get_Order_Creator,
+    get_Orders
 }

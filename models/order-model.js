@@ -47,6 +47,16 @@ exports.getOrderByuserId = async (userId) => {
     }
 };
 
+exports.getOrdersByuserId = async (userId) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    var order = await Order.find({buyerId: userId });
+    return order;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 exports.getOrderBysellerId = async (sellerId) => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
