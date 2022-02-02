@@ -121,3 +121,13 @@ exports.createOrUpdateProfile = async (id, profile) => {
     throw error;
   }
 }
+
+exports.getAllOtherProfiles = async (id) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const profiles = await Profile.find({ id: { $ne: id } });
+    return profiles;
+  } catch (error) {
+    console.error(error);
+  }
+}

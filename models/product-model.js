@@ -84,3 +84,13 @@ exports.updateStock = async(productId, newStock)=>{
     throw error;
   }
 };
+
+exports.getAllOtherProducts = async (storeId) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const products = await Product.find({ storeId: { $ne: storeId } });
+    return products;
+  } catch (error) {
+    console.error(error);
+  }
+}
