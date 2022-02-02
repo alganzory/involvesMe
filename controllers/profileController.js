@@ -4,6 +4,7 @@ const PostController = require("../controllers/postController");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const { search } = require("../routes/landing-route");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -78,6 +79,8 @@ const get_myprofile = async (req, res) => {
 const get_profile = async (req, res) => {
   var usernameURL = req.params.username;
   var searchedUser = await UserService.getUserByUsername(usernameURL);
+  searchedUser = searchedUser? searchedUser : await UserService.getUserById(usernameURL);
+  
   var profileOwner = false;
   if (searchedUser) {
     var profile = await ProfileService.getProfileById(searchedUser.id);

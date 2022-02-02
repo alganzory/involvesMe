@@ -67,3 +67,13 @@ exports.deletePost = async (id) => {
     throw error;
   }
 };
+
+exports.getAllOtherPosts = async (userId) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const posts = await Post.find({ userId: { $ne: userId } });
+    return posts;
+  } catch (error) {
+    console.error(error);
+  }
+};
