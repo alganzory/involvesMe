@@ -86,7 +86,7 @@ Coded by www.creative-tim.com
 
   <!-- Editing Button and Banner -->
   <%  if (isStoreOwner) {  %>
-  <div class="fixed-top container">
+  <div class=" container">
     <div id="editing-mode-banner"
       class="shadow alert alert-info text-white border-0 text-md p-3 d-none justify-content-between align-items-center mt-3"
       role="alert" style="opacity: 90%; z-index: 2000;">
@@ -156,7 +156,9 @@ Coded by www.creative-tim.com
 
         <% if (isStoreOwner) { %> 
         <div>
-          <button type="button" class="btn bg-gradient-primary mt-3">Add Product</button>
+          
+          <a href="product/" class="btn bg-gradient-primary mt-3" role="button">Add Product</a>
+          
         </div>
         <% } %>
       </div>

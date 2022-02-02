@@ -49,9 +49,9 @@ const get_mystore = async (req, res) => {
     console.log (store);
      products = await productController.get_store_products(store.id);
 
-    return res.render("store", { store: store, user: user, products:products, isStoreOwner: true });
+    return res.render("store", { store: store,usertype: req.user.type, user: user, products:products, isStoreOwner: true });
   }
-  res.render("store", { store: store, user: user, isStoreOwner: true });
+  res.render("store", { store: store,usertype: req.user.type, user: user, isStoreOwner: true });
 };
 
 const get_store = async (req, res) => {
@@ -72,10 +72,10 @@ const get_store = async (req, res) => {
     console.log (store);
      products = await productController.get_store_products(store.id);
 
-    return res.render("store", { store: store, user: user, products:products, isStoreOwner: false });
+    return res.render("store", { store: store,usertype: req.user.type, user: user, products:products, isStoreOwner: false });
   }
 
-  res.render("store", { store: store, user: user, isStoreOwner: false });
+  res.render("store", { store: store,usertype: req.user.type, user: user, isStoreOwner: false });
 };
 
 const upload_photo = parser.single("bannerPic");

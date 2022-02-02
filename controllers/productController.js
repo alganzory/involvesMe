@@ -78,11 +78,7 @@ const get_product = async(req, res) => {
     res.render("viewProduct", { product: product, usertype: req.user.type,user: user });
 };
 
-const get_product_json = async(req, res) => {
-    const productId = req.params.id;
-    const product = await ProductService.getProductById(productId);
-    res.json(product);
-};
+
 
 const updateProductStock = async(productObject, productId) => {
     var updatedProduct = await ProductService.updateProduct(productId, productObject);
@@ -112,6 +108,5 @@ module.exports = {
     add_product,
     upload_photos,
     get_addproduct,
-    get_product_json,
     get_store_products
 };
