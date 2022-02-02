@@ -100,405 +100,480 @@ Coded by www.creative-tim.com
         <li></li>
     </ul>
     <section>
-        <div class="page-header min-vh-100">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-8 d-flex flex-column mx-auto">
-                        <div class="card card-plain">
-                            <div class="card-header pb-0 text-left">
-                                <h4 class="pt-3">Settings</h4>
-                            </div>
-                            <div class="card-body pb-0">
-                                <% if (messages.error) { %>
-                                <div class="alert alert-danger text-white border-0 text-sm p-3 " role="alert">
-                                    <%= messages.error %>
+        <%- include('parts/nav-section.ejs') %>
+            <div class="page-header min-vh-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-8 d-flex flex-column mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left">
+                                    <h4 class="pt-3">Settings</h4>
                                 </div>
-                                <%} %>
+                                <div class="card-body pb-0">
+                                    <% if (messages.error) { %>
+                                        <div class="alert alert-danger text-white border-0 text-sm p-3 " role="alert">
+                                            <%= messages.error %>
+                                        </div>
+                                        <%} %>
 
-                                <p class="mb-0 pt-4">Profile</p>    
-                                <% if (messages.noProfile) {%>
-                                <div class="alert alert-info text-white border-0 text-sm p-3 mt-2" role="alert">
-                                    <%= messages.noProfile %>
-                                </div>
-                                <%} %>
-
-                                <div class="profile-pic-div position-relative py-1 mb-3">
-                                    <form id="pp-form" method="post" method="post" enctype="multipart/form-data"
-                                        action="/settings/profile-photo">
-
-                                        <div id="pp-edit" class="pp-upload-wrapper m-0">
-                                            <label for="profile-upload" class="pp-upload m-0 text-center p-0">
-                                                <div type="button" class="btn btn-outline-primary mb-0 mx-1 px-3">
-                                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                            <p class="mb-0 pt-4">Profile</p>
+                                            <% if (messages.noProfile) {%>
+                                                <div class="alert alert-info text-white border-0 text-sm p-3 mt-2"
+                                                    role="alert">
+                                                    <%= messages.noProfile %>
                                                 </div>
-                                            </label>
-                                            <input onchange="loadFile()" type="file" name="profile-photo"
-                                                id="profile-upload" accept="image/png, image/jpeg">
-                                        </div>
+                                                <%} %>
 
-                                        <img class="rounded-circle mt-4 rounded mx-auto d-block" width="150px"
-                                            id="profile-photo" src=<%=profilePhoto%>>
+                                                    <div class="profile-pic-div position-relative py-1 mb-3">
+                                                        <form id="pp-form" method="post" method="post"
+                                                            enctype="multipart/form-data"
+                                                            action="/settings/profile-photo">
 
-                                        <div id="pp-buttons" style="display: none;" class="btn-group col-12 p-2"
-                                            role="group">
+                                                            <div id="pp-edit" class="pp-upload-wrapper m-0">
+                                                                <label for="profile-upload"
+                                                                    class="pp-upload m-0 text-center p-0">
+                                                                    <div type="button"
+                                                                        class="btn btn-outline-primary mb-0 mx-1 px-3">
+                                                                        <i class="fa fa-pen" aria-hidden="true"></i>
+                                                                    </div>
+                                                                </label>
+                                                                <input onchange="loadFile()" type="file"
+                                                                    name="profile-photo" id="profile-upload"
+                                                                    accept="image/png, image/jpeg">
+                                                            </div>
 
-                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6" type="button"
-                                                id="ppCancel">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("ppCancel").addEventListener("click",
-                                                    function () {
-                                                        ppCancel();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 " type="submit"
-                                                id="ppSave">
-                                                <i class="fas fa-check text-md "></i>
-                                            </button>
-                                        </div>
-                                    </form>
+                                                            <img class="rounded-circle mt-4 rounded mx-auto d-block"
+                                                                width="150px" id="profile-photo" src=<%=profilePhoto%>>
 
-                                </div>
+                                                            <div id="pp-buttons" style="display: none;"
+                                                                class="btn-group col-12 p-2" role="group">
 
-                                <form role="form" method="POST" action="/settings/name?_method=PUT">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="displayname" class="form-check-label text-muted">Display
-                                            Name</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="displayname" id="displayname"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Display Name"
-                                                value = "<%=displayName%>"
-                                                aria-label="Display name" aria-describedby="button-addon2" 
-                                                readonly >
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttondisplayname" >
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="displaycancel" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("displaycancel").addEventListener("click",
-                                                    function () {
-                                                        displayCancel();
-                                                    });
-                                                document.getElementById("editbuttondisplayname").addEventListener(
-                                                    "click",
-                                                    function () {
-                                                        enableDisplayName();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveDisplay" style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
+                                                                <button
+                                                                    class="btn btn-outline-primary col-3 mb-0 mx-0 px-6"
+                                                                    type="button" id="ppCancel">
+                                                                    <i class="fas fa-times text-md"></i>
+                                                                </button>
+                                                                <script>
+                                                                    // add on click event listener to the previous button
+                                                                    document.getElementById("ppCancel").addEventListener("click",
+                                                                        function () {
+                                                                            ppCancel();
+                                                                        });
+                                                                </script>
+                                                                <button
+                                                                    class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
+                                                                    type="submit" id="ppSave">
+                                                                    <i class="fas fa-check text-md "></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
 
-
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <form role="form " method="POST" action="/settings/bio">
-                                    <div class="form-group col-lg-12 mx-auto pb-0">
-                                        <label for="bioedit" class="form-check-label text-muted">Bio</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="bio" id="bioedit"
-                                                class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value= "<%=bio%>"
-                                                 placeholder="Your Bio"
-                                                aria-label="Bio" aria-describedby="button-addon2" readonly>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-outline-primary col-12 mb-0 mx-auto" type="button"
-                                                id="editbuttonbio">
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("editbuttonbio").addEventListener("click",
-                                                    function () {
-                                                        enableBio();
-                                                    });
-                                            </script>
-                                            <div class="btn-group col-12 pb-5" role="group">
-                                                <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6"
-                                                    type="button" id="biocancel"
-                                                    style="display: none;">
-                                                    <i class="fas fa-times text-md"></i>
-                                                </button>
-                                                <script>
-                                                    // add on click event listener to the previous button
-                                                    document.getElementById("biocancel").addEventListener("click",
-                                                        function () {
-                                                            bioCancel();
-                                                        });
-                                                </script>
-                                                <button class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
-                                                    type="submit" id="saveBio" style="display: none; ">
-                                                    <i class="fas fa-check text-md "></i>
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <!-- Divider Text -->
-                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
-                                    <div class="border-bottom w-100 ml-5 "></div>
-                                    <span class="px-0 small text-muted font-weight-bold text-muted "></span>
-                                    <div class="border-bottom w-100 mr-5 "></div>
-                                </div>
-
-                                <p class="mb-0 pt-2 pb-3">Account</p>
-                                <form role="form " method="POST " action="/settings/username?_method=PUT ">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="username" class="form-check-label text-muted">Username</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="username" id="username"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                value="<%=username%>" placeholder="@Username" aria-label="Username"
-                                                aria-describedby="button-addon2" readonly>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonusername">
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("editbuttonusername").addEventListener("click",
-                                                    function () {
-                                                        enableUsername();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="usernamecancel" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("usernamecancel").addEventListener("click",
-                                                    function () {
-                                                        usernameCancel();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveName" style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                </form>
-                                <%var actionurl;%>
-                                <% if (usertype ==="local") actionurl="/settings/email?_method=PUT"; else actionurl="#"%>
-                                <form role="form" method="POST" action="<%=actionurl%>">
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="email" class="form-check-label text-muted">Email</label>
-                                        <div class="d-flex input-group mb-1">
-                                            <input type="text" name="email" id="email"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
-                                                value="<%=useremail%>" placeholder="email" aria-label="email"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%if(usertype === "local"){%>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonemail" >
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("editbuttonemail").addEventListener("click",
-                                                    function () {
-                                                        enableEmail();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="emailcancel" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("emailcancel").addEventListener("click",
-                                                    function () {
-                                                        emailCancel();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="saveEmail" style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
-                                            <%}%>
                                                     </div>
-                                                </div>
-                                            </form>
-                                            <form role="form" method="POST" action="/settings/password?_method=PUT">
-                                                <div class="form-group col-lg-12 mx-auto">
-                                                    <label for="password" class="form-check-label text-muted" id="passwordtext">Password</label>
-                                                    <div class="d-flex input-group mb-1">
-                                                        <% if (passwordVer){ %>
-                                            <input type="password" name="password" id="password"
-                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
-                                                placeholder="**********" aria-label="password"
-                                                aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <% if (!passwordVer){ %>
-                                            <input type="password" name="placeholderpassword" id="placeholderpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Add a password to be able to sign in with credentials"
-                                                aria-label="password" aria-describedby="button-addon2" readonly>
-                                            <%} %>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="editbuttonpassword" >
-                                                <i class="fas fa-pen text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("editbuttonpassword").addEventListener("click",
-                                                    function () {
-                                                        enablePassword();
-                                                    });
-                                            </script>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-12 mx-auto">
-                                        <label for="newpassword" class="form-check-label text-muted"
-                                            id="newpasswordtext" style="display: none;">New Password</label>
-                                        <div class="input-group mb-1">
-                                            <input type="password" name="newpassword" id="newpassword"
-                                                class="flex-grow-1 input-group-text bg-gray-300 text-start"
-                                                placeholder="Please Input New Password" aria-label="newpassword"
-                                                aria-describedby="button-addon2" style="display: none;">
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="button"
-                                                id="passwordcancel" style="display: none;">
-                                                <i class="fas fa-times text-md"></i>
-                                            </button>
-                                            <script>
-                                                // add on click event listener to the previous button
-                                                document.getElementById("passwordcancel").addEventListener("click",
-                                                    function () {
-                                                        passwordCancel();
-                                                    });
-                                            </script>
-                                            <button class="btn btn-outline-primary mb-0 mx-1 px-3" type="submit"
-                                                id="savePassword" style="display: none;">
-                                                <i class="fas fa-check text-md"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+
+                                                    <form role="form" method="POST" action="/settings/name?_method=PUT">
+                                                        <div class="form-group col-lg-12 mx-auto">
+                                                            <label for="displayname"
+                                                                class="form-check-label text-muted">Display
+                                                                Name</label>
+                                                            <div class="d-flex input-group mb-1">
+                                                                <input type="text" name="displayname" id="displayname"
+                                                                    class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                                    placeholder="Display Name" value="<%=displayName%>"
+                                                                    aria-label="Display name"
+                                                                    aria-describedby="button-addon2" readonly>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="button" id="editbuttondisplayname">
+                                                                    <i class="fas fa-pen text-md"></i>
+                                                                </button>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="button" id="displaycancel"
+                                                                    style="display: none;">
+                                                                    <i class="fas fa-times text-md"></i>
+                                                                </button>
+                                                                <script>
+                                                                    // add on click event listener to the previous button
+                                                                    document.getElementById("displaycancel").addEventListener("click",
+                                                                        function () {
+                                                                            displayCancel();
+                                                                        });
+                                                                    document.getElementById("editbuttondisplayname").addEventListener(
+                                                                        "click",
+                                                                        function () {
+                                                                            enableDisplayName();
+                                                                        });
+                                                                </script>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="submit" id="saveDisplay"
+                                                                    style="display: none;">
+                                                                    <i class="fas fa-check text-md"></i>
+                                                                </button>
 
 
-                                <% if ((usertype) != "creator"){ %>
-                                <form role="form" method="post" action="/settings/type">
-                                    <div class="row mb-0 text-quicksand ">
-                                        <p class="mb-1 text-left ">I am a: </p>
-                                        <div class="btn-group " role="group ">
-                                            <input type=" text" class="btn btn-primary col-1" name="account-type"
-                                                id="fan" value="fan" readonly>
-                                            <button class="btn btn-md px-3 btn-outline-primary" id="tog" type="submit"
-                                                >Upgrade to Content Creator</button>
-                                        </div>
-                                        <script>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <form role="form " method="POST" action="/settings/bio">
+                                                        <div class="form-group col-lg-12 mx-auto pb-0">
+                                                            <label for="bioedit"
+                                                                class="form-check-label text-muted">Bio</label>
+                                                            <div class="d-flex input-group mb-1">
+                                                                <input type="text" name="bio" id="bioedit"
+                                                                    class="py-4 flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                                    value="<%=bio%>" placeholder="Your Bio"
+                                                                    aria-label="Bio" aria-describedby="button-addon2"
+                                                                    readonly>
+                                                            </div>
+                                                            <div>
+                                                                <button
+                                                                    class="btn btn-outline-primary col-12 mb-0 mx-auto"
+                                                                    type="button" id="editbuttonbio">
+                                                                    <i class="fas fa-pen text-md"></i>
+                                                                </button>
+                                                                <script>
+                                                                    // add on click event listener to the previous button
+                                                                    document.getElementById("editbuttonbio").addEventListener("click",
+                                                                        function () {
+                                                                            enableBio();
+                                                                        });
+                                                                </script>
+                                                                <div class="btn-group col-12 pb-5" role="group">
+                                                                    <button
+                                                                        class="btn btn-outline-primary col-3 mb-0 mx-0 px-6"
+                                                                        type="button" id="biocancel"
+                                                                        style="display: none;">
+                                                                        <i class="fas fa-times text-md"></i>
+                                                                    </button>
+                                                                    <script>
+                                                                        // add on click event listener to the previous button
+                                                                        document.getElementById("biocancel").addEventListener("click",
+                                                                            function () {
+                                                                                bioCancel();
+                                                                            });
+                                                                    </script>
+                                                                    <button
+                                                                        class="btn btn-outline-primary col-3 mb-0 mx-0 px-6 "
+                                                                        type="submit" id="saveBio"
+                                                                        style="display: none; ">
+                                                                        <i class="fas fa-check text-md "></i>
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <!-- Divider Text -->
+                                                    <div
+                                                        class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
+                                                        <div class="border-bottom w-100 ml-5 "></div>
+                                                        <span
+                                                            class="px-0 small text-muted font-weight-bold text-muted "></span>
+                                                        <div class="border-bottom w-100 mr-5 "></div>
+                                                    </div>
+
+                                                    <p class="mb-0 pt-2 pb-3">Account</p>
+                                                    <form role="form " method="POST "
+                                                        action="/settings/username?_method=PUT ">
+                                                        <div class="form-group col-lg-12 mx-auto">
+                                                            <label for="username"
+                                                                class="form-check-label text-muted">Username</label>
+                                                            <div class="d-flex input-group mb-1">
+                                                                <input type="text" name="username" id="username"
+                                                                    class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                                    value="<%=username%>" placeholder="@Username"
+                                                                    aria-label="Username"
+                                                                    aria-describedby="button-addon2" readonly>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="button" id="editbuttonusername">
+                                                                    <i class="fas fa-pen text-md"></i>
+                                                                </button>
+                                                                <script>
+                                                                    // add on click event listener to the previous button
+                                                                    document.getElementById("editbuttonusername").addEventListener("click",
+                                                                        function () {
+                                                                            enableUsername();
+                                                                        });
+                                                                </script>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="button" id="usernamecancel"
+                                                                    style="display: none;">
+                                                                    <i class="fas fa-times text-md"></i>
+                                                                </button>
+                                                                <script>
+                                                                    // add on click event listener to the previous button
+                                                                    document.getElementById("usernamecancel").addEventListener("click",
+                                                                        function () {
+                                                                            usernameCancel();
+                                                                        });
+                                                                </script>
+                                                                <button class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                    type="submit" id="saveName" style="display: none;">
+                                                                    <i class="fas fa-check text-md"></i>
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <%var actionurl;%>
+                                                        <% if (usertype==="local" )
+                                                            actionurl="/settings/email?_method=PUT" ; else actionurl="#"
+                                                            %>
+                                                            <form role="form" method="POST" action="<%=actionurl%>">
+                                                                <div class="form-group col-lg-12 mx-auto">
+                                                                    <label for="email"
+                                                                        class="form-check-label text-muted">Email</label>
+                                                                    <div class="d-flex input-group mb-1">
+                                                                        <input type="text" name="email" id="email"
+                                                                            class="flex-grow-1 input-group-text bg-gray-300  text-start"
+                                                                            value="<%=useremail%>" placeholder="email"
+                                                                            aria-label="email"
+                                                                            aria-describedby="button-addon2" readonly>
+                                                                        <%if(usertype==="local" ){%>
+                                                                            <button
+                                                                                class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                                type="button" id="editbuttonemail">
+                                                                                <i class="fas fa-pen text-md"></i>
+                                                                            </button>
+                                                                            <script>
+                                                                                // add on click event listener to the previous button
+                                                                                document.getElementById("editbuttonemail").addEventListener("click",
+                                                                                    function () {
+                                                                                        enableEmail();
+                                                                                    });
+                                                                            </script>
+                                                                            <button
+                                                                                class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                                type="button" id="emailcancel"
+                                                                                style="display: none;">
+                                                                                <i class="fas fa-times text-md"></i>
+                                                                            </button>
+                                                                            <script>
+                                                                                // add on click event listener to the previous button
+                                                                                document.getElementById("emailcancel").addEventListener("click",
+                                                                                    function () {
+                                                                                        emailCancel();
+                                                                                    });
+                                                                            </script>
+                                                                            <button
+                                                                                class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                                type="submit" id="saveEmail"
+                                                                                style="display: none;">
+                                                                                <i class="fas fa-check text-md"></i>
+                                                                            </button>
+                                                                            <%}%>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <form role="form" method="POST"
+                                                                action="/settings/password?_method=PUT">
+                                                                <div class="form-group col-lg-12 mx-auto">
+                                                                    <label for="password"
+                                                                        class="form-check-label text-muted"
+                                                                        id="passwordtext">Password</label>
+                                                                    <div class="d-flex input-group mb-1">
+                                                                        <% if (passwordVer){ %>
+                                                                            <input type="password" name="password"
+                                                                                id="password"
+                                                                                class="flex-grow-1 input-group-text bg-gray-300  text-start"
+                                                                                placeholder="**********"
+                                                                                aria-label="password"
+                                                                                aria-describedby="button-addon2"
+                                                                                readonly>
+                                                                            <%} %>
+                                                                                <% if (!passwordVer){ %>
+                                                                                    <input type="password"
+                                                                                        name="placeholderpassword"
+                                                                                        id="placeholderpassword"
+                                                                                        class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                                                        placeholder="Add a password to be able to sign in with credentials"
+                                                                                        aria-label="password"
+                                                                                        aria-describedby="button-addon2"
+                                                                                        readonly>
+                                                                                    <%} %>
+                                                                                        <button
+                                                                                            class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                                            type="button"
+                                                                                            id="editbuttonpassword">
+                                                                                            <i
+                                                                                                class="fas fa-pen text-md"></i>
+                                                                                        </button>
+                                                                                        <script>
+                                                                                            // add on click event listener to the previous button
+                                                                                            document.getElementById("editbuttonpassword").addEventListener("click",
+                                                                                                function () {
+                                                                                                    enablePassword();
+                                                                                                });
+                                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group col-lg-12 mx-auto">
+                                                                    <label for="newpassword"
+                                                                        class="form-check-label text-muted"
+                                                                        id="newpasswordtext" style="display: none;">New
+                                                                        Password</label>
+                                                                    <div class="input-group mb-1">
+                                                                        <input type="password" name="newpassword"
+                                                                            id="newpassword"
+                                                                            class="flex-grow-1 input-group-text bg-gray-300 text-start"
+                                                                            placeholder="Please Input New Password"
+                                                                            aria-label="newpassword"
+                                                                            aria-describedby="button-addon2"
+                                                                            style="display: none;">
+                                                                        <button
+                                                                            class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                            type="button" id="passwordcancel"
+                                                                            style="display: none;">
+                                                                            <i class="fas fa-times text-md"></i>
+                                                                        </button>
+                                                                        <script>
+                                                                            // add on click event listener to the previous button
+                                                                            document.getElementById("passwordcancel").addEventListener("click",
+                                                                                function () {
+                                                                                    passwordCancel();
+                                                                                });
+                                                                        </script>
+                                                                        <button
+                                                                            class="btn btn-outline-primary mb-0 mx-1 px-3"
+                                                                            type="submit" id="savePassword"
+                                                                            style="display: none;">
+                                                                            <i class="fas fa-check text-md"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+                                                            <% if ((usertype) !="creator" ){ %>
+                                                                <form role="form" method="post" action="/settings/type">
+                                                                    <div class="row mb-0 text-quicksand ">
+                                                                        <p class="mb-1 text-left ">I am a: </p>
+                                                                        <div class="btn-group " role="group ">
+                                                                            <input type=" text"
+                                                                                class="btn btn-primary col-1"
+                                                                                name="account-type" id="fan" value="fan"
+                                                                                readonly>
+                                                                            <button
+                                                                                class="btn btn-md px-3 btn-outline-primary"
+                                                                                id="tog" type="submit">Upgrade to
+                                                                                Content Creator</button>
+                                                                        </div>
+                                                                        <script>
                                             // add on click event listener to the previous button
                                             // document.getElementById("tog").addEventListener("click",
                                             //     function () {
                                             //         toggle();
                                             //     });
-                                        </script>
-                                    </div>
-                                </form>
-                                <% } %>
-                                <!-- Divider Text -->
-                                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
-                                    <div class="border-bottom w-100 ml-5 "></div>
-                                    <span class="px-0 small text-muted font-weight-bold text-muted "></span>
-                                    <div class="border-bottom w-100 mr-5 "></div>
-                                </div>
+                                                                        </script>
+                                                                    </div>
+                                                                </form>
+                                                                <% } %>
+                                                                    <!-- Divider Text -->
+                                                                    <div
+                                                                        class="form-group col-lg-12 mx-auto d-flex align-items-center my-3">
+                                                                        <div class="border-bottom w-100 ml-5 "></div>
+                                                                        <span
+                                                                            class="px-0 small text-muted font-weight-bold text-muted "></span>
+                                                                        <div class="border-bottom w-100 mr-5 "></div>
+                                                                    </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-sm-12 ">
-                                        <!-- Button trigger modal -->
-                                        <button type="button " class="btn btn-secondary" data-toggle="modal "
-                                            data-target="#deleteModal "
-                                           >
-                                            Delete account
-                                        </button>
-                                        <script>
-                                            // add on click event listener to the previous button
-                                            document.getElementById("deleteModal").addEventListener("click",
-                                                function () {
-                                                    document.getElementById( 'deleteModal').style.display='none'
-                                                });
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 ">
+                                                                            <!-- Button trigger modal -->
+                                                                            <button type="button "
+                                                                                class="btn btn-secondary"
+                                                                                data-toggle="modal "
+                                                                                data-target="#deleteModal ">
+                                                                                Delete account
+                                                                            </button>
+                                                                            <script>
+                                                                                // add on click event listener to the previous button
+                                                                                document.getElementById("deleteModal").addEventListener("click",
+                                                                                    function () {
+                                                                                        document.getElementById('deleteModal').style.display = 'none'
+                                                                                    });
 
-                                        </script>
+                                                                            </script>
 
 
-                                        <!-- Modal -->
+                                                                            <!-- Modal -->
 
-                                        <div class="modal " id="deleteModal" tabindex="-1 " role="dialog"
-                                            aria-labelledby="deleteModalLabel " aria-hidden="true ">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content ">
-                                                    <div class="modal-header ">
-                                                        <h5 class="modal-title text-secondary " id="exampleModalLabel ">
-                                                            Account deletion</h5>
-                                                        <button type="button " class="close border-0 bg-transparent "
-                                                            data-dismiss="modal " aria-label="Close "
-                                                          >
-                                                            <span aria-hidden="true ">&times;</span>
-                                                        </button>
-                                                        <script>
-                                                            // add on click event listener to the previous button
-                                                            document.getElementById("deleteModal").addEventListener("click",
-                                                                function () {
-                                                                    document.getElementById( 'deleteModal').style.display='none'
-                                                                });
+                                                                            <div class="modal " id="deleteModal"
+                                                                                tabindex="-1 " role="dialog"
+                                                                                aria-labelledby="deleteModalLabel "
+                                                                                aria-hidden="true ">
+                                                                                <div class="modal-dialog modal-dialog-centered"
+                                                                                    role="document">
+                                                                                    <div class="modal-content ">
+                                                                                        <div class="modal-header ">
+                                                                                            <h5 class="modal-title text-secondary "
+                                                                                                id="exampleModalLabel ">
+                                                                                                Account deletion</h5>
+                                                                                            <button type="button "
+                                                                                                class="close border-0 bg-transparent "
+                                                                                                data-dismiss="modal "
+                                                                                                aria-label="Close ">
+                                                                                                <span
+                                                                                                    aria-hidden="true ">&times;</span>
+                                                                                            </button>
+                                                                                            <script>
+                                                                                                // add on click event listener to the previous button
+                                                                                                document.getElementById("deleteModal").addEventListener("click",
+                                                                                                    function () {
+                                                                                                        document.getElementById('deleteModal').style.display = 'none'
+                                                                                                    });
 
-                                                        </script>
-                                                    </div>
-                                                    <div class="modal-body ">
-                                                        Are you sure you want to Delete your Account ?
-                                                    </div>
-                                                    <div class="modal-footer ">
-                                                        <form role="form " method="POST"
-                                                            action="/settings/delete-account?_method=DELETE">
-                                                            <button type="submit" class="btn bg-gradient-primary">Delete
-                                                                account</button>
-                                                        </form>
-                                                        <button type="button " class="btn btn-secondary "
-                                                            data-dismiss="modal "
-                                                            >Close</button>
-                                                    </div>
-                                                    <script>
-                                                        // add on click event listener to the previous button
-                                                        document.getElementById("deleteModal").addEventListener("click",
-                                                            function () {
-                                                                document.getElementById( 'deleteModal').style.display='none'
-                                                            });
-                                                    </script>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                                                            </script>
+                                                                                        </div>
+                                                                                        <div class="modal-body ">
+                                                                                            Are you sure you want to
+                                                                                            Delete your Account ?
+                                                                                        </div>
+                                                                                        <div class="modal-footer ">
+                                                                                            <form role="form "
+                                                                                                method="POST"
+                                                                                                action="/settings/delete-account?_method=DELETE">
+                                                                                                <button type="submit"
+                                                                                                    class="btn bg-gradient-primary">Delete
+                                                                                                    account</button>
+                                                                                            </form>
+                                                                                            <button type="button "
+                                                                                                class="btn btn-secondary "
+                                                                                                data-dismiss="modal ">Close</button>
+                                                                                        </div>
+                                                                                        <script>
+                                                                                            // add on click event listener to the previous button
+                                                                                            document.getElementById("deleteModal").addEventListener("click",
+                                                                                                function () {
+                                                                                                    document.getElementById('deleteModal').style.display = 'none'
+                                                                                                });
+                                                                                        </script>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+            </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
     <script src="/js/plugins/perfect-scrollbar.min.js "></script>
     <script src="/js/plugins/parallax.min.js "></script>
     <script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>

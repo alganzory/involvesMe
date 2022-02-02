@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
+
 <!-- axios -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -57,6 +58,7 @@ Coded by www.creative-tim.com
   }
 </style>
 
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,6 +82,7 @@ Coded by www.creative-tim.com
 </head>
 
 <body>
+<%- include('parts/nav-section.ejs') %>
 
   <!-- Editing Button and Banner -->
   <%  if (isStoreOwner) {  %>
@@ -150,10 +153,10 @@ Coded by www.creative-tim.com
 
         </div>
 
+
         <% if (isStoreOwner) { %> 
         <div>
           <button type="button" class="btn bg-gradient-primary mt-3">Add Product</button>
-
         </div>
         <% } %>
       </div>
@@ -162,10 +165,9 @@ Coded by www.creative-tim.com
 
 
 
+
   <div>
     <div class="container my-5">
-
-
       <div class="row">            
         <div class="col">
 
@@ -197,7 +199,6 @@ Coded by www.creative-tim.com
     </div>
   </div>
 
-
   <!-- Javascript for editing -->
   <script>
     var editableFields = document.getElementsByClassName('content-editable');
@@ -211,6 +212,7 @@ Coded by www.creative-tim.com
     function enableEdit() {
       // alert("hi")
       // e.preventDefault();
+
       console.log(editableFields)
       for (let i = 0; i < editableFields.length; i++) {
         editableFields[i].contentEditable = true;
@@ -218,6 +220,7 @@ Coded by www.creative-tim.com
         console.log("here", textContent)
         editableFieldsValues[i] = textContent;
       }
+
       let bannerPic = document.getElementById('banner-pic');
       editableFieldsValues.push(bannerPic.src)
       editStoreBtn.classList.remove('d-flex');
@@ -227,7 +230,6 @@ Coded by www.creative-tim.com
       editableFields[0].focus();
       bannerPicEdit[0].classList.remove('d-none');
       bannerPicEdit[0].classList.add('d-flex');
-
     }
 
     function disableEdit() {
@@ -249,7 +251,6 @@ Coded by www.creative-tim.com
       // alert('save');
 
       disableEdit();
-
       for (let i = 0; i < editableFields.length; i++) {
         let textContent = editableFields[i].textContent.replace(/[^\S\r\n]/, ' ').trim();
         if (editableFieldsValues[i] != textContent) {
@@ -284,8 +285,6 @@ Coded by www.creative-tim.com
 
         // add a spinner overlay
         let spinner = document.createElement('div');
-
-
         axios.post('/store/edit', formData, {
             headers: {
               'Content-Type': `multipart/form-data;`,
@@ -349,9 +348,6 @@ Coded by www.creative-tim.com
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
   <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
   <!-- >>>>>>> 3940b009b77cd8a66da8cb885e3e57bb043ff1dc -->
-
-
-
 </body>
 
 </html>

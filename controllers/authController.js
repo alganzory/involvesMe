@@ -8,11 +8,10 @@ const passport = require("passport");
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const User = require("../models/user-Model");
-
+const ProfileService = require("../models/profile-Model")
+const { passwordStrength } = require('check-password-strength');
 const jwt = require("jsonwebtoken");
-
 require("../passport-config");
-
 const sendEmail = require("../nodemailer");
 
 // middleware to check if the user is authenticated
@@ -62,10 +61,10 @@ const register_user = async (req, res) => {
     req.flash("registerError", "Account not created. Email already Exists");
     return res.redirect("/auth/register");
   }
-  if (password.length < 8) {
+  if ((passwordStrength(password).value) === "Too weak" || (passwordStrength(password).value) === "Weak") {
     req.flash(
       "registerError",
-      "Account not created. Password must be 8 characters long at least"
+      "Account not created. Password Must contain atleast 1 symbol, 1 Upper Case Letter, 1 Number and be 8 charactes long."
     );
     return res.redirect("/auth/register");
   }
@@ -89,6 +88,16 @@ const register_user = async (req, res) => {
       source: "local",
     };
     const newUser = await User.addUser(newUserData);
+
+    //  add profile
+    var profile = {
+      id: newUserData.id,
+      displayName: username,
+      bio: null,
+
+    };
+    ProfileService.createOrUpdateProfile(newUserData.id, profile)
+
     res.redirect("/auth/login");
   } catch (e) {
     console.error(e);
@@ -195,9 +204,9 @@ const sendSuccessfulResetEmail = (email) => {
 const post_reset_password = async (req, res) => {
   const { password, confirmPassword, token, userId } = req.body;
   const thisLink = `/auth/reset-password/${token}/${userId}`;
-  if (password.length < 8) {
-    req.flash("resetError", "Password must be 8 characters long at least");
-    console.log("password length");
+  if ((passwordStrength(password).value) === "Too weak" || (passwordStrength(password).value) === "Weak") {
+    req.flash("resetError", "Password Must contain atleast 1 symbol, 1 Upper Case Letter, 1 Number and be 8 charactes long.");
+    console.log("password Strength");
     return res.redirect(`/auth/reset-password/${token}/${userId}`);
   }
   if (password != confirmPassword) {
@@ -256,10 +265,23 @@ const google_redirect = (req, res) => {
   res.redirect("/");
 };
 
-
 const passportTwitchAuth =  passport.authenticate("twitch", { failureRedirect: "/auth/login",failureFlash: "Account already exists, sign in with credentials" });
 const twitch_redirect =  (req, res) => {
     res.redirect("/");
+};
+
+const updateUserBalance = async (userId, balance) => {
+  updatedUser = {
+    balance: balance
+  }
+  await User.updateUser(userId,updatedUser)
+};
+
+const updateUserPoints = async (userId, points) => {
+  updatedUser = {
+    points: points
+  }
+  await User.updateUser(userId,updatedUser)
 };
 
 module.exports = {
@@ -278,4 +300,6 @@ module.exports = {
   post_forgot_password,
   get_reset_password,
   post_reset_password,
+  updateUserBalance,
+  updateUserPoints
 };

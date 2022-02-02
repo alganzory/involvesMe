@@ -1,4 +1,4 @@
-/*!
+/*
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -338,6 +338,12 @@ th {
 
 label {
   display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  /* font-family: "Montserrat"; */
+  margin-bottom: 2px;
+  display: block;
+  color: #fff;
 }
 
 button {
@@ -21598,7 +21604,7 @@ span.flatpickr-weekday {
   box-shadow: -10px 0 0 #cb0c9f;
 }
 
-/*! nouislider - 14.6.3 - 11/19/2020 */
+/* nouislider - 14.6.3 - 11/19/2020 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.

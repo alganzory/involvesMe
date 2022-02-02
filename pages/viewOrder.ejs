@@ -1,0 +1,180 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <title>
+        involvesMe. | <%= title %>
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <%- include('parts/nav-section.ejs') %>
+        <section>
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                }
+
+                #involves {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50px;
+                }
+            </style>
+            <div class="mt-5 d-flex justify-content-between">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <h2>Sales History</h2>
+                        </div>
+                    </div>
+
+                    <table class="table table table-condensed table-striped">
+                        <thead>
+                            <tr align="center">
+                                <th scope="col">#</th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Purchase Date</th>
+                                <th scope="col">Amount Paid (MYR)</th>
+                                <th scope="col">Item(s)</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <%for(let i=0; i<order.length;i++){ %>
+                                <tr align="center">
+                                    <th scope="row">
+                                        <%=i+1%>
+                                    </th>
+                                    <td>
+                                        <%=order[i].orderId%>
+                                    </td>
+                                    <td>
+                                        <%=order[i].fullName%>
+                                    </td>
+                                    <td>
+                                        <%=order[i].createdAt%>
+                                    </td>
+                                    <td>
+                                        <%=order[i].totalPrice%>
+                                    </td>
+                                    <td><button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalLong<%=i%>">View Order</button>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+
+                    </table>
+
+                    <!-- Modal -->
+                    <%for(let i=0; i<order.length;i++){ %>
+                        <div class="modal fade" id="exampleModalLong<%=i%>" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table table-condensed table-striped">
+                                            <thead>
+                                                <tr align="center">
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price(RM)</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <%for(let j=0; j<order[i].products.length;j++){ %>
+                                                    <tr align="center">
+                                                        <td>
+                                                            <%=order[i].products[j].name%>
+                                                        </td>
+                                                        <td>
+                                                            <%=order[i].products[j].quantity%>
+                                                        </td>
+                                                        <td>
+                                                            <%=order[i].products[j].price%>
+                                                        </td>
+                                                        <td>
+                                                            <%=order[i].products[j].totalPrice%>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </section>
+
+        <script src="/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+        <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+        <script src="/js/plugins/parallax.min.js"></script>
+        <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+        <script src="/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+
+        <!-- modal -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+            </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+            </script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
+</body>
+
+</html>
