@@ -25,6 +25,17 @@ const get_addproduct = async(req, res) => {
     res.render('addProduct',{usertype: req.user.type});
 };
 
+
+const get_product_json = async (productId) => {
+  const product = await ProductService.getProductById(productId);
+  return(product);
+};
+
+const get_store_products = async (storeId) => {
+  const products = await ProductService.getProductsByStoreId(storeId);
+  return products;
+};
+
 const upload_photos = parser.array('productPhotos', 10);
 
 
@@ -100,5 +111,7 @@ module.exports = {
     GetProductObject,
     add_product,
     upload_photos,
-    get_addproduct
+    get_addproduct,
+    get_product_json,
+    get_store_products
 };

@@ -50,6 +50,20 @@ exports.getProductById = async (id) => {
     console.error(error);
   }
 };
+
+
+exports.getProductsByStoreId = async (storeId) => {
+  try {
+    console.log(storeId);
+    await mongoose.connect(process.env.MONGO_URI);
+    const products = await Product.find({ storeId });
+    console.log (products);
+    return products;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 exports.updateProduct = async (id, product) => {
  
   try {
