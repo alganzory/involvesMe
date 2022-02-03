@@ -1,5 +1,5 @@
-const walletService = require("../models/wallet-model");
-const UserService = require("../models/user-Model");
+const walletService = require("../models/walletModel");
+const UserService = require("../models/userModel");
 const uuid = require("uuid");
 const paypal = require('paypal-rest-sdk');
 

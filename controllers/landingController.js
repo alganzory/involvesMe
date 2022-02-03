@@ -1,6 +1,6 @@
-const PostService = require("../models/post-Model");
-const ProfileService = require("../models/profile-Model");
-const ProductService = require('../models/product-model')
+const PostService = require("../models/postModel");
+const ProfileService = require("../models/profileModel");
+const ProductService = require('../models/productModel')
 // get all profiles that are not of the currently logged in user
 const get_all_other_profiles = async (req) => {
   try {

@@ -1,13 +1,13 @@
-const orderService = require("../models/order-model");
+const orderService = require("../models/orderModel");
 const cartController = require("../controllers/cartController")
 const productController = require("../controllers/productController")
 const userController = require("../controllers/authController")
 const walletController = require("../controllers/walletController")
 const uuid = require("uuid");
 const paypal = require('paypal-rest-sdk');
-const { findOrCreate } = require("../models/user-Model");
-const UserService = require("../models/user-Model")
-const ProductService = require("../models/product-model")
+const { findOrCreate } = require("../models/userModel");
+const UserService = require("../models/userModel")
+const ProductService = require("../models/productModel")
 const e = require("express");
 
 paypal.configure({

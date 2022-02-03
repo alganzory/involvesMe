@@ -7,8 +7,8 @@ const passport = require("passport");
 
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
-const User = require("../models/user-Model");
-const ProfileService = require("../models/profile-Model")
+const User = require("../models/userModel");
+const ProfileService = require("../models/profileModel")
 const { passwordStrength } = require('check-password-strength');
 const jwt = require("jsonwebtoken");
 require("../passport-config");

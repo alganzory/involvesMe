@@ -1,6 +1,6 @@
-const cartService = require("../models/cart-model");
+const cartService = require("../models/cartModel");
 const productController = require("../controllers/productController");
-const ProductService = require('../models/product-model')
+const ProductService = require('../models/productModel')
 const uuid = require("uuid");
 
 

@@ -1,5 +1,5 @@
-const UserService = require("../models/user-Model");
-const ProfileService = require("../models/profile-Model");
+const UserService = require("../models/userModel");
+const ProfileService = require("../models/profileModel");
 const PostController = require("../controllers/postController");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;

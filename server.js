@@ -28,7 +28,7 @@ app.set("views", "pages");
 app.set("view engine", "ejs");
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");

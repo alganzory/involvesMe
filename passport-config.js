@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const passport = require("passport");
-const User = require("./models/user-Model");
+const User = require("./models/userModel");
 const bcrypt = require("bcrypt");
 
 const LocalStrategy = require("passport-local").Strategy;

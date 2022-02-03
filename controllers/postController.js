@@ -1,4 +1,4 @@
-const PostService = require("../models/post-Model");
+const PostService = require("../models/postModel");
 
 const get_userposts = async (id) => {
     var posts = await PostService.getPostByuserId(id)
