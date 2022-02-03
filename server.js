@@ -51,5 +51,8 @@ app.use('/post', postRouter);
 app.use('/wallet', walletRouter);
 app.use('/', indexRouter);
 
+const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
-app.listen(port);
+app.listen(port, host, () => {
+    console.log(`Listening on port ${port}`);   
+});
