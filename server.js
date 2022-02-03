@@ -8,6 +8,7 @@ const flash = require('express-flash');
 const cookieSession = require('cookie-session');
 const passport = require("passport")
 const multer  = require('multer')
+const path = require('path');
 const upload = multer({ dest: 'uploads/' })
 // set up session cookies
 app.use(cookieSession({
@@ -27,7 +28,7 @@ app.set("views", "pages");
 app.set("view engine", "ejs");
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("assets"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const indexRouter = require("./routes/landing-route.js");
 const authRouter = require("./routes/auth-route.js");
