@@ -1,9 +1,10 @@
-const UserService = require("../models/user-Model");
-const ProfileService = require("../models/profile-Model");
+const UserService = require("../models/userModel");
+const ProfileService = require("../models/profileModel");
 const PostController = require("../controllers/postController");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const { search } = require("../routes/landing-route");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -47,6 +48,8 @@ const get_myprofile = async (req, res) => {
       currentUser: profile,
       searchedUser: null,
       userFollowers: followers,
+      profileUser: req.user.username,
+      usertype: req.user.type,
       userFollowing: following,
       posts: posts,
       title: "My Profile",
@@ -64,6 +67,8 @@ const get_myprofile = async (req, res) => {
       profileOwner: profileOwner,
       currentUser: null,
       searchedUser: null,
+      profileUser: req.user.username,
+      usertype: req.user.type,
       userFollowers: followers,
       userFollowing: following,
       posts: posts,
@@ -76,6 +81,8 @@ const get_myprofile = async (req, res) => {
 const get_profile = async (req, res) => {
   var usernameURL = req.params.username;
   var searchedUser = await UserService.getUserByUsername(usernameURL);
+  searchedUser = searchedUser? searchedUser : await UserService.getUserById(usernameURL);
+  
   var profileOwner = false;
   if (searchedUser) {
     var profile = await ProfileService.getProfileById(searchedUser.id);
@@ -111,7 +118,9 @@ const get_profile = async (req, res) => {
         profileOwner: profileOwner,
         currentUser: currentUser,
         userFollowers: followers,
+        profileUser: searchedUser.username,
         userFollowing: following,
+        usertype: req.user.type,
         searchedUser: searchedUser,
         posts: posts,
         title: usernameURL + "'s Profile",
@@ -123,7 +132,9 @@ const get_profile = async (req, res) => {
         profileOwner: profileOwner,
         currentUser: null,
         userFollowers: followers,
+        profileUser: searchedUser.username,
         userFollowing: following,
+        usertype: req.user.type,
         searchedUser: searchedUser,
         posts: posts,
         title: usernameURL + "'s Profile",

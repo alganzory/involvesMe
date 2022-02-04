@@ -19,7 +19,7 @@ const profileSchema = new Schema({
   storeDesc: String // TODO: change to store model
 }, { timestamps: true });
 const Profile = mongoose.model("profile", profileSchema, "profile");
-
+mongoose.models={};
 exports.profileModel = Profile;
 
 exports.addProfile = async (profile) => {
@@ -119,5 +119,15 @@ exports.createOrUpdateProfile = async (id, profile) => {
   } catch (error) {
     console.error(error);
     throw error;
+  }
+}
+
+exports.getAllOtherProfiles = async (id) => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    const profiles = await Profile.find({ id: { $ne: id } });
+    return profiles;
+  } catch (error) {
+    console.error(error);
   }
 }

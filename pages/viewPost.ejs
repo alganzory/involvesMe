@@ -1,0 +1,322 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <title>
+        involvesMe. | <%= title %>
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
+</head>
+
+<body class="sign-in-illustration">
+
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <sections>
+        <%- include('parts/nav-section.ejs') %>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row  d-flex align-items-center justify-content-center">
+                    <div class="col-6 d-flex flex-column mx-lg-0 mx-auto">
+                        <div class="card card-plain">
+                            <% if(post !=null){ %>
+                               
+                                <div class="card-header pb-0 text-left">
+                                    <div class="row">
+                                        <div class="col-sm-9 my-auto">
+                                            <form action="/post/edit" method="post">
+                                                <input type="text" id="postId" name="postId" value="<%=post._id.toString()%>" hidden>
+                                            <h4 class="font-weight-bolder" id="postTitle">
+                                                <%=post.title%>
+                                               
+                                            </h4>
+                                            <% if (messages.nonull) {%>
+                                                <p class="text-primary">
+                                                    <%= messages.nonull %>
+                                                </p>
+                                                 <%}%>
+                                          <!-- edit the post title -->
+                                            <h4 id = "postss"></h4>
+                                                        <input id = "post_title" 
+                                                            name="newTitle"
+                                                            type="String" 
+                                                            
+                                                            class="d-none"
+                                                           
+                                                    
+                                                           >
+
+                                           
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="card-body pt-1 pb-0">
+
+                               
+                                    <footer class="pt-2  border-top">
+                                        <p>
+                                            <span id="post_con">
+                                                <%=post.content%>
+                                            </span>
+                                            
+                                            </p>
+                                            
+                                                <!-- edit post content -->
+                                            <p>  <span id = "postsc"></span></p>
+                                                <textarea style="width: 100%; height: 100%;" id = "post_conent" 
+                                                    name="newContent"
+                                                    type="String" 
+                                                   
+                                                    
+                                                    class="d-none"
+                                                   
+                                            
+                                                   ></textarea>
+
+                                        
+                                    </footer>
+                                    
+                                      <%if (user.id===post.userId){%>
+                                            
+                                                <div class="col-sm-3 ">
+                                                   
+                                                       
+                                                    <button type="button"
+                                                                   
+                                                    style="color: black; background-color: #1266f1"
+                                                    class="btn mt-3 d-flex display: inline-block;"
+                                                    id= "editItem"
+                                                    onclick="enableEdit()">
+                                                    Edit
+                                                </button>
+                                                    <button type="submit"
+                                                        
+                                                    class="btn bg-gradient-dark mt-3 d-none"
+                                                    id= "saveChanges"
+                                                    onclick="saveChanges()">
+                                                    <i class="fa fa-check-square-o"></i>
+                                                    Save
+                                                </button>
+                                                <button
+                                            
+                                                    class="btn bg-gradient-dark mt-3 d-none"
+                                                    id= "cancelChanges" 
+                                                    onclick="cancelChanges()">
+                                                    <i class="fa fa-window-close-o"></i>
+                                                    Cancel
+                                                </button>
+                                                
+                                </form>
+                                </div>
+                               
+
+                                <form action="/post/delete" method="post" onsubmit="return submitForm(this);" >
+                                    <input type="text" id="postId" name="postId" value="<%=post._id.toString()%>" hidden>
+                                    <button  id="#btn-delete" 
+                                      class="btn bg-gradient-secondary mt-3 delete">
+                                    Delete
+                                </button>
+                            </form>
+                            
+                            </div>
+                        
+                        <% } %>
+                                </div>
+                                <% }else{ %>
+                                    <div class="col-md-12">
+                                        <p class="text-center">There is no post with this ID</p>
+                                    </div>
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </section>
+
+
+
+        <!-- delete alert -->
+        <script>
+            function submitForm(form){
+                swal({
+                    title: "Are you sure to delete?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                       
+                        form.submit();
+                    } 
+                });
+                return false;
+            }
+        
+        </script> 
+
+
+
+<script>
+
+    var edit = "editItem";
+    var save = "saveChanges";
+    var cancel = "cancelChanges";
+
+
+    
+
+function enableEdit()
+ {  
+
+    var itemId = edit;
+    var saveId = save;
+    var cancelId = cancel;
+    var postTitle = "postss";
+    var postEditTitle = "post_title";
+
+    var post_con = "postsc";
+    var post_content = "post_conent";
+    //console.log(quantityId);
+
+    var thisItem = document.getElementById(itemId);
+    var saveThis = document.getElementById(saveId);
+    var cancelThis = document.getElementById(cancelId);
+    var oldTitle = document.getElementById(postTitle);
+    var newTitle = document.getElementById(postEditTitle);
+    var oldContent = document.getElementById(post_con);
+    var newContent = document.getElementById(post_content);
+    //console.log(changeQuantity);
+
+    thisItem.classList.add("d-none");
+    saveThis.classList.remove("d-none");
+    cancelThis.classList.remove("d-none");
+    oldTitle.setAttribute("class" , "d-none");
+    newTitle.removeAttribute("class" ,"d-none");
+
+    oldContent.setAttribute("class" , "d-none");
+    newContent.removeAttribute("class" ,"d-none");
+
+    newTitle.value = +oldQuantity.textContent
+    newContent.value = +old2.textContent
+    //console.log(tempQuantity);
+    //changeQuantity.style.backgroundColor = "white";
+    // var num = 1;
+    // console.log(changeQuantity);
+    //console.log(changeQuantity.innerText);
+    //tempQuantity = changeQuantity.innerText;
+
+    // if(isNaN(tempQuantity))
+    // {
+    //     log.error("wtf");
+    // }
+
+ }
+
+ function cancelChanges()
+ {
+    var itemId = edit;
+    var saveId = save;
+    var cancelId = cancel;
+    var postTitle = "postss";
+    var postEditTitle = "post_title";
+    var post_con = "postsc";
+    var post_content = "post_conent";
+
+    var thisItem = document.getElementById(itemId);
+    var saveThis = document.getElementById(saveId);
+    var cancelThis = document.getElementById(cancelId);
+    var oldTitle = document.getElementById(postTitle);
+    var newTitle = document.getElementById(postEditTitle);
+
+    var oldContent = document.getElementById(post_con);
+    var newContent = document.getElementById(post_content);
+    //console.log(changeQuantity);
+
+    thisItem.classList.remove("d-none");
+    saveThis.classList.add("d-none");
+    cancelThis.classList.add("d-none");
+    oldTitle.setAttribute("class" , "d-block");
+    newTitle.setAttribute("class" ,"d-none");
+
+    oldContent.setAttribute("class" , "d-block");
+    newContent.setAttribute("class" ,"d-none");
+
+    console.log(oldQuantity.textContent);
+    console.log(newQuantity.textContent);
+     
+    console.log(oldContent.textContent);
+    console.log(newContent.textContent);
+     
+    // var test = parseInt(newQuantity.textContent);
+    // console.log(test);
+
+    // if(oldQuantity.textContent != newQuantity.textContent)
+    // {
+    //     newQuantity.innerHTML = oldQuantity.textContent;
+    // }
+
+
+
+ }
+
+</script>
+
+
+
+
+        <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+        <script src="../assets/js/plugins/parallax.min.js"></script>
+        <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+        <script src="../assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>

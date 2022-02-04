@@ -1,0 +1,204 @@
+<!--
+=========================================================
+* Soft UI Design System - v1.0.5
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/soft-ui-design-system 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <title>
+        involvesMe. | Product
+
+    </title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/soft-design-system.css?v=1.0.5" rel="stylesheet" />
+    <link href="/css/additional-styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <%- include('parts/nav-section.ejs') %>
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <section>
+        <div class="container">
+            <div class="row mt-7">
+                <div class="col-lg-6 col-12 mb-5 ">
+                    <div class="card ">
+                        <div class="card-body p-2">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper height-500">
+
+                                    <% for (let i = 0; i < product.productPhotos.length; i++) { %>
+                                        <div class="swiper-slide">
+                                            <img src="<%= product.productPhotos[i] %>" alt="..." class="img-fluid">
+                                        </div>
+                                        <% } %>
+
+
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+
+                        <%  if(user.id !== product.userId){%>
+                            <div class="card-footer pb-0">
+                                <form action="/cart/addItem" method="post">
+                                    <div class="form-group d-flex flex-md-row flex-column" style="gap:1rem">
+                                        <!-- <label for="Quantity"> Quantity</label> -->
+                                        <input type="number" placeholder="Quantity" class="form-control flex-shrink-1"
+                                            id="QuantityInputEmail1" name="quantity" min="1" max="<%=product.stock%>" required aria-describedby="QuantityHelp ">
+                                        <input type="text" name="productId" value="<%=product.id%>"hidden>
+                                        <button type="submit " class="btn btn-primary ">Add to cart</button>
+                                    </div>
+                                    <p class="text-center text-danger"> Max Quantity Available is <%=product.stock%> </p>
+                                </form>
+                            </div>
+                         <%}%>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="card ">
+                        <div class="card-header pb-0">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h2>
+                                        <%= product.name ||    "Product Name" %>
+                                    </h2>
+                                </div>
+                                <%  if(user.id === product.userId){%>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary" id="">
+                                        Edit Product
+                                </div>
+                                <%}%>
+                            </div>
+                            <h4 class="text-info"> <%= "RM" + product.price || "9999" %></h4>
+                            
+                        </div>
+                        <div class="card-body">
+                            
+                            <% if (product.color) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Color</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.color || "Color" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                            <% if (product.size) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Size</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.size || "Size" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                            <% if (product.category) {%>
+                                <hr>
+                            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="flex-shrink-0">
+                                    <h7>Category</h7>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h7><%= product.category || "Category" %></h7>
+                                </div>
+                            </div>
+                            <%}%>
+                                    
+                            <hr>
+                            <p class="card-text"><%= product.description || "Product Description" %></p>
+
+                          
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha512-ANkGm5vSmtDaoFA/NB1nVJzOKOiI4a/9GipFtkpMG8Rg2Bz8R1GFf5kfL0+z0lcv2X/KZRugwrAlVTAgmxgvIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+    <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+    <script src="/js/plugins/parallax.min.js "></script>
+    <!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI "></script>
+    <script src="/js/soft-design-system.min.js?v=1.0.5 " type="text/javascript "></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js'></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js "></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper ", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination ",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next ",
+                prevEl: ".swiper-button-prev ",
+            },
+        });
+    </script>
+</body>
+
+</html>
