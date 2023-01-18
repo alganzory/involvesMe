@@ -19,7 +19,7 @@ paypal.configure({
 const get_Order = async (req, res) => {
     var order = await cartController.getCartById(req.user.id);
     var userPoints = await walletController.getWalletObject(req.user.id);
-    userPoints = userPoints.points;
+    userPoints = userPoints?.points;
     if (order) {
         res.render('order', { order: order, usertype: req.user.type, userPoints: userPoints, title: "Your Order" });
     }
